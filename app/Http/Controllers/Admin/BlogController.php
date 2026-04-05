@@ -1,0 +1,118 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Blog;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class BlogController extends Controller
+{
+    public function index()
+    {
+        $blogs = Blog::latest()->paginate(15);
+        return view('admin.blogs.index', compact('blogs'));
+    }
+
+    public function create()
+    {
+        return view('admin.blogs.form', ['blog' => new Blog()]);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->validated($request);
+        $data['featured_image'] = $this->handleImage($request);
+        $data['slug'] = $this->uniqueSlug($request->slug ?: $request->title);
+        $data['published_at'] = $data['is_published'] ? now() : null;
+
+        $blog = Blog::create($data);
+
+        return redirect()->route('admin.blogs.edit', $blog)->with('success', 'Blog created successfully.');
+    }
+
+    public function edit(Blog $blog)
+    {
+        return view('admin.blogs.form', compact('blog'));
+    }
+
+    public function update(Request $request, Blog $blog)
+    {
+        $data = $this->validated($request);
+
+        // Handle slug: use provided or keep existing
+        $newSlug = trim($request->slug);
+        if ($newSlug && $newSlug !== $blog->slug) {
+            $data['slug'] = $this->uniqueSlug($newSlug, $blog->id);
+        }
+
+        if ($request->hasFile('featured_image')) {
+            $data['featured_image'] = $this->handleImage($request);
+        }
+
+        if ($data['is_published'] && !$blog->published_at) {
+            $data['published_at'] = now();
+        }
+
+        $blog->update($data);
+
+        return redirect()->route('admin.blogs.edit', $blog)->with('success', 'Blog updated successfully.');
+    }
+
+    public function uploadImage(Request $request)
+    {
+        $request->validate(['file' => 'required|image|max:4096']);
+        $file     = $request->file('file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads/blogs'), $filename);
+        return response()->json(['location' => asset('uploads/blogs/' . $filename)]);
+    }
+
+    public function destroy(Blog $blog)
+    {
+        $blog->delete();
+        return back()->with('success', 'Blog deleted.');
+    }
+
+    private function validated(Request $request): array
+    {
+        $data = $request->validate([
+            'title'            => 'required|string|max:255',
+            'slug'             => 'nullable|string|max:255',
+            'excerpt'          => 'nullable|string|max:500',
+            'content'          => 'required|string',
+            'category'         => 'nullable|string|max:100',
+            'tags'             => 'nullable|string|max:255',
+            'author'           => 'nullable|string|max:100',
+            'is_published'     => 'nullable|in:0,1',
+            'meta_title'       => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:500',
+            'meta_keywords'    => 'nullable|string|max:500',
+            'og_image'         => 'nullable|string|max:500',
+            'schema_markup'    => 'nullable|string',
+        ]);
+        $data['is_published'] = (bool) ($data['is_published'] ?? false);
+        return $data;
+    }
+
+    private function handleImage(Request $request): ?string
+    {
+        if ($request->hasFile('featured_image')) {
+            $file     = $request->file('featured_image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/blogs'), $filename);
+            return 'uploads/blogs/' . $filename;
+        }
+        return null;
+    }
+
+    private function uniqueSlug(string $title, ?int $excludeId = null): string
+    {
+        $slug  = Str::slug($title);
+        $query = Blog::where('slug', 'like', $slug . '%');
+        if ($excludeId) $query->where('id', '!=', $excludeId);
+        $count = $query->count();
+        return $count ? $slug . '-' . ($count + 1) : $slug;
+    }
+}
