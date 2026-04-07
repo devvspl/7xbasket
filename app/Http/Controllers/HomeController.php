@@ -37,6 +37,22 @@ class HomeController extends Controller
         return view('frontend.contact', compact('seo'));
     }
 
+    public function brochure()
+    {
+        $file = public_path('custom/7XBasket-Brochure.pdf');
+        if (!file_exists($file)) {
+            abort(404, 'Brochure not available yet.');
+        }
+        return response()->download($file, '7xBasket-Franchise-Brochure.pdf');
+    }
+
+    public function sitemap()
+    {
+        $blogs = Blog::published()->latest()->get();
+        return response()->view('sitemap', compact('blogs'))
+            ->header('Content-Type', 'application/xml');
+    }
+
     public function calculator()
     {
         $seo = SeoService::get('calculator', [

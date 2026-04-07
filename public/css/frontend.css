@@ -1,0 +1,170 @@
+/* ============================================================
+   7x Basket — Frontend Stylesheet
+   ============================================================ */
+
+/* ── CSS Variables ── */
+:root {
+    --green:  #055346;
+    --red:    #ec2024;
+    --accent: #109125;
+}
+
+/* ── Global ── */
+html, body { scroll-behavior: smooth; overflow-x: hidden; }
+[x-cloak] { display: none !important; }
+.prose img { border-radius: 0.5rem; }
+
+/* ── Buttons ── */
+.btn-primary {
+    background: linear-gradient(135deg, #109125, #055346);
+    transition: all .3s;
+}
+.btn-primary:hover {
+    background: linear-gradient(135deg, #055346, #109125);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(5, 83, 70, .35);
+}
+.btn-outline {
+    border: 2px solid #055346;
+    color: #055346;
+    transition: all .3s;
+}
+.btn-outline:hover {
+    background: #055346;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ── Cards ── */
+.card-hover { transition: all .3s; }
+.card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .12);
+}
+.glow-green:hover {
+    box-shadow: 0 0 0 3px rgba(16, 145, 37, .25);
+}
+
+/* ── Background blobs ── */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: .12;
+    pointer-events: none;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* ── Brand logo strip ── */
+.logo-strip { animation: scroll-logos 28s linear infinite; }
+@keyframes scroll-logos {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ── Notification bar ticker (mobile) ── */
+@keyframes ticker {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ── Notification bar shimmer ── */
+@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+}
+.shimmer-bar {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+}
+
+/* ── Range slider thumb ── */
+input[type="range"] { accent-color: #055346; }
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #055346;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(5, 83, 70, .4);
+}
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #055346;
+    cursor: pointer;
+    border: none;
+}
+
+/* ── Count-up animation ── */
+.count-up { transition: all .5s ease; }
+
+/* ── Navbar active link ── */
+.nav-active { color: #055346; font-weight: 600; }
+
+/* ── Mobile ticker ── */
+.ticker-wrap { overflow: hidden; }
+.ticker-inner { animation: ticker 18s linear infinite; }
+
+/* ── Fixed floating side buttons ── */
+
+/* WhatsApp & Call — expand on hover */
+.fixed-side-btn {
+    position: fixed;
+    left: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    border-radius: 0 1rem 1rem 0;
+    overflow: hidden;
+    box-shadow: 4px 4px 20px rgba(0,0,0,.18);
+    transition: width .3s ease;
+    width: 44px;
+    color: #fff;
+    text-decoration: none;
+}
+.fixed-side-btn:hover { width: 160px; }
+.fixed-side-btn .icon-wrap {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.fixed-side-btn .label {
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    padding-right: 14px;
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+.fixed-side-btn:hover .label { opacity: 1; }
+
+/* Apply Franchise vertical tab */
+.apply-tab {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    letter-spacing: .15em;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* ── Notification bar marquee ── */
+.marquee-track {
+    animation: marquee 30s linear infinite;
+}
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+@keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
