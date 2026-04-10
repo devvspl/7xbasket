@@ -159,7 +159,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* ── Notification bar marquee ── */
 .marquee-track {
-    animation: marquee 30s linear infinite;
+    animation: marquee 60s linear infinite;
 }
 .marquee-track:hover {
     animation-play-state: paused;
@@ -167,4 +167,44 @@ input[type="range"]::-moz-range-thumb {
 @keyframes marquee {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+}
+
+/* ── Testimonial dual-row slider ── */
+.testimonial-scroll-left {
+    animation: testimonial-left 40s linear infinite;
+    width: max-content;
+}
+.testimonial-scroll-right {
+    animation: testimonial-right 40s linear infinite;
+    width: max-content;
+}
+.testimonial-scroll-left:hover,
+.testimonial-scroll-right:hover {
+    animation-play-state: paused;
+}
+@keyframes testimonial-left {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+@keyframes testimonial-right {
+    0%   { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+/* ── Brand marquee strip ── */
+.brand-marquee {
+    animation: brand-scroll 32s linear infinite;
+}
+.brand-marquee:hover {
+    animation-play-state: paused;
+}
+@keyframes brand-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.brand-logo-item {
+    transition: background-color 0.2s ease;
+}
+.brand-logo-item:hover {
+    background-color: #f9fafb;
 }

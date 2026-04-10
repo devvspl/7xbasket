@@ -141,37 +141,39 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer class="relative overflow-hidden bg-gradient-to-br from-[#055346] via-[#076b58] to-[#055346] text-green-100 pt-16 pb-8">
+        <div class="blob w-96 h-96 bg-[#109125] top-[-80px] left-[-80px]"></div>
+        <div class="blob w-72 h-72 bg-[#ec2024] bottom-[-60px] right-[10%]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
                 <div class="md:col-span-2">
                     <div class="flex items-center mb-4">
-                        <img src="{{ asset('custom/logo-ligth.jpeg') }}" alt="7x Basket" class="h-10 w-auto object-contain">
+                        <img src="{{ asset('custom/logo-ligth.png') }}" alt="7x Basket" class="h-10 w-auto object-contain">
                     </div>
-                    <p class="text-sm leading-relaxed text-gray-400 max-w-sm">Your trusted grocery franchise partner. Build a profitable business with our proven model, full support, and strong brand.</p>
+                    <p class="text-sm leading-relaxed text-green-200 max-w-sm">Your trusted grocery franchise partner. Build a profitable business with our proven model, full support, and strong brand.</p>
                 </div>
                 <div>
                     <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="{{ route('home') }}" class="hover:text-green-400 transition-colors">Home</a></li>
-                        <li><a href="{{ route('about') }}" class="hover:text-green-400 transition-colors">About Us</a></li>
-                        <li><a href="{{ route('blogs') }}" class="hover:text-green-400 transition-colors">Blog</a></li>
-                        <li><a href="{{ route('calculator') }}" class="hover:text-green-400 transition-colors">Investment Calculator</a></li>
-                        <li><a href="{{ route('apply') }}" class="hover:text-green-400 transition-colors">Apply Franchise</a></li>
+                        <li><a href="{{ route('home') }}" class="text-green-200 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="{{ route('about') }}" class="text-green-200 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="{{ route('blogs') }}" class="text-green-200 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="{{ route('calculator') }}" class="text-green-200 hover:text-white transition-colors">Investment Calculator</a></li>
+                        <li><a href="{{ route('apply') }}" class="text-green-200 hover:text-white transition-colors">Apply Franchise</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Contact</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
+                    <ul class="space-y-2 text-sm text-green-200">
                         <li>📧 franchise@7xbasket.com</li>
                         <li>📞 +91 98765 43210</li>
                         <li>📍 India</li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-gray-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-500">
+            <div class="border-t border-white/20 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-green-300">
                 <p>&copy; {{ date('Y') }} 7x Basket. All rights reserved.</p>
-                <a href="{{ route('sitemap') }}" class="hover:text-green-400">Sitemap</a>
+                <a href="{{ route('sitemap') }}" class="hover:text-white transition-colors">Sitemap</a>
             </div>
         </div>
     </footer>
