@@ -1,63 +1,91 @@
 @extends('layouts.app')
-
 @section('content')
+    {{-- 1. Hero --}}
+    <section class="bg-[#f0faf4] py-16 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <span
+                class="inline-flex items-center gap-2 bg-[#109125]/10 text-[#055346] text-xs font-semibold px-4 py-1.5 rounded-full mb-4 border border-[#109125]/20">
+                <span class="w-2 h-2 bg-[#ec2024] rounded-full animate-pulse"></span>
+                India's Fastest Growing Grocery Franchise
+            </span>
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-3">About 7x Basket</h1>
+            <p class="text-gray-500 text-base max-w-lg mx-auto">Building India's most trusted grocery franchise network, one
+                store at a time.</p>
+        </div>
+    </section>
 
-<section class="bg-gradient-to-br from-green-50 to-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-4">About 7x Basket</h1>
-        <p class="text-gray-500 max-w-2xl mx-auto text-lg">Building India's most trusted grocery franchise network, one store at a time.</p>
-    </div>
-</section>
-
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
-                <p class="text-gray-600 leading-relaxed mb-4">7x Basket was founded with a simple vision: to make quality grocery retail accessible to every neighbourhood in India. We believe that a well-run grocery store is the backbone of any community.</p>
-                <p class="text-gray-600 leading-relaxed mb-4">Starting from a single store in 2018, we have grown to a network of 500+ franchise partners across 20+ cities. Our model is built on trust, transparency, and technology.</p>
-                <p class="text-gray-600 leading-relaxed">We don't just sell franchises — we build long-term partnerships. Every franchise partner gets dedicated support, training, and the tools they need to succeed.</p>
-            </div>
-            <div class="grid grid-cols-2 gap-5">
-                @foreach([
-                    ['500+', 'Franchise Stores'],
-                    ['20+', 'Cities'],
-                    ['₹50Cr+', 'Partner Revenue'],
-                    ['98%', 'Partner Satisfaction'],
-                ] as [$num, $label])
-                <div class="bg-green-50 rounded-2xl p-6 text-center border border-green-100">
-                    <div class="text-3xl font-extrabold text-green-600 mb-1">{{ $num }}</div>
-                    <div class="text-sm text-gray-600">{{ $label }}</div>
+    {{-- 2. Story + Image --}}
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                {{-- Image --}}
+                <div data-aos="fade-right">
+                    <img src="{{ asset('custom/7x_Basket_Store.jpg') }}" alt="7x Basket Store"
+                        class="rounded-2xl shadow-sm w-full h-80 object-cover">
                 </div>
+                {{-- Text --}}
+                <div data-aos="fade-left">
+                    <span class="text-[#109125] text-xs font-bold uppercase tracking-widest">Our Story</span>
+                    <h2 class="text-2xl font-extrabold text-gray-900 mt-2 mb-4">From One Store to 500+</h2>
+                    <p class="text-gray-500 leading-relaxed text-sm mb-4">
+                        Starting from a single store in 2018, we have grown to a network of 500+ franchise partners across
+                        20+ cities. Our model is built on trust, transparency, and technology.
+                    </p>
+                    <p class="text-gray-500 leading-relaxed text-sm mb-4">
+                        We believe every entrepreneur deserves a proven system with zero royalty and full support — from
+                        site selection and store setup to daily operations and marketing.
+                    </p>
+                    <p class="text-gray-500 leading-relaxed text-sm">
+                        We don't just sell franchises — we build long-term partnerships. Every partner gets a dedicated
+                        relationship manager, access to 5000+ SKUs, and cutting-edge POS technology from day one.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- 3. Stats Row --}}
+    <section class="py-10 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach ([['500+', 'Franchise Stores'], ['20+', 'Cities'], ['₹50Cr+', 'Partner Revenue'], ['98%', 'Satisfaction']] as [$num, $label])
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
+                        <p class="text-4xl font-extrabold text-[#109125]">{{ $num }}</p>
+                        <p class="text-gray-400 text-sm mt-1">{{ $label }}</p>
+                    </div>
                 @endforeach
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
-                <div class="text-3xl mb-4">🎯</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Our Mission</h3>
-                <p class="text-gray-600 leading-relaxed">To empower entrepreneurs across India by providing a proven, profitable grocery franchise model with complete support and technology infrastructure.</p>
+    {{-- 4. Mission & Vision --}}
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10" data-aos="fade-up">
+                <span class="text-[#109125] text-xs font-bold uppercase tracking-widest">What Drives Us</span>
+                <h2 class="text-2xl font-extrabold text-gray-900 mt-2">Mission & Vision</h2>
             </div>
-            <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
-                <div class="text-3xl mb-4">🔭</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Our Vision</h3>
-                <p class="text-gray-600 leading-relaxed">To become India's largest and most trusted grocery franchise network, with 5000+ stores serving 10 million families by 2030.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-[#f0faf4] border border-green-100 rounded-2xl p-8" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-10 h-10 bg-[#109125]/10 rounded-xl flex items-center justify-center text-xl mb-4">🎯</div>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-3">Our Mission</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">To empower entrepreneurs across India with a proven,
+                        profitable grocery franchise model with complete support and technology infrastructure.</p>
+                </div>
+                <div class="bg-[#f0faf4] border border-green-100 rounded-2xl p-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-10 h-10 bg-[#109125]/10 rounded-xl flex items-center justify-center text-xl mb-4">🔭</div>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-3">Our Vision</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">To become India's largest grocery franchise network
+                        with 5000+ stores serving 10 million families by 2030.</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-
-<section class="py-20 bg-green-600">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">Be Part of Our Story</h2>
-        <p class="text-green-100 mb-8">Join the 7x Basket family and build a business you're proud of.</p>
-        <a href="{{ route('apply') }}" class="inline-block bg-white text-green-700 font-bold px-8 py-3.5 rounded-xl hover:bg-green-50 transition-colors">Apply for Franchise</a>
-    </div>
-</section>
-
+    </section>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 60
+        });
+    </script>
 @endsection

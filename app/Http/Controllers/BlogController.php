@@ -38,6 +38,11 @@ class BlogController extends Controller
             ->where('category', $blog->category)
             ->take(3)->get();
 
-        return view('frontend.blogs.show', compact('seo', 'blog', 'related'));
+        $recent = Blog::published()
+            ->where('id', '!=', $blog->id)
+            ->latest('published_at')
+            ->take(4)->get();
+
+        return view('frontend.blogs.show', compact('seo', 'blog', 'related', 'recent'));
     }
 }

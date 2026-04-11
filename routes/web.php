@@ -20,7 +20,7 @@ Route::middleware(['block.ip', 'track.visitor'])->group(function () {
     Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
     Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
     Route::get('/apply-franchise', [FranchiseController::class, 'apply'])->name('apply');
-    Route::post('/apply-franchise', [FranchiseController::class, 'store'])->name('apply.store')->middleware('throttle:3,60');
+    Route::post('/apply-franchise', [FranchiseController::class, 'store'])->name('apply.store')->middleware('throttle:20,60');
     Route::get('/download-brochure', [HomeController::class, 'brochure'])->name('brochure.download');
 });
 
