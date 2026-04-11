@@ -1,48 +1,50 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 @section('content')
     {{-- ══════════════════════════════════════════
      HERO
 ══════════════════════════════════════════ --}}
     <section
-        class="relative overflow-hidden bg-[#f0faf4] lg:min-h-screen flex items-center"
+        class="relative overflow-hidden bg-gradient-to-br from-[#055346] via-[#076b58] to-[#055346] min-h-screen flex items-center"
         style="max-width:100vw">
+        {{-- dark overlay for text readability --}}
+        <div class="absolute inset-0 bg-black/45 z-0 pointer-events-none"></div>
         {{-- blobs --}}
-        <div class="blob w-96 h-96 bg-[#109125]/10 top-[-80px] left-[-80px]"></div>
-        <div class="blob w-72 h-72 bg-[#ec2024]/10 bottom-[-60px] right-[10%]"></div>
+        <div class="blob w-96 h-96 bg-[#109125] top-[-80px] left-[-80px]"></div>
+        <div class="blob w-72 h-72 bg-[#ec2024] bottom-[-60px] right-[10%]"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 w-full relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div data-aos="fade-right" data-aos-duration="800">
                     <span
-                        class="inline-flex items-center gap-2 bg-[#109125]/10 text-[#055346] text-xs font-semibold px-4 py-1.5 rounded-full mb-6 border border-[#109125]/20">
+                        class="inline-flex items-center gap-2 bg-white/10 text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm border border-white/20">
                         <span class="w-2 h-2 bg-[#ec2024] rounded-full animate-pulse"></span>
                         India's Fastest Growing Grocery Franchise
                     </span>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
-                        Own a <span class="text-[#109125]">7x Basket</span><br>Grocery Store
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                        Own a <span class="text-[#4ade80]">7x Basket</span><br>Grocery Store
                     </h1>
-                    <p class="text-gray-500 text-lg leading-relaxed mb-8 max-w-lg">
+                    <p class="text-green-100 text-lg leading-relaxed mb-8 max-w-lg">
                         Join 500+ successful franchise partners. Low investment, high returns, zero royalty, and complete
                         business support from day one.
                     </p>
                     <div class="flex flex-wrap gap-4 mb-10">
-                        <a href="#" onclick="openLeadPopup(); return false;"
-                            class="inline-block bg-[#ec2024] hover:bg-[#c41e1e] text-white font-extrabold px-8 py-4 rounded-xl text-base shadow-[0_4px_20px_rgba(236,32,36,0.4)] hover:shadow-[0_6px_28px_rgba(236,32,36,0.55)] hover:-translate-y-0.5 transition-all duration-200">
+                        <a href="{{ route('apply') }}"
+                            class="inline-block bg-[#f5a623] hover:bg-[#e09610] text-[#1a1a1a] font-extrabold px-8 py-4 rounded-xl text-base shadow-[0_4px_20px_rgba(245,166,35,0.5)] hover:shadow-[0_6px_28px_rgba(245,166,35,0.65)] hover:-translate-y-0.5 transition-all duration-200">
                             Apply Now →
                         </a>
                     </div>
                     <div class="flex flex-wrap gap-8">
                         @foreach ([['500+', 'Partners'], ['₹5L', 'Min. Investment'], ['30%', 'Avg. ROI'], ['0', 'Royalty Fee']] as [$n, $l])
                             <div>
-                                <p class="text-3xl font-extrabold text-gray-900">{{ $n }}</p>
-                                <p class="text-gray-500 text-sm">{{ $l }}</p>
+                                <p class="text-3xl font-extrabold text-white">{{ $n }}</p>
+                                <p class="text-green-200 text-sm">{{ $l }}</p>
                             </div>
                         @endforeach
                     </div>
                 </div>
 
-                <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="200" class="relative">
-                    <div class="relative bg-white rounded-3xl p-6 border border-gray-200 shadow-xl">
+                <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="200" class="relative hidden lg:block">
+                    <div class="relative bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20">
                         <img src="{{ asset('custom/7x_Basket_Store.png') }}" alt="7x Basket Store"
                             class="w-full h-72 object-cover rounded-2xl">
                         {{-- floating badges --}}
@@ -51,7 +53,7 @@
                             Zero Royalty!
                         </div>
                         <div
-                            class="absolute -bottom-4 -left-4 bg-white text-[#055346] text-xs font-bold px-3 py-2 rounded-xl shadow-lg border border-gray-100">
+                            class="absolute -bottom-4 -left-4 bg-white text-[#055346] text-xs font-bold px-3 py-2 rounded-xl shadow-lg">
                             ✓ FSSAI Certified
                         </div>
                     </div>
@@ -74,8 +76,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
                 @foreach ([['🏛️', 'FSSAI', 'Certified'], ['📋', 'GST', 'Registered'], ['⭐', '4.8/5', 'Customer Rating'], ['📅', '6+', 'Years in Business'], ['🏆', '15+', 'Industry Awards']] as [$icon, $val, $label])
-                    <div class="card-hover bg-gray-50 rounded-2xl p-5 text-center border border-gray-100 {{ $loop->last ? 'col-span-2 sm:col-span-1' : '' }}"
-                        data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
+                    <div class="card-hover bg-gray-50 rounded-2xl p-5 text-center border border-gray-100" data-aos="fade-up"
+                        data-aos-delay="{{ $loop->index * 80 }}">
                         <div class="text-3xl mb-2">{{ $icon }}</div>
                         <p class="text-xl font-extrabold text-[#055346]">{{ $val }}</p>
                         <p class="text-xs text-gray-500 mt-0.5">{{ $label }}</p>
@@ -98,7 +100,7 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ([['😰', 'No Brand Recognition', '✅ Instant brand trust with 7x Basket name'], ['📦', 'Supply Chain Issues', '✅ Direct sourcing, daily fresh delivery'], ['💸', 'High Operating Costs', '✅ Bulk buying power, lower margins'], ['📊', 'No Tech Support', '✅ POS, inventory & app included'], ['🎓', 'No Training', '✅ Full onboarding + staff training'], ['📣', 'Zero Marketing', '✅ National + local campaigns handled']] as [$icon, $problem, $solution])
-                    <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100 shadow-sm"
+                    <div class="card-hover glow-green bg-white rounded-2xl p-6 border border-gray-100 shadow-sm"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
                         <div class="text-3xl mb-3">{{ $icon }}</div>
                         <p class="text-sm font-semibold text-[#ec2024] mb-2 line-through opacity-70">{{ $problem }}
@@ -113,9 +115,9 @@
     {{-- ══════════════════════════════════════════
      WHY CHOOSE US
 ══════════════════════════════════════════ --}}
-    <section class="py-16 bg-gray-50 relative overflow-hidden">
-        <div class="blob w-[500px] h-[500px] bg-[#109125]/5 top-[-100px] left-[-150px]"></div>
-        <div class="blob w-80 h-80 bg-[#ec2024]/5 bottom-[-80px] right-[-80px]"></div>
+    <section class="py-16 bg-[#060f0c] relative overflow-hidden">
+        <div class="blob w-[500px] h-[500px] bg-[#109125]/10 top-[-100px] left-[-150px]"></div>
+        <div class="blob w-80 h-80 bg-[#ec2024]/10 bottom-[-80px] right-[-80px]"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -123,10 +125,10 @@
 
                 {{-- Right: text content --}}
                 <div data-aos="fade-left" data-aos-delay="100" class="lg:sticky lg:top-8">
-                    <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Why 7x Basket</span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-2 mb-4">Why Choose 7x Basket Franchise?
+                    <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Why 7x Basket</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2 mb-4">Why Choose 7x Basket Franchise?
                     </h2>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                    <p class="text-[#6b8f7e] text-sm leading-relaxed mb-6">
                         Choosing a 7x Basket franchise in India is like hitting the jackpot! With our established brand
                         recognition, you'll be the go-to grocery store in no time. Our diverse product range means you can
                         cater to every customer's craving, from snacks to soaps. Plus, our flexible business model lets you
@@ -148,12 +150,12 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <span class="text-gray-700 text-sm">{{ $item }}</span>
+                                <span class="text-[#c8e8d8] text-sm">{{ $item }}</span>
                             </div>
                         @endforeach
                     </div>
 
-                    <a href="#" onclick="openLeadPopup(); return false;"
+                    <a href="{{ route('apply') }}"
                         class="inline-block bg-[#ec2024] hover:bg-red-600 text-white font-bold px-8 py-4 rounded-xl transition-all duration-200 text-base shadow-lg hover:-translate-y-0.5">
                         👉 Apply Franchise
                     </a>
@@ -163,33 +165,34 @@
                 <div class="flex flex-col gap-4" data-aos="fade-right">
                     <div class="grid grid-cols-2 gap-4" style="grid-auto-rows: 1fr">
                         @foreach ([[1, '💰', 'Lucrative Margins', 'Attractive profit margins and exclusive deals maximize earning potential with a high return on investment.'], [2, '📈', 'Proven Profitability', 'A franchise model with a proven track record of profitability, giving you a solid foundation from day one.'], [3, '🤝', 'Comprehensive Support', 'Full support from site selection and setup to ongoing operations — we are with you every step of the way.'], [4, '💡', 'Innovative Technology', 'Cutting-edge POS, inventory software, and digital marketing tools to streamline operations and drive growth.'], [5, '🛍️', 'Diverse Product Range', 'Groceries, household essentials, personal care, and more — catering to every customer need under one roof.'], [6, '🏷️', 'Established Brand', 'Leverage the 7x Basket brand trusted nationwide for quality, reliability, and everyday affordability.']] as [$num, $icon, $title, $desc])
-                            <div class="relative bg-white border border-gray-200 rounded-xl p-4 hover:border-[#109125]/40 hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col justify-center"
+                            <div class="relative bg-[#0d1f18] border border-[#1a3328] rounded-xl p-4 hover:border-[#109125]/60 hover:bg-[#0f2318] transition-all duration-300 overflow-hidden flex flex-col justify-center"
                                 data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
                                 <span
-                                    class="absolute top-2 right-3 text-5xl font-extrabold text-gray-900/[0.04] leading-none select-none">{{ $num }}</span>
+                                    class="absolute top-2 right-3 text-5xl font-extrabold text-white/[0.04] leading-none select-none">{{ $num }}</span>
                                 <div class="flex items-center gap-2 mb-1.5 relative z-10">
                                     <span class="text-sm leading-none">{{ $icon }}</span>
-                                    <p class="font-bold text-gray-900 text-sm leading-tight">{{ $title }}</p>
+                                    <p class="font-bold text-[#c8e8d8] text-sm leading-tight">{{ $title }}</p>
                                 </div>
-                                <p class="text-gray-500 text-xs leading-relaxed relative z-10">{{ $desc }}</p>
+                                <p class="text-[#4b7060] text-xs leading-relaxed relative z-10">{{ $desc }}</p>
                             </div>
                         @endforeach
                     </div>
                     {{-- 7th card centered --}}
                     <div class="flex justify-center">
-                        <div class="relative bg-white border border-gray-200 rounded-xl p-4 hover:border-[#109125]/40 hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col justify-center w-1/2"
+                        <div class="relative bg-[#0d1f18] border border-[#1a3328] rounded-xl p-4 hover:border-[#109125]/60 hover:bg-[#0f2318] transition-all duration-300 overflow-hidden flex flex-col justify-center w-1/2"
                             data-aos="fade-up" data-aos-delay="360">
                             <span
-                                class="absolute top-2 right-3 text-5xl font-extrabold text-gray-900/[0.04] leading-none select-none">7</span>
+                                class="absolute top-2 right-3 text-5xl font-extrabold text-white/[0.04] leading-none select-none">7</span>
                             <div class="flex items-center gap-2 mb-1.5 relative z-10">
                                 <span class="text-sm leading-none">🌐</span>
-                                <p class="font-bold text-gray-900 text-sm leading-tight">Community Network</p>
+                                <p class="font-bold text-[#c8e8d8] text-sm leading-tight">Community Network</p>
                             </div>
-                            <p class="text-gray-500 text-xs leading-relaxed relative z-10">Join a network of franchisees
+                            <p class="text-[#4b7060] text-xs leading-relaxed relative z-10">Join a network of franchisees
                                 sharing best practices, experiences, and resources for mutual growth.</p>
                         </div>
                     </div>
                 </div>
+
 
             </div>
         </div>
@@ -207,34 +210,37 @@
                 </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-                @foreach ([['Mini Store', '₹5–8 Lakhs', '300–500 sq ft', 'Starter', false, ['500+ SKUs', 'POS System', 'Basic Staff Training', 'Local Marketing Support', 'FSSAI Compliance Help']], ['Super Store', '₹10–15 Lakhs', '800–1200 sq ft', 'Most Popular', true, ['2,000+ SKUs', 'Full POS + Inventory Tech', 'Advanced Staff Training', 'Dedicated Relationship Manager', 'Regional Marketing Campaigns']], ['Hyper Store', '₹20–30 Lakhs', '2000+ sq ft', 'Premium', false, ['5,000+ SKUs', 'Enterprise Tech Stack', 'Full Team Training', 'Priority 24/7 Support', 'National Marketing Campaigns']]] as [$name, $price, $size, $badge, $featured, $features])
+                @foreach ([['Mini Store', '₹5–8 Lakhs', '300–500 sq ft', 'Starter', false, ['500+ SKUs', 'POS System', 'Basic Staff Training', 'Local Marketing Support', 'FSSAI Compliance Help']], ['Super Store', '₹10–15 Lakhs', '800–1200 sq ft', 'Most Popular', true, ['2,000+ SKUs', 'Full POS + Inventory Tech', 'Advanced Staff Training', 'Dedicated Relationship Manager', 'Regional Marketing Campaigns', 'Customer Loyalty Program']], ['Hyper Store', '₹20–30 Lakhs', '2000+ sq ft', 'Premium', false, ['5,000+ SKUs', 'Enterprise Tech Stack', 'Full Team Training', 'Priority 24/7 Support', 'National Marketing Campaigns', 'Loyalty Program + Analytics']]] as [$name, $price, $size, $badge, $featured, $features])
                     <div class="relative rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl
                         {{ $featured ? 'bg-white border-gray-200 shadow-2xl scale-105' : 'bg-gray-50 border-gray-200 shadow-sm' }}"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
 
+                        {{-- Amber top accent for featured --}}
                         @if ($featured)
-                            <div class="h-1.5 bg-[#ec2024] w-full"></div>
+                            <div class="h-1.5 bg-[#f5a623] w-full"></div>
                         @else
                             <div class="h-1.5 bg-[#109125]/30 w-full"></div>
                         @endif
 
                         <div class="p-7">
+                            {{-- Badge --}}
                             <div class="flex items-center justify-between mb-4">
                                 <span
                                     class="text-xs font-bold uppercase tracking-widest
-                                    {{ $featured ? 'text-[#ec2024]' : 'text-[#109125]' }}">
+                                    {{ $featured ? 'text-[#f5a623]' : 'text-[#109125]' }}">
                                     {{ $badge }}
                                 </span>
                                 @if ($featured)
                                     <span
-                                        class="bg-[#ec2024] text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wide">
+                                        class="bg-[#f5a623] text-[#1a1a1a] text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wide">
                                         ⭐ Most Popular
                                     </span>
                                 @endif
                             </div>
 
+                            {{-- Name & Price --}}
                             <h3 class="text-2xl font-extrabold text-gray-900 mb-1">{{ $name }}</h3>
-                            <p class="text-3xl font-extrabold {{ $featured ? 'text-[#ec2024]' : 'text-[#055346]' }} mb-1">
+                            <p class="text-3xl font-extrabold {{ $featured ? 'text-[#f5a623]' : 'text-[#055346]' }} mb-1">
                                 {{ $price }}</p>
                             <p class="text-sm text-gray-400 mb-6 flex items-center gap-1">
                                 <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor"
@@ -247,14 +253,16 @@
                                 {{ $size }} store area
                             </p>
 
+                            {{-- Divider --}}
                             <div class="border-t border-gray-100 mb-5"></div>
 
+                            {{-- Features --}}
                             <ul class="space-y-3 mb-8">
                                 @foreach ($features as $f)
                                     <li class="flex items-center gap-2.5 text-sm text-gray-700">
                                         <div
-                                            class="w-5 h-5 {{ $featured ? 'bg-[#ec2024]' : 'bg-[#109125]' }} rounded-full flex items-center justify-center flex-shrink-0">
-                                            <svg class="w-3 h-3 {{ $featured ? 'text-white' : 'text-white' }}"
+                                            class="w-5 h-5 {{ $featured ? 'bg-[#f5a623]' : 'bg-[#109125]' }} rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-3 h-3 {{ $featured ? 'text-[#1a1a1a]' : 'text-white' }}"
                                                 fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd"
                                                     d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -266,7 +274,8 @@
                                 @endforeach
                             </ul>
 
-                            <a href="#" onclick="openLeadPopup(); return false;"
+                            {{-- CTA --}}
+                            <a href="{{ route('apply') }}"
                                 class="block text-center font-bold py-3.5 rounded-xl transition-all duration-200
                                 {{ $featured
                                     ? 'bg-[#109125] hover:bg-[#0d7a1e] text-white shadow-lg shadow-green-900/20'
@@ -283,13 +292,13 @@
     {{-- ══════════════════════════════════════════
      DUAL CALCULATOR
 ══════════════════════════════════════════ --}}
-    <section class="py-12 bg-gray-50" id="calculator">
+    <section class="py-12 bg-[#081510]" id="calculator">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8" data-aos="fade-up">
-                <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Smart Calculator</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Plan Your Franchise Investment
+                <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Smart Calculator</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-[#c8e8d8] mt-2 mb-3">Plan Your Franchise Investment
                 </h2>
-                <p class="text-gray-500 max-w-xl mx-auto">Calculate startup costs and projected earnings — all in one
+                <p class="text-[#4b7060] max-w-xl mx-auto">Calculate startup costs and projected earnings — all in one
                     place.</p>
             </div>
 
@@ -297,16 +306,16 @@
 
                 {{-- Tab switcher --}}
                 <div class="flex justify-center mb-6">
-                    <div class="inline-flex bg-gray-100 rounded-2xl p-1 gap-1">
+                    <div class="inline-flex bg-[#1a2e27] rounded-2xl p-1 gap-1">
                         <button @click="tab = 'cost'"
-                            :class="tab === 'cost' ? 'bg-white text-[#055346] shadow-sm' :
-                                'text-gray-500 hover:text-[#055346]'"
+                            :class="tab === 'cost' ? 'bg-[#0f1f1a] text-[#4ade80] shadow-sm' :
+                                'text-[#6b8f7e] hover:text-[#4ade80]'"
                             class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200">
                             💰 Startup Costs
                         </button>
                         <button @click="tab = 'earn'"
-                            :class="tab === 'earn' ? 'bg-white text-[#055346] shadow-sm' :
-                                'text-gray-500 hover:text-[#055346]'"
+                            :class="tab === 'earn' ? 'bg-[#0f1f1a] text-[#4ade80] shadow-sm' :
+                                'text-[#6b8f7e] hover:text-[#4ade80]'"
                             class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200">
                             📈 Earnings Projection
                         </button>
@@ -328,29 +337,29 @@
                         get total() { return this.fitout + this.inventory + this.franchise + this.working },
                         fmt(n) { return '₹' + Number(n).toLocaleString('en-IN') }
                     }"
-                        class="bg-white border border-gray-200 rounded-3xl shadow-sm overflow-hidden">
+                        class="bg-[#0f1f1a] border border-white/[0.08] rounded-3xl shadow-2xl overflow-hidden">
                         <div class="grid grid-cols-1 lg:grid-cols-2">
 
                             {{-- Left --}}
-                            <div class="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-gray-100">
-                                <p class="text-gray-900 font-bold text-base mb-5">Calculate Your Supermarket Franchise
+                            <div class="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-white/[0.08]">
+                                <p class="text-white font-bold text-base mb-5">Calculate Your Supermarket Franchise
                                     Startup Costs</p>
 
                                 {{-- Store Type --}}
                                 <div class="mb-5">
                                     <label
-                                        class="text-gray-700 text-xs font-bold uppercase tracking-wider block mb-3">Supermarket
+                                        class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider block mb-3">Supermarket
                                         Format</label>
                                     <div class="grid grid-cols-3 gap-3">
                                         @foreach (['mini' => ['🏪', 'Mini Store', '300–500 sqft'], 'super' => ['🏬', 'Super Store', '800–1200 sqft'], 'hyper' => ['🏢', 'Hyper Store', '2000+ sqft']] as $key => [$icon, $name, $size])
                                             <button @click="storeType = '{{ $key }}'"
                                                 :class="storeType === '{{ $key }}' ?
-                                                    'border-[#109125] bg-green-50 text-[#055346]' :
-                                                    'border-gray-200 text-gray-600 hover:border-gray-300'"
+                                                    'border-[#f5a623] bg-[#f5a623]/10 text-[#f5a623]' :
+                                                    'border-white/20 text-[#9bbfb0] hover:border-white/40'"
                                                 class="border-2 rounded-xl p-3 text-center transition-all duration-200 bg-transparent">
                                                 <div class="text-2xl mb-1">{{ $icon }}</div>
                                                 <p class="text-xs font-bold">{{ $name }}</p>
-                                                <p class="text-[10px] text-gray-400">{{ $size }}</p>
+                                                <p class="text-[10px] text-[#6b8f7e]">{{ $size }}</p>
                                             </button>
                                         @endforeach
                                     </div>
@@ -359,14 +368,14 @@
                                 {{-- Area --}}
                                 <div class="mb-5">
                                     <div class="flex justify-between mb-2">
-                                        <label class="text-gray-700 text-xs font-bold uppercase tracking-wider">Store Area
+                                        <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Store Area
                                             (sq ft)</label>
-                                        <span class="text-sm font-bold text-[#055346]"
+                                        <span class="text-sm font-bold text-[#f5a623]"
                                             x-text="area.toLocaleString() + ' sqft'"></span>
                                     </div>
                                     <input type="range" x-model="area" min="300" max="10000" step="100"
-                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#109125] bg-gray-200">
-                                    <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
+                                    <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
                                         <span>300</span><span>5,000</span><span>10,000</span>
                                     </div>
                                 </div>
@@ -374,13 +383,13 @@
                                 {{-- Plan --}}
                                 <div class="mb-5">
                                     <label
-                                        class="text-gray-700 text-xs font-bold uppercase tracking-wider block mb-3">Working
+                                        class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider block mb-3">Working
                                         Capital Plan</label>
                                     <div class="grid grid-cols-3 gap-2">
                                         @foreach ([1 => ['Basic', '₹5L'], 2 => ['Standard', '₹7.5L'], 3 => ['Premium', '₹10L']] as $p => [$pname, $pamount])
                                             <button @click="plan = {{ $p }}"
-                                                :class="plan === {{ $p }} ? 'bg-[#109125] text-white' :
-                                                    'bg-gray-100 text-gray-600 hover:bg-gray-200'"
+                                                :class="plan === {{ $p }} ? 'bg-[#f5a623] text-[#081510]' :
+                                                    'bg-white/10 text-[#9bbfb0] hover:bg-white/15'"
                                                 class="rounded-xl py-2 text-xs font-bold transition-all duration-200">
                                                 <div>{{ $pname }}</div>
                                                 <div class="opacity-75">{{ $pamount }}</div>
@@ -389,28 +398,28 @@
                                     </div>
                                 </div>
 
-                                <a href="#" onclick="openLeadPopup(); return false;"
+                                <a href="{{ route('apply') }}"
                                     class="block w-full bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold text-center py-3 rounded-xl transition-all duration-200 text-sm">
                                     Plan My Budget →
                                 </a>
                             </div>
 
                             {{-- Right --}}
-                            <div class="p-6 sm:p-8 bg-gray-50">
-                                <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-1">Total
+                            <div class="p-6 sm:p-8 bg-[#081510]">
+                                <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Total
                                     Estimated Investment</p>
-                                <p class="text-5xl font-extrabold text-[#ec2024] mb-1" x-text="fmt(total)"></p>
-                                <p class="text-gray-400 text-xs mb-6">Based on your selected format & plan</p>
+                                <p class="text-5xl font-extrabold text-[#f5a623] mb-1" x-text="fmt(total)"></p>
+                                <p class="text-[#6b8f7e] text-xs mb-6">Based on your selected format & plan</p>
 
                                 <div class="space-y-4">
-                                    @foreach ([['Store Fitout & Setup', 'fitout', 'bg-[#109125]'], ['Initial Inventory', 'inventory', 'bg-[#055346]'], ['Franchise Fee', 'franchise', 'bg-[#ec2024]'], ['Working Capital', 'working', 'bg-[#ec2024]']] as [$label, $key, $color])
+                                    @foreach ([['Store Fitout & Setup', 'fitout', 'bg-[#109125]'], ['Initial Inventory', 'inventory', 'bg-[#055346]'], ['Franchise Fee', 'franchise', 'bg-[#ec2024]'], ['Working Capital', 'working', 'bg-[#f5a623]']] as [$label, $key, $color])
                                         <div>
                                             <div class="flex justify-between text-sm mb-1.5">
-                                                <span class="text-gray-500 font-medium">{{ $label }}</span>
-                                                <span class="font-bold text-gray-900"
+                                                <span class="text-[#9bbfb0] font-medium">{{ $label }}</span>
+                                                <span class="font-bold text-white"
                                                     x-text="fmt({{ $key }})"></span>
                                             </div>
-                                            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
                                                 <div class="{{ $color }} h-full rounded-full transition-all duration-500"
                                                     :style="`width: ${Math.round(({{ $key }} / total) * 100)}%`">
                                                 </div>
@@ -420,13 +429,13 @@
                                 </div>
 
                                 <div class="mt-5 grid grid-cols-2 gap-3">
-                                    <div class="bg-white rounded-xl p-3 border border-gray-100 text-center">
-                                        <p class="text-xs text-gray-500 mb-0.5">Monthly Rent Est.</p>
-                                        <p class="font-bold text-[#055346] text-sm" x-text="fmt(baseRent)"></p>
+                                    <div class="bg-white/[0.06] rounded-xl p-3 border border-white/10 text-center">
+                                        <p class="text-xs text-[#9bbfb0] mb-0.5">Monthly Rent Est.</p>
+                                        <p class="font-bold text-[#f5a623] text-sm" x-text="fmt(baseRent)"></p>
                                     </div>
-                                    <div class="bg-white rounded-xl p-3 border border-gray-100 text-center">
-                                        <p class="text-xs text-gray-500 mb-0.5">Zero Royalty</p>
-                                        <p class="font-bold text-[#109125] text-sm">₹0 / month</p>
+                                    <div class="bg-white/[0.06] rounded-xl p-3 border border-white/10 text-center">
+                                        <p class="text-xs text-[#9bbfb0] mb-0.5">Zero Royalty</p>
+                                        <p class="font-bold text-[#4ade80] text-sm">₹0 / month</p>
                                     </div>
                                 </div>
                             </div>
@@ -461,41 +470,41 @@
                         fmt(n) { return (n >= 100000) ? (n / 100000).toFixed(1) + 'L' : (n >= 1000) ? (n / 1000).toFixed(0) + 'K' : n },
                         fmtFull(n) { return '₹' + Number(n).toLocaleString('en-IN') }
                     }"
-                        class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200">
+                        class="bg-[#0f1f1a] rounded-3xl overflow-hidden shadow-2xl border border-white/[0.08]">
                         <div class="grid grid-cols-1 lg:grid-cols-2">
 
                             {{-- Left --}}
-                            <div class="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-gray-100">
-                                <p class="text-gray-900 font-bold text-base mb-5">Calculate Your Earnings (Not Just Costs)
+                            <div class="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-white/10">
+                                <p class="text-white font-bold text-base mb-5">Calculate Your Earnings (Not Just Costs)
                                     <span
                                         class="text-[10px] bg-[#109125] text-white px-2 py-0.5 rounded-full ml-1">LIVE</span>
                                 </p>
 
                                 <div class="mb-5">
                                     <div class="flex justify-between mb-2">
-                                        <label class="text-gray-700 text-xs font-bold uppercase tracking-wider">Store Size
+                                        <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Store Size
                                             (sq ft)</label>
-                                        <span class="text-[#055346] text-sm font-bold"
+                                        <span class="text-[#f5a623] text-sm font-bold"
                                             x-text="storeSize + ' sq ft'"></span>
                                     </div>
                                     <input type="range" x-model="storeSize" min="500" max="10000"
                                         step="100"
-                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#109125] bg-gray-200">
-                                    <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
+                                    <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
                                         <span>500</span><span>2,500</span><span>10,000</span>
                                     </div>
                                 </div>
 
                                 <div class="mb-5">
                                     <label
-                                        class="text-gray-700 text-xs font-bold uppercase tracking-wider block mb-2">City
+                                        class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider block mb-2">City
                                         Tier</label>
                                     <div class="grid grid-cols-3 gap-2">
                                         @foreach ([1 => 'Tier 1', 2 => 'Tier 2', 3 => 'Tier 3'] as $t => $label)
                                             <button @click="cityTier = {{ $t }}"
                                                 :class="cityTier === {{ $t }} ?
-                                                    'bg-[#109125] text-white border-[#109125]' :
-                                                    'bg-transparent text-gray-600 border-gray-200 hover:border-gray-300'"
+                                                    'bg-[#f5a623] text-[#081510] border-[#f5a623]' :
+                                                    'bg-transparent text-[#9bbfb0] border-white/20 hover:border-white/40'"
                                                 class="border rounded-xl py-2 text-sm font-semibold transition-all duration-200">
                                                 {{ $label }}
                                             </button>
@@ -505,77 +514,77 @@
 
                                 <div class="mb-5">
                                     <div class="flex justify-between mb-2">
-                                        <label class="text-gray-700 text-xs font-bold uppercase tracking-wider">Starting
+                                        <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Starting
                                             Capital (₹ Lakh)</label>
-                                        <span class="text-[#055346] text-sm font-bold"
+                                        <span class="text-[#f5a623] text-sm font-bold"
                                             x-text="'₹' + capital + 'L'"></span>
                                     </div>
                                     <input type="range" x-model="capital" min="5" max="50"
                                         step="1"
-                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#109125] bg-gray-200">
-                                    <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
+                                    <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
                                         <span>₹5L</span><span>₹25L</span><span>₹50L</span>
                                     </div>
                                 </div>
 
                                 <div class="mb-5">
                                     <div class="flex justify-between mb-2">
-                                        <label class="text-gray-700 text-xs font-bold uppercase tracking-wider">Expected
+                                        <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Expected
                                             Daily Footfall</label>
-                                        <span class="text-[#055346] text-sm font-bold"
+                                        <span class="text-[#f5a623] text-sm font-bold"
                                             x-text="footfall + ' customers'"></span>
                                     </div>
                                     <input type="range" x-model="footfall" min="50" max="1000"
                                         step="10"
-                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#109125] bg-gray-200">
-                                    <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
+                                    <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
                                         <span>50</span><span>500</span><span>1000</span>
                                     </div>
                                 </div>
 
-                                <a href="#" onclick="openLeadPopup(); return false;"
+                                <a href="{{ route('apply') }}"
                                     class="block w-full bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold text-center py-3 rounded-xl transition-all duration-200 text-sm">
                                     Calculate My Earnings →
                                 </a>
                             </div>
 
                             {{-- Right --}}
-                            <div class="p-6 sm:p-8 bg-gray-50">
-                                <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-1">Projected
+                            <div class="p-6 sm:p-8 bg-[#081510]">
+                                <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Projected
                                     Monthly Revenue</p>
-                                <p class="text-5xl font-extrabold text-[#ec2024] leading-none mb-1"
+                                <p class="text-5xl font-extrabold text-[#f5a623] leading-none mb-1"
                                     x-text="fmtFull(monthlyRevenue)"></p>
-                                <p class="text-gray-400 text-xs mb-5">Estimated based on your inputs</p>
+                                <p class="text-[#6b8f7e] text-xs mb-5">Estimated based on your inputs</p>
 
                                 <div class="grid grid-cols-3 gap-3 mb-5">
-                                    <div class="bg-white rounded-xl p-3 text-center border border-gray-100">
-                                        <p class="text-[#055346] text-xl font-extrabold" x-text="margin + '%'"></p>
-                                        <p class="text-gray-500 text-xs mt-0.5">Margin</p>
+                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                        <p class="text-[#f5a623] text-xl font-extrabold" x-text="margin + '%'"></p>
+                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Margin</p>
                                     </div>
-                                    <div class="bg-white rounded-xl p-3 text-center border border-gray-100">
-                                        <p class="text-[#055346] text-xl font-extrabold" x-text="breakeven + 'mo'"></p>
-                                        <p class="text-gray-500 text-xs mt-0.5">Breakeven</p>
+                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                        <p class="text-[#f5a623] text-xl font-extrabold" x-text="breakeven + 'mo'"></p>
+                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Breakeven</p>
                                     </div>
-                                    <div class="bg-white rounded-xl p-3 text-center border border-gray-100">
-                                        <p class="text-[#109125] text-xl font-extrabold" x-text="'₹' + fmt(annualProfit)">
+                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                        <p class="text-[#4ade80] text-xl font-extrabold" x-text="'₹' + fmt(annualProfit)">
                                         </p>
-                                        <p class="text-gray-500 text-xs mt-0.5">Yr 1 Profit</p>
+                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Yr 1 Profit</p>
                                     </div>
                                 </div>
 
-                                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2">Monthly
+                                <p class="text-[#4b7060] text-xs font-semibold uppercase tracking-wider mb-2">Monthly
                                     Earnings Projection</p>
-                                <div class="flex items-end gap-1 h-24 bg-gray-50 rounded-xl p-2">
+                                <div class="flex items-end gap-1 h-24">
                                     <template x-for="(bar, i) in chartBars" :key="i">
                                         <div class="flex-1 rounded-t-sm transition-all duration-500 ease-out"
                                             :style="`height: ${Math.round((bar / maxBar) * 100)}%; background: ${i >= 9 ? '#4ade80' : i >= 6 ? '#22c55e' : i >= 3 ? '#16a34a' : '#109125'}; min-height: 3px;`">
                                         </div>
                                     </template>
                                 </div>
-                                <div class="flex justify-between text-xs text-gray-400 mt-1.5">
+                                <div class="flex justify-between text-xs text-[#2e4d3d] mt-1.5">
                                     <span>Month 1</span><span>Month 6</span><span>Month 12</span>
                                 </div>
-                                <p class="text-xs text-gray-400 mt-3 text-center">*Based on average 7x Basket partner data
+                                <p class="text-xs text-[#2e4d3d] mt-3 text-center">*Based on average 7x Basket partner data
                                 </p>
                             </div>
                         </div>
@@ -589,7 +598,7 @@
     {{-- ══════════════════════════════════════════
      STEPS
 ══════════════════════════════════════════ --}}
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">How It Works</span>
@@ -600,9 +609,11 @@
                 @foreach ([[1, 'Apply Online', 'Fill the franchise application form with your details and investment capacity.'], [2, 'Consultation Call', 'Our team contacts you within 24 hours for a detailed discussion about your goals.'], [3, 'Site Evaluation', 'We assess your proposed location for viability, footfall, and market potential.'], [4, 'Agreement Signing', 'Sign the franchise agreement and complete all onboarding formalities smoothly.'], [5, 'Store Design', 'Our team designs your store layout, shelving, signage, and brand standards.'], [6, 'Setup & Stocking', 'We set up the store, install POS, and stock initial inventory before launch.'], [7, 'Staff Training', 'Your team gets full training on operations, billing, and customer service.'], [8, 'Grand Opening', 'Launch your store with our marketing support and start serving customers.']] as [$num, $title, $desc])
                     <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
-                        <div class="w-8 h-8 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mb-4 flex-shrink-0">
-                            <span class="text-[#109125] text-xs font-extrabold leading-none">{{ $num }}</span>
+                        {{-- Number badge --}}
+                        <div class="w-8 h-8 rounded-full bg-[#1a5c38] flex items-center justify-center mb-4 flex-shrink-0">
+                            <span class="text-white text-xs font-extrabold leading-none">{{ $num }}</span>
                         </div>
+                        {{-- Connector line hint for non-last items --}}
                         <h3 class="font-bold text-gray-900 text-sm mb-2">{{ $title }}</h3>
                         <p class="text-xs text-gray-500 leading-relaxed">{{ $desc }}</p>
                     </div>
@@ -613,7 +624,7 @@
     {{-- ══════════════════════════════════════════
      TESTIMONIALS
 ══════════════════════════════════════════ --}}
-    <section class="py-12 bg-gray-50 overflow-hidden">
+    <section class="py-12 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Success Stories</span>
@@ -633,6 +644,7 @@
             }" x-init="init()" @mouseenter="clearInterval(timer)"
                 @mouseleave="timer = setInterval(() => next(), 3000)" class="relative">
 
+                {{-- Prev button --}}
                 <button @click="prev()"
                     class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center hover:bg-[#055346] hover:text-white hover:border-[#055346] transition-all">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -640,36 +652,82 @@
                     </svg>
                 </button>
 
+                {{-- Slider track --}}
                 <div class="overflow-hidden mx-6">
                     <div class="flex transition-transform duration-500 ease-in-out gap-4"
                         :style="`transform: translateX(calc(-${current * (100 / visible())}% - ${current * 16 / visible()}px))`">
 
                         @php
                             $testimonials = [
-                                ['Rajesh Kumar', 'Delhi', 'Super Store', 'Joining 7x Basket was the best business decision I made. Turned profitable in 8 months. The support team is always available.'],
-                                ['Priya Sharma', 'Mumbai', 'Mini Store', 'The supply chain is excellent. Fresh products daily and margins are much better than running an independent store.'],
-                                ['Amit Patel', 'Ahmedabad', 'Hyper Store', 'From training to launch, everything was smooth. The technology platform makes inventory management effortless.'],
-                                ['Sunita Verma', 'Jaipur', 'Super Store', 'Zero royalty model is a game changer. I keep all my profits and the brand name brings customers in without extra marketing.'],
-                                ['Kiran Reddy', 'Hyderabad', 'Mini Store', 'The dedicated relationship manager helped me through every step. My store broke even in just 6 months.'],
-                                ['Manoj Singh', 'Lucknow', 'Super Store', 'I was skeptical at first but the 45-day launch timeline is real. My store was up and running exactly on schedule.'],
-                                ['Deepa Nair', 'Kochi', 'Hyper Store', 'The POS system and inventory app are incredibly easy to use. Customer loyalty program keeps them coming back.'],
-                                ['Vikram Joshi', 'Pune', 'Mini Store', 'Best investment I have made. The brand recognition alone drives footfall. 7x Basket is trusted before they walk in.'],
-                                ['Anita Gupta', 'Chandigarh', 'Super Store', 'National marketing campaigns save me so much time and money. I just focus on running the store and customers keep coming.'],
+                                [
+                                    'Rajesh Kumar',
+                                    'Delhi',
+                                    'Super Store',
+                                    'Joining 7x Basket was the best business decision I made. Turned profitable in 8 months. The support team is always available.',
+                                ],
+                                [
+                                    'Priya Sharma',
+                                    'Mumbai',
+                                    'Mini Store',
+                                    'The supply chain is excellent. Fresh products daily and margins are much better than running an independent store.',
+                                ],
+                                [
+                                    'Amit Patel',
+                                    'Ahmedabad',
+                                    'Hyper Store',
+                                    'From training to launch, everything was smooth. The technology platform makes inventory management effortless.',
+                                ],
+                                [
+                                    'Sunita Verma',
+                                    'Jaipur',
+                                    'Super Store',
+                                    'Zero royalty model is a game changer. I keep all my profits and the brand name brings customers in without extra marketing.',
+                                ],
+                                [
+                                    'Kiran Reddy',
+                                    'Hyderabad',
+                                    'Mini Store',
+                                    'The dedicated relationship manager helped me through every step. My store broke even in just 6 months.',
+                                ],
+                                [
+                                    'Manoj Singh',
+                                    'Lucknow',
+                                    'Super Store',
+                                    'I was skeptical at first but the 45-day launch timeline is real. My store was up and running exactly on schedule.',
+                                ],
+                                [
+                                    'Deepa Nair',
+                                    'Kochi',
+                                    'Hyper Store',
+                                    'The POS system and inventory app are incredibly easy to use. Customer loyalty program keeps them coming back.',
+                                ],
+                                [
+                                    'Vikram Joshi',
+                                    'Pune',
+                                    'Mini Store',
+                                    'Best investment I have made. The brand recognition alone drives footfall. 7x Basket is trusted before they walk in.',
+                                ],
+                                [
+                                    'Anita Gupta',
+                                    'Chandigarh',
+                                    'Super Store',
+                                    'National marketing campaigns save me so much time and money. I just focus on running the store and customers keep coming.',
+                                ],
                             ];
                         @endphp
 
                         @foreach ($testimonials as $t)
                             <div
-                                class="flex-shrink-0 w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-11px)] bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+                                class="flex-shrink-0 w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-11px)] bg-gray-50 rounded-2xl p-5 border border-gray-100">
                                 <div class="flex gap-0.5 mb-3">
                                     @for ($i = 0; $i < 5; $i++)
-                                        <svg class="w-4 h-4 text-[#ec2024]" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                         </svg>
                                     @endfor
                                 </div>
-                                <p class="text-gray-700 text-sm leading-relaxed mb-4 italic">"{{ $t[3] }}"</p>
+                                <p class="text-gray-600 text-sm leading-relaxed mb-4 italic">"{{ $t[3] }}"</p>
                                 <div class="flex items-center gap-3">
                                     <div
                                         class="w-9 h-9 bg-[#055346] rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
@@ -686,6 +744,7 @@
                     </div>
                 </div>
 
+                {{-- Next button --}}
                 <button @click="next()"
                     class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center hover:bg-[#055346] hover:text-white hover:border-[#055346] transition-all">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -693,6 +752,7 @@
                     </svg>
                 </button>
 
+                {{-- Dots --}}
                 <div class="flex justify-center gap-2 mt-6">
                     @for ($i = 0; $i < 9; $i++)
                         <button @click="current = {{ $i }}"
@@ -708,14 +768,14 @@
     {{-- ══════════════════════════════════════════
      SERVICES — What We Handle For You
 ══════════════════════════════════════════ --}}
-    <section class="py-16 bg-white relative overflow-hidden">
-        <div class="blob w-[500px] h-[500px] bg-[#109125]/5 top-[-100px] right-[-150px]"></div>
-        <div class="blob w-80 h-80 bg-[#ec2024]/5 bottom-[-80px] left-[-80px]"></div>
+    <section class="py-16 bg-[#060f0c] relative overflow-hidden">
+        <div class="blob w-[500px] h-[500px] bg-[#109125]/10 top-[-100px] right-[-150px]"></div>
+        <div class="blob w-80 h-80 bg-[#ec2024]/10 bottom-[-80px] left-[-80px]"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12" data-aos="fade-up">
-                <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Done For You</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Everything We Handle For You</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto">You focus on serving customers. We take care of everything else
+                <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Done For You</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">Everything We Handle For You</h2>
+                <p class="text-[#6b8f7e] max-w-2xl mx-auto">You focus on serving customers. We take care of everything else
                     — from setup to daily operations.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -730,7 +790,7 @@
             ['⏱️', 'Expiry Management System', 'Automated alerts and processes to track product expiry and reduce wastage.', '✔ Reduce losses, improve margins', ''],
             ['🛟', '24/7 Backend Support', 'Round-the-clock support for operations, tech issues, supply chain, and escalations.', '✔ Never face a problem alone', ''],
         ] as [$icon, $title, $desc, $benefit, $type])
-                    <div class="relative {{ $type === 'highlight' ? 'bg-red-50 border-red-200 hover:bg-red-50/80' : 'bg-white border-gray-200 hover:border-[#109125]/40 hover:shadow-md' }} border rounded-2xl p-5 flex flex-col transition-all duration-300"
+                    <div class="relative {{ $type === 'highlight' ? 'bg-[#ec2024]/10 border-[#ec2024]/50 hover:bg-[#ec2024]/15' : 'bg-[#0d1f18] border-[#1a3328] hover:border-[#109125]/60 hover:bg-[#0f2318]' }} border rounded-2xl p-5 flex flex-col transition-all duration-300"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
                         @if ($type === 'highlight')
                             <span
@@ -739,14 +799,14 @@
                         @endif
                         <div class="flex items-center gap-3 mb-3">
                             <div
-                                class="w-10 h-10 {{ $type === 'highlight' ? 'bg-red-100' : 'bg-green-50' }} rounded-xl flex items-center justify-center text-xl flex-shrink-0">
+                                class="w-10 h-10 {{ $type === 'highlight' ? 'bg-[#ec2024]/20' : 'bg-[#109125]/15' }} rounded-xl flex items-center justify-center text-xl flex-shrink-0">
                                 {{ $icon }}
                             </div>
-                            <p class="font-bold text-gray-900 text-sm leading-tight">{{ $title }}</p>
+                            <p class="font-bold text-[#c8e8d8] text-sm leading-tight">{{ $title }}</p>
                         </div>
-                        <p class="text-gray-500 text-xs leading-relaxed mb-3 flex-1">{{ $desc }}</p>
+                        <p class="text-[#4b7060] text-xs leading-relaxed mb-3 flex-1">{{ $desc }}</p>
                         <p
-                            class="text-xs font-semibold {{ $type === 'highlight' ? 'text-[#ec2024]' : 'text-[#109125]' }}">
+                            class="text-xs font-semibold {{ $type === 'highlight' ? 'text-[#ec2024]' : 'text-[#4ade80]' }}">
                             {{ $benefit }}</p>
                     </div>
                 @endforeach
@@ -767,6 +827,7 @@
                     directly from manufacturers.</p>
             </div>
 
+            {{-- Category tags --}}
             <div class="flex flex-wrap justify-center gap-2 mb-10" data-aos="fade-up">
                 @foreach (['🥛 Dairy', '🥦 Fresh Produce', '🛒 Staples', '🧴 Personal Care', '🏠 Home Care', '🍿 Snacks', '🌾 Organic', '🥤 Beverages', '👶 Baby Care', '🐾 Pet Care'] as $cat)
                     <span
@@ -775,6 +836,7 @@
             </div>
         </div>
 
+        {{-- Marquee strip — full bleed, no max-width --}}
         <div class="border-t border-b border-gray-100 py-0 overflow-hidden">
             <div class="flex brand-marquee" style="width: max-content">
                 @php
@@ -814,7 +876,7 @@
     {{-- ══════════════════════════════════════════
      GALLERY + VIDEO
 ══════════════════════════════════════════ --}}
-    <section class="py-16 bg-gray-50 relative overflow-hidden" x-data="{
+    <section class="py-16 bg-[#060f0c] relative overflow-hidden" x-data="{
         videoModal: false,
         videoSrc: '',
         lightbox: false,
@@ -846,9 +908,9 @@
 
             {{-- ── Image Slider ── --}}
             <div class="text-center mb-8" data-aos="fade-up">
-                <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Inside 7x Basket</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Our Stores & Stories</h2>
-                <p class="text-gray-500 max-w-xl mx-auto">A look inside our franchise stores across India.</p>
+                <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Inside 7x Basket</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">Our Stores & Stories</h2>
+                <p class="text-[#6b8f7e] max-w-xl mx-auto">A look inside our franchise stores across India.</p>
             </div>
 
             <div x-data="{
@@ -860,6 +922,7 @@
                 @mouseleave="timer = setInterval(() => { current = (current + 1) % total }, 3500)"
                 class="relative overflow-hidden rounded-2xl mb-16" data-aos="fade-up">
 
+                {{-- Slides — each slide is a 3-image group --}}
                 <div class="flex transition-transform duration-700 ease-in-out"
                     :style="`transform: translateX(-${current * 100}%)`">
 
@@ -873,6 +936,7 @@
                                     <img src="{{ asset($img) }}" alt="{{ $alt }}"
                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         loading="lazy">
+                                    {{-- zoom icon on hover --}}
                                     <div
                                         class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
                                         <div
@@ -894,6 +958,7 @@
                     @endforeach
                 </div>
 
+                {{-- Prev / Next --}}
                 <button @click="current = (current - 1 + total) % total"
                     class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/80 hover:bg-white rounded-full shadow flex items-center justify-center transition-all">
                     <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -907,6 +972,7 @@
                     </svg>
                 </button>
 
+                {{-- Dots --}}
                 <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
                     @for ($i = 0; $i < 3; $i++)
                         <button @click="current = {{ $i }}"
@@ -918,34 +984,39 @@
 
             {{-- ── Have Doubts? Videos ── --}}
             <div class="text-center mb-8" data-aos="fade-up">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-1">Have Doubts? These Videos Will Help!</h2>
-                <p class="text-gray-500 text-sm">Watch real stories and expert insights about 7x Basket franchise.</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-1">Have Doubts? These Videos Will Help!</h2>
+                <p class="text-[#6b8f7e] text-sm">Watch real stories and expert insights about 7x Basket franchise.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
                 @foreach ([['custom/7x_Basket_Store.png', 'How to Start a 7x Basket Franchise', 'Investment & ROI Explained', 'Expert Guide', ''], ['custom/7x_Basket_Store.png', 'Franchise Offer — Start Your Supermarket', '₹5L Investment, High Returns', 'Business Overview', ''], ['custom/7x_Basket_Store.png', 'Supermarket Grocery Store Business', 'Full Setup Guide for Beginners', 'Step-by-Step', '']] as [$img, $title, $subtitle, $tag, $ytId])
-                    <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-sm border border-gray-200"
+                    <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
                         @click="openVideo('https://www.youtube.com/embed/{{ $ytId }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
+                        {{-- Background --}}
                         <img src="{{ asset($img) }}" alt="{{ $title }}"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        {{-- Dark overlay --}}
                         <div
                             class="absolute inset-0 bg-gradient-to-br from-[#1a5c38]/80 to-black/70 group-hover:from-[#1a5c38]/90 transition-all duration-300">
                         </div>
+                        {{-- Tag --}}
                         <div class="absolute top-3 left-3">
                             <span
-                                class="bg-[#ec2024] text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wide">{{ $tag }}</span>
+                                class="bg-[#f5a623] text-[#1a1a1a] text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wide">{{ $tag }}</span>
                         </div>
+                        {{-- Play button --}}
                         <div class="absolute inset-0 flex items-center justify-center">
                             <div
-                                class="w-14 h-14 bg-[#ec2024] rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-white transition-all duration-300">
+                                class="w-14 h-14 bg-[#f5a623] rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-white transition-all duration-300">
                                 <svg class="w-6 h-6 text-[#1a5c38] ml-1" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M8 5v14l11-7z" />
                                 </svg>
                             </div>
                         </div>
+                        {{-- Bottom info --}}
                         <div class="absolute bottom-0 left-0 right-0 p-4">
                             <p class="text-white font-bold text-sm leading-tight mb-0.5">{{ $title }}</p>
-                            <p class="text-[#ec2024] text-xs font-medium">{{ $subtitle }}</p>
+                            <p class="text-[#f5a623] text-xs font-medium">{{ $subtitle }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -953,38 +1024,43 @@
 
             {{-- ── What Our Franchise Partner Says ── --}}
             <div class="text-center mb-8" data-aos="fade-up">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-1">What Our Franchise Partner Says</h2>
-                <p class="text-gray-500 text-sm">Hear directly from our franchise owners across India.</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-1">What Our Franchise Partner Says</h2>
+                <p class="text-[#6b8f7e] text-sm">Hear directly from our franchise owners across India.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 @foreach ([['custom/7x_Basket_Store.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."'], ['custom/7x_Basket_Store.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."'], ['custom/7x_Basket_Store.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."']] as [$img, $name, $city, $role, $quote])
-                    <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-sm border border-gray-200"
+                    <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
                         @click="openVideo('https://www.youtube.com/embed/')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
+                        {{-- Background --}}
                         <img src="{{ asset($img) }}" alt="{{ $name }}"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        {{-- Overlay --}}
                         <div
                             class="absolute inset-0 bg-gradient-to-br from-[#1a5c38]/85 to-black/75 group-hover:from-[#1a5c38]/90 transition-all duration-300">
                         </div>
+                        {{-- Partner badge --}}
                         <div class="absolute top-3 left-3">
                             <span
-                                class="bg-[#ec2024] text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wide">Partner
+                                class="bg-[#f5a623] text-[#1a1a1a] text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wide">Partner
                                 Story</span>
                         </div>
+                        {{-- Play button --}}
                         <div class="absolute inset-0 flex items-center justify-center">
                             <div
-                                class="w-14 h-14 bg-white/20 border-2 border-white/60 rounded-full flex items-center justify-center shadow-2xl group-hover:bg-[#ec2024] group-hover:border-[#ec2024] transition-all duration-300">
+                                class="w-14 h-14 bg-white/20 border-2 border-white/60 rounded-full flex items-center justify-center shadow-2xl group-hover:bg-[#f5a623] group-hover:border-[#f5a623] transition-all duration-300">
                                 <svg class="w-6 h-6 text-white ml-1 group-hover:text-[#1a5c38]" fill="currentColor"
                                     viewBox="0 0 24 24">
                                     <path d="M8 5v14l11-7z" />
                                 </svg>
                             </div>
                         </div>
+                        {{-- Bottom info --}}
                         <div class="absolute bottom-0 left-0 right-0 p-4">
-                            <p class="text-[#ec2024] text-xs font-medium italic mb-1.5">{{ $quote }}</p>
+                            <p class="text-[#f5a623] text-xs font-medium italic mb-1.5">{{ $quote }}</p>
                             <div class="flex items-center gap-2">
                                 <div
-                                    class="w-7 h-7 bg-[#1a5c38] border-2 border-[#ec2024] rounded-full flex items-center justify-center text-white text-xs font-extrabold flex-shrink-0">
+                                    class="w-7 h-7 bg-[#1a5c38] border-2 border-[#f5a623] rounded-full flex items-center justify-center text-white text-xs font-extrabold flex-shrink-0">
                                     {{ substr($name, 0, 1) }}
                                 </div>
                                 <div>
@@ -1006,6 +1082,7 @@
             class="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" @click.self="lightbox = false"
             style="display:none">
 
+            {{-- Close --}}
             <button @click="lightbox = false"
                 class="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all z-10">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1013,10 +1090,12 @@
                 </svg>
             </button>
 
+            {{-- Counter --}}
             <div class="absolute top-4 left-1/2 -translate-x-1/2 text-white/60 text-sm z-10">
                 <span x-text="lightboxIndex + 1"></span> / <span x-text="images.length"></span>
             </div>
 
+            {{-- Prev --}}
             <button @click="prevImage()"
                 class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/25 rounded-full flex items-center justify-center text-white transition-all z-10">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1024,12 +1103,14 @@
                 </svg>
             </button>
 
+            {{-- Image --}}
             <div class="max-w-5xl w-full px-20">
                 <img :src="images[lightboxIndex].src" :alt="images[lightboxIndex].alt"
                     class="w-full max-h-[80vh] object-contain rounded-xl shadow-2xl">
                 <p class="text-white/70 text-sm text-center mt-3" x-text="images[lightboxIndex].alt"></p>
             </div>
 
+            {{-- Next --}}
             <button @click="nextImage()"
                 class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/25 rounded-full flex items-center justify-center text-white transition-all z-10">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1037,6 +1118,7 @@
                 </svg>
             </button>
 
+            {{-- Dot indicators --}}
             <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5">
                 <template x-for="(img, i) in images" :key="i">
                     <button @click="lightboxIndex = i" :class="lightboxIndex === i ? 'bg-white w-5' : 'bg-white/30 w-2'"
@@ -1068,7 +1150,7 @@
     {{-- ══════════════════════════════════════════
      FAQ
 ══════════════════════════════════════════ --}}
-    <section class="py-16 bg-gray-50">
+    <section class="py-16" style="background-color: #f0f7f3">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div class="text-center mb-10" data-aos="fade-up">
@@ -1092,36 +1174,40 @@
             ['Can I open multiple stores?', 'Yes. Many of our partners operate 2–5 stores. Multi-store partners get additional discounts and priority support.'],
         ] as [$q, $a])
                     <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
-                        :class="open === {{ $loop->index }} ? 'border-gray-200 shadow-md' : 'border-gray-200 shadow-sm'"
+                        :class="open === {{ $loop->index }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
 
                         <div class="flex">
 
+                            <!-- Left Accent -->
                             <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
-                                :class="open === {{ $loop->index }} ? 'bg-[#ec2024]' : 'bg-transparent'"></div>
+                                :class="open === {{ $loop->index }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
 
                             <div class="flex-1">
 
+                                <!-- Question -->
                                 <button
                                     @click="open === {{ $loop->index }} ? open = null : open = {{ $loop->index }}"
                                     class="w-full flex items-center justify-between px-5 py-4 text-left">
 
-                                    <span class="font-semibold text-gray-800 text-sm pr-4 leading-snug">
+                                    <span class="font-semibold text-gray-900 text-sm pr-4 leading-snug">
                                         {{ $q }}
                                     </span>
 
                                     <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
-                                        :class="open === {{ $loop->index }} ? 'bg-[#1a5c38]' : 'bg-gray-100'">
+                                        :class="open === {{ $loop->index }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
 
                                         <svg :class="open === {{ $loop->index }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
                                             class="w-4 h-4 transition-all duration-300" fill="none"
                                             stroke="currentColor" viewBox="0 0 24 24">
+
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                                 d="M19 9l-7 7-7-7" />
                                         </svg>
                                     </div>
                                 </button>
 
+                                <!-- Answer -->
                                 <div x-show="open === {{ $loop->index }}"
                                     x-transition:enter="transition ease-out duration-250"
                                     x-transition:enter-start="opacity-0 -translate-y-1"
@@ -1130,7 +1216,7 @@
                                     x-transition:leave-start="opacity-100 translate-y-0"
                                     x-transition:leave-end="opacity-0 -translate-y-1" class="px-5 pb-5">
 
-                                    <p class="text-sm text-gray-500 leading-relaxed border-t border-gray-100 pt-3">
+                                    <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">
                                         {{ $a }}
                                     </p>
                                 </div>
@@ -1143,7 +1229,6 @@
             </div>
         </div>
     </section>
-
     {{-- ══════════════════════════════════════════
      BLOG PREVIEW
 ══════════════════════════════════════════ --}}
@@ -1198,6 +1283,3 @@
         });
     </script>
 @endsection
-
-
-

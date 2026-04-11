@@ -16,12 +16,19 @@ class ApplicationController extends Controller
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
+        if ($request->filled('source')) {
+            $query->where('source', $request->source);
+        }
+        if ($request->filled('spam')) {
+            $query->where('is_spam', (bool) $request->spam);
+        }
         if ($request->filled('search')) {
             $s = $request->search;
             $query->where(function ($q) use ($s) {
                 $q->where('name', 'like', "%$s%")
                   ->orWhere('email', 'like', "%$s%")
-                  ->orWhere('city', 'like', "%$s%");
+                  ->orWhere('phone', 'like', "%$s%")
+                  ->orWhere('pincode', 'like', "%$s%");
             });
         }
 
@@ -53,12 +60,15 @@ class ApplicationController extends Controller
 
         return response()->stream(function () use ($applications) {
             $handle = fopen('php://output', 'w');
-            fputcsv($handle, ['ID', 'Name', 'Email', 'Phone', 'City', 'Budget', 'Message', 'Status', 'Date']);
+            fputcsv($handle, ['ID','Name','Email','Phone','Pincode','Store Area','Property Type','Opening Timeline','City','Budget','Source','Spam','Status','IP','Date']);
             foreach ($applications as $app) {
                 fputcsv($handle, [
                     $app->id, $app->name, $app->email, $app->phone,
-                    $app->city, $app->investment_budget, $app->message,
-                    $app->status, $app->created_at->format('Y-m-d'),
+                    $app->pincode, $app->store_area, $app->property_type,
+                    $app->opening_timeline, $app->city, $app->investment_budget,
+                    $app->source, $app->is_spam ? 'Yes' : 'No',
+                    $app->status, $app->ip_address,
+                    $app->created_at->format('Y-m-d H:i'),
                 ]);
             }
             fclose($handle);

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('components.seo-head')
     <link rel="icon" href="{{ asset('custom/favicon.jpeg') }}" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,6 +28,9 @@
 </head>
 <body class="font-sans bg-white text-gray-800 antialiased overflow-x-hidden">
 
+    {{-- Sticky wrapper: announcement bar + navbar --}}
+    <div class="sticky top-0 z-50" x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 10)">
+
     {{-- ── Notification Bar ── --}}
     <div x-data="{ show: true }" x-show="show" x-cloak
          class="relative bg-[#055346] text-white text-xs sm:text-sm font-medium overflow-hidden">
@@ -39,20 +43,20 @@
             <div class="flex-1 overflow-hidden">
                 <div class="marquee-track flex gap-16 whitespace-nowrap w-max">
                     {{-- set 1 --}}
-                    <span class="flex items-center gap-1.5"><span class="text-yellow-300">🎉</span> Limited slots available — Apply before <strong>30 April 2026</strong></span>
+                    <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">🎉</span> Limited slots available — Apply before <strong>30 April 2026</strong></span>
                     <span class="text-white/30">|</span>
                     <span class="flex items-center gap-1.5"><span class="text-green-300">✅</span> <strong>Zero Royalty</strong> · Zero Hidden Charges</span>
                     <span class="text-white/30">|</span>
-                    <span class="flex items-center gap-1.5"><span class="text-yellow-300">📞</span> Call us: <a href="tel:+919876543210" class="underline underline-offset-2 hover:text-green-200 transition-colors">+91 98765 43210</a></span>
+                    <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">📞</span> Call us: <a href="tel:+919876543210" class="underline underline-offset-2 hover:text-green-200 transition-colors">+91 98765 43210</a></span>
                     <span class="text-white/30">|</span>
                     <span class="flex items-center gap-1.5"><span>🏪</span> 500+ Franchise Partners Across India</span>
                     <span class="text-white/30">|</span>
                     {{-- duplicate for seamless loop --}}
-                    <span class="flex items-center gap-1.5"><span class="text-yellow-300">🎉</span> Limited slots available — Apply before <strong>30 April 2026</strong></span>
+                    <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">🎉</span> Limited slots available — Apply before <strong>30 April 2026</strong></span>
                     <span class="text-white/30">|</span>
                     <span class="flex items-center gap-1.5"><span class="text-green-300">✅</span> <strong>Zero Royalty</strong> · Zero Hidden Charges</span>
                     <span class="text-white/30">|</span>
-                    <span class="flex items-center gap-1.5"><span class="text-yellow-300">📞</span> Call us: <a href="tel:+919876543210" class="underline underline-offset-2 hover:text-green-200 transition-colors">+91 98765 43210</a></span>
+                    <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">📞</span> Call us: <a href="tel:+919876543210" class="underline underline-offset-2 hover:text-green-200 transition-colors">+91 98765 43210</a></span>
                     <span class="text-white/30">|</span>
                     <span class="flex items-center gap-1.5"><span>🏪</span> 500+ Franchise Partners Across India</span>
                     <span class="text-white/30">|</span>
@@ -61,7 +65,7 @@
 
             {{-- CTA + close --}}
             <div class="flex items-center gap-3 flex-shrink-0">
-                <a href="{{ route('apply') }}"
+                <a href="#" onclick="openLeadPopup(); return false;"
                    class="hidden sm:inline-block bg-[#ec2024] hover:bg-red-600 text-white text-xs font-bold
                           px-3 py-1.5 rounded-lg transition-all hover:-translate-y-px whitespace-nowrap">
                     Apply Now
@@ -79,7 +83,7 @@
     </div>
 
     {{-- Navbar --}}
-    <nav x-data="{ open: false }" class="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
+    <nav x-data="{ open: false }" :class="scrolled ? 'shadow-md' : 'shadow-sm'" class="bg-white border-b border-gray-100 transition-shadow duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <a href="{{ route('home') }}" class="flex items-center">
@@ -121,6 +125,8 @@
             </a>
         </div>
     </nav>
+
+    </div>{{-- end sticky wrapper --}}
 
     {{-- Flash Messages --}}
     @if(session('success'))
@@ -171,8 +177,53 @@
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-white/20 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-green-300">
+            <div class="border-t border-white/20 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-green-300">
                 <p>&copy; {{ date('Y') }} 7x Basket. All rights reserved.</p>
+
+                {{-- Social Icons --}}
+                <div class="flex items-center gap-3">
+                    <a href="https://www.facebook.com/7xbasket" target="_blank" rel="noopener"
+                       class="w-8 h-8 bg-white/10 hover:bg-[#1877F2] rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110" title="Facebook">
+                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/7xbasket" target="_blank" rel="noopener"
+                       class="w-8 h-8 bg-white/10 hover:bg-gradient-to-br hover:from-[#f09433] hover:via-[#e6683c] hover:to-[#dc2743] rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110" title="Instagram">
+                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/@7xbasket" target="_blank" rel="noopener"
+                       class="w-8 h-8 bg-white/10 hover:bg-[#FF0000] rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110" title="YouTube">
+                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/>
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#055346"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/7xbasket" target="_blank" rel="noopener"
+                       class="w-8 h-8 bg-white/10 hover:bg-black rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110" title="X (Twitter)">
+                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/7xbasket" target="_blank" rel="noopener"
+                       class="w-8 h-8 bg-white/10 hover:bg-[#0A66C2] rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110" title="LinkedIn">
+                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/919876543210" target="_blank" rel="noopener"
+                       class="w-8 h-8 bg-white/10 hover:bg-[#25D366] rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110" title="WhatsApp">
+                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.198-1.448A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+                        </svg>
+                    </a>
+                </div>
+
                 <a href="{{ route('sitemap') }}" class="hover:text-white transition-colors">Sitemap</a>
             </div>
         </div>
@@ -188,8 +239,7 @@
                      bg-gray-900 text-white text-[11px] font-semibold px-2.5 py-1 rounded-lg shadow-lg whitespace-nowrap pointer-events-none">
             WhatsApp
         </span>
-        <a href="https://wa.me/919876543210?text=Hi%2C%20I%27m%20interested%20in%207x%20Basket%20franchise"
-           target="_blank" rel="noopener"
+        <button onclick="openLeadPopup('whatsapp')"
            class="w-10 h-10 rounded-xl bg-[#25D366] text-white flex items-center justify-center
                   shadow-lg shadow-green-400/30 hover:shadow-xl hover:shadow-green-400/50
                   hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
@@ -197,7 +247,7 @@
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                 <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.882l6.198-1.448A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.68.859.875-3.593-.234-.369A9.818 9.818 0 1112 21.818z"/>
             </svg>
-        </a>
+        </button>
     </div>
 
     {{-- BOTTOM-RIGHT: Call (detached) --}}
@@ -206,18 +256,18 @@
                      bg-gray-900 text-white text-[11px] font-semibold px-2.5 py-1 rounded-lg shadow-lg whitespace-nowrap pointer-events-none">
             Call Now
         </span>
-        <a href="tel:+919876543210"
+        <button onclick="openLeadPopup('call')"
            class="w-10 h-10 rounded-xl bg-[#ec2024] text-white flex items-center justify-center
                   shadow-lg shadow-red-500/40 hover:shadow-xl hover:shadow-red-500/60
                   hover:scale-110 hover:-translate-y-0.5 transition-all duration-300">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/>
             </svg>
-        </a>
+        </button>
     </div>
 
     {{-- RIGHT-CENTER: Apply Franchise vertical tab --}}
-    <a href="{{ route('apply') }}"
+    <a href="#" onclick="openLeadPopup(); return false;"
        title="Apply for Franchise"
        class="fixed right-0 top-1/2 -translate-y-1/2 z-50
               bg-[#ec2024] text-white shadow-xl rounded-l-2xl
@@ -230,5 +280,214 @@
         </span>
     </a>
 
-</body>
+    {{-- ══════════════════════════════════════════
+         LEAD POPUP — appears after 5 seconds on all pages
+    ══════════════════════════════════════════ --}}
+    <div id="leadPopup"
+         class="fixed inset-0 z-[999] flex items-center justify-center p-4 hidden">
+
+        {{-- Backdrop --}}
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeLeadPopup()"></div>
+
+        {{-- Modal --}}
+        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg z-10 animate-popup">
+
+            {{-- Green header --}}
+            <div class="bg-gradient-to-br from-[#055346] to-[#109125] rounded-t-2xl px-5 py-4 text-white">
+                <button onclick="closeLeadPopup()" class="absolute top-3 right-3 w-7 h-7 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+                <div class="flex items-center gap-2">
+                    <span class="text-xl">🏪</span>
+                    <div>
+                        <h2 class="text-sm font-extrabold leading-tight">Start Your 7x Basket Franchise</h2>
+                        <p class="text-white/80 text-[11px]">Our team will call you within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Form --}}
+            <form id="leadPopupForm" action="{{ route('apply.store') }}" method="POST" class="px-5 py-4 space-y-3">
+                @csrf
+
+                {{-- Success / Error message --}}
+                <div id="leadPopupMsg" class="hidden rounded-lg px-4 py-3 text-sm font-medium text-center"></div>
+
+                {{-- Full Name --}}
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1">Full Name <span class="text-[#109125]">*</span></label>
+                    <input type="text" name="name" required placeholder="e.g. Rajesh Kumar"
+                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all">
+                </div>
+
+                {{-- Mobile + Email --}}
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">Mobile Number <span class="text-[#109125]">*</span></label>
+                        <input type="tel" name="phone" required placeholder="+91 98765 43210"
+                            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">Email Address</label>
+                        <input type="email" name="email" placeholder="you@example.com"
+                            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all">
+                    </div>
+                </div>
+
+                {{-- Pincode + Store Area --}}
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">Pincode <span class="text-[#109125]">*</span></label>
+                        <input type="text" name="pincode" required placeholder="e.g. 110001" maxlength="6"
+                            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">Store Area (sq. ft.) <span class="text-[#109125]">*</span></label>
+                        <select name="store_area" required
+                            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all bg-white">
+                            <option value="" disabled selected>Select area</option>
+                            <option value="300-500">300–500 sq ft (Mini)</option>
+                            <option value="500-800">500–800 sq ft</option>
+                            <option value="800-1200">800–1200 sq ft (Super)</option>
+                            <option value="1200-2000">1200–2000 sq ft</option>
+                            <option value="2000+">2000+ sq ft (Hyper)</option>
+                        </select>
+                    </div>
+                </div>
+
+                {{-- Property Ownership --}}
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1">Property Ownership Type <span class="text-[#109125]">*</span></label>
+                    <select name="property_type" required
+                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all bg-white">
+                        <option value="" disabled selected>Select ownership type</option>
+                        <option value="owned">Owned Property</option>
+                        <option value="rented">Rented Property</option>
+                        <option value="leased">Leased Property</option>
+                        <option value="looking">Still Looking for Space</option>
+                    </select>
+                </div>
+
+                {{-- Opening Timeline --}}
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1">Planned Store Opening Timeline <span class="text-[#109125]">*</span></label>
+                    <select name="opening_timeline" required
+                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all bg-white">
+                        <option value="" disabled selected>Select timeline</option>
+                        <option value="1_month">Within 1 Month</option>
+                        <option value="3_months">1–3 Months</option>
+                        <option value="6_months">3–6 Months</option>
+                        <option value="1_year">6–12 Months</option>
+                        <option value="exploring">Just Exploring</option>
+                    </select>
+                </div>
+
+                {{-- Submit --}}
+                <button type="submit" id="leadPopupSubmit"
+                    class="w-full bg-[#109125] hover:bg-[#0d7a1e] text-white font-extrabold py-2.5 rounded-lg transition-all duration-200 text-xs shadow-md hover:-translate-y-0.5">
+                    Submit & Get a Free Callback →
+                </button>
+
+                <p class="text-center text-[10px] text-gray-400 pb-1">No spam. We'll only call to discuss your franchise query.</p>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        @keyframes popupIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+        .animate-popup { animation: popupIn 0.3s ease-out; }
+    </style>
+
+    <script>
+        var _leadAction = null;
+        function closeLeadPopup() {
+            document.getElementById('leadPopup').classList.add('hidden');
+            _leadAction = null;
+        }
+        function openLeadPopup(action) {
+            _leadAction = action || null;
+            document.getElementById('leadPopup').classList.remove('hidden');
+            // Reset form & message on re-open
+            document.getElementById('leadPopupForm').reset();
+            var msg = document.getElementById('leadPopupMsg');
+            msg.className = 'hidden rounded-lg px-4 py-3 text-sm font-medium text-center';
+            msg.textContent = '';
+            var btn = document.getElementById('leadPopupSubmit');
+            btn.disabled = false;
+            btn.textContent = 'Submit & Get a Free Callback →';
+        }
+
+        // AJAX submit
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('leadPopupForm');
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const btn = document.getElementById('leadPopupSubmit');
+                const msg = document.getElementById('leadPopupMsg');
+
+                // Loading state
+                btn.disabled = true;
+                btn.textContent = 'Submitting…';
+
+                const data = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' },
+                    body: data
+                })
+                .then(res => res.json())
+                .then(json => {
+                    msg.classList.remove('hidden');
+                    if (json.success) {
+                        msg.className = 'rounded-lg px-4 py-3 text-sm font-medium text-center bg-green-50 text-green-700 border border-green-200';
+                        msg.textContent = json.message;
+                        form.reset();
+                        // Redirect based on action, else auto-close
+                        setTimeout(() => {
+                            closeLeadPopup();
+                            if (_leadAction === 'whatsapp') {
+                                var name = form.querySelector('[name="name"]') ? form.querySelector('[name="name"]').value : '';
+                                var phone = form.querySelector('[name="phone"]') ? form.querySelector('[name="phone"]').value : '';
+                                var text = encodeURIComponent('Hi, I\'m ' + name + ' (' + phone + '). I\'m interested in 7x Basket franchise.');
+                                window.open('https://wa.me/919876543210?text=' + text, '_blank');
+                            } else if (_leadAction === 'call') {
+                                window.location.href = 'tel:+919876543210';
+                            }
+                        }, 1500);
+                    } else {
+                        msg.className = 'rounded-lg px-4 py-3 text-sm font-medium text-center bg-red-50 text-red-700 border border-red-200';
+                        msg.textContent = json.message || 'Something went wrong. Please try again.';
+                        btn.disabled = false;
+                        btn.textContent = 'Submit & Get a Free Callback →';
+                    }
+                })
+                .catch(() => {
+                    msg.classList.remove('hidden');
+                    msg.className = 'rounded-lg px-4 py-3 text-sm font-medium text-center bg-red-50 text-red-700 border border-red-200';
+                    msg.textContent = 'Network error. Please check your connection and try again.';
+                    btn.disabled = false;
+                    btn.textContent = 'Submit & Get a Free Callback →';
+                });
+            });
+        });
+
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.getElementById('leadPopup').classList.remove('hidden');
+            }, 1000);
+        });
+    </script>
+
+
 </html>
+
+
