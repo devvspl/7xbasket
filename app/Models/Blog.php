@@ -8,9 +8,10 @@ use Illuminate\Support\Str;
 class Blog extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'excerpt', 'content', 'featured_image',
+        'title', 'slug', 'excerpt', 'content', 'featured_image', 'featured_image_alt',
         'category', 'tags', 'author', 'is_published', 'published_at',
-        'meta_title', 'meta_description', 'meta_keywords', 'og_image', 'schema_markup',
+        'meta_title', 'meta_description', 'meta_keywords', 'og_image',
+        'schema_markup', 'schema_type', 'meta_index', 'meta_follow',
     ];
 
     protected $casts = [

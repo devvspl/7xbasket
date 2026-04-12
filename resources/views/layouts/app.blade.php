@@ -424,7 +424,7 @@
 
                 fetch(form.action, {
                     method: 'POST',
-                    headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' },
+                    headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json', 'X-Page-Url': window.location.href },
                     body: data
                 })
                 .then(res => res.json())

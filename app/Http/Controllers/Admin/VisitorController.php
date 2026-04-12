@@ -17,8 +17,11 @@ class VisitorController extends Controller
         if ($request->filled('ip')) {
             $query->where('ip_address', 'like', '%' . $request->ip . '%');
         }
+        if ($request->filled('page_filter')) {
+            $query->where('page', 'like', '%' . $request->page_filter . '%');
+        }
 
-        $visitors = $query->paginate(30)->withQueryString();
+        $visitors = $query->paginate(10)->withQueryString();
 
         $topPages = Visitor::select('page', DB::raw('count(*) as visits'))
             ->groupBy('page')->orderByDesc('visits')->take(10)->get();
@@ -26,13 +29,30 @@ class VisitorController extends Controller
         $devices = Visitor::select('device', DB::raw('count(*) as total'))
             ->groupBy('device')->get();
 
-        return view('admin.visitors.index', compact('visitors', 'topPages', 'devices'));
+        // Stats
+        $totalVisitors  = Visitor::count();
+        $todayVisitors  = Visitor::whereDate('created_at', today())->count();
+        $uniqueIps      = Visitor::distinct('ip_address')->count();
+        $blockedCount   = BlockedIp::where('is_active', true)->count();
+
+        // Blocked IPs with application info
+        $blocked = BlockedIp::latest()->paginate(10, ['*'], 'blocked_page');
+
+        // Enrich visitors with application flag
+        $visitorIps = $visitors->pluck('ip_address')->unique();
+        $appliedIps = \App\Models\FranchiseApplication::whereIn('ip_address', $visitorIps)
+            ->pluck('ip_address')->unique()->flip();
+
+        return view('admin.visitors.index', compact(
+            'visitors', 'topPages', 'devices',
+            'totalVisitors', 'todayVisitors', 'uniqueIps', 'blockedCount',
+            'blocked', 'appliedIps'
+        ));
     }
 
     public function blockedIps()
     {
-        $blocked = BlockedIp::latest()->paginate(20);
-        return view('admin.visitors.blocked', compact('blocked'));
+        return redirect()->route('admin.visitors.index', ['tab' => 'blocked']);
     }
 
     public function blockIp(Request $request)

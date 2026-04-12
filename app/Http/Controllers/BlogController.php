@@ -7,16 +7,31 @@ use App\Services\SeoService;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
         $seo = SeoService::get('blogs', [
             'title'       => 'Blog - 7x Basket Franchise Insights',
             'description' => 'Read the latest articles about grocery franchise, business tips and 7x Basket updates.',
         ]);
 
-        $blogs = Blog::published()->latest('published_at')->paginate(9);
+        $query = Blog::published()->latest('published_at');
 
-        return view('frontend.blogs.index', compact('seo', 'blogs'));
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+        if ($request->filled('search')) {
+            $s = $request->search;
+            $query->where(function ($q) use ($s) {
+                $q->where('title', 'like', "%$s%")
+                  ->orWhere('excerpt', 'like', "%$s%")
+                  ->orWhere('tags', 'like', "%$s%");
+            });
+        }
+
+        $blogs      = $query->paginate(9)->withQueryString();
+        $categories = Blog::published()->whereNotNull('category')->distinct()->pluck('category');
+
+        return view('frontend.blogs.index', compact('seo', 'blogs', 'categories'));
     }
 
     public function show(string $slug)

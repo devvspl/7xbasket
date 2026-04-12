@@ -9,15 +9,42 @@ use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $blogs = Blog::latest()->paginate(15);
-        return view('admin.blogs.index', compact('blogs'));
+        $query = Blog::latest();
+
+        if ($request->filled('search')) {
+            $s = $request->search;
+            $query->where(function ($q) use ($s) {
+                $q->where('title', 'like', "%$s%")
+                  ->orWhere('category', 'like', "%$s%")
+                  ->orWhere('author', 'like', "%$s%");
+            });
+        }
+        if ($request->filled('status')) {
+            $query->where('is_published', $request->status === 'published');
+        }
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        $blogs      = $query->paginate(10)->withQueryString();
+        $categories = Blog::whereNotNull('category')->distinct()->pluck('category');
+
+        return view('admin.blogs.index', compact('blogs', 'categories'));
     }
 
     public function create()
     {
-        return view('admin.blogs.form', ['blog' => new Blog()]);
+        $categories = Blog::whereNotNull('category')->distinct()->pluck('category');
+        $allTags    = Blog::whereNotNull('tags')->pluck('tags')
+                        ->flatMap(fn($t) => array_map('trim', explode(',', $t)))
+                        ->unique()->values();
+        return view('admin.blogs.form', [
+            'blog'       => new Blog(),
+            'categories' => $categories,
+            'allTags'    => $allTags,
+        ]);
     }
 
     public function store(Request $request)
@@ -34,7 +61,11 @@ class BlogController extends Controller
 
     public function edit(Blog $blog)
     {
-        return view('admin.blogs.form', compact('blog'));
+        $categories = Blog::whereNotNull('category')->distinct()->pluck('category');
+        $allTags    = Blog::whereNotNull('tags')->pluck('tags')
+                        ->flatMap(fn($t) => array_map('trim', explode(',', $t)))
+                        ->unique()->values();
+        return view('admin.blogs.form', compact('blog', 'categories', 'allTags'));
     }
 
     public function update(Request $request, Blog $blog)
@@ -85,14 +116,20 @@ class BlogController extends Controller
             'category'         => 'nullable|string|max:100',
             'tags'             => 'nullable|string|max:255',
             'author'           => 'nullable|string|max:100',
+            'featured_image_alt' => 'nullable|string|max:255',
             'is_published'     => 'nullable|in:0,1',
             'meta_title'       => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'meta_keywords'    => 'nullable|string|max:500',
             'og_image'         => 'nullable|string|max:500',
             'schema_markup'    => 'nullable|string',
+            'schema_type'      => 'nullable|string|max:50',
+            'meta_index'       => 'nullable|boolean',
+            'meta_follow'      => 'nullable|boolean',
         ]);
         $data['is_published'] = (bool) ($data['is_published'] ?? false);
+        $data['meta_index']   = (bool) ($data['meta_index'] ?? false);
+        $data['meta_follow']  = (bool) ($data['meta_follow'] ?? false);
         return $data;
     }
 

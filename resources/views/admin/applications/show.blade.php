@@ -57,6 +57,35 @@
             </div>
         </div>
 
+        {{-- Analytics --}}
+        <div class="stat-card">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Analytics</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100">
+                    <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Device</p>
+                    <p class="text-sm font-semibold text-gray-900 capitalize">{{ $application->device_type ?? '—' }}</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100">
+                    <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Source</p>
+                    <p class="text-sm font-semibold capitalize {{ $application->source === 'popup' ? 'text-purple-600' : 'text-blue-600' }}">
+                        {{ $application->source ?? 'website' }}
+                    </p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100 sm:col-span-2">
+                    <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Page URL</p>
+                    <p class="text-xs text-gray-700 break-all">{{ $application->page_url ?? '—' }}</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100 sm:col-span-2">
+                    <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Referrer</p>
+                    <p class="text-xs text-gray-700 break-all">{{ $application->referer_url ?: '—' }}</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100 sm:col-span-2">
+                    <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">User Agent</p>
+                    <p class="text-xs text-gray-500 break-all">{{ $application->user_agent ?? '—' }}</p>
+                </div>
+            </div>
+        </div>
+
         {{-- Franchise Details --}}
         <div class="stat-card">
             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Franchise Details</p>

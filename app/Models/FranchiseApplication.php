@@ -11,6 +11,7 @@ class FranchiseApplication extends Model
         'investment_budget', 'message', 'ip_address', 'status',
         'pincode', 'store_area', 'property_type', 'opening_timeline',
         'source', 'is_spam', 'submission_count',
+        'device_type', 'user_agent', 'page_url', 'referer_url',
     ];
 
     protected $casts = [
