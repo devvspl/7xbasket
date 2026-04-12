@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', $blog->exists ? 'Edit Blog' : 'New Blog')
+@section('title', $blog->exists ? "Edit Blog" : "New Blog")
 
 @section('content')
 
@@ -9,20 +9,8 @@
     $blogExcerpt   = addslashes($blog->excerpt ?? '');
     $metaIndex     = old('meta_index',  isset($blog->meta_index)  ? $blog->meta_index  : true) ? true : false;
     $metaFollow    = old('meta_follow', isset($blog->meta_follow) ? $blog->meta_follow : true) ? true : false;
-    $schemaType    = old('schema_type',   $blog->schema_type   ?? 'BlogPosting');
-    $schemaMarkup  = old('schema_markup', $blog->schema_markup ?? '');
     $uploadUrl     = route('admin.blogs.upload-image');
     $csrfToken     = csrf_token();
-    $schemaDefaults = json_encode([
-        'title'   => $blog->title ?? '',
-        'desc'    => $blog->excerpt ?? '',
-        'baseUrl' => url('/blogs'),
-        'date'    => $blog->published_at ? $blog->published_at->toIso8601String() : now()->toIso8601String(),
-        'image'   => $blog->featured_image ? asset($blog->featured_image) : '',
-        'logo'    => asset('custom/logo.png'),
-        'siteUrl' => url('/'),
-    ]);
-    $schemaTypes = ['BlogPosting','Article','NewsArticle','FAQPage','HowTo','Product','LocalBusiness'];
 @endphp
 
 <form action="{{ $blog->exists ? route('admin.blogs.update', $blog) : route('admin.blogs.store') }}"
@@ -79,6 +67,113 @@
             <div class="stat-card">
                 <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Content <span class="text-red-500">*</span></label>
                 <textarea name="content" id="blogContent">{{ old('content', $blog->content) }}</textarea>
+            </div>
+
+            {{-- SEO Settings --}}
+            <div class="stat-card space-y-4" x-data="{ seoOpen: true }">
+                <button type="button" @click="seoOpen = !seoOpen" class="flex items-center justify-between w-full">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">SEO Settings</p>
+                    <svg :class="seoOpen ? 'rotate-180' : ''" class="w-4 h-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div x-show="seoOpen" class="space-y-4">
+
+                    {{-- SERP Preview --}}
+                    <div class="bg-gray-50 rounded-xl p-3 border border-gray-100">
+                        <p class="text-[10px] font-semibold text-gray-400 uppercase mb-2">Search Preview</p>
+                        <p class="text-blue-600 text-sm font-medium leading-tight truncate" id="serpTitle">{{ $blog->meta_title ?: $blog->title ?: 'Blog Title' }}</p>
+                        <p class="text-green-700 text-[11px] mt-0.5">/blogs/{{ $blog->slug ?: 'your-slug' }}</p>
+                        <p class="text-gray-500 text-xs mt-1 line-clamp-2" id="serpDesc">{{ $blog->meta_description ?: $blog->excerpt ?: 'Meta description will appear here...' }}</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1.5">Meta Title <span class="text-gray-400 float-right" id="metaTitleCount">0/60</span></label>
+                            <input type="text" name="meta_title" id="metaTitle" value="{{ old('meta_title', $blog->meta_title) }}" maxlength="60"
+                                class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                                placeholder="Leave blank to use blog title">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1.5">Meta Keywords</label>
+                            <input type="text" name="meta_keywords" value="{{ old('meta_keywords', $blog->meta_keywords) }}"
+                                class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                                placeholder="keyword1, keyword2">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1.5">Meta Description <span class="text-gray-400 float-right" id="metaDescCount">0/160</span></label>
+                        <textarea name="meta_description" id="metaDesc" rows="2" maxlength="160"
+                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
+                            placeholder="Leave blank to use excerpt">{{ old('meta_description', $blog->meta_description) }}</textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1.5">OG Image URL</label>
+                            <input type="text" name="og_image" value="{{ old('og_image', $blog->og_image) }}"
+                                class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                                placeholder="Leave blank to use featured image">
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-3 border border-gray-100 space-y-2">
+                            <p class="text-[10px] font-semibold text-gray-400 uppercase mb-1">Indexing & Crawling</p>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="meta_index" value="1" {{ $metaIndex ? 'checked' : '' }}
+                                    class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="text-xs text-gray-600">Allow indexing</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="meta_follow" value="1" {{ $metaFollow ? 'checked' : '' }}
+                                    class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="text-xs text-gray-600">Allow link following</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {{-- Schema Markup --}}
+            <div class="stat-card space-y-4" x-data="{ schemaOpen: true }">
+                <button type="button" @click="schemaOpen = !schemaOpen" class="flex items-center justify-between w-full">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Schema Markup (JSON-LD)</p>
+                    <svg :class="schemaOpen ? 'rotate-180' : ''" class="w-4 h-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div x-show="schemaOpen" class="space-y-3" id="schemaList">
+                    @php
+                        $existingSchemas = $blog->exists ? $blog->schemas : collect();
+                        $schemaTypeOptions = ['BlogPosting','Article','NewsArticle','FAQPage','HowTo','Product','LocalBusiness'];
+                    @endphp
+                    @if($existingSchemas->isEmpty())
+                    <p class="text-xs text-gray-400 text-center py-2" id="schemaEmpty">No schema entries yet. Click "Add Schema" to add one.</p>
+                    @else
+                    @foreach($existingSchemas as $schema)
+                    <div class="schema-entry border border-gray-200 rounded-xl p-3 space-y-2 bg-gray-50">
+                        <div class="flex items-center gap-2">
+                            <select name="schema_type[]" class="flex-1 border border-gray-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-green-500 bg-white">
+                                <?php foreach ($schemaTypeOptions as $st): ?>
+                                <option value="<?= $st ?>" <?= $schema->schema_type === $st ? 'selected' : '' ?>><?= $st ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <button type="button" onclick="this.closest('.schema-entry').remove()"
+                                class="text-red-400 hover:text-red-600 transition-colors flex-shrink-0">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                            </button>
+                        </div>
+                        <textarea name="schema_markup[]" rows="5"
+                            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-green-500 resize-y"
+                            placeholder="">{{ $schema->schema_markup }}</textarea>
+                    </div>
+                    @endforeach
+                    @endif
+                </div>
+                <button type="button" id="addSchemaBtn"
+                    class="w-full text-xs border border-dashed border-green-300 text-green-600 hover:bg-green-50 py-2 rounded-xl transition-colors font-medium">
+                    + Add Schema
+                </button>
             </div>
 
         </div>
@@ -191,98 +286,10 @@
                 </div>
             </div>
 
-            {{-- SEO Settings --}}
-            <div class="stat-card space-y-4" x-data="{ seoOpen: true }">
-                <button type="button" @click="seoOpen = !seoOpen" class="flex items-center justify-between w-full">
-                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">SEO Settings</p>
-                    <svg :class="seoOpen ? 'rotate-180' : ''" class="w-4 h-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </button>
-                <div x-show="seoOpen" class="space-y-4">
-
-                    {{-- SERP Preview --}}
-                    <div class="bg-gray-50 rounded-xl p-3 border border-gray-100">
-                        <p class="text-[10px] font-semibold text-gray-400 uppercase mb-2">Search Preview</p>
-                        <p class="text-blue-600 text-sm font-medium leading-tight truncate" id="serpTitle">{{ $blog->meta_title ?: $blog->title ?: 'Blog Title' }}</p>
-                        <p class="text-green-700 text-[11px] mt-0.5">/blogs/{{ $blog->slug ?: 'your-slug' }}</p>
-                        <p class="text-gray-500 text-xs mt-1 line-clamp-2" id="serpDesc">{{ $blog->meta_description ?: $blog->excerpt ?: 'Meta description will appear here...' }}</p>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-gray-600 mb-1.5">Meta Title <span class="text-gray-400 float-right" id="metaTitleCount">0/60</span></label>
-                        <input type="text" name="meta_title" id="metaTitle" value="{{ old('meta_title', $blog->meta_title) }}" maxlength="60"
-                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                            placeholder="Leave blank to use blog title">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-gray-600 mb-1.5">Meta Description <span class="text-gray-400 float-right" id="metaDescCount">0/160</span></label>
-                        <textarea name="meta_description" id="metaDesc" rows="3" maxlength="160"
-                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
-                            placeholder="Leave blank to use excerpt">{{ old('meta_description', $blog->meta_description) }}</textarea>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-gray-600 mb-1.5">Meta Keywords</label>
-                        <input type="text" name="meta_keywords" value="{{ old('meta_keywords', $blog->meta_keywords) }}"
-                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                            placeholder="keyword1, keyword2">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-gray-600 mb-1.5">OG Image URL</label>
-                        <input type="text" name="og_image" value="{{ old('og_image', $blog->og_image) }}"
-                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                            placeholder="Leave blank to use featured image">
-                    </div>
-
-                    {{-- Indexing --}}
-                    <div class="bg-gray-50 rounded-xl p-3 border border-gray-100 space-y-2">
-                        <p class="text-[10px] font-semibold text-gray-400 uppercase mb-1">Indexing & Crawling</p>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" name="meta_index" value="1" {{ $metaIndex ? 'checked' : '' }}
-                                class="rounded border-gray-300 text-green-600 focus:ring-green-500">
-                            <span class="text-xs text-gray-600">Allow search engines to index this page</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" name="meta_follow" value="1" {{ $metaFollow ? 'checked' : '' }}
-                                class="rounded border-gray-300 text-green-600 focus:ring-green-500">
-                            <span class="text-xs text-gray-600">Allow search engines to follow links</span>
-                        </label>
-                    </div>
-
-                    {{-- Schema --}}
-                    <div>
-                        <div class="flex items-center justify-between mb-1.5">
-                            <label class="text-xs font-medium text-gray-600">Schema Type</label>
-                            <button type="button" id="generateSchemaBtn"
-                                class="text-[10px] bg-green-50 hover:bg-green-100 text-green-700 px-2.5 py-1 rounded-lg font-semibold border border-green-200 transition-colors">
-                                ⚡ Generate
-                            </button>
-                        </div>
-                        <select name="schema_type" id="schemaTypeSelect"
-                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white mb-3">
-                            <option value="">None</option>
-                            @foreach($schemaTypes as $st)
-                            <option value="{{ $st }}" {{ $schemaType === $st ? 'selected' : '' }}>{{ $st }}</option>
-                            @endforeach
-                        </select>
-                        <label class="block text-xs font-medium text-gray-600 mb-1.5">Schema Markup (JSON-LD)</label>
-                        <textarea name="schema_markup" id="schemaMarkup" rows="7"
-                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-green-500 resize-y"
-                            placeholder='{"@context":"https://schema.org",...}'>{{ $schemaMarkup }}</textarea>
-                        <p class="text-[10px] text-gray-400 mt-1">Click Generate to auto-fill a template.</p>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
     </div>
 </form>
 
-<script>const schemaDefaults = {!! $schemaDefaults !!};</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.2/tinymce.min.js"></script>
 <script>
 tinymce.init({
@@ -359,7 +366,7 @@ var metaDescCount  = document.getElementById('metaDescCount');
 
 function updateSerp() {
     document.getElementById('serpTitle').textContent = metaTitle.value || titleInput.value || 'Blog Title';
-    document.getElementById('serpDesc').textContent  = metaDesc.value || schemaDefaults.desc || 'Meta description...';
+    document.getElementById('serpDesc').textContent  = metaDesc.value || titleInput.value || 'Meta description...';
 }
 
 metaTitle.addEventListener('input', function() {
@@ -377,25 +384,6 @@ metaDescCount.textContent  = metaDesc.value.length + '/160';
 
 document.getElementById('publishToggle').addEventListener('change', function() {
     document.getElementById('publishLabel').textContent = this.checked ? 'Published' : 'Draft';
-});
-
-document.getElementById('generateSchemaBtn').addEventListener('click', function() {
-    var s      = schemaDefaults;
-    var type   = document.getElementById('schemaTypeSelect').value;
-    var title  = titleInput.value || s.title;
-    var desc   = metaDesc.value || s.desc;
-    var url    = s.baseUrl + '/' + slugInput.value;
-    var author = document.querySelector('[name="author"]').value || '7x Basket Team';
-    var map = {
-        BlogPosting:   {'@context':'https://schema.org','@type':'BlogPosting','headline':title,'description':desc,'url':url,'datePublished':s.date,'author':{'@type':'Person','name':author},'publisher':{'@type':'Organization','name':'7x Basket','logo':{'@type':'ImageObject','url':s.logo}},'image':s.image},
-        Article:       {'@context':'https://schema.org','@type':'Article','headline':title,'description':desc,'url':url,'datePublished':s.date,'author':{'@type':'Person','name':author},'publisher':{'@type':'Organization','name':'7x Basket'},'image':s.image},
-        NewsArticle:   {'@context':'https://schema.org','@type':'NewsArticle','headline':title,'description':desc,'url':url,'datePublished':s.date,'author':{'@type':'Person','name':author},'image':s.image},
-        FAQPage:       {'@context':'https://schema.org','@type':'FAQPage','mainEntity':[{'@type':'Question','name':'Question 1?','acceptedAnswer':{'@type':'Answer','text':'Answer 1'}}]},
-        HowTo:         {'@context':'https://schema.org','@type':'HowTo','name':title,'description':desc,'step':[{'@type':'HowToStep','name':'Step 1','text':'Describe step 1'}]},
-        Product:       {'@context':'https://schema.org','@type':'Product','name':title,'description':desc,'image':s.image,'brand':{'@type':'Brand','name':'7x Basket'}},
-        LocalBusiness: {'@context':'https://schema.org','@type':'LocalBusiness','name':'7x Basket','description':desc,'url':s.siteUrl,'telephone':'+91 9870275327','address':{'@type':'PostalAddress','streetAddress':'C-97, Lajpat Nagar','addressLocality':'New Delhi','addressCountry':'IN'}},
-    };
-    if (map[type]) document.getElementById('schemaMarkup').value = JSON.stringify(map[type], null, 2);
 });
 
 function addTag(tag) {
@@ -421,6 +409,32 @@ document.getElementById('featuredImageInput').addEventListener('change', functio
         reader.readAsDataURL(this.files[0]);
     }
 });
+
+@verbatim
+var schemaTypes = ['BlogPosting','Article','NewsArticle','FAQPage','HowTo','Product','LocalBusiness'];
+
+document.getElementById('addSchemaBtn').addEventListener('click', function() {
+    var empty = document.getElementById('schemaEmpty');
+    if (empty) empty.remove();
+
+    var opts = schemaTypes.map(function(t) {
+        return '<option value="' + t + '">' + t + '</option>';
+    }).join('');
+
+    var entry = document.createElement('div');
+    entry.className = 'schema-entry border border-gray-200 rounded-xl p-3 space-y-2 bg-gray-50';
+    entry.innerHTML =
+        '<div class="flex items-center gap-2">' +
+            '<select name="schema_type[]" class="flex-1 border border-gray-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-green-500 bg-white">' + opts + '</select>' +
+            '<button type="button" onclick="this.closest(\'.schema-entry\').remove()" class="text-red-400 hover:text-red-600 transition-colors flex-shrink-0">' +
+                '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>' +
+            '</button>' +
+        '</div>' +
+        '<textarea name="schema_markup[]" rows="5" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-green-500 resize-y" placeholder=\'{"@context":"https://schema.org",...}\'></textarea>';
+
+    document.getElementById('schemaList').appendChild(entry);
+});
+@endverbatim
 </script>
 
 @endsection

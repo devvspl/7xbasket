@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\BlogSchema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -55,6 +56,7 @@ class BlogController extends Controller
         $data['published_at'] = $data['is_published'] ? now() : null;
 
         $blog = Blog::create($data);
+        $this->syncSchemas($blog, $request);
 
         return redirect()->route('admin.blogs.edit', $blog)->with('success', 'Blog created successfully.');
     }
@@ -72,7 +74,6 @@ class BlogController extends Controller
     {
         $data = $this->validated($request);
 
-        // Handle slug: use provided or keep existing
         $newSlug = trim($request->slug);
         if ($newSlug && $newSlug !== $blog->slug) {
             $data['slug'] = $this->uniqueSlug($newSlug, $blog->id);
@@ -87,6 +88,7 @@ class BlogController extends Controller
         }
 
         $blog->update($data);
+        $this->syncSchemas($blog, $request);
 
         return redirect()->route('admin.blogs.edit', $blog)->with('success', 'Blog updated successfully.');
     }
@@ -122,8 +124,6 @@ class BlogController extends Controller
             'meta_description' => 'nullable|string|max:500',
             'meta_keywords'    => 'nullable|string|max:500',
             'og_image'         => 'nullable|string|max:500',
-            'schema_markup'    => 'nullable|string',
-            'schema_type'      => 'nullable|string|max:50',
             'meta_index'       => 'nullable|boolean',
             'meta_follow'      => 'nullable|boolean',
         ]);
@@ -131,6 +131,24 @@ class BlogController extends Controller
         $data['meta_index']   = (bool) ($data['meta_index'] ?? false);
         $data['meta_follow']  = (bool) ($data['meta_follow'] ?? false);
         return $data;
+    }
+
+    private function syncSchemas(Blog $blog, Request $request): void
+    {
+        $blog->schemas()->delete();
+
+        $types   = $request->input('schema_type', []);
+        $markups = $request->input('schema_markup', []);
+
+        foreach ($types as $i => $type) {
+            $markup = trim($markups[$i] ?? '');
+            if ($markup === '') continue;
+            $blog->schemas()->create([
+                'schema_type'   => $type ?: 'BlogPosting',
+                'schema_markup' => $markup,
+                'sort_order'    => $i,
+            ]);
+        }
     }
 
     private function handleImage(Request $request): ?string

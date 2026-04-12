@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'block.ip'      => \App\Http\Middleware\BlockIpMiddleware::class,
             'track.visitor' => \App\Http\Middleware\TrackVisitor::class,
         ]);
+        $middleware->redirectGuestsTo(fn () => route('admin.login'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (\Illuminate\Http\Exceptions\ThrottleRequestsException $e, $request) {

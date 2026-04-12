@@ -11,7 +11,7 @@ class Blog extends Model
         'title', 'slug', 'excerpt', 'content', 'featured_image', 'featured_image_alt',
         'category', 'tags', 'author', 'is_published', 'published_at',
         'meta_title', 'meta_description', 'meta_keywords', 'og_image',
-        'schema_markup', 'schema_type', 'meta_index', 'meta_follow',
+        'meta_index', 'meta_follow',
     ];
 
     protected $casts = [
@@ -37,5 +37,10 @@ class Blog extends Model
     public function getTagsArrayAttribute(): array
     {
         return $this->tags ? array_map('trim', explode(',', $this->tags)) : [];
+    }
+
+    public function schemas()
+    {
+        return $this->hasMany(BlogSchema::class)->orderBy('sort_order');
     }
 }
