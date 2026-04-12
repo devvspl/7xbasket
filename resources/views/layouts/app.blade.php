@@ -37,7 +37,7 @@
         {{-- animated shimmer line --}}
         <div class="shimmer-bar absolute inset-0 pointer-events-none"></div>
 
-        <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+        <div class="max-w-7xl mx-auto px-4 py-1 flex items-center justify-between gap-4">
 
             {{-- Scrolling marquee — all screen sizes --}}
             <div class="flex-1 overflow-hidden">
