@@ -131,49 +131,46 @@
                         </div>
                     </div>
 
-                </div>
-            </div>
-
-            {{-- Schema Markup --}}
-            <div class="stat-card space-y-4" x-data="{ schemaOpen: true }">
-                <button type="button" @click="schemaOpen = !schemaOpen" class="flex items-center justify-between w-full">
-                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Schema Markup (JSON-LD)</p>
-                    <svg :class="schemaOpen ? 'rotate-180' : ''" class="w-4 h-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </button>
-                <div x-show="schemaOpen" class="space-y-3" id="schemaList">
-                    @php
-                        $existingSchemas = $blog->exists ? $blog->schemas : collect();
-                        $schemaTypeOptions = ['BlogPosting','Article','NewsArticle','FAQPage','HowTo','Product','LocalBusiness'];
-                    @endphp
-                    @if($existingSchemas->isEmpty())
-                    <p class="text-xs text-gray-400 text-center py-2" id="schemaEmpty">No schema entries yet. Click "Add Schema" to add one.</p>
-                    @else
-                    @foreach($existingSchemas as $schema)
-                    <div class="schema-entry border border-gray-200 rounded-xl p-3 space-y-2 bg-gray-50">
-                        <div class="flex items-center gap-2">
-                            <select name="schema_type[]" class="flex-1 border border-gray-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-green-500 bg-white">
-                                <?php foreach ($schemaTypeOptions as $st): ?>
-                                <option value="<?= $st ?>" <?= $schema->schema_type === $st ? 'selected' : '' ?>><?= $st ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <button type="button" onclick="this.closest('.schema-entry').remove()"
-                                class="text-red-400 hover:text-red-600 transition-colors flex-shrink-0">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                            </button>
+                    {{-- Schema Markup --}}
+                    <div class="border-t border-gray-100 pt-4 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Schema Markup (JSON-LD)</p>
                         </div>
-                        <textarea name="schema_markup[]" rows="5"
-                            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-green-500 resize-y"
-                            placeholder="">{{ $schema->schema_markup }}</textarea>
+                        <div class="space-y-3" id="schemaList">
+                            @php
+                                $existingSchemas = $blog->exists ? $blog->schemas : collect();
+                                $schemaTypeOptions = ['BlogPosting','Article','NewsArticle','FAQPage','HowTo','Product','LocalBusiness'];
+                            @endphp
+                            @if($existingSchemas->isEmpty())
+                            <p class="text-xs text-gray-400 text-center py-2" id="schemaEmpty">No schema entries yet. Click "Add Schema" to add one.</p>
+                            @else
+                            @foreach($existingSchemas as $schema)
+                            <div class="schema-entry border border-gray-200 rounded-xl p-3 space-y-2 bg-gray-50">
+                                <div class="flex items-center gap-2">
+                                    <select name="schema_type[]" class="flex-1 border border-gray-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-green-500 bg-white">
+                                        <?php foreach ($schemaTypeOptions as $st): ?>
+                                        <option value="<?= $st ?>" <?= $schema->schema_type === $st ? 'selected' : '' ?>><?= $st ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <button type="button" onclick="this.closest('.schema-entry').remove()"
+                                        class="text-red-400 hover:text-red-600 transition-colors flex-shrink-0">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                                    </button>
+                                </div>
+                                <textarea name="schema_markup[]" rows="5"
+                                    class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-green-500 resize-y"
+                                    placeholder="">{{ $schema->schema_markup }}</textarea>
+                            </div>
+                            @endforeach
+                            @endif
+                        </div>
+                        <button type="button" id="addSchemaBtn"
+                            class="w-full text-xs border border-dashed border-green-300 text-green-600 hover:bg-green-50 py-2 rounded-xl transition-colors font-medium">
+                            + Add Schema
+                        </button>
                     </div>
-                    @endforeach
-                    @endif
+
                 </div>
-                <button type="button" id="addSchemaBtn"
-                    class="w-full text-xs border border-dashed border-green-300 text-green-600 hover:bg-green-50 py-2 rounded-xl transition-colors font-medium">
-                    + Add Schema
-                </button>
             </div>
 
         </div>

@@ -36,16 +36,19 @@ class BlogController extends Controller
 
     public function show(string $slug)
     {
-        $blog = Blog::published()->where('slug', $slug)->firstOrFail();
+        $blog = Blog::published()->where('slug', $slug)->with('schemas')->firstOrFail();
 
         $seo = [
-            'title'          => $blog->title . ' - 7x Basket Blog',
-            'description'    => $blog->excerpt ?? substr(strip_tags($blog->content), 0, 160),
-            'keywords'       => $blog->tags ?? '',
-            'og_title'       => $blog->title,
-            'og_description' => $blog->excerpt ?? '',
-            'og_image'       => $blog->featured_image ? asset('storage/' . $blog->featured_image) : asset('images/og-default.jpg'),
-            'schema_markup'  => null,
+            'title'          => ($blog->meta_title ?: $blog->title) . ' - 7x Basket Blog',
+            'description'    => $blog->meta_description ?: ($blog->excerpt ?? substr(strip_tags($blog->content), 0, 160)),
+            'keywords'       => $blog->meta_keywords ?: ($blog->tags ?? ''),
+            'og_type'        => 'article',
+            'og_title'       => $blog->meta_title ?: $blog->title,
+            'og_description' => $blog->meta_description ?: ($blog->excerpt ?? ''),
+            'og_image'       => $blog->og_image ?: ($blog->featured_image ? asset($blog->featured_image) : null),
+            'meta_index'     => $blog->meta_index ?? true,
+            'meta_follow'    => $blog->meta_follow ?? true,
+            'schemas'        => $blog->schemas->map(fn($s) => ['type' => $s->schema_type, 'markup' => $s->schema_markup])->all(),
         ];
 
         $related = Blog::published()
