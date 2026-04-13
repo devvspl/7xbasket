@@ -2,18 +2,20 @@
 @section('content')
 
 {{-- Hero --}}
-<section class="bg-[#f0faf4] py-10 text-center">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <span class="inline-flex items-center gap-2 bg-[#109125]/10 text-[#055346] text-xs font-semibold px-4 py-1.5 rounded-full mb-4 border border-[#109125]/20">
+<section class="relative overflow-hidden bg-gradient-to-br from-[#055346] via-[#076b58] to-[#055346] py-10 text-center">
+    <div class="absolute blob w-72 h-72 bg-[#109125]/20 top-[-60px] left-[-60px]"></div>
+    <div class="absolute blob w-56 h-56 bg-[#ec2024]/10 bottom-[-40px] right-[5%]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <span class="inline-flex items-center gap-2 bg-white/10 text-green-200 text-xs font-semibold px-4 py-1.5 rounded-full mb-4 border border-white/20">
             <span class="w-2 h-2 bg-[#ec2024] rounded-full animate-pulse"></span>
             Franchise Insights & Tips
         </span>
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-3">Blog & Insights</h1>
-        <p class="text-gray-500 text-base max-w-lg mx-auto">Franchise tips, business insights and 7x Basket updates.</p>
-        <nav class="text-sm text-gray-400 flex items-center gap-1 flex-wrap justify-center mt-4">
-            <a href="{{ route('home') }}" class="hover:text-[#109125] transition-colors">Home</a>
-            <span class="text-gray-300">/</span>
-            <span class="text-gray-600 font-medium">Blog</span>
+        <h1 class="text-4xl font-extrabold text-white mb-3">Blog & Insights</h1>
+        <p class="text-green-100/80 text-base max-w-lg mx-auto">Franchise tips, business insights and 7x Basket updates.</p>
+        <nav class="text-sm flex items-center gap-1 flex-wrap justify-center mt-4">
+            <a href="{{ route('home') }}" class="text-green-300 hover:text-white transition-colors">Home</a>
+            <span class="text-white/30">/</span>
+            <span class="text-white font-medium">Blog</span>
         </nav>
     </div>
 </section>

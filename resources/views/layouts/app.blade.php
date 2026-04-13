@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="font-sans bg-white text-gray-800 antialiased overflow-x-hidden">
+<body class="font-sans bg-white text-gray-800 antialiased">
 
     {{-- Sticky wrapper: announcement bar + navbar --}}
     <div class="sticky top-0 z-50" x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 10)">
@@ -92,9 +92,10 @@
 
                 <div class="hidden md:flex items-center gap-8">
                     <a href="{{ route('home') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('home') ? 'text-green-600' : '' }}">Home</a>
-                    <a href="{{ route('about') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('about') ? 'text-green-600' : '' }}">About</a>
-                    <a href="{{ route('blogs') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('blogs*') ? 'text-green-600' : '' }}">Blog</a>
+                    <a href="{{ route('about') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('about') ? 'text-green-600' : '' }}">About Us</a>
+                    <a href="{{ route('blogs') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('blogs*') ? 'text-green-600' : '' }}">Blogs</a>
                     <a href="{{ route('calculator') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('calculator') ? 'text-green-600' : '' }}">Calculator</a>
+                    <a href="{{ route('apply') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('apply') ? 'text-green-600' : '' }}">Apply Franchise</a>
                     <a href="{{ route('contact') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('contact') ? 'text-green-600' : '' }}">Contact</a>
                     <a href="{{ route('brochure.download') }}"
                        class="flex items-center gap-1.5 bg-[#055346] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#076b58] transition-all duration-200">
@@ -115,9 +116,10 @@
         {{-- Mobile menu --}}
         <div x-show="open" x-cloak class="md:hidden border-t border-gray-100 bg-white px-4 py-4 space-y-3">
             <a href="{{ route('home') }}" class="block text-sm font-medium text-gray-700 hover:text-green-600">Home</a>
-            <a href="{{ route('about') }}" class="block text-sm font-medium text-gray-700 hover:text-green-600">About</a>
-            <a href="{{ route('blogs') }}" class="block text-sm font-medium text-gray-700 hover:text-green-600">Blog</a>
+            <a href="{{ route('about') }}" class="block text-sm font-medium text-gray-700 hover:text-green-600">About Us</a>
+            <a href="{{ route('blogs') }}" class="block text-sm font-medium text-gray-700 hover:text-green-600">Blogs</a>
             <a href="{{ route('calculator') }}" class="block text-sm font-medium text-gray-700 hover:text-green-600">Calculator</a>
+            <a href="{{ route('apply') }}" class="block text-sm font-medium text-gray-700 hover:text-green-600">Apply Franchise</a>
             <a href="{{ route('contact') }}" class="block text-sm font-medium text-gray-700 hover:text-green-600">Contact</a>
             <a href="{{ route('brochure.download') }}" class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-[#055346]">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
@@ -142,12 +144,12 @@
     </div>
     @endif
 
-    <main>
+    <main class="overflow-x-clip">
         @yield('content')
     </main>
 
     {{-- Footer --}}
-    <footer class="relative overflow-hidden bg-gradient-to-br from-[#055346] via-[#076b58] to-[#055346] text-green-100 pt-16 pb-8">
+    <footer class="overflow-x-hidden relative overflow-hidden bg-gradient-to-br from-[#055346] via-[#076b58] to-[#055346] text-green-100 pt-16 pb-8">
         <div class="blob w-96 h-96 bg-[#109125] top-[-80px] left-[-80px]"></div>
         <div class="blob w-72 h-72 bg-[#ec2024] bottom-[-60px] right-[10%]"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -163,7 +165,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('home') }}" class="text-green-200 hover:text-white transition-colors">Home</a></li>
                         <li><a href="{{ route('about') }}" class="text-green-200 hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="{{ route('blogs') }}" class="text-green-200 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="{{ route('blogs') }}" class="text-green-200 hover:text-white transition-colors">Blogs</a></li>
                         <li><a href="{{ route('calculator') }}" class="text-green-200 hover:text-white transition-colors">Investment Calculator</a></li>
                         <li><a href="{{ route('apply') }}" class="text-green-200 hover:text-white transition-colors">Apply Franchise</a></li>
                     </ul>
@@ -466,10 +468,9 @@
         window.addEventListener('load', function () {
             setTimeout(function () {
                 document.getElementById('leadPopup').classList.remove('hidden');
-            }, 1000);
+            }, 10000);
         });
     </script>
-
 
 </html>
 

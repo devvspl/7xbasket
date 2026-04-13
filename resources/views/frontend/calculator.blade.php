@@ -2,12 +2,26 @@
 
 @section('content')
 
-<section class="bg-gradient-to-br from-green-50 to-white py-16">
+<section class="relative overflow-hidden bg-gradient-to-br from-[#055346] via-[#076b58] to-[#055346] py-10 text-center">
+    <div class="absolute blob w-72 h-72 bg-[#109125]/20 top-[-60px] left-[-60px]"></div>
+    <div class="absolute blob w-56 h-56 bg-[#ec2024]/10 bottom-[-40px] right-[5%]"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <span class="inline-flex items-center gap-2 bg-white/10 text-green-200 text-xs font-semibold px-4 py-1.5 rounded-full mb-4 border border-white/20">
+            <span class="w-2 h-2 bg-[#ec2024] rounded-full animate-pulse"></span>
+            Plan Your Investment
+        </span>
+        <h1 class="text-4xl font-extrabold text-white mb-3">Investment Calculator</h1>
+        <p class="text-green-100/80">Estimate your potential returns from a 7x Basket franchise</p>
+        <nav class="text-sm flex items-center gap-1 flex-wrap justify-center mt-4">
+            <a href="{{ route('home') }}" class="text-green-300 hover:text-white transition-colors">Home</a>
+            <span class="text-white/30">/</span>
+            <span class="text-white font-medium">Investment Calculator</span>
+        </nav>
+    </div>
+</section>
+
+<section class="py-14 bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-extrabold text-gray-900 mb-3">Investment Calculator</h1>
-            <p class="text-gray-500">Estimate your potential returns from a 7x Basket franchise</p>
-        </div>
 
         <div x-data="{
             investment: 500000,
@@ -83,7 +97,7 @@
             </div>
 
             <div class="mt-6 text-center">
-                <a href="{{ route('apply') }}" class="inline-block bg-green-600 text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-green-700 transition-colors">
+                <a href="{{ route('apply') }}" class="inline-block bg-[#109125] hover:bg-[#0d7a1e] text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 shadow-md">
                     Apply for Franchise Now →
                 </a>
             </div>

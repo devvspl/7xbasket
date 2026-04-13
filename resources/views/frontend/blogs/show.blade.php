@@ -2,20 +2,22 @@
 @section('content')
 
 {{-- Hero / Breadcrumb --}}
-<section class="bg-[#f0faf4] py-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<section class="relative overflow-hidden bg-gradient-to-br from-[#055346] via-[#076b58] to-[#055346] py-10">
+    <div class="absolute blob w-72 h-72 bg-[#109125]/20 top-[-60px] left-[-60px]"></div>
+    <div class="absolute blob w-56 h-56 bg-[#ec2024]/10 bottom-[-40px] right-[5%]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         @if($blog->category)
-        <span class="inline-block bg-[#109125]/10 text-[#109125] text-xs font-bold px-3 py-1 rounded-full border border-[#109125]/20 mb-3">
+        <span class="inline-block bg-white/10 text-green-200 text-xs font-bold px-3 py-1 rounded-full border border-white/20 mb-3">
             {{ $blog->category }}
         </span>
         @endif
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight max-w-3xl mx-auto">{{ $blog->title }}</h1>
-        <nav class="text-sm text-gray-400 flex items-center gap-1 flex-wrap justify-center mt-4">
-            <a href="{{ route('home') }}" class="hover:text-[#109125] transition-colors">Home</a>
-            <span class="text-gray-300">/</span>
-            <a href="{{ route('blogs') }}" class="hover:text-[#109125] transition-colors">Blog</a>
-            <span class="text-gray-300">/</span>
-            <span class="text-gray-600 font-medium">{{ Str::limit($blog->title, 45) }}</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight max-w-3xl mx-auto">{{ $blog->title }}</h1>
+        <nav class="text-sm flex items-center gap-1 flex-wrap justify-center mt-4">
+            <a href="{{ route('home') }}" class="text-green-300 hover:text-white transition-colors">Home</a>
+            <span class="text-white/30">/</span>
+            <a href="{{ route('blogs') }}" class="text-green-300 hover:text-white transition-colors">Blog</a>
+            <span class="text-white/30">/</span>
+            <span class="text-white font-medium">{{ Str::limit($blog->title, 45) }}</span>
         </nav>
     </div>
 </section>

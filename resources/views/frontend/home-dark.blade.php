@@ -4,8 +4,7 @@
      HERO
 ══════════════════════════════════════════ --}}
     <section
-        class="relative overflow-hidden bg-gradient-to-br from-[#055346] via-[#076b58] to-[#055346] min-h-screen flex items-center"
-        style="max-width:100vw">
+        class="relative overflow-hidden bg-gradient-to-br from-[#055346] via-[#076b58] to-[#055346] min-h-screen flex items-center">
         {{-- dark overlay for text readability --}}
         <div class="absolute inset-0 bg-black/45 z-0 pointer-events-none"></div>
         {{-- blobs --}}
@@ -95,18 +94,45 @@
             <div class="text-center mb-8" data-aos="fade-up">
                 <span class="text-[#ec2024] text-sm font-bold uppercase tracking-widest">Why Independent Stores Fail</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">The Problems We Solve</h2>
-                <p class="text-gray-500 max-w-xl mx-auto">Running a grocery store alone is hard. 7x Basket eliminates every
-                    major pain point.</p>
+                <p class="text-gray-500 max-w-xl mx-auto">Running a grocery store alone is hard. 7x Basket eliminates every major pain point.</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ([['😰', 'No Brand Recognition', '✅ Instant brand trust with 7x Basket name'], ['📦', 'Supply Chain Issues', '✅ Direct sourcing, daily fresh delivery'], ['💸', 'High Operating Costs', '✅ Bulk buying power, lower margins'], ['📊', 'No Tech Support', '✅ POS, inventory & app included'], ['🎓', 'No Training', '✅ Full onboarding + staff training'], ['📣', 'Zero Marketing', '✅ National + local campaigns handled']] as [$icon, $problem, $solution])
-                    <div class="card-hover glow-green bg-white rounded-2xl p-6 border border-gray-100 shadow-sm"
-                        data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
-                        <div class="text-3xl mb-3">{{ $icon }}</div>
-                        <p class="text-sm font-semibold text-[#ec2024] mb-2 line-through opacity-70">{{ $problem }}
-                        </p>
-                        <p class="text-sm font-semibold text-[#109125]">{{ $solution }}</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                @foreach ([
+                    ['😰', 'No Brand Recognition',    'Customers don\'t trust new stores easily.',          'Instant brand trust with 7x Basket name'],
+                    ['📦', 'Supply Chain Issues',      'Sourcing fresh stock daily is a constant struggle.',  'Direct sourcing with daily fresh delivery'],
+                    ['💸', 'High Operating Costs',     'Buying alone means paying full retail margins.',      'Bulk buying power for lower costs'],
+                    ['📊', 'No Tech Support',          'Manual billing and inventory leads to losses.',       'POS, inventory & analytics app included'],
+                    ['🎓', 'No Training',              'Staff errors and poor service hurt your reputation.', 'Full onboarding and staff training provided'],
+                    ['📣', 'Zero Marketing',           'No visibility means no footfall, no growth.',         'National and local campaigns fully handled'],
+                ] as [$icon, $problem, $desc, $solution])
+                <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col"
+                    data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
+
+                    {{-- Icon --}}
+                    <div class="w-9 h-9 bg-red-50 rounded-lg flex items-center justify-center text-lg mb-3 flex-shrink-0">
+                        {{ $icon }}
                     </div>
+
+                    {{-- Problem title --}}
+                    <p class="text-sm font-semibold text-gray-900 mb-1">{{ $problem }}</p>
+
+                    {{-- Description --}}
+                    <p class="text-xs text-gray-400 leading-relaxed mb-3">{{ $desc }}</p>
+
+                    {{-- Divider --}}
+                    <div class="border-t border-gray-100 mb-3"></div>
+
+                    {{-- Solution --}}
+                    <div class="flex items-start gap-1.5 mt-auto">
+                        <div class="w-4 h-4 bg-[#109125] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-semibold text-[#109125] leading-snug">{{ $solution }}</p>
+                    </div>
+
+                </div>
                 @endforeach
             </div>
         </div>
@@ -635,14 +661,19 @@
 
             <div x-data="{
                 current: 0,
-                items: 9,
+                total: 9,
                 timer: null,
                 visible() { return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1 },
-                prev() { this.current = this.current === 0 ? this.items - this.visible() : this.current - 1 },
-                next() { this.current = this.current >= this.items - this.visible() ? 0 : this.current + 1 },
-                init() { this.timer = setInterval(() => this.next(), 3000) }
+                prev() { this.current = this.current === 0 ? this.total - this.visible() : this.current - 1; this.scrollTo() },
+                next() { this.current = this.current >= this.total - this.visible() ? 0 : this.current + 1; this.scrollTo() },
+                scrollTo() {
+                    const track = this.$refs.track;
+                    const card = track.children[this.current];
+                    if (card) track.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
+                },
+                init() { this.timer = setInterval(() => this.next(), 3500) }
             }" x-init="init()" @mouseenter="clearInterval(timer)"
-                @mouseleave="timer = setInterval(() => next(), 3000)" class="relative">
+                @mouseleave="timer = setInterval(() => next(), 3500)" class="relative">
 
                 {{-- Prev button --}}
                 <button @click="prev()"
@@ -653,9 +684,10 @@
                 </button>
 
                 {{-- Slider track --}}
-                <div class="overflow-hidden mx-6">
-                    <div class="flex transition-transform duration-500 ease-in-out gap-4"
-                        :style="`transform: translateX(calc(-${current * (100 / visible())}% - ${current * 16 / visible()}px))`">
+                <div class="mx-6 overflow-x-auto scrollbar-hide scroll-smooth"
+                     style="scrollbar-width:none;-ms-overflow-style:none;"
+                     x-ref="track">
+                    <div class="flex gap-4" style="width:max-content">
 
                         @php
                             $testimonials = [
@@ -717,8 +749,8 @@
                         @endphp
 
                         @foreach ($testimonials as $t)
-                            <div
-                                class="flex-shrink-0 w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-11px)] bg-gray-50 rounded-2xl p-5 border border-gray-100">
+                            <div class="flex-shrink-0 bg-gray-50 rounded-2xl p-5 border border-gray-100"
+                                 style="width: min(calc(33.333vw - 2rem), 380px); min-width: 280px;">
                                 <div class="flex gap-0.5 mb-3">
                                     @for ($i = 0; $i < 5; $i++)
                                         <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">

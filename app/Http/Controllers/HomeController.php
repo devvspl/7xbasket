@@ -7,7 +7,7 @@ use App\Services\SeoService;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function dark()
     {
         $seo = SeoService::get('home', [
             'title' => '7x Basket - Premium Grocery Franchise Opportunity',
@@ -16,10 +16,10 @@ class HomeController extends Controller
 
         $blogs = Blog::published()->latest('published_at')->take(3)->get();
 
-        return view('frontend.home', compact('seo', 'blogs'));
+        return view('frontend.home-dark', compact('seo', 'blogs'));
     }
 
-    public function dark()
+    public function light()
     {
         $seo = SeoService::get('dark', [
             'title' => '7x Basket - Premium Grocery Franchise Opportunity',
@@ -28,7 +28,7 @@ class HomeController extends Controller
 
         $blogs = Blog::published()->latest('published_at')->take(3)->get();
 
-        return view('frontend.home-dark', compact('seo', 'blogs'));
+        return view('frontend.home-light', compact('seo', 'blogs'));
     }
 
     public function about()
@@ -51,7 +51,7 @@ class HomeController extends Controller
 
     public function brochure()
     {
-        $file = public_path('custom/7XBasket-Brochure.pdf');
+        $file = public_path('brochure/7xBasket-Franchise-Brochure.pdf');
         if (!file_exists($file)) {
             abort(404, 'Brochure not available yet.');
         }

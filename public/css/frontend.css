@@ -10,7 +10,15 @@
 }
 
 /* ── Global ── */
-html, body { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body { scroll-behavior: smooth; overflow-x: clip; }
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #060f0c; }
+::-webkit-scrollbar-thumb { background: #055346; border-radius: 999px; border: 2px solid #060f0c; }
+::-webkit-scrollbar-thumb:hover { background: #109125; }
+* { scrollbar-width: thin; scrollbar-color: #055346 #060f0c; }
 [x-cloak] { display: none !important; }
 .prose img { border-radius: 0.5rem; }
 
@@ -169,7 +177,8 @@ input[type="range"]::-moz-range-thumb {
     100% { transform: translateX(-50%); }
 }
 
-/* ── Testimonial dual-row slider ── */
+/* ── Testimonial slider — hide scrollbar ── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
 .testimonial-scroll-left {
     animation: testimonial-left 40s linear infinite;
     width: max-content;
@@ -207,4 +216,13 @@ input[type="range"]::-moz-range-thumb {
 }
 .brand-logo-item:hover {
     background-color: #f9fafb;
+}
+
+/* Journey timeline — sticky left only on desktop */
+@media (min-width: 1024px) {
+    .journey-sticky {
+        position: sticky;
+        top: 120px;
+        align-self: flex-start;
+    }
 }
