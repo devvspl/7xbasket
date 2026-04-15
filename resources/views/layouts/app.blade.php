@@ -97,7 +97,7 @@
                     <a href="{{ route('calculator') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('calculator') ? 'text-green-600' : '' }}">Calculator</a>
                     <a href="{{ route('apply') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('apply') ? 'text-green-600' : '' }}">Apply Franchise</a>
                     <a href="{{ route('contact') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('contact') ? 'text-green-600' : '' }}">Contact</a>
-                    <a href="{{ route('brochure.download') }}"
+                    <a href="#" onclick="openLeadPopup('brochure'); return false;"
                        class="flex items-center gap-1.5 bg-[#055346] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#076b58] transition-all duration-200">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -121,7 +121,7 @@
             <a href="{{ route('calculator') }}" class="block text-sm font-medium text-gray-700 hover:text-green-600">Calculator</a>
             <a href="{{ route('apply') }}" class="block text-sm font-medium text-gray-700 hover:text-green-600">Apply Franchise</a>
             <a href="{{ route('contact') }}" class="block text-sm font-medium text-gray-700 hover:text-green-600">Contact</a>
-            <a href="{{ route('brochure.download') }}" class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-[#055346]">
+            <a href="#" onclick="openLeadPopup('brochure'); return false;" class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-[#055346]">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                 Download Brochure
             </a>
@@ -166,8 +166,9 @@
                         <li><a href="{{ route('home') }}" class="text-green-200 hover:text-white transition-colors">Home</a></li>
                         <li><a href="{{ route('about') }}" class="text-green-200 hover:text-white transition-colors">About Us</a></li>
                         <li><a href="{{ route('blogs') }}" class="text-green-200 hover:text-white transition-colors">Blogs</a></li>
-                        <li><a href="{{ route('calculator') }}" class="text-green-200 hover:text-white transition-colors">Investment Calculator</a></li>
+                        <li><a href="{{ route('calculator') }}" class="text-green-200 hover:text-white transition-colors">Calculator</a></li>
                         <li><a href="{{ route('apply') }}" class="text-green-200 hover:text-white transition-colors">Apply Franchise</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-green-200 hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
                 <div>
@@ -392,7 +393,7 @@
         var _leadAction = null;
         function closeLeadPopup() {
             document.getElementById('leadPopup').classList.add('hidden');
-            _leadAction = null;
+            // Don't reset _leadAction here - keep it for redirect
         }
         function openLeadPopup(action) {
             _leadAction = action || null;
@@ -424,6 +425,11 @@
 
                 const data = new FormData(form);
 
+                // Capture values BEFORE any async operations
+                var submittedName  = form.querySelector('[name="name"]') ? form.querySelector('[name="name"]').value : '';
+                var submittedPhone = form.querySelector('[name="phone"]') ? form.querySelector('[name="phone"]').value : '';
+                var currentAction = _leadAction; // Store action before it might change
+
                 fetch(form.action, {
                     method: 'POST',
                     headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json', 'X-Page-Url': window.location.href },
@@ -435,18 +441,24 @@
                     if (json.success) {
                         msg.className = 'rounded-lg px-4 py-3 text-sm font-medium text-center bg-green-50 text-green-700 border border-green-200';
                         msg.textContent = json.message;
-                        // Capture values BEFORE reset
-                        var submittedName  = form.querySelector('[name="name"]') ? form.querySelector('[name="name"]').value : '';
-                        var submittedPhone = form.querySelector('[name="phone"]') ? form.querySelector('[name="phone"]').value : '';
                         form.reset();
+                        
                         setTimeout(() => {
                             closeLeadPopup();
-                            if (_leadAction === 'whatsapp') {
+                            
+                            // Handle redirect based on action
+                            if (currentAction === 'whatsapp') {
                                 var text = encodeURIComponent('Hi, I\'m ' + submittedName + ' (' + submittedPhone + '). I\'m interested in 7x Basket franchise.');
                                 window.open('https://wa.me/919870275327?text=' + text, '_blank');
-                            } else if (_leadAction === 'call') {
+                            } else if (currentAction === 'call') {
                                 window.location.href = 'tel:+919870275327';
+                            } else if (currentAction === 'brochure') {
+                                // Trigger brochure download
+                                window.location.href = '{{ route("brochure.download") }}';
                             }
+                            
+                            // Reset action after redirect
+                            _leadAction = null;
                         }, 1500);
                     } else {
                         msg.className = 'rounded-lg px-4 py-3 text-sm font-medium text-center bg-red-50 text-red-700 border border-red-200';
@@ -468,7 +480,7 @@
         window.addEventListener('load', function () {
             setTimeout(function () {
                 document.getElementById('leadPopup').classList.remove('hidden');
-            }, 10000);
+            }, 30000);
         });
     </script>
 
