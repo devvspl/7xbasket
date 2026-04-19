@@ -176,7 +176,7 @@
                     <ul class="space-y-2 text-sm text-green-200">
                         <li><a href="mailto:info@7xbasket.com" class="hover:text-white transition-colors">📧 info@7xbasket.com</a></li>
                         <li><a href="tel:+919870275327" class="hover:text-white transition-colors">📞 +91 9870275327</a></li>
-                        <li><a href="https://maps.app.goo.gl/xKx7arLWfbyjaZvB8" target="_blank" rel="noopener" class="hover:text-white transition-colors">📍 Third Floor, C-97, Nearby OSR Jewellers, Lajpat Nagar, New Delhi, Delhi 110024</a></li>
+                        <li><a href="https://maps.app.goo.gl/xKx7arLWfbyjaZvB8" target="_blank" rel="noopener" class="hover:text-white transition-colors">📍 Third Floor, C-97, Nearby OSR Jewellers, Lajpat Nagar, Delhi 110024</a></li>
                         <li>🕐 Mon–Sat: 9AM – 6PM</li>
                     </ul>
                 </div>

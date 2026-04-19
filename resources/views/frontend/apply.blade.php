@@ -136,15 +136,15 @@
     <section class="py-10 bg-[#0f2d1f]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap justify-center gap-4">
-                @foreach ([['200+', 'Stores Pan India'], ['12+', 'States Covered'], ['5,000+', 'Products Stocked'], ['500+', 'Brand Partners'], ['?13L', 'Starting Investment']] as [$num, $label])
+                @foreach ([['200+', 'Stores Pan India'], ['12+', 'States Covered'], ['5,000+', 'Products Stocked'], ['500+', 'Brand Partners'], ['13L', 'Starting Investment']] as [$num, $label])
                     <div class="w-[45%] sm:w-[30%] lg:w-[18%] 
             border border-white/10 rounded-xl p-5 
             flex flex-col items-center justify-center text-center"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
-                        <p class="text-3xl font-extrabold text-[#4ade80]">
+                        <p class="text-3xl font-extrabold text-[#ffffff]">
                             {{ $num }}
                         </p>
-                        <p class="text-green-400/60 text-xs uppercase tracking-widest mt-1">
+                        <p class="text-[#ffffff] text-xs uppercase tracking-widest mt-1">
                             {{ $label }}
                         </p>
                     </div>
@@ -211,7 +211,9 @@
                             {{ $icon }}
                         </div>
                         <p class="text-sm font-bold text-white">{{ $title }}</p>
-                        <p class="text-xs text-green-300/60 leading-relaxed mt-1.5">{{ $desc }}</p>
+                        <p class="text-xs text-white/60 leading-relaxed mt-1.5">
+                            {{ $desc }}
+                        </p>
                     </div>
                 @endforeach
             </div>

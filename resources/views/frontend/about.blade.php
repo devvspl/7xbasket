@@ -80,26 +80,21 @@
     {{-- Stats Bar --}}
     <section class="py-10 bg-[#0f2d1f]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
             <div class="flex flex-wrap justify-center gap-4">
-
-                @foreach ([['200+', 'Stores Pan India'], ['12+', 'States Covered'], ['5,000+', 'Products Stocked'], ['500+', 'Brand Partners'], ['₹13L', 'Starting Investment']] as [$num, $label])
+                @foreach ([['200+', 'Stores Pan India'], ['12+', 'States Covered'], ['5,000+', 'Products Stocked'], ['500+', 'Brand Partners'], ['13L', 'Starting Investment']] as [$num, $label])
                     <div class="w-[45%] sm:w-[30%] lg:w-[18%] 
-                       border border-white/10 rounded-xl p-5 
-                       flex flex-col items-center justify-center text-center"
+            border border-white/10 rounded-xl p-5 
+            flex flex-col items-center justify-center text-center"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
-                        <p class="text-3xl font-extrabold text-[#4ade80]">
+                        <p class="text-3xl font-extrabold text-[#ffffff]">
                             {{ $num }}
                         </p>
-
-                        <p class="text-green-400/60 text-xs uppercase tracking-widest mt-1">
+                        <p class="text-[#ffffff] text-xs uppercase tracking-widest mt-1">
                             {{ $label }}
                         </p>
                     </div>
                 @endforeach
-
             </div>
-
         </div>
     </section>
 
@@ -135,20 +130,27 @@
                         livelihoods for thousands of franchise owners.</p>
                 </div>
 
-                <div class="bg-white border border-gray-100 rounded-2xl p-7 shadow-sm" data-aos="fade-up"
-                    data-aos-delay="200">
+                <div class="bg-[#109125] rounded-2xl p-7" data-aos="fade-up" data-aos-delay="200">
+
                     <span
-                        class="bg-green-50 text-[#109125] text-[10px] font-bold uppercase px-2 py-0.5 rounded-full inline-block mb-3">Our
-                        Values</span>
-                    <h3 class="text-xl font-extrabold text-gray-900 leading-tight">What We Stand For</h3>
-                    <ul class="mt-3 space-y-2.5">
-                        @foreach (['Transparency in every cost, every process', 'Franchisee success is our success — no exceptions', 'Technology that simplifies, not complicates', 'Quality products at prices every family can afford', 'Building local employment, not replacing it'] as $val)
-                            <li class="flex items-start gap-2 text-sm text-gray-600">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#109125] mt-1.5 flex-shrink-0"></span>
-                                {{ $val }}
-                            </li>
-                        @endforeach
-                    </ul>
+                        class="bg-white/20 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-full inline-block mb-3">
+                        Our Values
+                    </span>
+
+                    <h3 class="text-xl font-extrabold text-white leading-tight">
+                        What We Stand For
+                    </h3>
+
+                    <p class="text-green-100 text-sm leading-relaxed mt-3">
+                        We believe in complete transparency in every cost and process, ensuring trust at every step.
+                        Our franchise partners are at the heart of everything we do.
+                    </p>
+
+                    <a href="{{ route('apply') }}"
+                        class="bg-white/20 hover:bg-white/30 text-white font-bold px-5 py-2 rounded-xl text-xs mt-6 inline-block transition-all duration-200">
+                        Learn More →
+                    </a>
+
                 </div>
 
             </div>
@@ -301,7 +303,9 @@
                         <div class="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center text-lg mb-3">
                             {{ $icon }}</div>
                         <p class="text-white font-semibold text-sm">{{ $title }}</p>
-                        <p class="text-green-300/60 text-xs leading-relaxed mt-1.5">{{ $body }}</p>
+                        <p class="text-white/60 text-xs leading-relaxed mt-1.5">
+                            {{ $body }}
+                        </p>
                     </div>
                 @endforeach
             </div>
