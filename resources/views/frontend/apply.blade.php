@@ -22,30 +22,31 @@
     </section>
     <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+                    Start Your Own Supermarket Business.<br>
+                    <span class="text-[#109125]">Backed by a Brand People Trust.</span>
+                </h2>
+            </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div>
-                    <span
-                        class="inline-flex items-center gap-2 bg-[#109125]/10 text-[#055346] text-xs font-semibold px-4 py-1.5 rounded-full mb-5 border border-[#109125]/20">
-                        <span class="w-2 h-2 bg-[#ec2024] rounded-full animate-pulse"></span>
-                        Limited Slots Available — Apply Now
-                    </span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
-                        Start Your Own Supermarket Business.<br>
-                        <span class="text-[#109125]">Backed by a Brand People Trust.</span>
-                    </h2>
-                    <p class="text-gray-500 text-base mb-6 leading-relaxed">Join 200+ successful franchise partners across
-                        India. Get complete support — from store setup to daily operations — with zero royalty.
-                    </p>
-                    <div class="relative rounded-2xl overflow-hidden shadow-md mb-6 aspect-video bg-gray-100">
+                    <div class="relative rounded-2xl overflow-hidden shadow-md mb-5 aspect-video bg-gray-100">
                         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" class="w-full h-full" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen loading="lazy">
                         </iframe>
                     </div>
-                    <div class="flex flex-wrap gap-2">
-                        @foreach (['✓ Zero Royalty', '✓ 45-Day Launch', '✓ Full Training', '✓ FSSAI Certified'] as $tag)
-                            <span
-                                class="bg-[#f0faf4] border border-[#109125]/20 text-[#055346] text-xs font-bold px-3 py-1.5 rounded-full">{{ $tag }}</span>
+
+                    {{-- Key Benefits --}}
+                    <div class="grid grid-cols-2 gap-3 mb-5">
+                        @foreach ([['💰', 'Zero Royalty', 'Keep 100% of your profits forever'], ['🚀', '45-Day Launch', 'Store ready in just 45 days'], ['🎓', 'Full Training', 'Complete staff & ops training'], ['📦', '5,000+ SKUs', 'Direct sourcing at wholesale price'], ['🔒', 'Exclusive Zone', 'Protected territory for your store'], ['🤝', 'Dedicated Manager', 'Personal support from day one']] as [$icon, $title, $desc])
+                            <div class="flex items-start gap-3 bg-gray-50 rounded-xl p-3 border border-gray-100">
+                                <span class="text-xl flex-shrink-0">{{ $icon }}</span>
+                                <div>
+                                    <p class="text-xs font-bold text-gray-900">{{ $title }}</p>
+                                    <p class="text-[11px] text-gray-500 leading-snug">{{ $desc }}</p>
+                                </div>
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -122,9 +123,32 @@
                             </select>
                         </div>
                         <button type="submit" id="applyPageSubmit"
-                            class="w-full bg-[#ec2024] hover:bg-red-700 text-white font-extrabold py-3.5 rounded-xl transition-all duration-200 text-sm shadow-lg hover:-translate-y-0.5 tracking-wide">
-                            YES! I Want to Open My Supermarket Franchise →
+                            class="relative w-full overflow-hidden text-white font-extrabold py-4 rounded-xl text-sm tracking-wide shadow-[0_4px_20px_rgba(16,145,37,0.35)] hover:shadow-[0_6px_30px_rgba(16,145,37,0.55)] hover:-translate-y-0.5 transition-all duration-200 group btn-gradient-animate">
+                            <span
+                                class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent skew-x-12 pointer-events-none"></span>
+                            <span class="relative">YES! I Want to Open My Supermarket Franchise →</span>
                         </button>
+                        <style>
+                            .btn-gradient-animate {
+                                background: linear-gradient(270deg, #ec2024, #109125, #055346, #109125, #ec2024);
+                                background-size: 300% 300%;
+                                animation: gradientShift 4s ease infinite;
+                            }
+
+                            @keyframes gradientShift {
+                                0% {
+                                    background-position: 0% 50%
+                                }
+
+                                50% {
+                                    background-position: 100% 50%
+                                }
+
+                                100% {
+                                    background-position: 0% 50%
+                                }
+                            }
+                        </style>
                         <p class="text-center text-xs text-gray-400">No spam. We'll only call to discuss your franchise
                             query.
                         </p>
@@ -390,9 +414,7 @@
                         ['godrej', 'Godrej'],
                         ['patanjali', 'Patanjali'],
                         ['colgate', 'Colgate'],
-                        ['pg', 'P&G'],
                         ['haldirams', 'Haldirams'],
-                        ['mtr', 'MTR'],
                     ];
                 @endphp
                 @foreach (array_merge($brands, $brands) as [$slug, $brand])
@@ -400,7 +422,7 @@
                         style="padding: 0 24px; height: 80px; min-width: 140px">
                         @if (file_exists(public_path("custom/brands/{$slug}.png")))
                             <img src="{{ asset("custom/brands/{$slug}.png") }}" alt="{{ $brand }}"
-                                class="max-h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                                class="max-h-10 w-auto object-contain hover:scale-105 transition-all duration-300">
                         @else
                             <span
                                 class="text-gray-400 font-bold text-sm tracking-wide hover:text-[#055346] transition-colors duration-300 select-none">{{ $brand }}</span>
@@ -410,17 +432,34 @@
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="text-center mb-6" data-aos="fade-up">
+            <div class="text-center mb-8" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">As Featured On</span>
                 <p class="text-gray-500 text-sm mt-2">Recognized by top media houses and industry publications</p>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4" data-aos="fade-up" data-aos-delay="100">
-                @foreach ([['Times of India', 'TOI'], ['Economic Times', 'ET'], ['Franchise India', 'FI'], ['YourStory', 'YS'], ['Business Today', 'BT']] as [$name, $abbr])
-                    <div
-                        class="bg-gray-50 rounded-xl p-6 border border-gray-100 flex items-center justify-center hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
-                        <span class="text-gray-400 font-bold text-lg tracking-wide">{{ $abbr }}</span>
-                    </div>
-                @endforeach
+            <div class="bg-gray-50 rounded-2xl py-8 px-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6">
+                    @php
+                        $mediaCompanies = [
+                            ['Economic Times', 'et'],
+                            ['Franchise India', 'fi'],
+                            ['Times of India', 'toi'],
+                            ['Business Today', 'bt'],
+                            ['YourStory', 'yourstory'],
+                        ];
+                    @endphp
+                    @foreach ($mediaCompanies as [$name, $slug])
+                        <div
+                            class="flex items-center justify-center px-6 py-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-[#109125]/20 transition-all duration-300 group">
+                            @if (file_exists(public_path("custom/media/{$slug}.png")))
+                                <img src="{{ asset("custom/media/{$slug}.png") }}" alt="{{ $name }}"
+                                    class="h-8 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
+                            @else
+                                <span
+                                    class="text-gray-600 font-bold text-base tracking-wide group-hover:text-[#109125] transition-colors duration-300">{{ strtoupper(substr($name, 0, 2)) }}</span>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>

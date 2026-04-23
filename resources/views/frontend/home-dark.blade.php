@@ -5,7 +5,7 @@
         <div class="absolute inset-0 bg-black/45 z-0 pointer-events-none"></div>
         <div class="blob w-96 h-96 bg-[#109125] top-[-80px] left-[-80px]"></div>
         <div class="blob w-72 h-72 bg-[#ec2024] bottom-[-60px] right-[10%]"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pt-14 w-full relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pt-6 w-full relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div data-aos="fade-right" data-aos-duration="800">
                     <span
@@ -21,13 +21,13 @@
                         Join 500+ successful franchise partners. Low investment, high returns, zero royalty, and complete
                         business support from day one.
                     </p>
-                    <div class="flex flex-wrap gap-4 mb-10">
+                    <div class="flex flex-wrap gap-4 mb-5">
                         <a href="#" onclick="openLeadPopup(); return false;"
                             class="inline-block bg-[#f5a623] hover:bg-[#e09610] text-[#1a1a1a] font-extrabold px-8 py-4 rounded-xl text-base shadow-[0_4px_20px_rgba(245,166,35,0.5)] hover:shadow-[0_6px_28px_rgba(245,166,35,0.65)] hover:-translate-y-0.5 transition-all duration-200">
                             Apply Now →
                         </a>
                     </div>
-                    <div class="flex flex-wrap gap-8">
+                    <div class="flex flex-wrap gap-8 mb-5">
                         @foreach ([['500+', 'Partners'], ['₹5L', 'Min. Investment'], ['30%', 'Avg. ROI'], ['0', 'Royalty Fee']] as [$n, $l])
                             <div>
                                 <p class="text-3xl font-extrabold text-white">{{ $n }}</p>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="200" class="relative hidden lg:block">
-                    <div class="relative bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 scale-90">
+                    <div class="relative bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 scale-80">
                         <img src="{{ asset('custom/7x_Basket_Store.png') }}" alt="7x Basket Store"
                             class="w-full object-cover rounded-2xl">
                         <div
@@ -91,7 +91,7 @@
                             {{ $icon }}
                         </div>
                         <p class="text-sm font-semibold text-gray-900 mb-1">{{ $problem }}</p>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-3">{{ $desc }}</p>
+                        <p class="text-xs text-gray-500 leading-relaxed mb-3">{{ $desc }}</p>
                         <div class="border-t border-gray-100 mb-3"></div>
                         <div class="flex items-start gap-1.5 mt-auto">
                             <div
@@ -704,16 +704,16 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 @foreach ([
-                    ['🏗️', 'Interior Design & Setup', 'Complete store design, shelving, signage, and branding done by our expert team.', '✔ Ready-to-operate store in 45 days', ''],
-                    ['📦', 'Product Procurement', 'Access to 10,000+ SKUs sourced directly from top FMCG brands at wholesale prices.', '✔ Daily fresh delivery to your store', ''],
-                    ['🖥️', 'POS Software + Training', 'Cloud-based billing, inventory tracking, and analytics — fully set up and staff-trained.', '✔ Zero tech knowledge required', ''],
-                    ['👥', 'Staff Hiring & Training', 'We help recruit, screen, and train your store staff to brand standards.', '✔ Trained team before opening day', ''],
-                    ['📋', 'Legal Documentation', 'Franchise agreement, FSSAI, GST registration, and all compliance paperwork handled.', '✔ 100% legally compliant from day one', ''],
-                    ['💰', 'Zero Royalty — Year 1', 'No royalty fees in your first year. Keep 100% of your profits while you grow.', '✔ Maximum earnings from month one', 'highlight'],
-                    ['📣', 'Marketing & Branding', 'National campaigns, social media, local promotions, and in-store branding all managed.', '✔ Customers walk in before you advertise', ''],
-                    ['⏱️', 'Expiry Management System', 'Automated alerts and processes to track product expiry and reduce wastage.', '✔ Reduce losses, improve margins', ''],
-                    ['🛟', '24/7 Backend Support', 'Round-the-clock support for operations, tech issues, supply chain, and escalations.', '✔ Never face a problem alone', ''],
-                ] as [$icon, $title, $desc, $benefit, $type])
+            ['🏗️', 'Interior Design & Setup', 'Complete store design, shelving, signage, and branding done by our expert team.', '✔ Ready-to-operate store in 45 days', ''],
+            ['📦', 'Product Procurement', 'Access to 10,000+ SKUs sourced directly from top FMCG brands at wholesale prices.', '✔ Daily fresh delivery to your store', ''],
+            ['🖥️', 'POS Software + Training', 'Cloud-based billing, inventory tracking, and analytics — fully set up and staff-trained.', '✔ Zero tech knowledge required', ''],
+            ['👥', 'Staff Hiring & Training', 'We help recruit, screen, and train your store staff to brand standards.', '✔ Trained team before opening day', ''],
+            ['📋', 'Legal Documentation', 'Franchise agreement, FSSAI, GST registration, and all compliance paperwork handled.', '✔ 100% legally compliant from day one', ''],
+            ['💰', 'Zero Royalty — Year 1', 'No royalty fees in your first year. Keep 100% of your profits while you grow.', '✔ Maximum earnings from month one', 'highlight'],
+            ['📣', 'Marketing & Branding', 'National campaigns, social media, local promotions, and in-store branding all managed.', '✔ Customers walk in before you advertise', ''],
+            ['⏱️', 'Expiry Management System', 'Automated alerts and processes to track product expiry and reduce wastage.', '✔ Reduce losses, improve margins', ''],
+            ['🛟', '24/7 Backend Support', 'Round-the-clock support for operations, tech issues, supply chain, and escalations.', '✔ Never face a problem alone', ''],
+        ] as [$icon, $title, $desc, $benefit, $type])
                     <div class="relative {{ $type === 'highlight' ? 'bg-[#ec2024]/10 border-[#ec2024]/50 hover:bg-[#ec2024]/15' : 'bg-[#0d1f18] border-[#1a3328] hover:border-[#109125]/60 hover:bg-[#0f2318]' }} border rounded-2xl p-5 flex flex-col transition-all duration-300"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
                         @if ($type === 'highlight')
@@ -772,9 +772,7 @@
                         ['godrej', 'Godrej'],
                         ['patanjali', 'Patanjali'],
                         ['colgate', 'Colgate'],
-                        ['pg', 'P&G'],
                         ['haldirams', 'Haldirams'],
-                        ['mtr', 'MTR'],
                     ];
                 @endphp
                 @foreach (array_merge($brands, $brands) as [$slug, $brand])
@@ -782,7 +780,7 @@
                         style="padding: 0 24px; height: 80px; min-width: 140px">
                         @if (file_exists(public_path("custom/brands/{$slug}.png")))
                             <img src="{{ asset("custom/brands/{$slug}.png") }}" alt="{{ $brand }}"
-                                class="max-h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                                class="max-h-10 w-auto object-contain hover:scale-105 transition-all duration-300">
                         @else
                             <span
                                 class="text-gray-400 font-bold text-sm tracking-wide hover:text-[#055346] transition-colors duration-300 select-none">{{ $brand }}</span>
@@ -792,17 +790,34 @@
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="text-center mb-6" data-aos="fade-up">
+            <div class="text-center mb-8" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">As Featured On</span>
                 <p class="text-gray-500 text-sm mt-2">Recognized by top media houses and industry publications</p>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4" data-aos="fade-up" data-aos-delay="100">
-                @foreach ([['Times of India', 'TOI'], ['Economic Times', 'ET'], ['Franchise India', 'FI'], ['YourStory', 'YS'], ['Business Today', 'BT']] as [$name, $abbr])
-                    <div
-                        class="bg-gray-50 rounded-xl p-6 border border-gray-100 flex items-center justify-center hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
-                        <span class="text-gray-400 font-bold text-lg tracking-wide">{{ $abbr }}</span>
-                    </div>
-                @endforeach
+            <div class="bg-gray-50 rounded-2xl py-8 px-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6">
+                    @php
+                        $mediaCompanies = [
+                            ['Economic Times', 'et'],
+                            ['Franchise India', 'fi'],
+                            ['Times of India', 'toi'],
+                            ['Business Today', 'bt'],
+                            ['YourStory', 'yourstory'],
+                        ];
+                    @endphp
+                    @foreach ($mediaCompanies as [$name, $slug])
+                        <div
+                            class="flex items-center justify-center px-6 py-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-[#109125]/20 transition-all duration-300 group">
+                            @if (file_exists(public_path("custom/media/{$slug}.png")))
+                                <img src="{{ asset("custom/media/{$slug}.png") }}" alt="{{ $name }}"
+                                    class="h-8 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
+                            @else
+                                <span
+                                    class="text-gray-600 font-bold text-base tracking-wide group-hover:text-[#109125] transition-colors duration-300">{{ strtoupper(substr($name, 0, 2)) }}</span>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
@@ -1117,23 +1132,28 @@
                     @foreach ($blogs as $blog)
                         <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
                             data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                            @if ($blog->featured_image)
-                                <img src="{{ asset($blog->featured_image) }}" alt="{{ $blog->title }}"
-                                    class="w-full h-44 object-cover" loading="lazy">
-                            @else
-                                <div
-                                    class="w-full h-44 bg-gradient-to-br from-[#055346] to-[#076b58] flex items-center justify-center">
-                                    <span class="text-4xl">🛒</span>
-                                </div>
-                            @endif
+                            <a href="{{ route('blogs.show', $blog->slug) }}" class="block">
+                                @if ($blog->featured_image)
+                                    <img src="{{ asset($blog->featured_image) }}" alt="{{ $blog->title }}"
+                                        class="w-full h-44 object-cover" loading="lazy">
+                                @else
+                                    <div
+                                        class="w-full h-44 bg-gradient-to-br from-[#055346] to-[#076b58] flex items-center justify-center">
+                                        <span class="text-4xl">🛒</span>
+                                    </div>
+                                @endif
+                            </a>
                             <div class="p-5">
                                 @if ($blog->category)
                                     <span
                                         class="text-xs font-bold text-[#109125] bg-green-50 px-2.5 py-1 rounded-full">{{ $blog->category }}</span>
                                 @endif
-                                <h3 class="font-bold text-gray-900 mt-2 mb-2 line-clamp-2 leading-snug text-sm">
-                                    {{ $blog->title }}
-                                </h3>
+                                <a href="{{ route('blogs.show', $blog->slug) }}">
+                                    <h3
+                                        class="font-bold text-gray-900 mt-2 mb-2 line-clamp-2 leading-snug text-sm hover:text-[#055346] transition-colors">
+                                        {{ $blog->title }}
+                                    </h3>
+                                </a>
                                 <p class="text-sm text-gray-500 line-clamp-2 mb-4">{{ $blog->excerpt }}</p>
                                 <a href="{{ route('blogs.show', $blog->slug) }}"
                                     class="text-[#055346] text-sm font-semibold hover:underline">Read more →</a>
