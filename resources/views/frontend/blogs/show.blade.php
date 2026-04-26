@@ -15,7 +15,7 @@
         <nav class="text-sm flex items-center gap-1 flex-wrap justify-center mt-4">
             <a href="{{ route('home') }}" class="text-green-300 hover:text-white transition-colors">Home</a>
             <span class="text-white/30">/</span>
-            <a href="{{ route('blogs') }}" class="text-green-300 hover:text-white transition-colors">Blog</a>
+            <a href="{{ route('blogs') }}" class="text-green-300 hover:text-white transition-colors">Blogs</a>
             <span class="text-white/30">/</span>
             <span class="text-white font-medium">{{ Str::limit($blog->title, 45) }}</span>
         </nav>

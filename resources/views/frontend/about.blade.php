@@ -303,7 +303,7 @@
                         <div class="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center text-lg mb-3">
                             {{ $icon }}</div>
                         <p class="text-white font-semibold text-sm">{{ $title }}</p>
-                        <p class="text-white/60 text-xs leading-relaxed mt-1.5">
+                        <p class="text-white text-xs leading-relaxed mt-1.5">
                             {{ $body }}
                         </p>
                     </div>

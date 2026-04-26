@@ -257,281 +257,365 @@
             </div>
         </div>
     </section>
-    <section class="py-12 bg-[#081510]" id="calculator">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-8" data-aos="fade-up">
-                <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Smart Calculator</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-[#c8e8d8] mt-2 mb-3">Plan Your Franchise Investment
-                </h2>
-                <p class="text-[#4b7060] max-w-xl mx-auto">Calculate startup costs and projected earnings — all in one
-                    place.
-                </p>
-            </div>
-            <div x-data="{ tab: 'cost' }" data-aos="fade-up" data-aos-delay="100">
-                <div class="flex justify-center mb-6">
-                    <div class="inline-flex bg-[#1a2e27] rounded-2xl p-1 gap-1">
-                        <button @click="tab = 'cost'"
-                            :class="tab === 'cost' ? 'bg-[#0f1f1a] text-[#4ade80] shadow-sm' :
-                                'text-[#6b8f7e] hover:text-[#4ade80]'"
-                            class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200">
-                            💰 Startup Costs
-                        </button>
-                        <button @click="tab = 'earn'"
-                            :class="tab === 'earn' ? 'bg-[#0f1f1a] text-[#4ade80] shadow-sm' :
-                                'text-[#6b8f7e] hover:text-[#4ade80]'"
-                            class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200">
-                            📈 Earnings Projection
-                        </button>
-                    </div>
+<section class="py-12 bg-[#081510]" id="calculator">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8" data-aos="fade-up">
+            <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Smart Calculator</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-[#c8e8d8] mt-2 mb-3">Plan Your Franchise Investment</h2>
+            <p class="text-[#4b7060] max-w-xl mx-auto">Calculate startup costs and projected earnings — all in one place.</p>
+        </div>
+
+        <div x-data="{ tab: 'cost' }" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex justify-center mb-6">
+                <div class="inline-flex bg-[#1a2e27] rounded-2xl p-1 gap-1">
+                    <button @click="tab = 'cost'"
+                        :class="tab === 'cost' ? 'bg-[#0f1f1a] text-[#4ade80] shadow-sm' : 'text-[#6b8f7e] hover:text-[#4ade80]'"
+                        class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200">
+                        💰 Startup Costs
+                    </button>
+                    <button @click="tab = 'earn'"
+                        :class="tab === 'earn' ? 'bg-[#0f1f1a] text-[#4ade80] shadow-sm' : 'text-[#6b8f7e] hover:text-[#4ade80]'"
+                        class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200">
+                        📈 Earnings Projection
+                    </button>
                 </div>
-                <div x-show="tab === 'cost'" x-transition:enter="transition ease-out duration-200"
-                    x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-                    <div x-data="{
-                        storeType: 'super',
-                        area: 10000,
-                        plan: 1,
-                        get baseRent() { return this.area * (this.storeType === 'mini' ? 35 : this.storeType === 'super' ? 45 : 55) },
-                        get fitout() { return this.area * (this.storeType === 'mini' ? 800 : this.storeType === 'super' ? 1200 : 1500) },
-                        get inventory() { return this.storeType === 'mini' ? 500000 : this.storeType === 'super' ? 1200000 : 2500000 },
-                        get franchise() { return this.storeType === 'mini' ? 100000 : this.storeType === 'super' ? 200000 : 350000 },
-                        get working() { return this.plan === 1 ? 500000 : this.plan === 2 ? 750000 : 1000000 },
-                        get total() { return this.fitout + this.inventory + this.franchise + this.working },
+            </div>
+
+            {{-- ======================== STARTUP COSTS TAB ======================== --}}
+            {{--
+                Formula Source: Startup_Costs.xlsx → "Startup Cost Calculator"
+                - Area Cost        = sqft × ₹2,000/sqft
+                - Base Cost        = ₹2,10,000 (fixed) + 18% GST = ₹2,47,800
+                - Additional Cost  = ₹40,000 (fixed) + 18% GST   = ₹47,200
+                - Total Startup    = Area Cost + ₹2,47,800 + ₹47,200
+                                   = (sqft × 2000) + ₹2,95,000
+            --}}
+            <div x-show="tab === 'cost'"
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 translate-y-2"
+                x-transition:enter-end="opacity-100 translate-y-0">
+
+                <div x-data="{
+                        area: 1000,
+                        format: 'super',
+
+                        /* ── Format presets: sets default area when format is picked ── */
+                        formats: {
+                            mini:  { icon: '🏪', label: 'Mini Store',  size: '300–500 sqft',  default: 400  },
+                            super: { icon: '🏬', label: 'Super Store', size: '800–1200 sqft', default: 1000 },
+                            hyper: { icon: '🏢', label: 'Hyper Store', size: '2000+ sqft',    default: 2000 }
+                        },
+
+                        selectFormat(key) {
+                            this.format = key;
+                            this.area   = this.formats[key].default;
+                        },
+
+                        /* ── Startup Cost Formulas (from Startup_Costs.xlsx) ── */
+                        get areaCost()      { return this.area * 2000 },
+                        get baseWithGst()   { return 247800 },   /* ₹2,10,000 + 18% GST */
+                        get additionalGst() { return 47200 },    /* ₹40,000   + 18% GST */
+                        get totalStartup()  { return this.areaCost + this.baseWithGst + this.additionalGst },
+
                         fmt(n) { return '₹' + Number(n).toLocaleString('en-IN') }
                     }"
-                        class="bg-[#0f1f1a] border border-white/[0.08] rounded-3xl shadow-2xl overflow-hidden">
-                        <div class="grid grid-cols-1 lg:grid-cols-2">
-                            <div class="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-white/[0.08]">
-                                <p class="text-white font-bold text-base mb-5">Calculate Your Supermarket Franchise
-                                    Startup Costs
-                                </p>
-                                <div class="mb-5">
-                                    <label
-                                        class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider block mb-3">Supermarket
-                                        Format</label>
-                                    <div class="grid grid-cols-3 gap-3">
-                                        @foreach (['mini' => ['🏪', 'Mini Store', '300–500 sqft'], 'super' => ['🏬', 'Super Store', '800–1200 sqft'], 'hyper' => ['🏢', 'Hyper Store', '2000+ sqft']] as $key => [$icon, $name, $size])
-                                            <button @click="storeType = '{{ $key }}'"
-                                                :class="storeType === '{{ $key }}' ?
-                                                    'border-[#f5a623] bg-[#f5a623]/10 text-[#f5a623]' :
-                                                    'border-white/20 text-[#9bbfb0] hover:border-white/40'"
-                                                class="border-2 rounded-xl p-3 text-center transition-all duration-200 bg-transparent">
-                                                <div class="text-2xl mb-1">{{ $icon }}</div>
-                                                <p class="text-xs font-bold">{{ $name }}</p>
-                                                <p class="text-[10px] text-[#6b8f7e]">{{ $size }}</p>
-                                            </button>
-                                        @endforeach
-                                    </div>
+                    class="bg-[#0f1f1a] border border-white/[0.08] rounded-3xl shadow-2xl overflow-hidden">
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+
+                        {{-- LEFT: Controls --}}
+                        <div class="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-white/[0.08]">
+                            <p class="text-white font-bold text-base mb-5">Calculate Your Supermarket Franchise Startup Costs</p>
+
+                            {{-- Supermarket Format --}}
+                            <div class="mb-5">
+                                <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider block mb-3">Supermarket Format</label>
+                                <div class="grid grid-cols-3 gap-3">
+                                    <template x-for="(f, key) in formats" :key="key">
+                                        <button @click="selectFormat(key)"
+                                            :class="format === key
+                                                ? 'border-[#f5a623] bg-[#f5a623]/10 text-[#f5a623]'
+                                                : 'border-white/20 text-[#9bbfb0] hover:border-white/40'"
+                                            class="border-2 rounded-xl p-3 text-center transition-all duration-200 bg-transparent">
+                                            <div class="text-2xl mb-1" x-text="f.icon"></div>
+                                            <p class="text-xs font-bold" x-text="f.label"></p>
+                                            <p class="text-[10px] text-[#6b8f7e]" x-text="f.size"></p>
+                                        </button>
+                                    </template>
                                 </div>
-                                <div class="mb-5">
-                                    <div class="flex justify-between mb-2">
-                                        <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Store Area
-                                            (sq ft)</label>
-                                        <span class="text-sm font-bold text-[#f5a623]"
-                                            x-text="area.toLocaleString() + ' sqft'"></span>
-                                    </div>
-                                    <input type="range" x-model="area" min="300" max="10000" step="100"
-                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
-                                    <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
-                                        <span>300</span><span>5,000</span><span>10,000</span>
-                                    </div>
-                                </div>
-                                <div class="mb-5">
-                                    <label
-                                        class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider block mb-3">Working
-                                        Capital Plan</label>
-                                    <div class="grid grid-cols-3 gap-2">
-                                        @foreach ([1 => ['Basic', '₹5L'], 2 => ['Standard', '₹7.5L'], 3 => ['Premium', '₹10L']] as $p => [$pname, $pamount])
-                                            <button @click="plan = {{ $p }}"
-                                                :class="plan === {{ $p }} ? 'bg-[#f5a623] text-[#081510]' :
-                                                    'bg-white/10 text-[#9bbfb0] hover:bg-white/15'"
-                                                class="rounded-xl py-2 text-xs font-bold transition-all duration-200">
-                                                <div>{{ $pname }}</div>
-                                                <div class="opacity-75">{{ $pamount }}</div>
-                                            </button>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <a href="#" onclick="openLeadPopup(); return false;"
-                                    class="block w-full bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold text-center py-3 rounded-xl transition-all duration-200 text-sm">
-                                    Plan My Budget →
-                                </a>
                             </div>
-                            <div class="p-6 sm:p-8 bg-[#081510]">
-                                <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Total
-                                    Estimated Investment
-                                </p>
-                                <p class="text-5xl font-extrabold text-[#f5a623] mb-1" x-text="fmt(total)"></p>
-                                <p class="text-[#6b8f7e] text-xs mb-6">Based on your selected format & plan</p>
-                                <div class="space-y-4">
-                                    @foreach ([['Store Fitout & Setup', 'fitout', 'bg-[#109125]'], ['Initial Inventory', 'inventory', 'bg-[#055346]'], ['Franchise Fee', 'franchise', 'bg-[#ec2024]'], ['Working Capital', 'working', 'bg-[#f5a623]']] as [$label, $key, $color])
-                                        <div>
-                                            <div class="flex justify-between text-sm mb-1.5">
-                                                <span class="text-[#9bbfb0] font-medium">{{ $label }}</span>
-                                                <span class="font-bold text-white"
-                                                    x-text="fmt({{ $key }})"></span>
-                                            </div>
-                                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                                <div class="{{ $color }} h-full rounded-full transition-all duration-500"
-                                                    :style="`width: ${Math.round(({{ $key }} / total) * 100)}%`">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
+
+                            {{-- Store Area: Slider + Number Input --}}
+                            <div class="mb-6">
+                                <div class="flex justify-between items-center mb-2">
+                                    <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Store Area (sq ft)</label>
+                                    <div class="flex items-center gap-1 bg-[#1a2e27] border border-white/20 rounded-lg px-2 py-1">
+                                        <input type="number" x-model.number="area"
+                                            @input="let v = Number($event.target.value); area = v > 10000 ? 10000 : (v || v === 0 ? v : area)"
+                                            @blur="area = Math.min(10000, Math.max(300, Number($event.target.value) || 300))"
+                                            class="w-20 bg-transparent text-[#f5a623] text-sm font-bold text-right outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none">
+                                        <span class="text-[#6b8f7e] text-xs">sq ft</span>
+                                    </div>
                                 </div>
-                                <div class="mt-5 grid grid-cols-2 gap-3">
-                                    <div class="bg-white/[0.06] rounded-xl p-3 border border-white/10 text-center">
-                                        <p class="text-xs text-[#9bbfb0] mb-0.5">Monthly Rent Est.</p>
-                                        <p class="font-bold text-[#f5a623] text-sm" x-text="fmt(baseRent)"></p>
+                                <input type="range" x-model.number="area" min="300" max="10000" step="100"
+                                    class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
+                                <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
+                                    <span>300</span><span>5,000</span><span>10,000</span>
+                                </div>
+                            </div>
+
+                            <a href="#" onclick="openLeadPopup(); return false;"
+                                class="block w-full bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold text-center py-3 rounded-xl transition-all duration-200 text-sm">
+                                Plan My Budget →
+                            </a>
+                        </div>
+
+                        {{-- RIGHT: Results --}}
+                        <div class="p-6 sm:p-8 bg-[#081510]">
+                            <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Total Estimated Investment</p>
+                            <p class="text-5xl font-extrabold text-[#f5a623] mb-1" x-text="fmt(totalStartup)"></p>
+                            <p class="text-[#6b8f7e] text-xs mb-6">Based on <span x-text="Number(area).toLocaleString('en-IN')"></span> sq ft store area</p>
+
+                            {{-- Bar Chart --}}
+                            <div class="space-y-4 mb-6">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1.5">
+                                        <span class="text-[#9bbfb0] font-medium">Store Fitout & Setup</span>
+                                        <span class="font-bold text-white" x-text="fmt(areaCost)"></span>
                                     </div>
-                                    <div class="bg-white/[0.06] rounded-xl p-3 border border-white/10 text-center">
-                                        <p class="text-xs text-[#9bbfb0] mb-0.5">Zero Royalty</p>
-                                        <p class="font-bold text-[#4ade80] text-sm">₹0 / month</p>
+                                    <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                        <div class="bg-[#109125] h-full rounded-full transition-all duration-500"
+                                            :style="`width: ${Math.round((areaCost / totalStartup) * 100)}%`"></div>
                                     </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1.5">
+                                        <span class="text-[#9bbfb0] font-medium">Base Setup Cost (incl. GST)</span>
+                                        <span class="font-bold text-white">₹2,47,800</span>
+                                    </div>
+                                    <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                        <div class="bg-[#055346] h-full rounded-full transition-all duration-500"
+                                            :style="`width: ${Math.round((247800 / totalStartup) * 100)}%`"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1.5">
+                                        <span class="text-[#9bbfb0] font-medium">Additional Costs (incl. GST)</span>
+                                        <span class="font-bold text-white">₹47,200</span>
+                                    </div>
+                                    <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                        <div class="bg-[#ec2024] h-full rounded-full transition-all duration-500"
+                                            :style="`width: ${Math.round((47200 / totalStartup) * 100)}%`"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 grid grid-cols-2 gap-3">
+                                <div class="bg-white/[0.06] rounded-xl p-3 border border-white/10 text-center">
+                                    <p class="text-xs text-[#9bbfb0] mb-0.5">Cost per Sq Ft</p>
+                                    <p class="font-bold text-[#f5a623] text-sm">₹2,000</p>
+                                </div>
+                                <div class="bg-white/[0.06] rounded-xl p-3 border border-white/10 text-center">
+                                    <p class="text-xs text-[#9bbfb0] mb-0.5">Zero Royalty</p>
+                                    <p class="font-bold text-[#4ade80] text-sm">₹0 / month</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div x-show="tab === 'earn'" x-transition:enter="transition ease-out duration-200"
-                    x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-                    <div x-data="{
-                        storeSize: 2000,
-                        cityTier: 1,
-                        capital: 10,
-                        footfall: 300,
-                        get tierMultiplier() { return this.cityTier === 1 ? 1.3 : this.cityTier === 2 ? 1.1 : 0.9 },
-                        get avgBill() { return this.cityTier === 1 ? 420 : this.cityTier === 2 ? 340 : 260 },
-                        get dailyRevenue() { return this.footfall * this.avgBill },
-                        get monthlyRevenue() { return this.dailyRevenue * 26 },
-                        get margin() { return this.cityTier === 1 ? 28 : this.cityTier === 2 ? 24 : 20 },
-                        get monthlyProfit() { return Math.round(this.monthlyRevenue * this.margin / 100) },
-                        get breakeven() { return Math.ceil((this.capital * 100000) / this.monthlyProfit) },
-                        get annualProfit() { return this.monthlyProfit * 12 },
+            </div>
+
+            {{-- ======================== EARNINGS PROJECTION TAB ======================== --}}
+            {{--
+                Formula Source: Earnings_Projection.xlsx → "ROI Calculator"
+                - Startup Costs      = (area × 2000) + 2,47,800 + 47,200
+                - Stock Investment   = ₹10,00,000 (fixed)
+                - Total Setup Cost   = Startup Costs + Stock Investment
+                - Monthly Sales      = area × 1333.33  (₹40L/month per 3000 sqft)
+                - Gross Profit       = Monthly Sales × 25%
+                - Area Expense       = area × ₹126/sqft
+                - Discount           = Monthly Sales × 5%
+                - Total Expenses     = Area Expense + Discount
+                - Net Monthly Profit = Gross Profit − Total Expenses
+                - Annual Profit      = Net Monthly Profit × 12
+                - Payback (months)   = Total Setup Cost ÷ Net Monthly Profit
+                - Annual ROI %       = (Annual Profit ÷ Total Setup Cost) × 100
+            --}}
+            <div x-show="tab === 'earn'"
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 translate-y-2"
+                x-transition:enter-end="opacity-100 translate-y-0">
+
+                <div x-data="{
+                        area: 1000,
+                        stockInvestment: 1000000,
+
+                        /* ── Startup Cost (same formula as Tab 1) ── */
+                        get startupCost()     { return (this.area * 2000) + 247800 + 47200 },
+
+                        /* ── Total Setup ── */
+                        get totalSetup()      { return this.startupCost + this.stockInvestment },
+
+                        /* ── Revenue & Profit (from ROI Calculator sheet) ── */
+                        get monthlySales()    { return Math.round(this.area * (4000000 / 3000)) },
+                        get grossProfit()     { return Math.round(this.monthlySales * 0.25) },
+                        get areaExpense()     { return this.area * 126 },
+                        get discount()        { return Math.round(this.monthlySales * 0.05) },
+                        get totalExpenses()   { return this.areaExpense + this.discount },
+                        get netMonthlyProfit(){ return this.grossProfit - this.totalExpenses },
+                        get annualProfit()    { return this.netMonthlyProfit * 12 },
+
+                        /* ── ROI Metrics ── */
+                        get paybackMonths()   { return Math.ceil(this.totalSetup / this.netMonthlyProfit) },
+                        get annualRoi()       { return ((this.annualProfit / this.totalSetup) * 100).toFixed(1) },
+
+                        /* ── Chart: 12-month profit growth (~4% month-on-month) ── */
                         get chartBars() {
                             let bars = [];
                             for (let i = 1; i <= 12; i++) {
-                                bars.push(Math.round(this.monthlyProfit * (1 + (i - 1) * 0.04)));
+                                bars.push(Math.round(this.netMonthlyProfit * (1 + (i - 1) * 0.04)));
                             }
                             return bars;
                         },
                         get maxBar() { return Math.max(...this.chartBars) },
-                        fmt(n) { return (n >= 100000) ? (n / 100000).toFixed(1) + 'L' : (n >= 1000) ? (n / 1000).toFixed(0) + 'K' : n },
-                        fmtFull(n) { return '₹' + Number(n).toLocaleString('en-IN') }
+
+                        fmt(n)     { return (n >= 100000) ? (n / 100000).toFixed(1) + 'L' : (n >= 1000) ? (n / 1000).toFixed(0) + 'K' : n },
+                        fmtFull(n) { return '₹' + Number(Math.round(n)).toLocaleString('en-IN') }
                     }"
-                        class="bg-[#0f1f1a] rounded-3xl overflow-hidden shadow-2xl border border-white/[0.08]">
-                        <div class="grid grid-cols-1 lg:grid-cols-2">
-                            <div class="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-white/10">
-                                <p class="text-white font-bold text-base mb-5">Calculate Your Earnings (Not Just Costs)
-                                    <span
-                                        class="text-[10px] bg-[#109125] text-white px-2 py-0.5 rounded-full ml-1">LIVE</span>
-                                </p>
-                                <div class="mb-5">
-                                    <div class="flex justify-between mb-2">
-                                        <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Store Size
-                                            (sq ft)</label>
-                                        <span class="text-[#f5a623] text-sm font-bold"
-                                            x-text="storeSize + ' sq ft'"></span>
-                                    </div>
-                                    <input type="range" x-model="storeSize" min="500" max="10000"
-                                        step="100"
-                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
-                                    <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
-                                        <span>500</span><span>2,500</span><span>10,000</span>
-                                    </div>
-                                </div>
-                                <div class="mb-5">
-                                    <label
-                                        class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider block mb-2">City
-                                        Tier</label>
-                                    <div class="grid grid-cols-3 gap-2">
-                                        @foreach ([1 => 'Tier 1', 2 => 'Tier 2', 3 => 'Tier 3'] as $t => $label)
-                                            <button @click="cityTier = {{ $t }}"
-                                                :class="cityTier === {{ $t }} ?
-                                                    'bg-[#f5a623] text-[#081510] border-[#f5a623]' :
-                                                    'bg-transparent text-[#9bbfb0] border-white/20 hover:border-white/40'"
-                                                class="border rounded-xl py-2 text-sm font-semibold transition-all duration-200">
-                                                {{ $label }}
-                                            </button>
-                                        @endforeach
+                    class="bg-[#0f1f1a] rounded-3xl overflow-hidden shadow-2xl border border-white/[0.08]">
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+
+                        {{-- LEFT: Controls --}}
+                        <div class="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-white/10">
+                            <p class="text-white font-bold text-base mb-5">
+                                Calculate Your Earnings (Not Just Costs)
+                                <span class="text-[10px] bg-[#109125] text-white px-2 py-0.5 rounded-full ml-1">LIVE</span>
+                            </p>
+
+                            {{-- Store Area --}}
+                            <div class="mb-5">
+                                <div class="flex justify-between items-center mb-2">
+                                    <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Store Area (sq ft)</label>
+                                    <div class="flex items-center gap-1 bg-[#1a2e27] border border-white/20 rounded-lg px-2 py-1">
+                                        <input type="number" x-model.number="area"
+                                            @input="let v = Number($event.target.value); area = v > 10000 ? 10000 : (v || v === 0 ? v : area)"
+                                            @blur="area = Math.min(10000, Math.max(300, Number($event.target.value) || 300))"
+                                            class="w-20 bg-transparent text-[#f5a623] text-sm font-bold text-right outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none">
+                                        <span class="text-[#6b8f7e] text-xs">sq ft</span>
                                     </div>
                                 </div>
-                                <div class="mb-5">
-                                    <div class="flex justify-between mb-2">
-                                        <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Starting
-                                            Capital (₹ Lakh)</label>
-                                        <span class="text-[#f5a623] text-sm font-bold"
-                                            x-text="'₹' + capital + 'L'"></span>
-                                    </div>
-                                    <input type="range" x-model="capital" min="5" max="50"
-                                        step="1"
-                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
-                                    <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
-                                        <span>₹5L</span><span>₹25L</span><span>₹50L</span>
-                                    </div>
+                                <input type="range" x-model.number="area" min="300" max="10000" step="100"
+                                    class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
+                                <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
+                                    <span>300</span><span>5,000</span><span>10,000</span>
                                 </div>
-                                <div class="mb-5">
-                                    <div class="flex justify-between mb-2">
-                                        <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Expected
-                                            Daily Footfall</label>
-                                        <span class="text-[#f5a623] text-sm font-bold"
-                                            x-text="footfall + ' customers'"></span>
-                                    </div>
-                                    <input type="range" x-model="footfall" min="50" max="1000"
-                                        step="10"
-                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
-                                    <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
-                                        <span>50</span><span>500</span><span>1000</span>
-                                    </div>
-                                </div>
-                                <a href="#" onclick="openLeadPopup(); return false;"
-                                    class="block w-full bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold text-center py-3 rounded-xl transition-all duration-200 text-sm">
-                                    Calculate My Earnings →
-                                </a>
                             </div>
-                            <div class="p-6 sm:p-8 bg-[#081510]">
-                                <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Projected
-                                    Monthly Revenue
-                                </p>
-                                <p class="text-5xl font-extrabold text-[#f5a623] leading-none mb-1"
-                                    x-text="fmtFull(monthlyRevenue)"></p>
-                                <p class="text-[#6b8f7e] text-xs mb-5">Estimated based on your inputs</p>
-                                <div class="grid grid-cols-3 gap-3 mb-5">
-                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
-                                        <p class="text-[#f5a623] text-xl font-extrabold" x-text="margin + '%'"></p>
-                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Margin</p>
-                                    </div>
-                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
-                                        <p class="text-[#f5a623] text-xl font-extrabold" x-text="breakeven + 'mo'"></p>
-                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Breakeven</p>
-                                    </div>
-                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
-                                        <p class="text-[#4ade80] text-xl font-extrabold" x-text="'₹' + fmt(annualProfit)">
-                                        </p>
-                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Yr 1 Profit</p>
-                                    </div>
+
+                            {{-- Stock Investment --}}
+                            <div class="mb-5">
+                                <div class="flex justify-between mb-2">
+                                    <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Stock Investment (₹ Lakh)</label>
+                                    <span class="text-[#f5a623] text-sm font-bold" x-text="'₹' + (stockInvestment/100000).toFixed(0) + 'L'"></span>
                                 </div>
-                                <p class="text-[#4b7060] text-xs font-semibold uppercase tracking-wider mb-2">Monthly
-                                    Earnings Projection
-                                </p>
-                                <div class="flex items-end gap-1 h-24">
-                                    <template x-for="(bar, i) in chartBars" :key="i">
-                                        <div class="flex-1 rounded-t-sm transition-all duration-500 ease-out"
-                                            :style="`height: ${Math.round((bar / maxBar) * 100)}%; background: ${i >= 9 ? '#4ade80' : i >= 6 ? '#22c55e' : i >= 3 ? '#16a34a' : '#109125'}; min-height: 3px;`">
-                                        </div>
-                                    </template>
+                                <input type="range" x-model.number="stockInvestment" min="500000" max="5000000" step="100000"
+                                    class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
+                                <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
+                                    <span>₹5L</span><span>₹27.5L</span><span>₹50L</span>
                                 </div>
-                                <div class="flex justify-between text-xs text-[#2e4d3d] mt-1.5">
-                                    <span>Month 1</span><span>Month 6</span><span>Month 12</span>
+                            </div>
+
+                            {{-- Calculated inputs (read-only display) --}}
+                            <div class="space-y-2 mb-5">
+                                <div class="bg-white/[0.04] rounded-xl px-4 py-2.5 flex justify-between border border-white/[0.06]">
+                                    <span class="text-[#9bbfb0] text-xs font-medium">Startup Cost (auto-calculated)</span>
+                                    <span class="text-white text-xs font-bold" x-text="fmtFull(startupCost)"></span>
                                 </div>
-                                <p class="text-xs text-[#2e4d3d] mt-3 text-center">*Based on average 7x Basket partner data
-                                </p>
+                                <div class="bg-white/[0.04] rounded-xl px-4 py-2.5 flex justify-between border border-white/[0.06]">
+                                    <span class="text-[#9bbfb0] text-xs font-medium">Monthly Sales</span>
+                                    <span class="text-[#4ade80] text-xs font-bold" x-text="fmtFull(monthlySales)"></span>
+                                </div>
+                                <div class="bg-white/[0.04] rounded-xl px-4 py-2.5 flex justify-between border border-white/[0.06]">
+                                    <span class="text-[#9bbfb0] text-xs font-medium">Gross Profit (25% margin)</span>
+                                    <span class="text-[#4ade80] text-xs font-bold" x-text="fmtFull(grossProfit)"></span>
+                                </div>
+                                <div class="bg-white/[0.04] rounded-xl px-4 py-2.5 flex justify-between border border-white/[0.06]">
+                                    <span class="text-[#9bbfb0] text-xs font-medium">Total Monthly Expenses</span>
+                                    <span class="text-[#ec2024] text-xs font-bold" x-text="fmtFull(totalExpenses)"></span>
+                                </div>
+                            </div>
+
+                            <a href="#" onclick="openLeadPopup(); return false;"
+                                class="block w-full bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold text-center py-3 rounded-xl transition-all duration-200 text-sm">
+                                Calculate My Earnings →
+                            </a>
+                        </div>
+
+                        {{-- RIGHT: Results --}}
+                        <div class="p-6 sm:p-8 bg-[#081510]">
+                            <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Net Monthly Profit</p>
+                            <p class="text-5xl font-extrabold text-[#f5a623] leading-none mb-1" x-text="fmtFull(netMonthlyProfit)"></p>
+                            <p class="text-[#6b8f7e] text-xs mb-5">Estimated based on <span x-text="Number(area).toLocaleString('en-IN')"></span> sq ft store</p>
+
+                            {{-- KPI Cards --}}
+                            <div class="grid grid-cols-3 gap-3 mb-5">
+                                <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                    <p class="text-[#f5a623] text-xl font-extrabold">25%</p>
+                                    <p class="text-[#9bbfb0] text-xs mt-0.5">Margin</p>
+                                </div>
+                                <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                    <p class="text-[#f5a623] text-xl font-extrabold" x-text="paybackMonths + 'mo'"></p>
+                                    <p class="text-[#9bbfb0] text-xs mt-0.5">Breakeven</p>
+                                </div>
+                                <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                    <p class="text-[#4ade80] text-xl font-extrabold" x-text="annualRoi + '%'"></p>
+                                    <p class="text-[#9bbfb0] text-xs mt-0.5">Annual ROI</p>
+                                </div>
+                            </div>
+
+                            {{-- Annual Profit highlight --}}
+                            <div class="bg-[#109125]/10 border border-[#109125]/30 rounded-xl p-3 mb-5 flex items-center justify-between">
+                                <div>
+                                    <p class="text-[#4ade80] text-xs font-semibold uppercase tracking-wider">Year 1 Annual Profit</p>
+                                    <p class="text-[#6b8f7e] text-[10px]">Net Monthly Profit × 12</p>
+                                </div>
+                                <p class="text-[#4ade80] text-2xl font-extrabold" x-text="fmtFull(annualProfit)"></p>
+                            </div>
+
+                            {{-- 12-Month Bar Chart --}}
+                            <p class="text-[#4b7060] text-xs font-semibold uppercase tracking-wider mb-2">Monthly Earnings Projection</p>
+                            <div class="flex items-end gap-1 h-24">
+                                <template x-for="(bar, i) in chartBars" :key="i">
+                                    <div class="flex-1 rounded-t-sm transition-all duration-500 ease-out"
+                                        :style="`height: ${Math.round((bar / maxBar) * 100)}%; background: ${i >= 9 ? '#4ade80' : i >= 6 ? '#22c55e' : i >= 3 ? '#16a34a' : '#109125'}; min-height: 3px;`">
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="flex justify-between text-xs text-[#2e4d3d] mt-1.5">
+                                <span>Month 1</span><span>Month 6</span><span>Month 12</span>
+                            </div>
+
+                            {{-- Total Setup Cost --}}
+                            <div class="mt-4 bg-white/[0.04] rounded-xl px-4 py-2.5 flex justify-between border border-white/[0.06]">
+                                <span class="text-[#9bbfb0] text-xs font-medium">Total Setup Cost (Startup + Stock)</span>
+                                <span class="text-white text-xs font-bold" x-text="fmtFull(totalSetup)"></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {{-- Disclaimer --}}
+            <div class="mt-5">
+                <p class="text-[#4b7060] text-xs text-center leading-relaxed">
+                    <span class="text-[#6b8f7e] font-semibold">Disclaimer:</span>
+                    Projections are based on average data from 7x Basket franchise partners. Actual results vary by location, footfall, and store management.
+                </p>
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
     <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12" data-aos="fade-up">
@@ -561,109 +645,68 @@
                     say.
                 </p>
             </div>
+            @php
+                $testimonials = [
+                    ['Rajesh Kumar', 'Delhi', 'Super Store', 'Joining 7x Basket was the best business decision I made. Turned profitable in 8 months. The support team is always available.'],
+                    ['Priya Sharma', 'Mumbai', 'Mini Store', 'The supply chain is excellent. Fresh products daily and margins are much better than running an independent store.'],
+                    ['Amit Patel', 'Ahmedabad', 'Hyper Store', 'From training to launch, everything was smooth. The technology platform makes inventory management effortless.'],
+                    ['Sunita Verma', 'Jaipur', 'Super Store', 'Zero royalty model is a game changer. I keep all my profits and the brand name brings customers in without extra marketing.'],
+                    ['Kiran Reddy', 'Hyderabad', 'Mini Store', 'The dedicated relationship manager helped me through every step. My store broke even in just 6 months.'],
+                    ['Manoj Singh', 'Lucknow', 'Super Store', 'I was skeptical at first but the 45-day launch timeline is real. My store was up and running exactly on schedule.'],
+                    ['Deepa Nair', 'Kochi', 'Hyper Store', 'The POS system and inventory app are incredibly easy to use. Customer loyalty program keeps them coming back.'],
+                    ['Vikram Joshi', 'Pune', 'Mini Store', 'Best investment I have made. The brand recognition alone drives footfall. 7x Basket is trusted before they walk in.'],
+                    ['Anita Gupta', 'Chandigarh', 'Super Store', 'National marketing campaigns save me so much time and money. I just focus on running the store and customers keep coming.'],
+                ];
+            @endphp
             <div x-data="{
                 current: 0,
-                total: 9,
+                total: {{ count($testimonials) }},
+                perPage: 1,
                 timer: null,
-                visible() { return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1 },
+                getPerPage() {
+                    if (window.innerWidth >= 1024) return 3;
+                    if (window.innerWidth >= 640) return 2;
+                    return 1;
+                },
+                get maxIndex() { return this.total - this.perPage },
                 prev() {
-                    this.current = this.current === 0 ? this.total - this.visible() : this.current - 1;
-                    this.scrollTo()
+                    this.current = this.current <= 0 ? this.maxIndex : this.current - 1;
                 },
                 next() {
-                    this.current = this.current >= this.total - this.visible() ? 0 : this.current + 1;
-                    this.scrollTo()
+                    this.current = this.current >= this.maxIndex ? 0 : this.current + 1;
                 },
-                scrollTo() {
-                    const track = this.$refs.track;
-                    const card = track.children[this.current];
-                    if (card) track.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
-                },
-                init() { this.timer = setInterval(() => this.next(), 3500) }
-            }" x-init="init()" @mouseenter="clearInterval(timer)"
-                @mouseleave="timer = setInterval(() => next(), 3500)" class="relative">
+                init() {
+                    this.perPage = this.getPerPage();
+                    window.addEventListener('resize', () => {
+                        this.perPage = this.getPerPage();
+                        if (this.current > this.maxIndex) this.current = this.maxIndex;
+                    });
+                    this.timer = setInterval(() => this.next(), 3500);
+                }
+            }" x-init="init()" @mouseenter="clearInterval(timer)" @mouseleave="timer = setInterval(() => next(), 3500)"
+                class="relative">
                 <button @click="prev()"
                     class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center hover:bg-[#055346] hover:text-white hover:border-[#055346] transition-all">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <div class="mx-6 overflow-x-auto scrollbar-hide scroll-smooth"
-                    style="scrollbar-width:none;-ms-overflow-style:none;" x-ref="track">
-                    <div class="flex gap-4" style="width:max-content">
-                        @php
-                            $testimonials = [
-                                [
-                                    'Rajesh Kumar',
-                                    'Delhi',
-                                    'Super Store',
-                                    'Joining 7x Basket was the best business decision I made. Turned profitable in 8 months. The support team is always available.',
-                                ],
-                                [
-                                    'Priya Sharma',
-                                    'Mumbai',
-                                    'Mini Store',
-                                    'The supply chain is excellent. Fresh products daily and margins are much better than running an independent store.',
-                                ],
-                                [
-                                    'Amit Patel',
-                                    'Ahmedabad',
-                                    'Hyper Store',
-                                    'From training to launch, everything was smooth. The technology platform makes inventory management effortless.',
-                                ],
-                                [
-                                    'Sunita Verma',
-                                    'Jaipur',
-                                    'Super Store',
-                                    'Zero royalty model is a game changer. I keep all my profits and the brand name brings customers in without extra marketing.',
-                                ],
-                                [
-                                    'Kiran Reddy',
-                                    'Hyderabad',
-                                    'Mini Store',
-                                    'The dedicated relationship manager helped me through every step. My store broke even in just 6 months.',
-                                ],
-                                [
-                                    'Manoj Singh',
-                                    'Lucknow',
-                                    'Super Store',
-                                    'I was skeptical at first but the 45-day launch timeline is real. My store was up and running exactly on schedule.',
-                                ],
-                                [
-                                    'Deepa Nair',
-                                    'Kochi',
-                                    'Hyper Store',
-                                    'The POS system and inventory app are incredibly easy to use. Customer loyalty program keeps them coming back.',
-                                ],
-                                [
-                                    'Vikram Joshi',
-                                    'Pune',
-                                    'Mini Store',
-                                    'Best investment I have made. The brand recognition alone drives footfall. 7x Basket is trusted before they walk in.',
-                                ],
-                                [
-                                    'Anita Gupta',
-                                    'Chandigarh',
-                                    'Super Store',
-                                    'National marketing campaigns save me so much time and money. I just focus on running the store and customers keep coming.',
-                                ],
-                            ];
-                        @endphp
+                <div class="mx-6 overflow-hidden">
+                    <div class="flex transition-transform duration-500 ease-in-out gap-4"
+                        :style="`transform: translateX(calc(-${current} * (100% / ${perPage}) - ${current} * (1rem / ${perPage})))`">
                         @foreach ($testimonials as $t)
                             <div class="flex-shrink-0 bg-gray-50 rounded-2xl p-5 border border-gray-100"
-                                style="width: min(calc(33.333vw - 2rem), 380px); min-width: 280px;">
+                                :style="`width: calc(${100 / perPage}% - ${(perPage - 1) / perPage}rem)`">
                                 <div class="flex gap-0.5 mb-3">
                                     @for ($i = 0; $i < 5; $i++)
                                         <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path
-                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                         </svg>
                                     @endfor
                                 </div>
                                 <p class="text-gray-600 text-sm leading-relaxed mb-4 italic">"{{ $t[3] }}"</p>
                                 <div class="flex items-center gap-3">
-                                    <div
-                                        class="w-9 h-9 bg-[#055346] rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                                    <div class="w-9 h-9 bg-[#055346] rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                                         {{ substr($t[0], 0, 1) }}
                                     </div>
                                     <div>
@@ -682,8 +725,8 @@
                     </svg>
                 </button>
                 <div class="flex justify-center gap-2 mt-6">
-                    @for ($i = 0; $i < 9; $i++)
-                        <button @click="current = {{ $i }}"
+                    @for ($i = 0; $i < count($testimonials); $i++)
+                        <button @click="current = {{ $i }} > maxIndex ? maxIndex : {{ $i }}"
                             :class="current === {{ $i }} ? 'bg-[#055346] w-5' : 'bg-gray-300 w-2'"
                             class="h-2 rounded-full transition-all duration-300"></button>
                     @endfor

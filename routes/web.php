@@ -29,6 +29,53 @@ Route::get('/sitemap.xml', [HomeController::class, 'sitemap'])->name('sitemap');
 
 /*
  * |--------------------------------------------------------------------------
+ * | Legacy URL Redirects (old 7xbasket.com WordPress URLs → new /blogs/{slug})
+ * |--------------------------------------------------------------------------
+ */
+$legacySlugs = [
+    'cost-of-opening-a-supermarket',
+    'supermarket-business-franchises-in-india',
+    'supermarket-franchise',
+    'grocery-store-franchise',
+    'best-supermarket-franchise-in-india',
+    'top-5-supermarket-franchises-growing-in-india',
+    'mini-supermarket-franchise',
+    'best-grocery-franchise',
+    'mini-grocery-store-franchise',
+    'grocery-store-franchise-cost',
+    'super-market-franchise',
+    'grocery-mart-franchise',
+    'supermarket-franchise-in-india',
+    'indian-grocery-franchise',
+    'best-grocery-store-franchise',
+    'supermarket-franchise-cost',
+    'best-franchise-grocery-store',
+    'cheapest-grocery-store-franchise',
+    'top-5-reasons-to-start-a-supermarket-business-in-2025',
+    'supermarket-business-franchise',
+    'franchise-grocery-store',
+    'grocery-store-franchise-in-india',
+    'grocery-store-in-india',
+    'grocery-store',
+    'grocery-retail-market',
+    'top-7-grocery-franchise-in-india',
+    '7xbasket-is-revolutionizing-indian-grocery',
+    'grocery-retail-in-india',
+    'how-to-maximize-profit-in-mini-supermarket-franchise',
+    'grocery-franchise-business-in-india',
+    'grocery-shopping-in-india',
+    'market-research-your-first-step-to-grocery-franchise-success',
+    'indian-grocery-store-franchises',
+    'small-budget-grocery-business',
+];
+
+foreach ($legacySlugs as $slug) {
+    Route::get('/' . $slug, fn() => redirect('/blogs/' . $slug, 301));
+    Route::get('/' . $slug . '/', fn() => redirect('/blogs/' . $slug, 301));
+}
+
+/*
+ * |--------------------------------------------------------------------------
  * | Admin Routes
  * |--------------------------------------------------------------------------
  */

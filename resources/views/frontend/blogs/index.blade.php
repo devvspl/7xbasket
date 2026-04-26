@@ -15,7 +15,7 @@
         <nav class="text-sm flex items-center gap-1 flex-wrap justify-center mt-4">
             <a href="{{ route('home') }}" class="text-green-300 hover:text-white transition-colors">Home</a>
             <span class="text-white/30">/</span>
-            <span class="text-white font-medium">Blog</span>
+            <span class="text-white font-medium">Blogs</span>
         </nav>
     </div>
 </section>
