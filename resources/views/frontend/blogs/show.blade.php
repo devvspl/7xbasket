@@ -34,9 +34,9 @@
                 {{-- Thumbnail --}}
                 @if($blog->featured_image)
                 <img src="{{ asset($blog->featured_image) }}" alt="{{ $blog->featured_image_alt ?: $blog->title }}"
-                     class="w-full h-72 object-cover rounded-2xl mt-6 shadow-sm" loading="lazy">
+                     class="w-full h-115 object-cover rounded-2xl mt-6 shadow-sm" loading="lazy">
                 @else
-                <div class="w-full h-72 bg-gradient-to-br from-[#055346] to-[#109125] rounded-2xl mt-6 flex items-center justify-center">
+                <div class="w-full h-115 bg-gradient-to-br from-[#055346] to-[#109125] rounded-2xl mt-6 flex items-center justify-center">
                     <span class="text-6xl">🛒</span>
                 </div>
                 @endif
