@@ -78,6 +78,6 @@ class ApplicationController extends Controller
     public function destroy(FranchiseApplication $application)
     {
         $application->delete();
-        return back()->with('success', 'Application deleted.');
+        return redirect()->route('admin.applications.index')->with('success', 'Application deleted.');
     }
 }
