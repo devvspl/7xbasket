@@ -75,55 +75,65 @@
             </div>
         </div>
     </section>
-    <section class="py-12 bg-gray-50">
+    <section class="py-16 bg-gray-50 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-8" data-aos="fade-up">
+            <div class="text-center mb-12" data-aos="fade-up">
                 <span class="text-[#ec2024] text-sm font-bold uppercase tracking-widest">Why Most Independent Grocery Stores
-                    Fail</span>
+                    Fail
+                </span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">7x Basket: The Problems We Solve
                 </h2>
-                <p class="text-gray-500 max-w-xl mx-auto">Running a grocery store on your own is harder than it looks. Stock
-                    shortages, thin margins, unreliable suppliers, no brand pull - these are daily battles for any
+                <p class="text-gray-500 mx-auto">Running a grocery store on your own is harder than it looks.
+                    Stock shortages, thin margins, unreliable suppliers, no brand pull - these are daily battles for any
                     standalone store owner. 7x Basket is built to fix every one of them.
                 </p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+
+            <div class="space-y-4">
                 @foreach ([
             ['😰', 'No Brand Recognition', 'Customers don\'t walk into stores they don\'t know or trust.', 'Instant credibility on day one. The 7x Basket name on your storefront signals quality and trust before a single word is spoken.'],
-
             ['📦', 'Supply Chain Issues', 'Sourcing fresh stock daily is unpredictable, expensive, and time-consuming.', 'Direct sourcing from top FMCG manufacturers. Reliable daily delivery, so your shelves are never empty.'],
-
-            ['💸', 'High Operating Costs', 'Buying in small quantities means paying full retail margins with no room to compete on price.', 'Our bulk buying power gives your store wholesale pricing - so you offer better prices to shoppers while protecting your margins.'],
-
-            ['📊', 'No Technology', 'Manual billing and paper-based inventory tracking leads to costly errors and stock losses.', 'Cloud-based POS, real-time inventory tracking, and a business analytics app - fully installed and staff-trained before opening.'],
-
+            ['💸', 'High Operating Costs', 'Buying in small quantities means paying full retail margins with no room to compete on price.', 'Our bulk buying power gives your store wholesale pricing — so you offer better prices to shoppers while protecting your margins.'],
+            ['📊', 'No Technology', 'Manual billing and paper-based inventory tracking leads to costly errors and stock losses.', 'Cloud-based POS, real-time inventory tracking, and a business analytics app — fully installed and staff-trained before opening.'],
             ['🎓', 'No Staff Training', 'Untrained staff hurt customer experience and drive repeat footfall away permanently.', 'Full onboarding and staff training provided before your grand opening. Your team is ready before the doors open.'],
-
-            ['📣', 'Zero Marketing', 'Without brand visibility, there is no footfall. No footfall means no revenue.', 'National brand campaigns, local area marketing, and social media - all managed for you, at no extra cost.'],
+            ['📣', 'Zero Marketing', 'Without brand visibility, there is no footfall. No footfall means no revenue.', 'National brand campaigns, local area marketing, and social media — all managed for you, at no extra cost.'],
         ] as [$icon, $problem, $desc, $solution])
-                    <div class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col h-full"
-                        data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
-                        <div
-                            class="w-9 h-9 bg-red-50 rounded-lg flex items-center justify-center text-lg mb-3 flex-shrink-0">
-                            {{ $icon }}
-                        </div>
-                        <p class="text-sm font-semibold text-gray-900 mb-1">{{ $problem }}</p>
-                        <p class="text-xs text-gray-500 leading-relaxed mb-3 min-h-[38px]">
-                            {{ $desc }}
-                        </p>
-                        <div class="border-t border-gray-100 mb-3"></div>
-                        <div class="flex items-start gap-2 mt-auto">
+                    <div class="rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200"
+                        data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
+                        <div class="grid grid-cols-1 md:grid-cols-2">
+                            {{-- Problem side --}}
                             <div
-                                class="w-4 h-4 bg-[#109125] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                        clip-rule="evenodd" />
-                                </svg>
+                                class="flex items-start gap-4 p-5 md:p-6 bg-[#fff5f5] border-b md:border-b-0 md:border-r border-red-100">
+                                <div
+                                    class="w-12 h-12 bg-[#ec2024]/10 border border-[#ec2024]/20 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+                                    {{ $icon }}
+                                </div>
+                                <div>
+                                    <span
+                                        class="inline-block text-[10px] font-extrabold uppercase tracking-widest text-[#ec2024] bg-[#ec2024]/10 px-2.5 py-0.5 rounded-full mb-1.5">❌
+                                        Problem</span>
+                                    <p class="font-extrabold text-gray-900 text-sm mb-1">{{ $problem }}</p>
+                                    <p class="text-xs text-gray-600 leading-relaxed">{{ $desc }}</p>
+                                </div>
                             </div>
-                            <p class="text-xs font-semibold text-[#109125] leading-snug min-h-[48px]">
-                                {{ $solution }}
-                            </p>
+                            {{-- Solution side --}}
+                            <div
+                                class="flex items-start gap-4 p-5 md:p-6 bg-[#f0fdf4] border-t md:border-t-0 border-green-100">
+                                <div
+                                    class="w-12 h-12 bg-[#109125]/15 border border-[#109125]/25 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 text-[#109125]" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span
+                                        class="inline-block text-[10px] font-extrabold uppercase tracking-widest text-[#109125] bg-[#109125]/10 px-2.5 py-0.5 rounded-full mb-1.5">✅
+                                        7x Basket Fix</span>
+                                    <p class="text-sm text-[#14532d] font-semibold leading-relaxed">{{ $solution }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -213,81 +223,121 @@
     </section>
     <section class="py-16 bg-white" id="plans">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12" data-aos="fade-up">
+            <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Store Plans</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Choose The Store Format That Fits
-                    Your Budget And Market</h2>
-                <p class="text-gray-500 max-w-xl mx-auto">7x Basket has three store formats built for the grocery store in
-                    India — each sized to match your available space, investment capacity, and local market size. Whether
-                    you're opening your first location or adding a second, there's a format that fits.
-
-                </p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Store Model Comparison</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Three store formats built for every budget and market size. Pick the one that fits your investment capacity and local opportunity.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-                @foreach ([['Mini Store', '₹5–8 Lakhs', '300–500 sq ft', 'Starter', false, ['500+ SKUs', 'POS System', 'Basic Staff Training', 'Local Marketing Support', 'FSSAI Compliance Help']], ['Super Store', '₹10–15 Lakhs', '800–1200 sq ft', 'Most Popular', true, ['2,000+ SKUs', 'Full POS + Inventory Tech', 'Advanced Staff Training', 'Dedicated Relationship Manager', 'Regional Marketing Campaigns', 'Customer Loyalty Program']], ['Hyper Store', '₹20–30 Lakhs', '2000+ sq ft', 'Premium', false, ['5,000+ SKUs', 'Enterprise Tech Stack', 'Full Team Training', 'Priority 24/7 Support', 'National Marketing Campaigns', 'Loyalty Program + Analytics']]] as [$name, $price, $size, $badge, $featured, $features])
-                    <div class="relative rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl
-            {{ $featured ? 'bg-white border-gray-200 shadow-2xl scale-105' : 'bg-gray-50 border-gray-200 shadow-sm' }}"
-                        data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                        @if ($featured)
-                            <div class="h-1.5 bg-[#f5a623] w-full"></div>
-                        @else
-                            <div class="h-1.5 bg-[#109125]/30 w-full"></div>
-                        @endif
-                        <div class="p-7">
-                            <div class="flex items-center justify-between mb-4">
-                                <span
-                                    class="text-xs font-bold uppercase tracking-widest
-                     {{ $featured ? 'text-[#f5a623]' : 'text-[#109125]' }}">
-                                    {{ $badge }}
-                                </span>
-                                @if ($featured)
-                                    <span
-                                        class="bg-[#f5a623] text-[#1a1a1a] text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wide">
-                                        ⭐ Most Popular
-                                    </span>
-                                @endif
-                            </div>
-                            <h3 class="text-2xl font-extrabold text-gray-900 mb-1">{{ $name }}</h3>
-                            <p class="text-3xl font-extrabold {{ $featured ? 'text-[#f5a623]' : 'text-[#055346]' }} mb-1">
-                                {{ $price }}
-                            </p>
-                            <p class="text-sm text-gray-400 mb-6 flex items-center gap-1">
-                                <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                {{ $size }} store area
-                            </p>
-                            <div class="border-t border-gray-100 mb-5"></div>
-                            <ul class="space-y-3 mb-8">
-                                @foreach ($features as $f)
-                                    <li class="flex items-center gap-2.5 text-sm text-gray-700">
-                                        <div
-                                            class="w-5 h-5 {{ $featured ? 'bg-[#f5a623]' : 'bg-[#109125]' }} rounded-full flex items-center justify-center flex-shrink-0">
-                                            <svg class="w-3 h-3 {{ $featured ? 'text-[#1a1a1a]' : 'text-white' }}"
-                                                fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        {{ $f }}
-                                    </li>
-                                @endforeach
-                            </ul>
-                            <a href="#" onclick="openLeadPopup(); return false;"
-                                class="block text-center font-bold py-3.5 rounded-xl transition-all duration-200
-                  {{ $featured
-                      ? 'bg-[#109125] hover:bg-[#0d7a1e] text-white shadow-lg shadow-green-900/20'
-                      : 'bg-[#109125]/10 hover:bg-[#109125] text-[#109125] hover:text-white border border-[#109125]/30 hover:border-[#109125]' }}">
-                                Apply for {{ $name }} →
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
+
+            <div class="overflow-x-auto rounded-2xl shadow-lg border border-gray-200" data-aos="fade-up" data-aos-delay="100">
+                <table class="w-full min-w-[700px] border-collapse">
+                    {{-- Header --}}
+                    <thead>
+                        <tr>
+                            <th class="bg-[#055346] text-white text-left px-5 py-4 text-sm font-extrabold uppercase tracking-wider w-[28%]">
+                                Parameter
+                            </th>
+                            <th class="bg-[#109125] text-white px-5 py-4 text-center w-[24%]">
+                                <div class="flex flex-col items-center gap-1">
+                                    <span class="text-2xl">🏪</span>
+                                    <span class="font-extrabold text-base leading-tight">Mini Store</span>
+                                    <span class="text-green-200 text-xs font-medium">(500 – 1000 sqft)</span>
+                                </div>
+                            </th>
+                            <th class="bg-[#076b58] text-white px-5 py-4 text-center w-[24%]">
+                                <div class="flex flex-col items-center gap-1">
+                                    <span class="text-2xl">🛒</span>
+                                    <span class="font-extrabold text-base leading-tight">Super Store</span>
+                                    <span class="text-green-200 text-xs font-medium">(1000 – 3000 sqft)</span>
+                                </div>
+                            </th>
+                            <th class="bg-[#ec2024] text-white px-5 py-4 text-center w-[24%]">
+                                <div class="flex flex-col items-center gap-1">
+                                    <span class="text-2xl">🏢</span>
+                                    <span class="font-extrabold text-base leading-tight">Hyper Store</span>
+                                    <span class="text-red-200 text-xs font-medium">(3000 – 10000 sqft)</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $rows = [
+                                ['💰', 'Investment Range',          '₹12L – ₹22L',              '₹23L – ₹62L',                  '₹63L – ₹2Cr'],
+                                ['⭐', 'Core Services<br><span class="font-normal text-gray-400">(Product setup, sourcing,<br>training, POS, branding)</span>', 'Included', 'Included', 'Included'],
+                                ['🛍️', 'Product Range',             'Essential categories',      'Expanded categories',           'Full categories + bulk'],
+                                ['📋', 'Number of SKUs',            '800 – 1500',                '2000 – 5000',                   '5000 – 12000+'],
+                                ['🏗️', 'Store Layout Planning',     'Standard layout',           'Optimized layout',              'Zoning & advanced layout'],
+                                ['🖥️', 'Billing System',            'Single POS counter',        '1 – 2 billing counters',        'Multi-counter billing'],
+                                ['👥', 'Staff Requirement',         '1 – 3',                     '3 – 6',                         '6 – 12'],
+                                ['📦', 'Inventory Management',      'Basic stock handling',      'Category-wise management',      'Advanced stock planning'],
+                                ['🤝', 'Supplier Advantage',        'Standard sourcing',         'Better rates (volume)',         'Best rates (bulk)'],
+                                ['📈', 'Daily Sales Potential',     '₹30K – ₹60K',              '₹60K – ₹1.5L',                 '₹1.5L – ₹5L+'],
+                                ['💹', 'Gross Margin (Estimated)',  '25% – 30%',                 '30% – 35%',                     '35% – 40%'],
+                                ['⚙️', 'Operational Complexity',    'Low',                       'Medium',                        'High'],
+                                ['⚡', 'Electricity & Running Cost','Low',                       'Medium',                        'High'],
+                                ['😊', 'Customer Experience',       'Functional',                'Organized shopping',            'Premium experience'],
+                                ['📊', 'Scalability',               'Limited',                   'High',                          'Very High'],
+                                ['🎯', 'Best For',                  'Entry-level investors',     'Most recommended',              'High-scale investors'],
+                            ];
+                        @endphp
+                        @foreach ($rows as $i => [$icon, $param, $mini, $super, $hyper])
+                            <tr class="{{ $i % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} border-t border-gray-100 hover:bg-blue-50/30 transition-colors duration-150">
+                                {{-- Parameter --}}
+                                <td class="px-5 py-3.5 border-r border-gray-100">
+                                    <div class="flex items-center gap-2.5">
+                                        <span class="text-base flex-shrink-0">{{ $icon }}</span>
+                                        <span class="text-sm font-semibold text-gray-800 leading-snug">{!! $param !!}</span>
+                                    </div>
+                                </td>
+                                {{-- Mini --}}
+                                <td class="px-5 py-3.5 text-center border-r border-gray-100">
+                                    <span class="text-sm font-bold text-[#109125]">{{ $mini }}</span>
+                                </td>
+                                {{-- Super --}}
+                                <td class="px-5 py-3.5 text-center border-r border-gray-100">
+                                    <span class="text-sm font-bold text-[#076b58]">{{ $super }}</span>
+                                </td>
+                                {{-- Hyper --}}
+                                <td class="px-5 py-3.5 text-center">
+                                    <span class="text-sm font-bold text-[#ec2024]">{{ $hyper }}</span>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                        {{-- CTA Row --}}
+                        <tr class="border-t-2 border-gray-200 bg-gray-50">
+                            <td class="px-5 py-4 text-sm font-bold text-gray-700">Apply Now</td>
+                            <td class="px-5 py-4 text-center">
+                                <a href="#" onclick="openLeadPopup(); return false;"
+                                    class="inline-block bg-[#109125] hover:bg-[#0d7a1e] text-white text-xs font-bold px-5 py-2 rounded-lg transition-all duration-200">
+                                    Apply →
+                                </a>
+                            </td>
+                            <td class="px-5 py-4 text-center">
+                                <a href="#" onclick="openLeadPopup(); return false;"
+                                    class="inline-block bg-[#076b58] hover:bg-[#055346] text-white text-xs font-bold px-5 py-2 rounded-lg transition-all duration-200">
+                                    Apply →
+                                </a>
+                            </td>
+                            <td class="px-5 py-4 text-center">
+                                <a href="#" onclick="openLeadPopup(); return false;"
+                                    class="inline-block bg-[#ec2024] hover:bg-red-700 text-white text-xs font-bold px-5 py-2 rounded-lg transition-all duration-200">
+                                    Apply →
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            {{-- Disclaimer --}}
+            <div class="mt-4 bg-[#055346] rounded-xl px-5 py-3 flex items-center gap-3" data-aos="fade-up" data-aos-delay="150">
+                <span class="text-xl flex-shrink-0">⭐</span>
+                <p class="text-white text-xs leading-relaxed">
+                    <span class="font-bold">All store formats include complete support.</span>
+                    <span class="text-yellow-300 ml-2">Sales and margin figures are indicative and depend on location, product mix, and store operations.</span>
+                </p>
             </div>
         </div>
     </section>
@@ -297,7 +347,7 @@
                 <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Smart Calculator</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-[#c8e8d8] mt-2 mb-3">Plan Your Franchise Investment
                 </h2>
-                <p class="text-[#4b7060] max-w-xl mx-auto">Calculate startup costs and projected earnings — all in one
+                <p class="text-[#4b7060]  mx-auto">Calculate startup costs and projected earnings — all in one
                     place.</p>
             </div>
 
@@ -691,7 +741,7 @@
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">How It Works</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">6 Steps to Opening Your 7x Basket
                     Store</h2>
-                <p class="text-gray-500 max-w-xl mx-auto">From application to grand opening in as little as 60 days.</p>
+                <p class="text-gray-500  mx-auto">From application to grand opening in as little as 60 days.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 @foreach ([
@@ -723,7 +773,7 @@
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Success Stories</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">What Our Partners Say</h2>
-                <p class="text-gray-500 max-w-xl mx-auto">500+ franchise partners across India. Here's what they have to
+                <p class="text-gray-500  mx-auto">500+ franchise partners across India. Here's what they have to
                     say.
                 </p>
             </div>
@@ -869,32 +919,34 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12" data-aos="fade-up">
                 <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Done For You</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">Everything We Handle - So You Can Focus on Your Customers </h2>
-                <p class="text-[#6b8f7e] max-w-2xl mx-auto">You run the store. We handle everything behind it. From setting up your store to running your marketing, every operational burden is managed by 7x Basket, so you can focus entirely on serving customers and growing your business.
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">Everything We Handle - So You Can
+                    Focus on Your Customers </h2>
+                <p class="text-[#6b8f7e] max-w-2xl mx-auto">You run the store. We handle everything behind it. From setting
+                    up your store to running your marketing, every operational burden is managed by 7x Basket, so you can
+                    focus entirely on serving customers and growing your business.
 
                 </p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-               @foreach ([
-['🏗️', 'Interior Design & Setup', '7x Basket offers expert guidance for store layout, creating welcoming spaces that improve the shopping experience. Franchisees get access to professional designers for an efficient and well-planned store setup.', '✔ Your store is ready to open in 45 days', ''],
+                @foreach ([
+            ['🏗️', 'Interior Design & Setup', '7x Basket offers expert guidance for store layout, creating welcoming spaces that improve the shopping experience. Franchisees get access to professional designers for an efficient and well-planned store setup.', '✔ Your store is ready to open in 45 days', ''],
 
-['📦', 'Product Procurement', '7x Basket handles product sourcing, giving franchisees access to trusted suppliers and negotiated pricing. A dedicated team manages inventory centrally to keep stock levels consistent and shelves full.', '✔ Fresh stock on your shelves every day', ''],
+            ['📦', 'Product Procurement', '7x Basket handles product sourcing, giving franchisees access to trusted suppliers and negotiated pricing. A dedicated team manages inventory centrally to keep stock levels consistent and shelves full.', '✔ Fresh stock on your shelves every day', ''],
 
-['🖥️', 'POS Software & Training', '7x Basket provides billing and inventory management software built for franchise store operations. Franchisees get real-time data on sales and stock to make day-to-day decisions with confidence. Staff get hands-on training so the system runs smoothly.', '✔ Zero technical knowledge required', ''],
+            ['🖥️', 'POS Software & Training', '7x Basket provides billing and inventory management software built for franchise store operations. Franchisees get real-time data on sales and stock to make day-to-day decisions with confidence. Staff get hands-on training so the system runs smoothly.', '✔ Zero technical knowledge required', ''],
 
-['👥', 'Staff Hiring & Training', 'Franchisees get full support for recruiting and training their store team. 7x Basket provides recruitment assistance, structured training programmes, and ongoing guidance to build a capable and confident team.', '✔ Your team is ready before opening day', ''],
+            ['👥', 'Staff Hiring & Training', 'Franchisees get full support for recruiting and training their store team. 7x Basket provides recruitment assistance, structured training programmes, and ongoing guidance to build a capable and confident team.', '✔ Your team is ready before opening day', ''],
 
-['📋', 'Legal Documentation', '7x Basket helps franchisees with all legal paperwork, keeping the setup process compliant with every applicable regulation. Franchisees get guidance on franchise agreements, licences, permits, and local registrations from start to finish.', '✔ 100% legally compliant from day one', ''],
+            ['📋', 'Legal Documentation', '7x Basket helps franchisees with all legal paperwork, keeping the setup process compliant with every applicable regulation. Franchisees get guidance on franchise agreements, licences, permits, and local registrations from start to finish.', '✔ 100% legally compliant from day one', ''],
 
-['💰', 'Zero Royalty - for 2 years', '7x Basket charges zero royalty fees for the first 2 years of your grocery franchise operation. This gives franchisees higher earnings in the early phase, with the freedom to put that money back into the business.', '✔ Maximum profit from your first month*', 'highlight'],
+            ['💰', 'Zero Royalty - for 2 years', '7x Basket charges zero royalty fees for the first 2 years of your grocery franchise operation. This gives franchisees higher earnings in the early phase, with the freedom to put that money back into the business.', '✔ Maximum profit from your first month*', 'highlight'],
 
-['📣', 'Marketing & Branding', '7x Basket runs targeted campaigns that build customer awareness and bring in consistent footfall. Franchisees get direct access to ready-to-use promotional materials and local marketing support to grow visibility from day one.', '✔ Customers arrive before you advertise', ''],
+            ['📣', 'Marketing & Branding', '7x Basket runs targeted campaigns that build customer awareness and bring in consistent footfall. Franchisees get direct access to ready-to-use promotional materials and local marketing support to grow visibility from day one.', '✔ Customers arrive before you advertise', ''],
 
-['⏱️', 'Expiry Management System', 'Automated alerts track product expiry dates across all inventory and flag items before they go to waste. Franchisees can act on time, cut unsold stock, and keep product quality consistent - directly protecting margins.', '✔ Reduce losses and protect your margins', ''],
+            ['⏱️', 'Expiry Management System', 'Automated alerts track product expiry dates across all inventory and flag items before they go to waste. Franchisees can act on time, cut unsold stock, and keep product quality consistent - directly protecting margins.', '✔ Reduce losses and protect your margins', ''],
 
-['🛟', '24/7 Backend Support', 'Franchisees get round-the-clock support covering technical issues, operations queries, and day-to-day challenges. A dedicated team is always available to step in and resolve problems so the store keeps running without interruption.', '✔ You will never face a problem alone', '']
-
-] as [$icon, $title, $desc, $benefit, $type])
+            ['🛟', '24/7 Backend Support', 'Franchisees get round-the-clock support covering technical issues, operations queries, and day-to-day challenges. A dedicated team is always available to step in and resolve problems so the store keeps running without interruption.', '✔ You will never face a problem alone', ''],
+        ] as [$icon, $title, $desc, $benefit, $type])
                     <div class="relative {{ $type === 'highlight' ? 'bg-[#ec2024]/10 border-[#ec2024]/50 hover:bg-[#ec2024]/15' : 'bg-[#0d1f18] border-[#1a3328] hover:border-[#109125]/60 hover:bg-[#0f2318]' }} border rounded-2xl p-5 flex flex-col transition-all duration-300"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
                         @if ($type === 'highlight')
@@ -926,31 +978,44 @@
             <div class="flex flex-col lg:flex-row items-center gap-12">
                 <div class="flex-1" data-aos="fade-right">
                     <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Franchise Opportunity</span>
-                    <h2 class="text-3xl sm:text-3xl font-extrabold text-[#0a2e1a] mt-2 mb-5">Empowering Individuals with Franchise Business Opportunity</h2>
-                    <p class="text-[#4a6b5a] text-base leading-relaxed mb-6">At 7x Basket, we are dedicated to providing aspiring entrepreneurs with the opportunity to own and operate their very own convenience supermarket franchise. With our proven business model and unwavering commitment to customer satisfaction, we have established ourselves as a trusted name in the retail industry.</p>
-                    <p class="text-[#4a6b5a] text-base leading-relaxed mb-8">Our franchise stores offer a wide assortment of high-quality products, including groceries, household essentials, fresh produce, and ready-to-eat items, all carefully curated to meet the diverse needs of our customers. With 7x Basket, you can embark on a rewarding journey towards financial independence and business ownership.</p>
+                    <h2 class="text-3xl sm:text-3xl font-extrabold text-[#0a2e1a] mt-2 mb-5">Empowering Individuals with
+                        Franchise Business Opportunity</h2>
+                    <p class="text-[#4a6b5a] text-base leading-relaxed mb-6">At 7x Basket, we are dedicated to providing
+                        aspiring entrepreneurs with the opportunity to own and operate their very own convenience
+                        supermarket franchise. With our proven business model and unwavering commitment to customer
+                        satisfaction, we have established ourselves as a trusted name in the retail industry.</p>
+                    <p class="text-[#4a6b5a] text-base leading-relaxed mb-8">Our franchise stores offer a wide assortment
+                        of high-quality products, including groceries, household essentials, fresh produce, and ready-to-eat
+                        items, all carefully curated to meet the diverse needs of our customers. With 7x Basket, you can
+                        embark on a rewarding journey towards financial independence and business ownership.</p>
                     <a href="#" onclick="openLeadPopup(); return false;"
                         class="inline-flex items-center gap-2 bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold px-7 py-3 rounded-xl transition-all duration-300 shadow-lg shadow-[#109125]/20">
-                            Apply Now →
+                        Apply Now →
                     </a>
                 </div>
                 <div class="flex-1 flex justify-center relative py-8 px-4" data-aos="fade-left">
                     {{-- Decorative blobs --}}
-                    <div class="absolute w-72 h-72 bg-[#109125]/15 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-2xl"></div>
+                    <div
+                        class="absolute w-72 h-72 bg-[#109125]/15 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-2xl">
+                    </div>
                     <div class="absolute w-48 h-48 bg-[#4ade80]/20 rounded-full top-4 right-4 blur-xl"></div>
                     <div class="absolute w-32 h-32 bg-[#109125]/10 rounded-full bottom-4 left-4 blur-lg"></div>
                     {{-- Dotted pattern --}}
                     <div class="absolute inset-0 opacity-20 rounded-3xl"
-                        style="background-image: radial-gradient(#109125 1px, transparent 1px); background-size: 20px 20px;"></div>
+                        style="background-image: radial-gradient(#109125 1px, transparent 1px); background-size: 20px 20px;">
+                    </div>
                     {{-- Image card --}}
-                    <div class="relative z-10 bg-white rounded-3xl shadow-2xl shadow-[#109125]/15 p-4 border border-[#d4eddf]">
+                    <div
+                        class="relative z-10 bg-white rounded-3xl shadow-2xl shadow-[#109125]/15 p-4 border border-[#d4eddf]">
                         <img src="{{ asset('custom/7x_Basket_Store_1.jpg') }}" alt="7x Basket Franchise Store"
                             class="rounded-2xl w-full max-w-sm object-cover">
                         {{-- Floating badges --}}
-                        <div class="absolute -bottom-4 -left-4 bg-[#109125] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg flex items-center gap-2">
+                        <div
+                            class="absolute -bottom-4 -left-4 bg-[#109125] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg flex items-center gap-2">
                             <span class="text-base">🏪</span> 150+ Franchise Partners
                         </div>
-                        <div class="absolute -top-4 -right-4 bg-white border border-[#d4eddf] text-[#109125] text-xs font-bold px-4 py-2 rounded-xl shadow-lg flex items-center gap-2">
+                        <div
+                            class="absolute -top-4 -right-4 bg-white border border-[#d4eddf] text-[#109125] text-xs font-bold px-4 py-2 rounded-xl shadow-lg flex items-center gap-2">
                             <span class="text-base">⭐</span> Trusted Brand
                         </div>
                     </div>
@@ -963,10 +1028,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
             <div class="text-center mb-6" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Our Product Range</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-2">10,000+ Products from India's Top Brands
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-2">10,000+ Products from India's Top
+                    Brands
 
                 </h2>
-                <p class="text-gray-500 max-w-xl mx-auto text-sm">Every category your customers buy from - all under one roof, sourced directly from manufacturers at wholesale prices. 7x Basket stores stock a carefully curated range across 6 core everyday categories. 
+                <p class="text-gray-500  mx-auto text-sm">Every category your customers buy from - all under one roof,
+                    sourced directly from manufacturers at wholesale prices. 7x Basket stores stock a carefully curated
+                    range across 6 core everyday categories.
                 </p>
             </div>
             <div class="flex flex-wrap justify-center gap-2 mb-6" data-aos="fade-up">
@@ -1077,7 +1145,8 @@
             <div class="text-center mb-8" data-aos="fade-up">
                 <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Inside 7x Basket</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">Inside a 7x Basket store</h2>
-                <p class="text-[#6b8f7e] max-w-xl mx-auto">A look inside 7x Basket franchise stores - from store design and product displays to grand openings and happy customers across cities.</p>
+                <p class="text-[#6b8f7e]  mx-auto">A look inside 7x Basket franchise stores - from store design and product
+                    displays to grand openings and happy customers across cities.</p>
             </div>
             <div x-data="{
                 current: 0,
@@ -1285,12 +1354,16 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4" x-data="{ open: null }">
                 @foreach ([
-            ['What is the minimum investment required?', 'The minimum investment for a 7x Basket Mini Store starts at ₹5 Lakhs, which includes franchise fee, store setup, and initial inventory.'],
-            ['Is there any royalty fee?', 'No. 7x Basket charges zero royalty. You keep 100% of your profits. We earn through the supply chain, not from your revenue.'],
-            ['How long does it take to open a store?', 'From application to grand opening typically takes 45–60 days, depending on location readiness and agreement completion.'],
-            ['Do I need prior retail experience?', 'No prior experience is required. We provide comprehensive training covering operations, inventory, customer service, and technology.'],
-            ['What support do I get after opening?', 'You get a dedicated relationship manager, monthly performance reviews, marketing support, supply chain management, and 24/7 technical support.'],
-            ['Can I open multiple stores?', 'Yes. Many of our partners operate 2–5 stores. Multi-store partners get additional discounts and priority support.'],
+            ['How much does a supermarket franchise cost in India?', 'It depends on the store format, city, and the brand. Costs vary based on the size of the space, fitout requirements, and the stock needed to open. The bigger the store and the bigger the city, the higher the number. Always ask for a written cost breakdown that separates the franchise fee, setup, and working capital before you decide.'],
+            ['Is a grocery franchise profitable in India?', 'Yes, grocery franchises in India are profitable. That said, it depends on location, store size, and how well the business is run. Well-managed stores tend to do well because people buy groceries every day - the demand never stops. Add a good product mix and steady footfall, and the numbers work.'],
+            ['Is a supermarket franchise better than opening an independent grocery store?', 'A franchise gives you a brand people already recognise, a supply chain that is already set up, and a trained support team from day one. An independent store gives you more control but puts everything - sourcing, branding, technology, and marketing - on you from scratch. For a first-time grocery business owner, a franchise reduces the three biggest risks: no brand pull, no supply chain, and no operational knowledge.'],
+            ['How much space do I need to open a grocery store franchise?', 'Space requirements depend on the store format. Most grocery franchise brands offer three formats - small, medium, and large. A small or mini format typically runs from 500 sq ft and suits residential neighbourhoods. A medium format runs from 1500 sq ft and works for higher-footfall markets. Large or hyper formats need 4,000 sq ft and above. Check the minimum area requirement with the specific franchise brand before locking in a property.'],
+            ['What is the royalty fee for a supermarket franchise in India?', 'Royalty fees vary by brand - some charge a percentage of monthly sales, others a flat monthly fee. In grocery retail where margins are already tight, the royalty structure directly affects monthly take-home profit. Always check when royalty starts, what it is calculated on, and whether there is a minimum charge regardless of how much you sell.'],
+            ['How do I start a supermarket business in India with no retail experience?', 'A structured grocery franchise model fills the experience gap. Look for one that includes hands-on training during store setup and an assigned support contact after opening. The first few months are when most first-time store owners run into problems - live support during that period matters more than what is written in the brochure.'],
+            ['How long does it take to open a grocery store franchise in India?', 'Most structured grocery franchise models get a store open within a few weeks to a couple of months from agreement signing. The main factors that affect the timeline are property readiness, documentation completion, and how quickly the fitout is done. A clean, ready space with complete paperwork gets you to opening day faster.'],
+            ['What support does a retail supermarket franchise give to partners?', 'Good franchise support covers three phases - setup, opening, and post-launch. Setup includes store design, fitout, and training. Post-launch is where most brands pull back. Before signing, ask specifically what ongoing support looks like, who your point of contact is, and what the response time is for day-to-day problems.'],
+            ['What is territory exclusivity in a supermarket franchise?', 'Territory exclusivity means the franchisor agrees not to open another store of the same brand within a defined area around your location. This protects your customer base from competition within the same franchise network. Not all grocery franchise brands offer it - some grant it based on location and market size, others assess it case by case. Always confirm the exact exclusivity terms in writing before signing the agreement.'],
+            ['Can I open a grocery mart franchise in India on rented property?', 'Yes. Most grocery franchise brands in India allow rented, leased, or owned properties. Make sure your lease term is at least as long as the franchise agreement period. A mismatch between the two - a 5-year franchise tied to a 2-year rental - is a risk most first-time franchise partners overlook.'],
         ] as [$q, $a])
                     <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
                         :class="open === {{ $loop->index }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"

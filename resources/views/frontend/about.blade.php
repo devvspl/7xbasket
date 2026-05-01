@@ -8,7 +8,7 @@
             <span
                 class="inline-flex items-center gap-2 bg-white/10 text-green-200 text-xs font-semibold px-4 py-1.5 rounded-full mb-4 border border-white/20">
                 <span class="w-2 h-2 bg-[#ec2024] rounded-full animate-pulse"></span>
-                India's Fastest Growing Grocery Franchise
+                India's trusted supermarket chain in India
             </span>
             <h1 class="text-4xl font-extrabold text-white mb-3">About 7x Basket</h1>
             <p class="text-green-100/80 text-base max-w-lg mx-auto">Building India's most trusted grocery franchise network.
@@ -47,27 +47,25 @@
                 <div data-aos="fade-left">
                     <span class="bg-[#f0faf4] text-[#109125] text-xs font-bold px-3 py-1 rounded-full inline-block">Our
                         Origin</span>
-                    <h2 class="text-3xl font-extrabold text-gray-900 mt-3 mb-2 leading-tight">A Problem We Saw Every Single
-                        Day</h2>
+                    <h2 class="text-3xl font-extrabold text-gray-900 mt-3 mb-2 leading-tight">How 7x Basket Started - And
+                        Where It Stands Today</h2>
                     <div class="w-8 h-1 bg-[#ec2024] rounded mb-5"></div>
                     <div class="space-y-3 text-gray-500 text-sm leading-relaxed">
-                        <p>In 2019, our founder walked through the lanes of Lajpat Nagar and noticed something that bothered
-                            him deeply — every kirana shop was the same. Unorganised. Dusty. Limited stock. No billing
-                            software. No hygiene standards.</p>
-                        <p>Meanwhile, India's middle class was growing fast. People wanted better shopping experiences —
-                            organised shelves, digital payments, wide product choice, clean ambience. But corporate
-                            supermarkets were too expensive and too far away.</p>
-                        <p>7x Basket was born to fill that exact gap. A franchise model that gives everyday entrepreneurs
-                            the tools, supply chain, brand, and training to run a world-class neighbourhood supermarket —
-                            starting from just ₹13 Lakh.</p>
-                        <p>We named it 7x because we believe every rupee you invest here should come back to you seven times
-                            over.</p>
+                        <p>7x Basket was founded in Delhi in 2022. Grocery is one of the most everyday businesses in India -
+                            every family buys it daily. But most small store owners were running without any real system. No
+                            billing software, no steady supply, no brand that gave customers a reason to choose them.</p>
+                        <p>So we built a model where anyone who wants to open a grocery store gets everything they need from
+                            day one - the brand, the products, the software, and the training. They run the store. We take
+                            care of the rest. Today that model is live across 150+ stores in 25 states.</p>
+                        <p>The name 7x reflects what we want every store owner to earn back on their investment. We work
+                            toward that by keeping costs clear, timelines honest, and support available long after the store
+                            has opened.</p>
                     </div>
                     <div class="flex flex-wrap gap-3 mt-6">
-                        <a href="{{ route('apply') }}"
+                        <a href="#" onclick="openLeadPopup(); return false;"
                             class="bg-[#ec2024] hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition-all duration-200 hover:-translate-y-0.5">Apply
                             for Franchise →</a>
-                        <a href="{{ route('brochure.download') }}"
+                        <a href="#" onclick="openLeadPopup('brochure'); return false;"
                             class="bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold px-6 py-3 rounded-xl text-sm transition-all duration-200 hover:-translate-y-0.5">Download
                             Brochure</a>
                     </div>
@@ -81,7 +79,7 @@
     <section class="py-10 bg-[#0f2d1f]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap justify-center gap-4">
-                @foreach ([['200+', 'Stores Pan India'], ['12+', 'States Covered'], ['5,000+', 'Products Stocked'], ['500+', 'Brand Partners'], ['13L', 'Starting Investment']] as [$num, $label])
+                @foreach ([['150+', 'Stores PAN India'], ['100+', 'Cities Covered'], ['25', 'States Pan India'], ['4.9/5', 'Customer Rating'], ['10L', 'Starting Investment']] as [$num, $label])
                     <div class="w-[45%] sm:w-[30%] lg:w-[18%] 
             border border-white/10 rounded-xl p-5 
             flex flex-col items-center justify-center text-center"
@@ -110,46 +108,40 @@
 
                 <div class="bg-[#109125] rounded-2xl p-7" data-aos="fade-up" data-aos-delay="0">
                     <span
-                        class="bg-white/20 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-full inline-block mb-3">Mission</span>
-                    <h3 class="text-xl font-extrabold text-white leading-tight">Bring Organised Retail to Every Indian
-                        Neighbourhood</h3>
-                    <p class="text-green-100 text-sm leading-relaxed mt-3">We exist to replace the fragmented kirana
-                        ecosystem with affordable, technology-enabled, franchise-owned supermarkets that serve every Indian
-                        family — regardless of city size.</p>
-                    <a href="{{ route('apply') }}"
-                        class="bg-white/20 hover:bg-white/30 text-white font-bold px-5 py-2 rounded-xl text-xs mt-6 inline-block transition-all duration-200">Learn
-                        More →</a>
+                        class="bg-white/20 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-full inline-block">Mission</span>
+
+                    <p class="text-green-100 text-sm leading-relaxed mt-3">Our mission is to help aspiring entrepreneurs
+                        open and run a successful grocery store - with the right brand, products, technology, and training
+                        already in place. We make sure no one has to start from zero.</p>
+
                 </div>
 
                 <div class="bg-[#0f2d1f] rounded-2xl p-7" data-aos="fade-up" data-aos-delay="100">
                     <span
-                        class="bg-white/10 text-[#4ade80] text-[10px] font-bold uppercase px-2 py-0.5 rounded-full inline-block mb-3">Vision</span>
-                    <h3 class="text-xl font-extrabold text-white leading-tight">1,000 Stores Across India by 2028</h3>
-                    <p class="text-green-300/70 text-sm leading-relaxed mt-3">We're on a path to become India's most trusted
-                        neighbourhood supermarket brand — present in every tier-1, tier-2, and tier-3 city, powering
-                        livelihoods for thousands of franchise owners.</p>
+                        class="bg-white/10 text-[#4ade80] text-[10px] font-bold uppercase px-2 py-0.5 rounded-full inline-block">Vision</span>
+
+                    <p class="text-green-300/70 text-sm leading-relaxed mt-3">We want a 7x Basket store in every
+                        neighbourhood across India where families still rely on unorganised shops. Our goal is 1,000
+                        franchise stores by 2028 - in big cities and small towns alike. </p>
                 </div>
 
                 <div class="bg-[#109125] rounded-2xl p-7" data-aos="fade-up" data-aos-delay="200">
 
                     <span
-                        class="bg-white/20 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-full inline-block mb-3">
+                        class="bg-white/20 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-full inline-block">
                         Our Values
                     </span>
 
-                    <h3 class="text-xl font-extrabold text-white leading-tight">
-                        What We Stand For
-                    </h3>
+
 
                     <p class="text-green-100 text-sm leading-relaxed mt-3">
-                        We believe in complete transparency in every cost and process, ensuring trust at every step.
-                        Our franchise partners are at the heart of everything we do.
+                        With a wide range of quality FMCG products, we want every customer to find what they need at a fair
+                        price. We stand by our franchise owners with full transparency and hands-on support - because their
+                        success is what makes this work.
+
                     </p>
 
-                    <a href="{{ route('apply') }}"
-                        class="bg-white/20 hover:bg-white/30 text-white font-bold px-5 py-2 rounded-xl text-xs mt-6 inline-block transition-all duration-200">
-                        Learn More →
-                    </a>
+
 
                 </div>
 
@@ -165,15 +157,19 @@
                 {{-- LEFT: sticky on desktop only --}}
                 <div class="w-full lg:w-80 flex-shrink-0 journey-sticky">
                     <span class="text-[#109125] text-xs font-bold uppercase tracking-widest block">Our Journey</span>
+
                     <h2 class="text-4xl font-extrabold text-gray-900 leading-tight mt-3">
-                        From One Store<br>to <span class="text-[#109125]">Two<br>Hundred</span>
+                        From One Store<br>to <span class="text-[#109125]">a Supermarket Chain</span>
                     </h2>
-                    <p class="text-gray-500 text-base mt-4 leading-relaxed">Five years of relentless building, one franchise
-                        at a time.</p>
+
+                    <p class="text-gray-500 text-base mt-4 leading-relaxed">
+                        What started as one store in Delhi is now a growing network across India.
+                    </p>
+
                     <div class="border-l-4 border-[#109125] bg-gray-50 rounded-r-xl pl-4 pr-5 py-4 mt-6">
-                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Currently operating</p>
-                        <p class="text-5xl font-extrabold text-[#109125] mt-1 leading-none">200+</p>
-                        <p class="text-sm text-gray-500 mt-2">stores across 12 states</p>
+                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Currently Operating</p>
+                        <p class="text-5xl font-extrabold text-[#109125] mt-1 leading-none">150+</p>
+                        <p class="text-sm text-gray-500 mt-2">Stores Across 25 States</p>
                     </div>
                 </div>
 
@@ -181,13 +177,17 @@
                 <div class="flex-1 min-w-0">
                     <div class="relative border-l-2 border-gray-100 ml-2 space-y-10 pb-4">
                         @foreach ([
-            ['2019', 'The Idea Takes Shape', 'Founded in Lajpat Nagar, New Delhi. First pilot store launched.', [['1ST STORE DELHI', false]]],
-            ['2020', 'Surviving & Strengthening', 'Pandemic hit, neighbourhood grocery became essential. Rapid expansion.', [['10 STORES', false], ['CLOUD POS LAUNCHED', false]]],
-            ['2021', 'First Multi-State Expansion', 'Crossed NCR into UP, Haryana, Rajasthan.', [['35 STORES', false], ['4 STATES', false], ['BRAND PARTNERSHIPS', false]]],
-            ['2022', 'Technology & Training Overhaul', 'Launched 7x Basket Franchise App. 45-day store launch guarantee introduced.', [['80 STORES', false], ['APP LAUNCH', false], ['45-DAY GUARANTEE', false]]],
-            ['2023', 'Award Recognition & 130+ Stores', 'Best FMCG Startup award. National media coverage.', [['130 STORES', false], ['BEST FMCG STARTUP', false], ['8 STATES', false]]],
-            ['2024–25', '200 Stores & Beyond', 'Exclusive territory model launched. Tier-2 city push begins.', [['200+ STORES', false], ['12 STATES', false], ['EXCLUSIVE TERRITORY', false]]],
-            ['2026 →', 'Road to 1,000 Stores', 'Targeting tier-2 and tier-3 expansion aggressively.', [['500 STORES TARGET (2026)', false], ['1,000 BY 2028', true]]],
+            ['2021', 'Research and Groundwork', 'Before building anything, we spent time in the market — talking to store owners, understanding how supply chains worked, and figuring out what a grocery franchise in India actually needed to succeed.', []],
+
+            ['2022', '7x Basket Officially Founded', '2022 was when it all became official. Brand registered, first store opened, first franchise partner onboarded. The model went from concept to reality.', []],
+
+            ['2023', 'First Multi-state Expansion', 'The network crossed state lines. New franchise partners joined from UP, Haryana, and Rajasthan. FMCG brand tie-ups and cloud-based POS system rolled out across all stores.', []],
+
+            ['2024', 'Technology and Training Overhaul', 'Dedicated franchise training programme launched. 9 support pillars formalised for every franchise partner. Tier-2 city expansion begins with active pincode-based territory mapping.', []],
+
+            ['2025', '150 stores, 25 states', 'Network crosses 150 active stores across 25 Indian states. Zero-royalty model confirmed for the first 2 years of operation. Customer rating reaches 4.9/5 across the franchise network.', []],
+
+            ['2026 →', 'Road to 500 stores', 'Expansion into tier-2 and tier-3 cities is well underway. New franchise slots are opening every month across India. The target is 500 active stores - and we are on track.', []],
         ] as [$year, $title, $body, $tags])
                             <div class="relative pl-10 timeline-item opacity-0 translate-y-4 transition-all duration-500">
                                 <div
@@ -244,10 +244,10 @@
                     <h2 class="text-3xl font-extrabold text-gray-900 leading-tight mt-2">
                         Spreading Across <span class="text-[#109125]">Every</span> State
                     </h2>
-                    <p class="text-gray-400 text-sm mt-3 max-w-xs">From Kashmir to Kanyakumari — we're growing. See where
-                        7x Basket stores are active and where we're heading next.</p>
+                    <p class="text-gray-400 text-sm mt-3 max-w-md">From Delhi to 25 states - and we are not done yet. See
+                        where we are active and where we are headed.</p>
                     <div class="grid grid-cols-2 gap-4 mt-6">
-                        @foreach ([['12+', 'Active States'], ['200+', 'Live Stores'], ['8+', 'Coming Soon'], ['50+', 'Cities Covered']] as [$n, $l])
+                        @foreach ([['150+', 'Live Stores'], ['100+', 'Cities Covered'], ['25+', 'States Covered'], ['New', 'Slots Opening Monthly']] as [$n, $l])
                             <div class="bg-white border border-gray-100 rounded-xl p-4">
                                 <p class="text-2xl font-extrabold text-[#109125]">{{ $n }}</p>
                                 <p class="text-gray-400 text-xs mt-0.5">{{ $l }}</p>
@@ -275,7 +275,7 @@
                             </span>
                         @endforeach
                     </div>
-                    <a href="{{ route('apply') }}"
+                    <a href="#" onclick="openLeadPopup(); return false;"
                         class="bg-[#109125] text-white font-bold px-6 py-3 rounded-xl text-sm mt-8 inline-block hover:bg-[#0d7a1e] transition-all duration-200 hover:-translate-y-0.5">Apply
                         for Your City →</a>
                 </div>
@@ -293,11 +293,23 @@
                     7x Basket</span>
                 <h2 class="text-3xl font-extrabold text-white mt-3">What Makes Us <span
                         class="text-[#4ade80]">Different</span></h2>
-                <p class="text-green-300/60 text-sm mt-2 max-w-lg mx-auto">We're not a faceless corporation. We're a team
-                    obsessed with franchisee success.</p>
+                <p class="text-green-300/60 text-sm mt-2 mx-auto">Most franchise brands give you a manual and leave. We do
+                    not. Here is what is different about working with us.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                @foreach ([['🧑‍💼', 'Franchisee-First Mindset', 'Every decision we make starts with one question: does this help our franchise owners earn more?'], ['⚡', 'Execution Speed', 'Site survey in 3 days. Store open in 45 days. Team response within the hour.'], ['🔍', 'Radical Transparency', 'No hidden fees. No vague promises. We show you every cost, every margin, every expected outcome before you sign.'], ['🏙️', 'Built for Small Cities Too', 'We actively target tier-2 and tier-3 cities — lower competition, higher loyalty, faster ROI for you.'], ['💻', 'Technology-Driven Operations', 'From cloud POS to a dedicated franchise app, we use technology to make daily store operations simple.'], ['👥', 'Community of Owners', 'Our WhatsApp franchise community has 200+ active store owners sharing tips, solving problems, and celebrating milestones together.']] as [$icon, $title, $body])
+                @foreach ([
+            ['🧑‍💼', 'Franchisee-First Decisions', 'Every decision we make - big or small - starts with one question: is this good for the store owner? If the answer is no, we go back and rethink it.'],
+
+            ['⚡', 'Your Store Opens Fast', 'Sign the agreement today. Your store can be ready in 45 days. We check your site in 3 days and answer your calls the same day - not next week.'],
+
+            ['🔍', 'No Hidden Costs', 'We show you exactly what you will spend before you say yes to anything. Every cost is written down clearly. Nothing gets added later.'],
+
+            ['🏙️', 'Built for Smaller Cities', 'Tier-2 and tier-3 cities have real demand but far less competition. Our franchise owners in smaller cities often do better than those in big metros.'],
+
+            ['💻', 'Easy to Use Technology', 'Our billing and stock management system is simple. Your staff can learn it in a day. No technical background needed - it just works.'],
+
+            ['👥', '150+ Community Network', 'When you join 7x Basket, you join a group of 150+ store owners who share tips, help each other out, and know what works on the ground.'],
+        ] as [$icon, $title, $body])
                     <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-all duration-300"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
                         <div class="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center text-lg mb-3">
@@ -325,9 +337,9 @@
                 {{-- Big number — tall left card --}}
                 <div class="bg-[#109125] rounded-2xl p-8 flex flex-col justify-center items-center text-center"
                     data-aos="fade-up" data-aos-delay="0">
-                    <p class="text-6xl font-extrabold text-white">200+</p>
-                    <p class="text-green-100 text-sm mt-3 leading-relaxed">Active franchise stores across India — each one
-                        a proof point that the model works.</p>
+                    <p class="text-6xl font-extrabold text-white">4.9/5</p>
+                    <p class="text-green-100 text-sm mt-3 leading-relaxed">Average customer rating across all 7x Basket
+                        stores - rated by real shoppers, not us.</p>
                     <a href="{{ route('blogs') }}"
                         class="bg-white text-[#109125] font-bold px-6 py-3 rounded-xl text-sm mt-6 w-full block text-center hover:bg-gray-100 transition-all duration-200">View
                         Success Stories →</a>
@@ -340,9 +352,9 @@
                     <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
                         <div class="text-2xl mb-3">🏆</div>
                         <p class="text-base font-bold text-gray-900">Award-Winning Model</p>
-                        <p class="text-gray-500 text-sm leading-relaxed mt-2">Recognised as Best FMCG Startup of the Year
-                            at the Brands Impact Summit 2024. Covered in Business Standard, Entrepreneur India, and
-                            Franchise India Magazine.</p>
+                        <p class="text-gray-500 text-sm leading-relaxed mt-2">7x Basket has been recognised across industry
+                            platforms as one of India's fastest-growing grocery franchise brands. A model built on real
+                            numbers, real stores, and real franchise owners.</p>
                     </div>
 
                     {{-- Legal --}}
@@ -350,17 +362,17 @@
                         <div class="text-2xl mb-3">📋</div>
                         <p class="text-base font-bold text-gray-900">Full Legal Compliance</p>
                         <p class="text-gray-500 text-sm leading-relaxed mt-2">Every franchise agreement is formally
-                            registered. All operations comply with FSSAI, GST, Shops & Establishments Act. Your investment
-                            is legally protected.</p>
+                            registered. All stores operate under FSSAI, GST, and the Shops & Establishments Act. Your
+                            investment is legally documented from day one.</p>
                     </div>
 
                     {{-- Territory — full width of right column --}}
                     <div class="sm:col-span-2 bg-[#ec2024] rounded-2xl p-6">
                         <div class="text-2xl mb-3">🔒</div>
                         <p class="text-base font-bold text-white">Your Territory is Protected</p>
-                        <p class="text-red-100 text-sm leading-relaxed mt-2">We practise exclusive territory franchising.
-                            Once your pincode zone is assigned, 7x Basket will not open another store within your radius for
-                            the duration of your agreement. You own your locality — completely.</p>
+                        <p class="text-red-100 text-sm leading-relaxed mt-2">Once your area is confirmed, no other 7x
+                            Basket store opens within your zone for the full term of your agreement. The customers in your
+                            locality are yours to serve.</p>
                     </div>
 
                 </div>
@@ -369,6 +381,59 @@
         </div>
     </section>
 
+    {{-- FAQ --}}
+    <section class="py-12 pt-0 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10" data-aos="fade-up">
+                <span class="text-[#109125] text-xs font-bold uppercase tracking-widest">FAQ</span>
+                <h2 class="text-3xl font-extrabold text-gray-900 mt-2 mb-3">Frequently Asked Questions</h2>
+                <p class="text-gray-500 text-sm">Everything you need to know about the 7x Basket franchise model.</p>
+            </div>
+            <div class="space-y-3" x-data="{ open: null }">
+                @foreach ([
+            ['What is 7x Basket and how does the franchise model work?', '7x Basket is a supermarket franchise brand headquartered in Delhi. Under the model, a franchisee pays a one-time fee and a variable setup cost based on store size, then runs a fully branded neighbourhood supermarket with 7x Basket\'s supply chain, software, and operational support. The brand charges zero royalty for the first 2 years of operation, after which a 1% royalty on total monthly sales applies from year 3 onwards. The franchise agreement runs for 5 years and is renewable.'],
+            ['How large is India\'s grocery market and why does it matter to franchisees?', 'India\'s grocery market is one of the largest in the world and remains predominantly unorganised. Over 90 percent of grocery retail in India still happens through unorganised channels - small shops, wet markets, and individual vendors. This means the shift toward branded, organised grocery retail is still in its early stages, which creates genuine demand for franchise-owned neighbourhood supermarkets in both urban and semi-urban areas.'],
+            ['How many states and cities does 7x Basket operate in?', '7x Basket currently operates 150+ franchise stores across 100+ cities in 25 states pan-India. The network is expanding monthly, with active territory mapping in tier-2 and tier-3 cities. Established in 2022, the brand has 3+ years of proven franchise operations. You can check city availability by contacting the team directly or applying online.'],
+            ['What support does 7x Basket provide to franchisees?', '7x Basket provides 9 dedicated support pillars to every franchisee. This includes site selection, store design and setup, 1-month on-site training during the launch phase, ongoing remote support post-launch, cloud-based billing software, inventory management guidance, marketing support for the store launch, branded signage and in-store materials, and access to the brand\'s national procurement network for product sourcing.'],
+        ] as [$q, $a])
+                    <div class="bg-gray-50 rounded-xl border border-[#d4e8dc] overflow-hidden"
+                        :class="open === {{ $loop->index }} ? 'shadow-md' : 'shadow-sm'" data-aos="fade-up"
+                        data-aos-delay="{{ $loop->index * 60 }}">
+                        <div class="flex">
+                            <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
+                                :class="open === {{ $loop->index }} ? 'bg-[#109125]' : 'bg-transparent'"></div>
+                            <div class="flex-1">
+                                <button @click="open === {{ $loop->index }} ? open = null : open = {{ $loop->index }}"
+                                    class="w-full flex items-center justify-between px-5 py-4 text-left">
+                                    <span
+                                        class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
+                                    <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
+                                        :class="open === {{ $loop->index }} ? 'bg-[#109125]' : 'bg-[#f0f7f3]'">
+                                        <svg :class="open === {{ $loop->index }} ? 'rotate-180 text-white' : 'text-[#109125]'"
+                                            class="w-4 h-4 transition-all duration-300" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div x-show="open === {{ $loop->index }}"
+                                    x-transition:enter="transition ease-out duration-200"
+                                    x-transition:enter-start="opacity-0 -translate-y-1"
+                                    x-transition:enter-end="opacity-100 translate-y-0"
+                                    x-transition:leave="transition ease-in duration-150"
+                                    x-transition:leave-start="opacity-100 translate-y-0"
+                                    x-transition:leave-end="opacity-0 -translate-y-1" class="px-5 pb-5">
+                                    <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">
+                                        {{ $a }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
     {{-- Final CTA --}}
     <section class="py-12 bg-[#f0faf4] text-center">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -378,10 +443,10 @@
             <h2 class="text-3xl font-extrabold text-gray-900 mt-5 leading-tight">
                 You've Read Our Story.<br>Now <span class="text-[#109125]">Write Yours.</span>
             </h2>
-            <p class="text-gray-500 text-sm mt-3 max-w-lg mx-auto">200+ entrepreneurs trusted us to help them build
-                something real. You could be next. Apply today — our team calls you within 30 minutes.</p>
+            <p class="text-gray-500 text-sm mt-3 max-w-lg mx-auto">Over 150 entrepreneurs across India chose 7x Basket to
+                start their business. If you are thinking about it, the best time to take that first step is now.</p>
             <div class="flex flex-wrap justify-center gap-3 mt-6">
-                <a href="{{ route('apply') }}"
+                <a href="#" onclick="openLeadPopup(); return false;"
                     class="bg-[#ec2024] hover:bg-red-700 text-white font-bold px-7 py-3 rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-sm">Apply
                     for Franchise →</a>
                 <a href="https://wa.me/919870275327" target="_blank"
@@ -393,6 +458,7 @@
             </div>
         </div>
     </section>
+
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
