@@ -1352,59 +1352,99 @@
                     Everything you need to know before starting your franchise journey.
                 </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" x-data="{ open: null }">
-                @foreach ([
-            ['How much does a supermarket franchise cost in India?', 'It depends on the store format, city, and the brand. Costs vary based on the size of the space, fitout requirements, and the stock needed to open. The bigger the store and the bigger the city, the higher the number. Always ask for a written cost breakdown that separates the franchise fee, setup, and working capital before you decide.'],
-            ['Is a grocery franchise profitable in India?', 'Yes, grocery franchises in India are profitable. That said, it depends on location, store size, and how well the business is run. Well-managed stores tend to do well because people buy groceries every day - the demand never stops. Add a good product mix and steady footfall, and the numbers work.'],
-            ['Is a supermarket franchise better than opening an independent grocery store?', 'A franchise gives you a brand people already recognise, a supply chain that is already set up, and a trained support team from day one. An independent store gives you more control but puts everything - sourcing, branding, technology, and marketing - on you from scratch. For a first-time grocery business owner, a franchise reduces the three biggest risks: no brand pull, no supply chain, and no operational knowledge.'],
-            ['How much space do I need to open a grocery store franchise?', 'Space requirements depend on the store format. Most grocery franchise brands offer three formats - small, medium, and large. A small or mini format typically runs from 500 sq ft and suits residential neighbourhoods. A medium format runs from 1500 sq ft and works for higher-footfall markets. Large or hyper formats need 4,000 sq ft and above. Check the minimum area requirement with the specific franchise brand before locking in a property.'],
-            ['What is the royalty fee for a supermarket franchise in India?', 'Royalty fees vary by brand - some charge a percentage of monthly sales, others a flat monthly fee. In grocery retail where margins are already tight, the royalty structure directly affects monthly take-home profit. Always check when royalty starts, what it is calculated on, and whether there is a minimum charge regardless of how much you sell.'],
-            ['How do I start a supermarket business in India with no retail experience?', 'A structured grocery franchise model fills the experience gap. Look for one that includes hands-on training during store setup and an assigned support contact after opening. The first few months are when most first-time store owners run into problems - live support during that period matters more than what is written in the brochure.'],
-            ['How long does it take to open a grocery store franchise in India?', 'Most structured grocery franchise models get a store open within a few weeks to a couple of months from agreement signing. The main factors that affect the timeline are property readiness, documentation completion, and how quickly the fitout is done. A clean, ready space with complete paperwork gets you to opening day faster.'],
-            ['What support does a retail supermarket franchise give to partners?', 'Good franchise support covers three phases - setup, opening, and post-launch. Setup includes store design, fitout, and training. Post-launch is where most brands pull back. Before signing, ask specifically what ongoing support looks like, who your point of contact is, and what the response time is for day-to-day problems.'],
-            ['What is territory exclusivity in a supermarket franchise?', 'Territory exclusivity means the franchisor agrees not to open another store of the same brand within a defined area around your location. This protects your customer base from competition within the same franchise network. Not all grocery franchise brands offer it - some grant it based on location and market size, others assess it case by case. Always confirm the exact exclusivity terms in writing before signing the agreement.'],
-            ['Can I open a grocery mart franchise in India on rented property?', 'Yes. Most grocery franchise brands in India allow rented, leased, or owned properties. Make sure your lease term is at least as long as the franchise agreement period. A mismatch between the two - a 5-year franchise tied to a 2-year rental - is a risk most first-time franchise partners overlook.'],
-        ] as [$q, $a])
+            <div class="flex flex-col md:flex-row md:items-start gap-4" x-data="{ open: null }">
+                @php
+                    $faqs = [
+                        ['How much does a supermarket franchise cost in India?', 'It depends on the store format, city, and the brand. Costs vary based on the size of the space, fitout requirements, and the stock needed to open. The bigger the store and the bigger the city, the higher the number. Always ask for a written cost breakdown that separates the franchise fee, setup, and working capital before you decide.'],
+                        ['Is a grocery franchise profitable in India?', 'Yes, grocery franchises in India are profitable. That said, it depends on location, store size, and how well the business is run. Well-managed stores tend to do well because people buy groceries every day - the demand never stops. Add a good product mix and steady footfall, and the numbers work.'],
+                        ['Is a supermarket franchise better than opening an independent grocery store?', 'A franchise gives you a brand people already recognise, a supply chain that is already set up, and a trained support team from day one. An independent store gives you more control but puts everything - sourcing, branding, technology, and marketing - on you from scratch. For a first-time grocery business owner, a franchise reduces the three biggest risks: no brand pull, no supply chain, and no operational knowledge.'],
+                        ['How much space do I need to open a grocery store franchise?', 'Space requirements depend on the store format. Most grocery franchise brands offer three formats - small, medium, and large. A small or mini format typically runs from 500 sq ft and suits residential neighbourhoods. A medium format runs from 1500 sq ft and works for higher-footfall markets. Large or hyper formats need 4,000 sq ft and above. Check the minimum area requirement with the specific franchise brand before locking in a property.'],
+                        ['What is the royalty fee for a supermarket franchise in India?', 'Royalty fees vary by brand - some charge a percentage of monthly sales, others a flat monthly fee. In grocery retail where margins are already tight, the royalty structure directly affects monthly take-home profit. Always check when royalty starts, what it is calculated on, and whether there is a minimum charge regardless of how much you sell.'],
+                        ['How do I start a supermarket business in India with no retail experience?', 'A structured grocery franchise model fills the experience gap. Look for one that includes hands-on training during store setup and an assigned support contact after opening. The first few months are when most first-time store owners run into problems - live support during that period matters more than what is written in the brochure.'],
+                        ['How long does it take to open a grocery store franchise in India?', 'Most structured grocery franchise models get a store open within a few weeks to a couple of months from agreement signing. The main factors that affect the timeline are property readiness, documentation completion, and how quickly the fitout is done. A clean, ready space with complete paperwork gets you to opening day faster.'],
+                        ['What support does a retail supermarket franchise give to partners?', 'Good franchise support covers three phases - setup, opening, and post-launch. Setup includes store design, fitout, and training. Post-launch is where most brands pull back. Before signing, ask specifically what ongoing support looks like, who your point of contact is, and what the response time is for day-to-day problems.'],
+                        ['What is territory exclusivity in a supermarket franchise?', 'Territory exclusivity means the franchisor agrees not to open another store of the same brand within a defined area around your location. This protects your customer base from competition within the same franchise network. Not all grocery franchise brands offer it - some grant it based on location and market size, others assess it case by case. Always confirm the exact exclusivity terms in writing before signing the agreement.'],
+                        ['Can I open a grocery mart franchise in India on rented property?', 'Yes. Most grocery franchise brands in India allow rented, leased, or owned properties. Make sure your lease term is at least as long as the franchise agreement period. A mismatch between the two - a 5-year franchise tied to a 2-year rental - is a risk most first-time franchise partners overlook.'],
+                    ];
+                    $left  = array_slice($faqs, 0, 5);
+                    $right = array_slice($faqs, 5);
+                @endphp
+
+                {{-- Left column --}}
+                <div class="flex-1 flex flex-col gap-4">
+                    @foreach ($left as $idx => [$q, $a])
                     <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
-                        :class="open === {{ $loop->index }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
-                        data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
+                        :class="open === {{ $idx }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
+                        data-aos="fade-up" data-aos-delay="{{ $idx * 60 }}">
                         <div class="flex">
-                            <!-- Left Accent -->
                             <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
-                                :class="open === {{ $loop->index }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
+                                :class="open === {{ $idx }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
                             <div class="flex-1">
-                                <!-- Question -->
-                                <button @click="open === {{ $loop->index }} ? open = null : open = {{ $loop->index }}"
+                                <button @click="open === {{ $idx }} ? open = null : open = {{ $idx }}"
                                     class="w-full flex items-center justify-between px-5 py-4 text-left">
-                                    <span class="font-semibold text-gray-900 text-sm pr-4 leading-snug">
-                                        {{ $q }}
-                                    </span>
+                                    <span class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
                                     <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
-                                        :class="open === {{ $loop->index }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
-                                        <svg :class="open === {{ $loop->index }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
-                                            class="w-4 h-4 transition-all duration-300" fill="none"
-                                            stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                                d="M19 9l-7 7-7-7" />
+                                        :class="open === {{ $idx }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
+                                        <svg :class="open === {{ $idx }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
+                                            class="w-4 h-4 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
                                         </svg>
                                     </div>
                                 </button>
-                                <!-- Answer -->
-                                <div x-show="open === {{ $loop->index }}"
-                                    x-transition:enter="transition ease-out duration-250"
+                                <div x-show="open === {{ $idx }}"
+                                    x-transition:enter="transition ease-out duration-200"
                                     x-transition:enter-start="opacity-0 -translate-y-1"
                                     x-transition:enter-end="opacity-100 translate-y-0"
                                     x-transition:leave="transition ease-in duration-150"
                                     x-transition:leave-start="opacity-100 translate-y-0"
-                                    x-transition:leave-end="opacity-0 -translate-y-1" class="px-5 pb-5">
-                                    <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">
-                                        {{ $a }}
-                                    </p>
+                                    x-transition:leave-end="opacity-0 -translate-y-1"
+                                    class="px-5 pb-5">
+                                    <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">{{ $a }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                    @endforeach
+                </div>
+
+                {{-- Right column --}}
+                <div class="flex-1 flex flex-col gap-4">
+                    @foreach ($right as $idx => [$q, $a])
+                    @php $i = $idx + 5; @endphp
+                    <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
+                        :class="open === {{ $i }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
+                        data-aos="fade-up" data-aos-delay="{{ $i * 60 }}">
+                        <div class="flex">
+                            <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
+                                :class="open === {{ $i }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
+                            <div class="flex-1">
+                                <button @click="open === {{ $i }} ? open = null : open = {{ $i }}"
+                                    class="w-full flex items-center justify-between px-5 py-4 text-left">
+                                    <span class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
+                                    <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
+                                        :class="open === {{ $i }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
+                                        <svg :class="open === {{ $i }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
+                                            class="w-4 h-4 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div x-show="open === {{ $i }}"
+                                    x-transition:enter="transition ease-out duration-200"
+                                    x-transition:enter-start="opacity-0 -translate-y-1"
+                                    x-transition:enter-end="opacity-100 translate-y-0"
+                                    x-transition:leave="transition ease-in duration-150"
+                                    x-transition:leave-start="opacity-100 translate-y-0"
+                                    x-transition:leave-end="opacity-0 -translate-y-1"
+                                    class="px-5 pb-5">
+                                    <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">{{ $a }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+
             </div>
         </div>
     </section>

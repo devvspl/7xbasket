@@ -1,25 +1,6 @@
-﻿@extends('layouts.app')
+﻿@extends('layouts.landing')
 @section('content')
-    <section class="relative overflow-hidden bg-gradient-to-br from-[#055346] via-[#076b58] to-[#055346] py-10 text-center">
-        <div class="absolute blob w-72 h-72 bg-[#109125]/20 top-[-60px] left-[-60px]"></div>
-        <div class="absolute blob w-56 h-56 bg-[#ec2024]/10 bottom-[-40px] right-[5%]"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <span
-                class="inline-flex items-center gap-2 bg-white/10 text-green-200 text-xs font-semibold px-4 py-1.5 rounded-full mb-4 border border-white/20">
-                <span class="w-2 h-2 bg-[#ec2024] rounded-full animate-pulse"></span>
-                Join Us
-            </span>
-            <h1 class="text-4xl font-extrabold text-white mb-3">Apply for Franchise</h1>
-            <p class="text-green-100/80 text-base max-w-lg mx-auto">Fill in your details and our team will contact you within
-                24 hours.
-            </p>
-            <nav class="text-sm flex items-center gap-1 flex-wrap justify-center mt-4">
-                <a href="{{ route('home') }}" class="text-green-300 hover:text-white transition-colors">Home</a>
-                <span class="text-white/30">/</span>
-                <span class="text-white font-medium">Apply Franchise</span>
-            </nav>
-        </div>
-    </section>
+
     <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8">
@@ -944,31 +925,6 @@
                     @endforeach
                 </div>
 
-            </div>
-        </div>
-    </section>
-    <section class="py-12 bg-[#ffffff] text-center">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <span
-                class="border border-[#109125]/30 text-[#109125] text-xs font-bold px-3 py-1 rounded-full inline-block">Join
-                the Network</span>
-            <h2 class="text-3xl font-extrabold text-gray-900 mt-5 leading-tight">
-                You've Read Our Story.<br>Now <span class="text-[#109125]">Write Yours.</span>
-            </h2>
-            <p class="text-gray-500 text-sm mt-3 max-w-lg mx-auto">200+ entrepreneurs trusted us to help them build
-                something real. You could be next. Apply today — our team calls you within 30 minutes.
-            </p>
-            <div class="flex flex-wrap justify-center gap-3 mt-6">
-                <a href="#"
-                    onclick="document.querySelector('#applyPageForm').scrollIntoView({behavior:'smooth'}); return false;"
-                    class="bg-[#ec2024] hover:bg-red-700 text-white font-bold px-7 py-3 rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-sm">Apply
-                    for Franchise →</a>
-                <a href="https://wa.me/919870275327" target="_blank"
-                    class="bg-white hover:bg-gray-50 text-gray-700 font-bold px-7 py-3 rounded-xl border border-gray-200 transition-all duration-200 text-sm">💬
-                    Chat on WhatsApp</a>
-                <a href="tel:+919870275327"
-                    class="bg-white hover:bg-gray-50 text-gray-700 font-bold px-7 py-3 rounded-xl border border-gray-200 transition-all duration-200 text-sm">📞
-                    +91 98702 75327</a>
             </div>
         </div>
     </section>

@@ -9,21 +9,30 @@ use Illuminate\Http\Request;
 
 class FranchiseController extends Controller
 {
-    const SPAM_LIMIT  = 3;  // flag as spam after 3 submissions/hour
+    const SPAM_LIMIT = 3;  // flag as spam after 3 submissions/hour
     const BLOCK_LIMIT = 6;  // auto-block IP after 6 submissions/hour
 
     public function apply()
     {
         $seo = SeoService::get('apply', [
-            'title'       => 'Apply for Franchise - 7x Basket',
+            'title' => 'Apply for Franchise - 7x Basket',
             'description' => 'Apply now to become a 7x Basket franchise partner. Fill the form and our team will contact you.',
         ]);
         return view('frontend.apply', compact('seo'));
     }
 
+    public function landing()
+    {
+        $seo = SeoService::get('landing', [
+            'title' => 'Apply for Franchise - 7x Basket',
+            'description' => 'Apply now to become a 7x Basket franchise partner. Fill the form and our team will contact you.',
+        ]);
+        return view('frontend.landing', compact('seo'));
+    }
+
     public function store(Request $request)
     {
-        $ip     = $request->ip();
+        $ip = $request->ip();
         $isAjax = $request->ajax() || $request->wantsJson();
 
         // ── 1. Already blocked? ─────────────────────────────────────
@@ -35,25 +44,25 @@ class FranchiseController extends Controller
         // ── 2. Validate ─────────────────────────────────────────────
         try {
             $validated = $request->validate([
-                'name'              => 'required|string|min:2|max:100|regex:/^[\pL\s\-\.]+$/u',
-                'phone'             => 'required|string|regex:/^[6-9]\d{9}$/',
-                'email'             => 'nullable|email:rfc|max:150',
-                'pincode'           => 'nullable|digits:6',
-                'store_area'        => 'nullable|string|max:50',
-                'property_type'     => 'nullable|in:owned,rented,leased,looking',
-                'opening_timeline'  => 'nullable|in:1_month,3_months,6_months,1_year,exploring',
-                'city'              => 'nullable|string|min:2|max:100',
+                'name' => 'required|string|min:2|max:100|regex:/^[\pL\s\-\.]+$/u',
+                'phone' => 'required|string|regex:/^[6-9]\d{9}$/',
+                'email' => 'nullable|email:rfc|max:150',
+                'pincode' => 'nullable|digits:6',
+                'store_area' => 'nullable|string|max:50',
+                'property_type' => 'nullable|in:owned,rented,leased,looking',
+                'opening_timeline' => 'nullable|in:1_month,3_months,6_months,1_year,exploring',
+                'city' => 'nullable|string|min:2|max:100',
                 'investment_budget' => 'nullable|string|max:100',
-                'message'           => 'nullable|string|max:1000',
+                'message' => 'nullable|string|max:1000',
             ], [
-                'name.required'       => 'Please enter your full name.',
-                'name.min'            => 'Name must be at least 2 characters.',
-                'name.regex'          => 'Name should contain only letters, spaces, hyphens or dots.',
-                'phone.required'      => 'Please enter your mobile number.',
-                'phone.regex'         => 'Enter a valid 10-digit Indian mobile number (starting with 6–9).',
-                'email.email'         => 'Please enter a valid email address.',
-                'pincode.digits'      => 'Pincode must be exactly 6 digits.',
-                'property_type.in'    => 'Please select a valid property ownership type.',
+                'name.required' => 'Please enter your full name.',
+                'name.min' => 'Name must be at least 2 characters.',
+                'name.regex' => 'Name should contain only letters, spaces, hyphens or dots.',
+                'phone.required' => 'Please enter your mobile number.',
+                'phone.regex' => 'Enter a valid 10-digit Indian mobile number (starting with 6–9).',
+                'email.email' => 'Please enter a valid email address.',
+                'pincode.digits' => 'Pincode must be exactly 6 digits.',
+                'property_type.in' => 'Please select a valid property ownership type.',
                 'opening_timeline.in' => 'Please select a valid opening timeline.',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -74,8 +83,8 @@ class FranchiseController extends Controller
             BlockedIp::firstOrCreate(
                 ['ip_address' => $ip],
                 [
-                    'reason'     => 'Auto-blocked: excessive franchise form submissions',
-                    'is_active'  => true,
+                    'reason' => 'Auto-blocked: excessive franchise form submissions',
+                    'is_active' => true,
                     'expires_at' => now()->addMonth(),
                 ]
             );
@@ -87,34 +96,34 @@ class FranchiseController extends Controller
         $isSpam = $recentCount >= self::SPAM_LIMIT;
 
         // ── 6. Analytics: device & page info ────────────────────────
-        $ua         = $request->userAgent() ?? '';
+        $ua = $request->userAgent() ?? '';
         $deviceType = $this->detectDevice($ua);
-        $referer    = $request->headers->get('referer', '');
-        $pageUrl    = $request->headers->get('x-page-url', $referer); // JS can send this header
+        $referer = $request->headers->get('referer', '');
+        $pageUrl = $request->headers->get('x-page-url', $referer);  // JS can send this header
 
         // ── 7. Source ────────────────────────────────────────────────
         $source = $request->input('source', 'website');
 
         // ── 8. Save ──────────────────────────────────────────────────
         FranchiseApplication::create([
-            'name'              => $validated['name'],
-            'email'             => $validated['email'] ?? null,
-            'phone'             => $validated['phone'],
-            'city'              => $validated['city'] ?? null,
+            'name' => $validated['name'],
+            'email' => $validated['email'] ?? null,
+            'phone' => $validated['phone'],
+            'city' => $validated['city'] ?? null,
             'investment_budget' => $validated['investment_budget'] ?? null,
-            'message'           => $validated['message'] ?? null,
-            'pincode'           => $validated['pincode'] ?? null,
-            'store_area'        => $validated['store_area'] ?? null,
-            'property_type'     => $validated['property_type'] ?? null,
-            'opening_timeline'  => $validated['opening_timeline'] ?? null,
-            'ip_address'        => $ip,
-            'source'            => $source,
-            'is_spam'           => $isSpam,
-            'submission_count'  => $recentCount + 1,
-            'device_type'       => $deviceType,
-            'user_agent'        => substr($ua, 0, 500),
-            'page_url'          => substr($pageUrl, 0, 500),
-            'referer_url'       => substr($referer, 0, 500),
+            'message' => $validated['message'] ?? null,
+            'pincode' => $validated['pincode'] ?? null,
+            'store_area' => $validated['store_area'] ?? null,
+            'property_type' => $validated['property_type'] ?? null,
+            'opening_timeline' => $validated['opening_timeline'] ?? null,
+            'ip_address' => $ip,
+            'source' => $source,
+            'is_spam' => $isSpam,
+            'submission_count' => $recentCount + 1,
+            'device_type' => $deviceType,
+            'user_agent' => substr($ua, 0, 500),
+            'page_url' => substr($pageUrl, 0, 500),
+            'referer_url' => substr($referer, 0, 500),
         ]);
 
         // ── 9. Response ──────────────────────────────────────────────
