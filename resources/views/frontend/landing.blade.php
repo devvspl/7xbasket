@@ -1,6 +1,5 @@
 ﻿@extends('layouts.landing')
 @section('content')
-
     <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8">
@@ -837,91 +836,125 @@
             <div class="flex flex-col md:flex-row md:items-start gap-4" x-data="{ open: null }">
                 @php
                     $applyFaqs = [
-                        ['What is a franchise business and how does it work in India?', 'A franchise is a business model where you pay to use an established brand\'s name, products, and systems to run your own store. The franchisor provides training, supply chain, and operational support - you invest the capital and manage the outlet. In India, active franchisors number around 4,600 across sectors including grocery, food, education, and healthcare.'],
-                        ['Is owning a franchise better than starting an independent business?', 'A franchise gives you a proven model, brand recognition, and built-in supplier network - reducing the risk of starting from zero. Independent stores offer more flexibility but require you to build everything yourself including brand trust, procurement, and customer base. For first-time entrepreneurs, a franchise typically reaches break-even faster than an independent setup.'],
-                        ['Which are the best grocery franchise opportunities in India in 2026?', 'Top grocery franchise options in India include D-Mart, Reliance Fresh, Spencer\'s Retail, More Retail, and 7x Basket. For mid-capital investors, 7x Basket is the most accessible entry point in 2026.'],
-                        ['What should I check before signing a grocery franchise agreement?', 'Check five things before signing - royalty structure and when it starts, territory exclusivity terms, full investment breakdown with no hidden costs, renewal and exit clauses, and actual support quality by speaking to existing franchise partners. Always have a franchise consultant or lawyer review the agreement before committing.'],
-                        ['Can I get a bank loan to fund a franchise in India?', 'Yes. Most nationalised and private banks in India offer business loans for franchise investments under MSME and Mudra scheme categories. Banks typically fund 60–70% of the total project cost after reviewing the franchise agreement, location feasibility, and your financial profile. Having a signed franchise agreement and a projected cash flow statement significantly improves loan approval chances.'],
-                        ['What is the difference between FOFO and FOCO franchise models?', 'FOFO (Franchisee Owned, Franchisee Operated) means you invest the capital and run the store yourself - all profit and risk is yours. FOCO (Franchisee Owned, Company Operated) means you invest but the brand\'s team manages operations - returns are more predictable but lower. Most grocery franchises in India - including Reliance Fresh and 7x Basket - operate on the FOFO model.'],
-                        ['Is a grocery store a good business in India in 2026?', 'Grocery is one of the most recession-proof retail businesses because demand is daily and non-discretionary. India\'s grocery retail is changing with growing urbanization, digital convergence, and changing consumer patterns - the need for organised formats has never been higher. Organised grocery stores replacing unbranded kirana shops is the single biggest structural trend driving franchise growth right now.'],
-                        ['Can I convert my existing kirana store into a franchise?', 'Yes - several grocery franchise brands actively target existing kirana owners for conversion. The advantage is you already have a location, customer base, and basic operations in place. Brands like Reliance Fresh, More Retail, and 7x Basket have dedicated kirana upgrade programmes where your existing setup is assessed and rebranded into an organised franchise format.'],
+                        [
+                            'What is a franchise business and how does it work in India?',
+                            'A franchise is a business model where you pay to use an established brand\'s name, products, and systems to run your own store. The franchisor provides training, supply chain, and operational support - you invest the capital and manage the outlet. In India, active franchisors number around 4,600 across sectors including grocery, food, education, and healthcare.',
+                        ],
+                        [
+                            'Is owning a franchise better than starting an independent business?',
+                            'A franchise gives you a proven model, brand recognition, and built-in supplier network - reducing the risk of starting from zero. Independent stores offer more flexibility but require you to build everything yourself including brand trust, procurement, and customer base. For first-time entrepreneurs, a franchise typically reaches break-even faster than an independent setup.',
+                        ],
+                        [
+                            'Which are the best grocery franchise opportunities in India in 2026?',
+                            'Top grocery franchise options in India include D-Mart, Reliance Fresh, Spencer\'s Retail, More Retail, and 7x Basket. For mid-capital investors, 7x Basket is the most accessible entry point in 2026.',
+                        ],
+                        [
+                            'Can I convert my existing kirana store into a franchise?',
+                            'Yes - several grocery franchise brands actively target existing kirana owners for conversion. The advantage is you already have a location, customer base, and basic operations in place. Brands like Reliance Fresh, More Retail, and 7x Basket have dedicated kirana upgrade programmes where your existing setup is assessed and rebranded into an organised franchise format.',
+                        ],
+
+                        [
+                            'Can I get a bank loan to fund a franchise in India?',
+                            'Yes. Most nationalised and private banks in India offer business loans for franchise investments under MSME and Mudra scheme categories. Banks typically fund 60–70% of the total project cost after reviewing the franchise agreement, location feasibility, and your financial profile. Having a signed franchise agreement and a projected cash flow statement significantly improves loan approval chances.',
+                        ],
+                        [
+                            'What is the difference between FOFO and FOCO franchise models?',
+                            'FOFO (Franchisee Owned, Franchisee Operated) means you invest the capital and run the store yourself - all profit and risk is yours. FOCO (Franchisee Owned, Company Operated) means you invest but the brand\'s team manages operations - returns are more predictable but lower. Most grocery franchises in India - including Reliance Fresh and 7x Basket - operate on the FOFO model.',
+                        ],
+                        [
+                            'What should I check before signing a grocery franchise agreement?',
+                            'Check five things before signing - royalty structure and when it starts, territory exclusivity terms, full investment breakdown with no hidden costs, renewal and exit clauses, and actual support quality by speaking to existing franchise partners. Always have a franchise consultant or lawyer review the agreement before committing.',
+                        ],
+
+                        [
+                            'Is a grocery store a good business in India in 2026?',
+                            'Grocery is one of the most recession-proof retail businesses because demand is daily and non-discretionary. India\'s grocery retail is changing with growing urbanization, digital convergence, and changing consumer patterns - the need for organised formats has never been higher. Organised grocery stores replacing unbranded kirana shops is the single biggest structural trend driving franchise growth right now.',
+                        ],
                     ];
-                    $leftFaqs  = array_slice($applyFaqs, 0, 4);
+                    $leftFaqs = array_slice($applyFaqs, 0, 4);
                     $rightFaqs = array_slice($applyFaqs, 4);
                 @endphp
 
                 {{-- Left column --}}
                 <div class="flex-1 flex flex-col gap-4">
                     @foreach ($leftFaqs as $idx => [$q, $a])
-                    <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
-                        :class="open === {{ $idx }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
-                        data-aos="fade-up" data-aos-delay="{{ $idx * 60 }}">
-                        <div class="flex">
-                            <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
-                                :class="open === {{ $idx }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
-                            <div class="flex-1">
-                                <button @click="open === {{ $idx }} ? open = null : open = {{ $idx }}"
-                                    class="w-full flex items-center justify-between px-5 py-4 text-left">
-                                    <span class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
-                                    <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
-                                        :class="open === {{ $idx }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
-                                        <svg :class="open === {{ $idx }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
-                                            class="w-4 h-4 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
-                                        </svg>
+                        <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
+                            :class="open === {{ $idx }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
+                            data-aos="fade-up" data-aos-delay="{{ $idx * 60 }}">
+                            <div class="flex">
+                                <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
+                                    :class="open === {{ $idx }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
+                                <div class="flex-1">
+                                    <button
+                                        @click="open === {{ $idx }} ? open = null : open = {{ $idx }}"
+                                        class="w-full flex items-center justify-between px-5 py-4 text-left">
+                                        <span
+                                            class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
+                                        <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
+                                            :class="open === {{ $idx }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
+                                            <svg :class="open === {{ $idx }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
+                                                class="w-4 h-4 transition-all duration-300" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                    d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div x-show="open === {{ $idx }}"
+                                        x-transition:enter="transition ease-out duration-200"
+                                        x-transition:enter-start="opacity-0 -translate-y-1"
+                                        x-transition:enter-end="opacity-100 translate-y-0"
+                                        x-transition:leave="transition ease-in duration-150"
+                                        x-transition:leave-start="opacity-100 translate-y-0"
+                                        x-transition:leave-end="opacity-0 -translate-y-1" class="px-5 pb-5">
+                                        <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">
+                                            {{ $a }}</p>
                                     </div>
-                                </button>
-                                <div x-show="open === {{ $idx }}"
-                                    x-transition:enter="transition ease-out duration-200"
-                                    x-transition:enter-start="opacity-0 -translate-y-1"
-                                    x-transition:enter-end="opacity-100 translate-y-0"
-                                    x-transition:leave="transition ease-in duration-150"
-                                    x-transition:leave-start="opacity-100 translate-y-0"
-                                    x-transition:leave-end="opacity-0 -translate-y-1"
-                                    class="px-5 pb-5">
-                                    <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">{{ $a }}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
 
                 {{-- Right column --}}
                 <div class="flex-1 flex flex-col gap-4">
                     @foreach ($rightFaqs as $idx => [$q, $a])
-                    @php $i = $idx + 4; @endphp
-                    <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
-                        :class="open === {{ $i }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
-                        data-aos="fade-up" data-aos-delay="{{ $i * 60 }}">
-                        <div class="flex">
-                            <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
-                                :class="open === {{ $i }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
-                            <div class="flex-1">
-                                <button @click="open === {{ $i }} ? open = null : open = {{ $i }}"
-                                    class="w-full flex items-center justify-between px-5 py-4 text-left">
-                                    <span class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
-                                    <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
-                                        :class="open === {{ $i }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
-                                        <svg :class="open === {{ $i }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
-                                            class="w-4 h-4 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
-                                        </svg>
+                        @php $i = $idx + 4; @endphp
+                        <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
+                            :class="open === {{ $i }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
+                            data-aos="fade-up" data-aos-delay="{{ $i * 60 }}">
+                            <div class="flex">
+                                <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
+                                    :class="open === {{ $i }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
+                                <div class="flex-1">
+                                    <button
+                                        @click="open === {{ $i }} ? open = null : open = {{ $i }}"
+                                        class="w-full flex items-center justify-between px-5 py-4 text-left">
+                                        <span
+                                            class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
+                                        <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
+                                            :class="open === {{ $i }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
+                                            <svg :class="open === {{ $i }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
+                                                class="w-4 h-4 transition-all duration-300" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                    d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div x-show="open === {{ $i }}"
+                                        x-transition:enter="transition ease-out duration-200"
+                                        x-transition:enter-start="opacity-0 -translate-y-1"
+                                        x-transition:enter-end="opacity-100 translate-y-0"
+                                        x-transition:leave="transition ease-in duration-150"
+                                        x-transition:leave-start="opacity-100 translate-y-0"
+                                        x-transition:leave-end="opacity-0 -translate-y-1" class="px-5 pb-5">
+                                        <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">
+                                            {{ $a }}</p>
                                     </div>
-                                </button>
-                                <div x-show="open === {{ $i }}"
-                                    x-transition:enter="transition ease-out duration-200"
-                                    x-transition:enter-start="opacity-0 -translate-y-1"
-                                    x-transition:enter-end="opacity-100 translate-y-0"
-                                    x-transition:leave="transition ease-in duration-150"
-                                    x-transition:leave-start="opacity-100 translate-y-0"
-                                    x-transition:leave-end="opacity-0 -translate-y-1"
-                                    class="px-5 pb-5">
-                                    <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">{{ $a }}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
 
