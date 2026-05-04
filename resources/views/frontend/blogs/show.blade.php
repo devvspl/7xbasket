@@ -87,7 +87,7 @@ html { scroll-behavior: smooth; }
     </div>
 </section>
 
-<section class="py-12 bg-[#f8faf8]">
+<section class="py-6 bg-[#f8faf8]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
@@ -107,7 +107,7 @@ html { scroll-behavior: smooth; }
                 @endif
 
                 {{-- Article Card --}}
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 mt-6 p-8 sm:p-10">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 mt-4 p-5 sm:p-6">
 
                     {{-- Blog Body --}}
                     <div id="blog-body" class="blog-content">

@@ -41,7 +41,7 @@
     {{-- Minimal landing header — logo + phone only --}}
     <header class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-            <a href="{{ route('home') }}" class="flex items-center gap-2">
+            <a href="{{ route('landing') }}" class="flex items-center gap-2">
                 <img src="{{ asset('custom/logo.png') }}" alt="7x Basket" class="h-8 w-auto">
             </a>
             <a href="#" onclick="openLeadPopup(); return false;"
