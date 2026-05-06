@@ -99,8 +99,7 @@
     </div>
 
     {{-- Apply Franchise vertical tab --}}
-    <a href="#" onclick="openLeadPopup(); return false;"
-        id="stickyApplyBtn"
+    <a href="#" onclick="openLeadPopup(); return false;" id="stickyApplyBtn"
         class="fixed right-0 top-1/2 -translate-y-1/2 z-50
               bg-[#ec2024] text-white shadow-xl rounded-l-2xl
               flex items-center justify-center
@@ -168,12 +167,19 @@
                                 class="text-[#109125]">*</span></label>
                         <select name="store_area" required
                             class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all bg-white">
-                            <option value="" disabled selected>Select</option>
-                            <option value="300-500">300–500 sq ft</option>
-                            <option value="500-800">500–800 sq ft</option>
-                            <option value="800-1200">800–1200 sq ft</option>
-                            <option value="1200-2000">1200–2000 sq ft</option>
-                            <option value="2000+">2000+ sq ft</option>
+                            <option value="" selected disabled>Select Store Type</option>
+
+                            <option value="500-1000">
+                                Mini Store (500 – 1000 sqft)
+                            </option>
+
+                            <option value="1000-3000">
+                                Super Store (1000 – 3000 sqft)
+                            </option>
+
+                            <option value="3000+">
+                                Hyper Store (3000+ sqft)
+                            </option>
                         </select>
                     </div>
                 </div>

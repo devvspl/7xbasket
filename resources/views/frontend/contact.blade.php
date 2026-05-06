@@ -94,12 +94,21 @@
                                 <label class="block text-xs font-bold text-gray-600 mb-1">Store Area (sq. ft.)</label>
                                 <select name="store_area"
                                     class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all bg-white">
-                                    <option value="">Select area</option>
-                                    
-                                    <option value="500-800">500–800 sq ft</option>
-                                    <option value="800-1200">800–1200 sq ft (Super)</option>
-                                    <option value="1200-2000">1200–2000 sq ft</option>
-                                    <option value="2000+">2000+ sq ft (Hyper)</option>
+
+                                    <option value="" selected disabled>Select Store Type</option>
+
+                                    <option value="500-1000">
+                                        Mini Store (500 – 1000 sqft)
+                                    </option>
+
+                                    <option value="1000-3000">
+                                        Super Store (1000 – 3000 sqft)
+                                    </option>
+
+                                    <option value="3000+">
+                                        Hyper Store (3000+ sqft)
+                                    </option>
+
                                 </select>
                             </div>
                             <div>

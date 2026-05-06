@@ -4,13 +4,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8">
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
-                    India's Most Supported Supermarket Franchise — Starting at ₹13 Lakh, <span class="text-[#109125]">Zero Royalty for 2 Years</span>
+                    India's Most Supported Supermarket Franchise — Starting at ₹13 Lakh, <span class="text-[#109125]">Zero
+                        Royalty for 2 Years</span>
                 </h2>
                 <p class="text-gray-600 text-base max-w-4xl mx-auto mt-4 leading-relaxed">
-                    Most people searching for a grocery store franchise in India hit the same wall: brands that look good on the website but give you almost no real support after you sign.
+                    Most people searching for a grocery store franchise in India hit the same wall: brands that look good on
+                    the website but give you almost no real support after you sign.
                 </p>
                 <p class="text-gray-700 text-base max-w-4xl mx-auto mt-3 leading-relaxed font-medium">
-                    7x Basket is built differently. You get a fully stocked supermarket franchise — 10,000+ products from Amul, HUL, Nestlé, and 150+ national brands — open in 45 days, with one named person managing your account from day one.
+                    7x Basket is built differently. You get a fully stocked supermarket franchise — 10,000+ products from
+                    Amul, HUL, Nestlé, and 150+ national brands — open in 45 days, with one named person managing your
+                    account from day one.
                 </p>
                 <p class="text-gray-600 text-base max-w-4xl mx-auto mt-3 leading-relaxed">
                     Grocery franchise cost starting at ₹13 lakh. No royalty for the first 2 years. Your profits stay yours.
@@ -76,12 +80,19 @@
                                         class="text-[#109125]">*</span></label>
                                 <select name="store_area" required
                                     class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all bg-white">
-                                    <option value="" disabled selected>Select</option>
-                                    <option value="300-500">300–500 sq ft</option>
-                                    <option value="500-800">500–800 sq ft</option>
-                                    <option value="800-1200">800–1200 sq ft</option>
-                                    <option value="1200-2000">1200–2000 sq ft</option>
-                                    <option value="2000+">2000+ sq ft</option>
+                                    <option value="" selected disabled>Select Store Type</option>
+
+                                    <option value="500-1000">
+                                        Mini Store (500 – 1000 sqft)
+                                    </option>
+
+                                    <option value="1000-3000">
+                                        Super Store (1000 – 3000 sqft)
+                                    </option>
+
+                                    <option value="3000+">
+                                        Hyper Store (3000+ sqft)
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -137,7 +148,8 @@
                                 }
                             }
                         </style>
-                        <p class="text-center text-xs text-gray-400">No spam. No pressure. We call only to discuss your franchise query.
+                        <p class="text-center text-xs text-gray-400">No spam. No pressure. We call only to discuss your
+                            franchise query.
                         </p>
                     </form>
                 </div>
@@ -172,9 +184,17 @@
                         Why a grocery business franchise is one of the
                         <span class="text-[#109125]">strongest opportunities in India right now</span>
                     </h2>
-                    <p class="text-gray-500 text-sm mt-4 leading-relaxed">Organised grocery retail covers 12% of India's market. The remaining 88% is still unbranded kirana — local stores with no supply chain advantage, no technology, and no brand pull.</p>
-                    <p class="text-gray-500 text-sm mt-3 leading-relaxed">That gap is exactly where a grocery supermarket franchise operates. Demand is weekly. It does not slow down in recessions. Customers buy groceries regardless of what the economy is doing, which is what makes supermarket franchise opportunities in India more stable than most retail categories.</p>
-                    <p class="text-gray-500 text-sm mt-3 leading-relaxed">India's grocery market is projected to cross ₹85 lakh crore by 2030, growing at 9% per year. The franchisees who claim a territory now will have 5–6 years of compounding customer loyalty before that growth peaks. The ones who wait will pay more for the same territory, or find it already taken.
+                    <p class="text-gray-500 text-sm mt-4 leading-relaxed">Organised grocery retail covers 12% of India's
+                        market. The remaining 88% is still unbranded kirana — local stores with no supply chain advantage,
+                        no technology, and no brand pull.</p>
+                    <p class="text-gray-500 text-sm mt-3 leading-relaxed">That gap is exactly where a grocery supermarket
+                        franchise operates. Demand is weekly. It does not slow down in recessions. Customers buy groceries
+                        regardless of what the economy is doing, which is what makes supermarket franchise opportunities in
+                        India more stable than most retail categories.</p>
+                    <p class="text-gray-500 text-sm mt-3 leading-relaxed">India's grocery market is projected to cross ₹85
+                        lakh crore by 2030, growing at 9% per year. The franchisees who claim a territory now will have 5–6
+                        years of compounding customer loyalty before that growth peaks. The ones who wait will pay more for
+                        the same territory, or find it already taken.
                     </p>
                     <div class="grid grid-cols-2 gap-4 mt-8">
                         @foreach ([['~₹58 lakh cr', 'Estimated market size 2025'], ['9% CAGR', 'Projected growth 2025–2030'], ['~12%', 'Organised retail share today'], ['₹85 lakh cr', 'Projected size by 2030']] as [$n, $l])
@@ -199,7 +219,8 @@
                             class="flex items-center gap-1.5 text-xs text-gray-600 font-medium"><span
                                 class="w-3 h-3 rounded-sm inline-block bg-[#86efac]"></span> Projected</span></div>
                     <div class="flex-1" style="min-height:300px"><canvas id="groceryChart"></canvas></div>
-                    <p class="text-[10px] text-gray-400 mt-3 text-center">Sources: Statista / Euromonitor / Technavio. 2025–2030 projected at 9% CAGR.</p>
+                    <p class="text-[10px] text-gray-400 mt-3 text-center">Sources: Statista / Euromonitor / Technavio.
+                        2025–2030 projected at 9% CAGR.</p>
                 </div>
             </div>
         </div>
@@ -210,9 +231,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#4ade80] text-xs font-bold uppercase tracking-widest">Why 7x Basket</span>
-                <h2 class="text-3xl font-extrabold text-white mt-2">Everything in place before your grocery store franchise opens</h2>
-                <p class="text-green-300/60 text-sm mt-2 max-w-3xl mx-auto">Most people who try to open an independent grocery store or small grocery franchise spend the first year learning things they should have known before signing anything — supplier contacts, software, store layout, licences, staff training. By the time they sort it out, a better-stocked competitor has already taken their customers.</p>
-                <p class="text-green-300/60 text-sm mt-2 max-w-3xl mx-auto">With 7x Basket, that groundwork is done before your store opens. Whether you are opening a mini grocery store franchise in a residential area or a full supermarket in a high-footfall location, here is what is in place from day one.
+                <h2 class="text-3xl font-extrabold text-white mt-2">Everything in place before your grocery store franchise
+                    opens</h2>
+                <p class="text-green-300/60 text-sm mt-2 max-w-3xl mx-auto">Most people who try to open an independent
+                    grocery store or small grocery franchise spend the first year learning things they should have known
+                    before signing anything — supplier contacts, software, store layout, licences, staff training. By the
+                    time they sort it out, a better-stocked competitor has already taken their customers.</p>
+                <p class="text-green-300/60 text-sm mt-2 max-w-3xl mx-auto">With 7x Basket, that groundwork is done before
+                    your store opens. Whether you are opening a mini grocery store franchise in a residential area or a full
+                    supermarket in a high-footfall location, here is what is in place from day one.
                 </p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -255,10 +282,14 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-gray-400 text-xs font-bold uppercase tracking-widest">Competitor Comparison</span>
-                <h2 class="text-4xl font-extrabold text-gray-900 mt-3 mb-3">How 7x Basket compares to other supermarket franchise options</h2>
-                <p class="text-gray-500 text-sm max-w-2xl mx-auto">If you have looked at other grocery franchise brands, you will have noticed a pattern: most do not publish their costs upfront, start charging royalty from month one, and leave you to manage operations mostly on your own after signing.
+                <h2 class="text-4xl font-extrabold text-gray-900 mt-3 mb-3">How 7x Basket compares to other supermarket
+                    franchise options</h2>
+                <p class="text-gray-500 text-sm max-w-2xl mx-auto">If you have looked at other grocery franchise brands,
+                    you will have noticed a pattern: most do not publish their costs upfront, start charging royalty from
+                    month one, and leave you to manage operations mostly on your own after signing.
                 </p>
-                <p class="text-gray-500 text-sm max-w-2xl mx-auto mt-2">Here is an honest comparison. Every line is verifiable — ask any existing 7x Basket franchisee to confirm.
+                <p class="text-gray-500 text-sm max-w-2xl mx-auto mt-2">Here is an honest comparison. Every line is
+                    verifiable — ask any existing 7x Basket franchisee to confirm.
                 </p>
             </div>
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden" data-aos="fade-up">
@@ -279,10 +310,11 @@
                     <tbody>
                         <tr class="border-b border-gray-100">
                             <td class="px-6 py-4 text-gray-600 text-sm">Grocery franchise cost / starting investment</td>
-                            <td class="px-6 py-4 text-center bg-green-50/50 font-bold text-gray-800">₹13–15 lakh, fully itemised</td>
+                            <td class="px-6 py-4 text-center bg-green-50/50 font-bold text-gray-800">₹13–15 lakh, fully
+                                itemised</td>
                             <td class="px-6 py-4 text-center text-gray-600">₹20 lakh+, often undisclosed</td>
                         </tr>
-                        
+
                         <tr class="border-b border-gray-100">
                             <td class="px-6 py-4 text-gray-600 text-sm">Supermarket franchise cost transparency</td>
                             <td class="px-6 py-4 text-center bg-green-50/50">
@@ -368,8 +400,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
             <div class="text-center mb-6" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Our Product Range</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-2">10,000+ products from India's most recognised brands</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto text-sm">Your store stocks what people actually buy — not niche imports, not unknown labels. The brands your customers grew up with: Amul, Britannia, Parle, ITC, HUL, Dabur, Marico, Godrej, Patanjali, Colgate, Haldirams, Nestlé. Sourced directly at wholesale, delivered regularly.</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-2">10,000+ products from India's most
+                    recognised brands</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto text-sm">Your store stocks what people actually buy — not niche
+                    imports, not unknown labels. The brands your customers grew up with: Amul, Britannia, Parle, ITC, HUL,
+                    Dabur, Marico, Godrej, Patanjali, Colgate, Haldirams, Nestlé. Sourced directly at wholesale, delivered
+                    regularly.</p>
             </div>
             <p class="text-center text-gray-600 text-sm mb-6" data-aos="fade-up">Stock covers 10 categories:</p>
             <div class="flex flex-wrap justify-center gap-2 mb-6" data-aos="fade-up">
@@ -503,8 +539,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8" data-aos="fade-up">
                 <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Inside 7x Basket</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">Inside a 7x Basket franchise store</h2>
-                <p class="text-[#6b8f7e] mx-auto">Every photo below is from a real 7x Basket franchise store, already running across India.</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">Inside a 7x Basket franchise store
+                </h2>
+                <p class="text-[#6b8f7e] mx-auto">Every photo below is from a real 7x Basket franchise store, already
+                    running across India.</p>
             </div>
             <div x-data="{
                 current: 0,
@@ -568,7 +606,8 @@
             </div>
             <div class="text-center mb-8" data-aos="fade-up">
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-1">Watch before you decide</h2>
-                <p class="text-[#6b8f7e] text-sm">These three videos cover what most franchise enquiry calls cover in the first 20 minutes. Watch them now — you will have better questions when our team calls.</p>
+                <p class="text-[#6b8f7e] text-sm">These three videos cover what most franchise enquiry calls cover in the
+                    first 20 minutes. Watch them now — you will have better questions when our team calls.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
                 @foreach ([['custom/7x_Basket_Store.png', 'How to start a 7x Basket grocery store franchise — investment, process, and what to expect', 'Complete franchise guide', 'Expert Guide', 'E8SjNuM04Xk'], ['custom/7x_Basket_Store.png', 'Supermarket franchise offer — opening your store: ₹13 lakh investment, what you get', 'Full breakdown of costs and support', 'Business Overview', '_AWeuLbDD1w'], ['custom/7x_Basket_Store.png', 'Full setup guide — from agreement to grand opening, step by step', 'Complete launch timeline explained', 'Step-by-Step', 'znAW7U4EoDY']] as [$img, $title, $subtitle, $tag, $ytId])
@@ -685,8 +724,9 @@
         <div x-show="videoModal" x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
             x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0" class="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4"
-            @click.self="closeVideo()" style="display:none">
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4" @click.self="closeVideo()"
+            style="display:none">
             <button @click="closeVideo()"
                 class="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
