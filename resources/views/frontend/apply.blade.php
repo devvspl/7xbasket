@@ -244,7 +244,7 @@
                 @foreach ([
             [1, '💰', 'Zero royalty model', 'Keep 100% of your profits for first 2 years. We earn through the supply chain. Your revenue is yours - no royalty deducted for first 2 years.'],
             [2, '🏗️', '45-day store launch', 'Store ready in 45 days flat. From signed agreement to grand opening in 45 days, fully managed by our operations team.'],
-            [3, '📦', '10,000+ products', 'Direct sourcing at wholesale prices. Top FMCG brands, daily delivery, at prices that give you competitive margins on every sale.'],
+            [3, '📦', '15,000+ products', 'Direct sourcing at wholesale prices. Top FMCG brands, daily delivery, at prices that give you competitive margins on every sale.'],
             [4, '🖥️', 'Cloud POS and app', 'One platform for your entire store. Billing, inventory, and sales analytics in one app. No prior tech knowledge needed to use it.'],
             [5, '👥', 'Staff training', 'Your team is trained before day one. Complete operations training for you and every staff member, before the store opens its doors.'],
             [6, '📣', 'Marketing support', 'National campaigns, local results. Branded marketing kits and national digital campaigns that bring customers in from week one.'],
@@ -402,7 +402,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
             <div class="text-center mb-6" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Our Product Range</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-2">10,000+ Products from India's Top
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-2">15,000+ Products from India's Top
                     Brands
                 </h2>
                 <p class="text-gray-500 max-w-xl mx-auto text-sm">Every category your customers need — all under one roof,

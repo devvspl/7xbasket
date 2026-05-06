@@ -721,7 +721,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 @foreach ([
             ['🏗️', 'Interior Design & Setup', 'Complete store design, shelving, signage, and branding done by our expert team.', '✔ Ready-to-operate store in 45 days', ''],
-            ['📦', 'Product Procurement', 'Access to 10,000+ SKUs sourced directly from top FMCG brands at wholesale prices.', '✔ Daily fresh delivery to your store', ''],
+            ['📦', 'Product Procurement', 'Access to 15,000+ SKUs sourced directly from top FMCG brands at wholesale prices.', '✔ Daily fresh delivery to your store', ''],
             ['🖥️', 'POS Software + Training', 'Cloud-based billing, inventory tracking, and analytics — fully set up and staff-trained.', '✔ Zero tech knowledge required', ''],
             ['👥', 'Staff Hiring & Training', 'We help recruit, screen, and train your store staff to brand standards.', '✔ Trained team before opening day', ''],
             ['📋', 'Legal Documentation', 'Franchise agreement, FSSAI, GST registration, and all compliance paperwork handled.', '✔ 100% legally compliant from day one', ''],
@@ -755,13 +755,13 @@
     </section>
 
     {{-- ══════════════════════════════════════════
-     BRANDS — 10,000+ Products
+     BRANDS — 15,000+ Products
 ══════════════════════════════════════════ --}}
     <section class="bg-white border-t border-b border-gray-200 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10">
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Our Product Range</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">10,000+ Products from India's Top
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">15,000+ Products from India's Top
                     Brands</h2>
                 <p class="text-gray-500 max-w-xl mx-auto">Every category your customers need — all under one roof, sourced
                     directly from manufacturers.</p>

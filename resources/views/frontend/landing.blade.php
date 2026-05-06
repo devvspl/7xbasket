@@ -12,7 +12,7 @@
                     the website but give you almost no real support after you sign.
                 </p>
                 <p class="text-gray-700 text-base max-w-4xl mx-auto mt-3 leading-relaxed font-medium">
-                    7x Basket is built differently. You get a fully stocked supermarket franchise — 10,000+ products from
+                    7x Basket is built differently. You get a fully stocked supermarket franchise — 15,000+ products from
                     Amul, HUL, Nestlé, and 150+ national brands — open in 45 days, with one named person managing your
                     account from day one.
                 </p>
@@ -31,7 +31,7 @@
 
                     {{-- Key Benefits --}}
                     <div class="grid grid-cols-2 gap-3 mb-5">
-                        @foreach ([['💰', 'Zero royalty — 2 years', 'Keep every rupee of profit for your first two years of operation.'], ['🚀', 'Opens in 45 days', 'Signed agreement to grand opening in 45 days, fully managed.'], ['🎓', 'Full staff training', 'Your team trained and ready before the doors open.'], ['📦', '10,000+ products', 'Direct sourcing from top FMCG brands at wholesale prices.'], ['🔒', 'Exclusive territory', 'Your pincode zone is protected — no competing store nearby.'], ['💵', 'Starts at ₹13 lakh', 'Transparent investment breakdown — no surprise costs after signing.']] as [$icon, $title, $desc])
+                        @foreach ([['💰', 'Zero royalty — 2 years', 'Keep every rupee of profit for your first two years of operation.'], ['🚀', 'Opens in 45 days', 'Signed agreement to grand opening in 45 days, fully managed.'], ['🎓', 'Full staff training', 'Your team trained and ready before the doors open.'], ['📦', '15,000+ products', 'Direct sourcing from top FMCG brands at wholesale prices.'], ['🔒', 'Exclusive territory', 'Your pincode zone is protected — no competing store nearby.'], ['💵', 'Starts at ₹13 lakh', 'Transparent investment breakdown — no surprise costs after signing.']] as [$icon, $title, $desc])
                             <div class="flex items-start gap-3 bg-gray-50 rounded-xl p-3 border border-gray-100">
                                 <span class="text-xl flex-shrink-0">{{ $icon }}</span>
                                 <div>
@@ -247,7 +247,7 @@
                 @foreach ([
             [1, '💰', 'Zero royalty — 2 years', 'You keep 100% of what your store earns for the first two years. 7x Basket earns through the supply chain, not your revenue. No royalty deducted, no hidden monthly fee. Your profit is yours to reinvest or take home.'],
             [2, '🏗️', 'Store ready in 45 days', 'From signed agreement to grand opening in 45 days. Applies to every store format — mini supermarket franchise or full hyper format. The operations team manages the full setup: fit-out, shelving, branding, and POS installation. You do not manage contractors or chase timelines.'],
-            [3, '📦', '10,000+ products at wholesale', 'Direct sourcing from national FMCG brands at prices that give you margins a standalone kirana cannot match. Stock from Amul, Nestlé, HUL, Britannia, Dabur, and 150+ others, delivered on a regular cycle.'],
+            [3, '📦', '15,000+ products at wholesale', 'Direct sourcing from national FMCG brands at prices that give you margins a standalone kirana cannot match. Stock from Amul, Nestlé, HUL, Britannia, Dabur, and 150+ others, delivered on a regular cycle.'],
             [4, '🖥️', 'Cloud POS and inventory app', 'One platform for billing, stock tracking, and sales data. Works on a tablet or a basic laptop. No IT background needed. Your staff learns it before the store opens, and support is one call away if anything goes wrong.'],
             [5, '👥', 'Staff hired and trained', '7x Basket helps you hire and then trains every staff member before opening day. They know the POS, the layout, the customer flow, and the inventory system. You do not start with untrained staff figuring things out on your customers.'],
             [6, '📣', 'Marketing from week one', 'Branded marketing kits for your local area and national digital campaigns that drive footfall. You do not build a customer base from zero — the brand name and the marketing bring people in from the first week.'],
@@ -401,7 +401,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
             <div class="text-center mb-6" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Our Product Range</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-2">10,000+ products from India's most
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-2">15,000+ products from India's most
                     recognised brands</h2>
                 <p class="text-gray-500 max-w-2xl mx-auto text-sm">Your store stocks what people actually buy — not niche
                     imports, not unknown labels. The brands your customers grew up with: Amul, Britannia, Parle, ITC, HUL,
