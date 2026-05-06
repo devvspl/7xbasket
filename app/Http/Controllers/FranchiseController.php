@@ -54,6 +54,7 @@ class FranchiseController extends Controller
                 'city' => 'nullable|string|min:2|max:100',
                 'investment_budget' => 'nullable|string|max:100',
                 'message' => 'nullable|string|max:1000',
+                'action_type' => 'nullable|string|in:whatsapp,call,brochure|max:50',
             ], [
                 'name.required' => 'Please enter your full name.',
                 'name.min' => 'Name must be at least 2 characters.',
@@ -118,6 +119,7 @@ class FranchiseController extends Controller
             'opening_timeline' => $validated['opening_timeline'] ?? null,
             'ip_address' => $ip,
             'source' => $source,
+            'action_type' => $validated['action_type'] ?? null,
             'is_spam' => $isSpam,
             'submission_count' => $recentCount + 1,
             'device_type' => $deviceType,
