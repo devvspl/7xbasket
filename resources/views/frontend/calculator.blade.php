@@ -19,29 +19,28 @@
             </nav>
         </div>
     </section>
-
-    <section class="py-12 bg-[#081510]" id="calculator">
+    <section class="py-12 bg-white" id="calculator">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8" data-aos="fade-up">
-                <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Smart Calculator</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-[#c8e8d8] mt-2 mb-3">Plan Your Franchise Investment
+                <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Smart Calculator</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Plan Your Franchise Investment
                 </h2>
-                <p class="text-[#4b7060]  mx-auto">Calculate startup costs and projected earnings — all in one
+                <p class="text-gray-600 mx-auto">Calculate startup costs and projected earnings — all in one
                     place.</p>
             </div>
 
             <div x-data="{ tab: 'cost' }" data-aos="fade-up" data-aos-delay="100">
                 <div class="flex justify-center mb-6">
-                    <div class="inline-flex bg-[#1a2e27] rounded-2xl p-1 gap-1">
+                    <div class="inline-flex bg-gray-100 rounded-2xl p-1 gap-1">
                         <button @click="tab = 'cost'"
-                            :class="tab === 'cost' ? 'bg-[#0f1f1a] text-[#4ade80] shadow-sm' :
-                                'text-[#6b8f7e] hover:text-[#4ade80]'"
+                            :class="tab === 'cost' ? 'bg-white text-[#109125] shadow-sm' :
+                                'text-gray-600 hover:text-[#109125]'"
                             class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200">
                             💰 Investment Calculator
                         </button>
                         <button @click="tab = 'earn'"
-                            :class="tab === 'earn' ? 'bg-[#0f1f1a] text-[#4ade80] shadow-sm' :
-                                'text-[#6b8f7e] hover:text-[#4ade80]'"
+                            :class="tab === 'earn' ? 'bg-white text-[#109125] shadow-sm' :
+                                'text-gray-600 hover:text-[#109125]'"
                             class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200">
                             📈 Income calculator
                         </button>
@@ -174,53 +173,77 @@
 
                             {{-- RIGHT: Results --}}
                             <div class="p-6 sm:p-8 bg-[#081510]">
-                                <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Total
-                                    Estimated Investment</p>
-                                <p class="text-5xl font-extrabold text-[#f5a623] mb-1" x-text="fmt(totalStartup)"></p>
-                                <p class="text-[#6b8f7e] text-xs mb-6">Based on <span
-                                        x-text="Number(area).toLocaleString('en-IN')"></span> sq ft store area</p>
+                                {{-- Show message if area is less than minimum --}}
+                                <div x-show="area < 500" x-cloak
+                                    class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                    <div
+                                        class="w-16 h-16 bg-[#ec2024]/20 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-[#ec2024]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                        </svg>
+                                    </div>
+                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Minimum Area Required
+                                    </p>
+                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Please select a store area of at
+                                        least 500 sq ft to see investment calculations.</p>
+                                </div>
 
-                                {{-- Cost Breakdown --}}
-                                <div class="space-y-4">
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Interior cost (Store Interior)</span>
-                                            <span class="font-bold text-white" x-text="fmt(interiorCost)"></span>
+                                {{-- Show results if area is valid --}}
+                                <div x-show="area >= 500" x-cloak>
+                                    <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Total
+                                        Estimated Investment</p>
+                                    <p class="text-5xl font-extrabold text-[#f5a623] mb-1" x-text="fmt(totalStartup)"></p>
+                                    <p class="text-[#6b8f7e] text-xs mb-6">Based on <span
+                                            x-text="Number(area).toLocaleString('en-IN')"></span> sq ft store area</p>
+
+                                    {{-- Cost Breakdown --}}
+                                    <div class="space-y-4">
+                                        <div>
+                                            <div class="flex justify-between text-sm mb-1.5">
+                                                <span class="text-[#9bbfb0] font-medium">Interior cost (Store
+                                                    Interior)</span>
+                                                <span class="font-bold text-white" x-text="fmt(interiorCost)"></span>
+                                            </div>
+                                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                                <div class="bg-[#109125] h-full rounded-full transition-all duration-500"
+                                                    :style="`width: ${interiorPercent}%`"></div>
+                                            </div>
                                         </div>
-                                        <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                            <div class="bg-[#109125] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${interiorPercent}%`"></div>
+                                        <div>
+                                            <div class="flex justify-between text-sm mb-1.5">
+                                                <span class="text-[#9bbfb0] font-medium">Inventory cost (Product
+                                                    Cost)</span>
+                                                <span class="font-bold text-white" x-text="fmt(inventoryCost)"></span>
+                                            </div>
+                                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                                <div class="bg-[#055346] h-full rounded-full transition-all duration-500"
+                                                    :style="`width: ${inventoryPercent}%`"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Inventory cost (Product Cost)</span>
-                                            <span class="font-bold text-white" x-text="fmt(inventoryCost)"></span>
+                                        <div>
+                                            <div class="flex justify-between text-sm mb-1.5">
+                                                <span class="text-[#9bbfb0] font-medium">Franchise Fees (incl. GST)</span>
+                                                <span class="font-bold text-white"
+                                                    x-text="fmt(franchiseFeesWithGst)"></span>
+                                            </div>
+                                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                                <div class="bg-[#ec2024] h-full rounded-full transition-all duration-500"
+                                                    :style="`width: ${franchisePercent}%`"></div>
+                                            </div>
                                         </div>
-                                        <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                            <div class="bg-[#055346] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${inventoryPercent}%`"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Franchise Fees (incl. GST)</span>
-                                            <span class="font-bold text-white" x-text="fmt(franchiseFeesWithGst)"></span>
-                                        </div>
-                                        <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                            <div class="bg-[#ec2024] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${franchisePercent}%`"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Software cost per login (incl.
-                                                GST)</span>
-                                            <span class="font-bold text-white" x-text="fmt(softwareCostWithGst)"></span>
-                                        </div>
-                                        <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                            <div class="bg-[#f5a623] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${softwarePercent}%`"></div>
+                                        <div>
+                                            <div class="flex justify-between text-sm mb-1.5">
+                                                <span class="text-[#9bbfb0] font-medium">Software cost per login (incl.
+                                                    GST)</span>
+                                                <span class="font-bold text-white"
+                                                    x-text="fmt(softwareCostWithGst)"></span>
+                                            </div>
+                                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                                <div class="bg-[#f5a623] h-full rounded-full transition-all duration-500"
+                                                    :style="`width: ${softwarePercent}%`"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -374,77 +397,99 @@
 
                             {{-- RIGHT: Results --}}
                             <div class="p-6 sm:p-8 bg-[#081510]">
-                                <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Net Monthly
-                                    Profit</p>
-                                <p class="text-5xl font-extrabold text-[#f5a623] leading-none mb-1"
-                                    x-text="fmtFull(netMonthlyProfit)"></p>
-                                <p class="text-[#6b8f7e] text-xs mb-5">Estimated based on <span
-                                        x-text="Number(area).toLocaleString('en-IN')"></span> sq ft store</p>
-
-                                {{-- KPI Cards --}}
-                                <div class="grid grid-cols-3 gap-3 mb-5">
-                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
-                                        <p class="text-[#f5a623] text-xl font-extrabold">25%</p>
-                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Margin</p>
+                                {{-- Show message if area is less than minimum --}}
+                                <div x-show="area < 500" x-cloak
+                                    class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                    <div
+                                        class="w-16 h-16 bg-[#ec2024]/20 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-[#ec2024]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                        </svg>
                                     </div>
-                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
-                                        <p class="text-[#f5a623] text-xl font-extrabold" x-text="paybackMonths + 'mo'">
-                                        </p>
-                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Breakeven</p>
-                                    </div>
-                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
-                                        <p class="text-[#4ade80] text-xl font-extrabold" x-text="annualRoi + '%'"></p>
-                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Annual ROI</p>
-                                    </div>
+                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Minimum Area
+                                        Required</p>
+                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Please select a store area of at
+                                        least 500 sq ft to see earnings projections.</p>
                                 </div>
 
-                                {{-- Annual Profit highlight --}}
-                                <div
-                                    class="bg-[#109125]/10 border border-[#109125]/30 rounded-xl p-3 mb-5 flex items-center justify-between">
-                                    <div>
-                                        <p class="text-[#4ade80] text-xs font-semibold uppercase tracking-wider">Year 1
-                                            Annual Profit</p>
-                                        <p class="text-[#6b8f7e] text-[10px]">Net Monthly Profit × 12</p>
-                                    </div>
-                                    <p class="text-[#4ade80] text-2xl font-extrabold" x-text="fmtFull(annualProfit)"></p>
-                                </div>
+                                {{-- Show results if area is valid --}}
+                                <div x-show="area >= 500" x-cloak>
+                                    <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Net
+                                        Monthly
+                                        Profit</p>
+                                    <p class="text-5xl font-extrabold text-[#f5a623] leading-none mb-1"
+                                        x-text="fmtFull(netMonthlyProfit)"></p>
+                                    <p class="text-[#6b8f7e] text-xs mb-5">Estimated based on <span
+                                            x-text="Number(area).toLocaleString('en-IN')"></span> sq ft store</p>
 
-                                {{-- 12-Month Bar Chart --}}
-                                <p class="text-[#4b7060] text-xs font-semibold uppercase tracking-wider mb-2">Monthly
-                                    Earnings Projection</p>
-                                <div class="flex items-end gap-1 h-24">
-                                    <template x-for="(bar, i) in chartBars" :key="i">
-                                        <div class="flex-1 rounded-t-sm transition-all duration-500 ease-out"
-                                            :style="`height: ${Math.round((bar / maxBar) * 100)}%; background: ${i >= 9 ? '#4ade80' : i >= 6 ? '#22c55e' : i >= 3 ? '#16a34a' : '#109125'}; min-height: 3px;`">
+                                    {{-- KPI Cards --}}
+                                    <div class="grid grid-cols-3 gap-3 mb-5">
+                                        <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                            <p class="text-[#f5a623] text-xl font-extrabold">25%</p>
+                                            <p class="text-[#9bbfb0] text-xs mt-0.5">Margin</p>
                                         </div>
-                                    </template>
-                                </div>
-                                <div class="flex justify-between text-xs text-[#2e4d3d] mt-1.5">
-                                    <span>Month 1</span><span>Month 6</span><span>Month 12</span>
-                                </div>
+                                        <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                            <p class="text-[#f5a623] text-xl font-extrabold"
+                                                x-text="paybackMonths + 'mo'">
+                                            </p>
+                                            <p class="text-[#9bbfb0] text-xs mt-0.5">Breakeven</p>
+                                        </div>
+                                        <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                            <p class="text-[#4ade80] text-xl font-extrabold" x-text="annualRoi + '%'"></p>
+                                            <p class="text-[#9bbfb0] text-xs mt-0.5">Annual ROI</p>
+                                        </div>
+                                    </div>
 
-                                {{-- Total Setup Cost --}}
-                                <div
-                                    class="mt-4 bg-white/[0.04] rounded-xl px-4 py-2.5 flex justify-between border border-white/[0.06]">
-                                    <span class="text-[#9bbfb0] text-xs font-medium">Total Investment Required</span>
-                                    <span class="text-white text-xs font-bold" x-text="fmtFull(totalSetup)"></span>
+                                    {{-- Annual Profit highlight --}}
+                                    <div
+                                        class="bg-[#109125]/10 border border-[#109125]/30 rounded-xl p-3 mb-5 flex items-center justify-between">
+                                        <div>
+                                            <p class="text-[#4ade80] text-xs font-semibold uppercase tracking-wider">Year 1
+                                                Annual Profit</p>
+                                            <p class="text-[#6b8f7e] text-[10px]">Net Monthly Profit × 12</p>
+                                        </div>
+                                        <p class="text-[#4ade80] text-2xl font-extrabold" x-text="fmtFull(annualProfit)">
+                                        </p>
+                                    </div>
+
+                                    {{-- 12-Month Bar Chart --}}
+                                    <p class="text-[#4b7060] text-xs font-semibold uppercase tracking-wider mb-2">Monthly
+                                        Earnings Projection</p>
+                                    <div class="flex items-end gap-1 h-24">
+                                        <template x-for="(bar, i) in chartBars" :key="i">
+                                            <div class="flex-1 rounded-t-sm transition-all duration-500 ease-out"
+                                                :style="`height: ${Math.round((bar / maxBar) * 100)}%; background: ${i >= 9 ? '#4ade80' : i >= 6 ? '#22c55e' : i >= 3 ? '#16a34a' : '#109125'}; min-height: 3px;`">
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <div class="flex justify-between text-xs text-[#2e4d3d] mt-1.5">
+                                        <span>Month 1</span><span>Month 6</span><span>Month 12</span>
+                                    </div>
+
+                                    {{-- Total Setup Cost --}}
+                                    <div
+                                        class="mt-4 bg-white/[0.04] rounded-xl px-4 py-2.5 flex justify-between border border-white/[0.06]">
+                                        <span class="text-[#9bbfb0] text-xs font-medium">Total Investment Required</span>
+                                        <span class="text-white text-xs font-bold" x-text="fmtFull(totalSetup)"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                {{-- Disclaimer --}}
-                <div class="mt-5">
-                    <p class="text-[#4b7060] text-xs text-center leading-relaxed">
-                        <span class="text-[#6b8f7e] font-semibold">Disclaimer:</span>
-                        Projections are based on average data from 7x Basket franchise partners. Actual results vary by
-                        location, footfall, and store management.
-                    </p>
-                </div>
+                    {{-- Disclaimer --}}
+                    <div class="mt-5">
+                        <p class="text-[#4b7060] text-xs text-center leading-relaxed">
+                            <span class="text-[#6b8f7e] font-semibold">Disclaimer:</span>
+                            Projections are based on average data from 7x Basket franchise partners. Actual results vary by
+                            location, footfall, and store management.
+                        </p>
+                    </div>
 
+                </div>
             </div>
-        </div>
     </section>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>

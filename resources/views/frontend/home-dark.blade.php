@@ -426,6 +426,7 @@
                     <div x-data="{
                         area: 2000,
                         format: 'super',
+                        hasInteracted: false,
                         
                         /* ── Configuration (can be made dynamic from backend) ── */
                         interiorCostPerSqFt: 1000,
@@ -444,6 +445,7 @@
                         selectFormat(key) {
                             this.format = key;
                             this.area = this.formats[key].default;
+                            this.hasInteracted = true;
                         },
                     
                         /* ── Startup Cost Formulas (Excel-based with GST) ── */
@@ -495,7 +497,7 @@
                                         Format</label>
                                     <div class="grid grid-cols-3 gap-3">
                                         <template x-for="(f, key) in formats" :key="key">
-                                            <button @click="selectFormat(key)"
+                                            <button @click="selectFormat(key); hasInteracted = true"
                                                 :class="format === key ?
                                                     'border-[#f5a623] bg-[#f5a623]/10 text-[#f5a623]' :
                                                     'border-white/20 text-[#9bbfb0] hover:border-white/40'"
@@ -516,14 +518,14 @@
                                         <div
                                             class="flex items-center gap-1 bg-[#1a2e27] border border-white/20 rounded-lg px-2 py-1">
                                             <input type="number" x-model.number="area"
-                                                @input="let v = Number($event.target.value); area = v > 10000 ? 10000 : (v || v === 0 ? v : area)"
+                                                @input="let v = Number($event.target.value); area = v > 10000 ? 10000 : (v || v === 0 ? v : area); hasInteracted = true"
                                                 @blur="area = Math.min(10000, Math.max(500, Number($event.target.value) || 500))"
                                                 class="w-20 bg-transparent text-[#f5a623] text-sm font-bold text-right outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none">
                                             <span class="text-[#6b8f7e] text-xs">sq ft</span>
                                         </div>
                                     </div>
                                     <input type="range" x-model.number="area" min="500" max="10000"
-                                        step="100"
+                                        step="100" @input="hasInteracted = true"
                                         class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
                                     <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
                                         <span>500</span><span>5,000</span><span>10,000</span>
@@ -538,8 +540,19 @@
 
                             {{-- RIGHT: Results --}}
                             <div class="p-6 sm:p-8 bg-[#081510]">
+                                {{-- Show initial message before interaction --}}
+                                <div x-show="!hasInteracted" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                    <div class="w-16 h-16 bg-[#109125]/20 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-[#4ade80]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                        </svg>
+                                    </div>
+                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Ready to Calculate</p>
+                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Select a store format or adjust the area slider to see your investment breakdown.</p>
+                                </div>
+
                                 {{-- Show message if area is less than minimum --}}
-                                <div x-show="area < 500" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                <div x-show="hasInteracted && area < 500" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
                                     <div class="w-16 h-16 bg-[#ec2024]/20 rounded-full flex items-center justify-center mb-4">
                                         <svg class="w-8 h-8 text-[#ec2024]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
@@ -550,7 +563,7 @@
                                 </div>
 
                                 {{-- Show results if area is valid --}}
-                                <div x-show="area >= 500" x-cloak>
+                                <div x-show="hasInteracted && area >= 500" x-cloak>
                                     <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Total
                                         Estimated Investment</p>
                                     <p class="text-5xl font-extrabold text-[#f5a623] mb-1" x-text="fmt(totalStartup)"></p>
@@ -627,6 +640,7 @@
 
                     <div x-data="{
                         area: 2000,
+                        hasInteracted: false,
                         
                         /* ── Configuration (same as Startup Costs tab) ── */
                         interiorCostPerSqFt: 1000,
@@ -701,14 +715,14 @@
                                         <div
                                             class="flex items-center gap-1 bg-[#1a2e27] border border-white/20 rounded-lg px-2 py-1">
                                             <input type="number" x-model.number="area"
-                                                @input="let v = Number($event.target.value); area = v > 10000 ? 10000 : (v || v === 0 ? v : area)"
+                                                @input="let v = Number($event.target.value); area = v > 10000 ? 10000 : (v || v === 0 ? v : area); hasInteracted = true"
                                                 @blur="area = Math.min(10000, Math.max(500, Number($event.target.value) || 500))"
                                                 class="w-20 bg-transparent text-[#f5a623] text-sm font-bold text-right outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none">
                                             <span class="text-[#6b8f7e] text-xs">sq ft</span>
                                         </div>
                                     </div>
                                     <input type="range" x-model.number="area" min="500" max="10000"
-                                        step="100"
+                                        step="100" @input="hasInteracted = true"
                                         class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
                                     <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
                                         <span>500</span><span>5,000</span><span>10,000</span>
@@ -751,8 +765,19 @@
 
                             {{-- RIGHT: Results --}}
                             <div class="p-6 sm:p-8 bg-[#081510]">
+                                {{-- Show initial message before interaction --}}
+                                <div x-show="!hasInteracted" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                    <div class="w-16 h-16 bg-[#109125]/20 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-[#4ade80]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                        </svg>
+                                    </div>
+                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Ready to Calculate</p>
+                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Adjust the area slider to see your projected earnings and ROI.</p>
+                                </div>
+
                                 {{-- Show message if area is less than minimum --}}
-                                <div x-show="area < 500" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                <div x-show="hasInteracted && area < 500" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
                                     <div class="w-16 h-16 bg-[#ec2024]/20 rounded-full flex items-center justify-center mb-4">
                                         <svg class="w-8 h-8 text-[#ec2024]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
@@ -763,7 +788,7 @@
                                 </div>
 
                                 {{-- Show results if area is valid --}}
-                                <div x-show="area >= 500" x-cloak>
+                                <div x-show="hasInteracted && area >= 500" x-cloak>
                                     <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Net Monthly
                                         Profit</p>
                                     <p class="text-5xl font-extrabold text-[#f5a623] leading-none mb-1"
