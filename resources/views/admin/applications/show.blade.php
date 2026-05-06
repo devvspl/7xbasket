@@ -94,10 +94,10 @@
                     <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Page URL</p>
                     <p class="text-xs text-gray-700 break-all">{{ $application->page_url ?? '—' }}</p>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100 sm:col-span-2">
+                {{-- <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100 sm:col-span-2">
                     <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Referrer</p>
                     <p class="text-xs text-gray-700 break-all">{{ $application->referer_url ?: '—' }}</p>
-                </div>
+                </div> --}}
                 <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100 sm:col-span-2">
                     <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">User Agent</p>
                     <p class="text-xs text-gray-500 break-all">{{ $application->user_agent ?? '—' }}</p>
