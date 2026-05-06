@@ -24,7 +24,7 @@
     <section class="py-10 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                @foreach ([['📧', 'Email', 'info@7xbasket.com', 'mailto:info@7xbasket.com'], ['📞', 'Phone', '+91 9870275327', 'tel:+919870275327'], ['📍', 'Address', 'Block E, Sector 3, Noida, Uttar Pradesh 201301', 'https://www.google.com/maps?q=28.580768,77.318195'], ['🕐', 'Hours', 'Mon–Sat: 9AM – 6PM', null]] as [$icon, $label, $value, $href])
+                @foreach ([['📧', 'Email', 'info@7xbasket.com', 'mailto:info@7xbasket.com'], ['📞', 'Phone', '+91 9870275327', 'tel:+919870275327'], ['📍', 'Address', 'E-52, 3rd Floor, Sector 3, Noida, 201301, Uttar Pradesh', 'https://www.google.com/maps?q=28.580768,77.318195'], ['🕐', 'Hours', 'Mon–Sat: 9AM – 6PM', null]] as [$icon, $label, $value, $href])
                     <div
                         class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-start gap-3 hover:shadow-md transition-shadow">
                         <div

@@ -236,7 +236,7 @@
                         <li><a href="tel:+919870275327" class="hover:text-white transition-colors">📞 +91
                                 9870275327</a></li>
                         <li><a href="https://maps.app.goo.gl/6RFzYXSyeP5oZ2za7" target="_blank" rel="noopener"
-                                class="hover:text-white transition-colors">📍 E-52, sector 3, third floor, GB Nagar, Noida up, pin code - 201301</a></li>
+                                class="hover:text-white transition-colors">📍 E-52, 3rd Floor, Sector 3, Noida, 201301, Uttar Pradesh</a></li>
                         <li>🕐 Mon–Sat: 9AM – 6PM</li>
                     </ul>
                 </div>
