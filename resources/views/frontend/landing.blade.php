@@ -647,7 +647,7 @@
         <div x-show="lightbox" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150"
             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-            class="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" @click.self="lightbox = false"
+            class="fixed inset-0 z-[60] bg-black/95 flex items-center justify-center" @click.self="lightbox = false"
             style="display:none">
             <button @click="lightbox = false"
                 class="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all z-10">
@@ -685,7 +685,7 @@
         <div x-show="videoModal" x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
             x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+            x-transition:leave-end="opacity-0" class="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4"
             @click.self="closeVideo()" style="display:none">
             <button @click="closeVideo()"
                 class="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all">

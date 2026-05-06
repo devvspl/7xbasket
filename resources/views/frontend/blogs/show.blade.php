@@ -6,10 +6,12 @@
 
 /* Blog content typography */
 .blog-content { font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.8; color: #374151; }
-.blog-content h1 { font-size: 2em; font-weight: 800; color: #111827; margin: 1.2em 0 0.4em; line-height: 1.25; }
-.blog-content h2 { font-size: 1.5em; font-weight: 700; color: #111827; margin: 1.4em 0 0.5em; line-height: 1.3; padding-bottom: 0.35em; border-bottom: 2px solid #f0fdf4; }
-.blog-content h3 { font-size: 1.2em; font-weight: 700; color: #1f2937; margin: 1.2em 0 0.4em; }
-.blog-content h4 { font-size: 1.05em; font-weight: 600; color: #374151; margin: 1em 0 0.3em; }
+.blog-content h1 { font-size: 2.25em; font-weight: 800; color: #111827; margin: 1.2em 0 0.5em; line-height: 1.2; }
+.blog-content h2 { font-size: 1.875em; font-weight: 700; color: #111827; margin: 1.3em 0 0.5em; line-height: 1.25; padding-bottom: 0.4em; border-bottom: 2px solid #f0fdf4; }
+.blog-content h3 { font-size: 1.5em; font-weight: 700; color: #1f2937; margin: 1.2em 0 0.4em; line-height: 1.3; }
+.blog-content h4 { font-size: 1.25em; font-weight: 600; color: #374151; margin: 1.1em 0 0.4em; line-height: 1.35; }
+.blog-content h5 { font-size: 1.125em; font-weight: 600; color: #4b5563; margin: 1em 0 0.3em; line-height: 1.4; }
+.blog-content h6 { font-size: 1em; font-weight: 600; color: #6b7280; margin: 1em 0 0.3em; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.05em; }
 .blog-content p  { margin: 0 0 0.9em; color: #4b5563; }
 .blog-content a  { color: #109125; text-decoration: underline; text-underline-offset: 3px; }
 .blog-content a:hover { color: #0d7a1e; }
