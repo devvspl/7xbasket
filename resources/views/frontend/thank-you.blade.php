@@ -34,4 +34,30 @@
             </div>
         </div>
     </section>
+
+    <script>
+        // Handle pending WhatsApp/Call actions from form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const pendingAction = sessionStorage.getItem('pendingAction');
+            const userName = sessionStorage.getItem('userName');
+            const userPhone = sessionStorage.getItem('userPhone');
+            
+            if (pendingAction) {
+                // Clear the stored data
+                sessionStorage.removeItem('pendingAction');
+                sessionStorage.removeItem('userName');
+                sessionStorage.removeItem('userPhone');
+                
+                // Execute the action after a short delay
+                setTimeout(() => {
+                    if (pendingAction === 'whatsapp') {
+                        const text = encodeURIComponent('Hi, I\'m ' + userName + ' (' + userPhone + '). I\'m interested in 7x Basket franchise.');
+                        window.open('https://wa.me/919870275327?text=' + text, '_blank');
+                    } else if (pendingAction === 'call') {
+                        window.location.href = 'tel:+919870275327';
+                    }
+                }, 500);
+            }
+        });
+    </script>
 @endsection
