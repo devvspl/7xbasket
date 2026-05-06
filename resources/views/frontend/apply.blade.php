@@ -118,7 +118,7 @@
                                 <option value="1_month">Within 1 Month</option>
                                 <option value="3_months">1–3 Months</option>
                                 <option value="6_months">3–6 Months</option>
-                                <option value="1_year">6–12 Months</option>
+                                <option value="within_a_week">Within A Week</option>
                                 <option value="exploring">Just Exploring</option>
                             </select>
                         </div>

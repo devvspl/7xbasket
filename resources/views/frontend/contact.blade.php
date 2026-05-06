@@ -24,7 +24,7 @@
     <section class="py-10 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                @foreach ([['📧', 'Email', 'info@7xbasket.com', 'mailto:info@7xbasket.com'], ['📞', 'Phone', '+91 9870275327', 'tel:+919870275327'], ['📍', 'Address', 'Lajpat Nagar, New Delhi', 'https://maps.app.goo.gl/xKx7arLWfbyjaZvB8'], ['🕐', 'Hours', 'Mon–Sat: 9AM – 6PM', null]] as [$icon, $label, $value, $href])
+                @foreach ([['📧', 'Email', 'info@7xbasket.com', 'mailto:info@7xbasket.com'], ['📞', 'Phone', '+91 9870275327', 'tel:+919870275327'], ['📍', 'Address', 'Block E, Sector 3, Noida, Uttar Pradesh 201301', 'https://www.google.com/maps?q=28.580768,77.318195'], ['🕐', 'Hours', 'Mon–Sat: 9AM – 6PM', null]] as [$icon, $label, $value, $href])
                     <div
                         class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-start gap-3 hover:shadow-md transition-shadow">
                         <div
@@ -122,7 +122,7 @@
                                 <option value="1_month">Within 1 Month</option>
                                 <option value="3_months">1–3 Months</option>
                                 <option value="6_months">3–6 Months</option>
-                                <option value="1_year">6–12 Months</option>
+                                <option value="within_a_week">Within A Week</option>
                                 <option value="exploring">Just Exploring</option>
                             </select>
                         </div>
@@ -137,9 +137,8 @@
 
                 {{-- Map --}}
                 <div class="rounded-2xl overflow-hidden border border-gray-100 shadow-sm h-full min-h-[500px]">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14015.505069970473!2d77.240493!3d28.573478000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce2552214615f%3A0x1ecdf1a3b48264d5!2sOSR%20JEWELLERS!5e0!3m2!1sen!2sus!4v1775920574387!5m2!1sen!2sus"
-                        width="100%" height="100%" style="border:0; min-height:500px;" allowfullscreen="" loading="lazy"
+                    <iframe src="https://maps.google.com/maps?q=28.580768,77.318195&z=15&output=embed" width="100%"
+                        height="100%" style="border:0; min-height:500px;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>

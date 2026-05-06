@@ -406,7 +406,7 @@
                             :class="tab === 'earn' ? 'bg-[#0f1f1a] text-[#4ade80] shadow-sm' :
                                 'text-[#6b8f7e] hover:text-[#4ade80]'"
                             class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200">
-                            📈 Earnings Projection
+                            📈 Income calculator
                         </button>
                     </div>
                 </div>
@@ -428,7 +428,8 @@
                         format: 'super',
                         
                         /* ── Configuration (can be made dynamic from backend) ── */
-                        costPerSqFt: 2000,
+                        interiorCostPerSqFt: 1000,
+                        inventoryCostPerSqFt: 1000,
                         franchiseBaseCost: 210000,
                         softwareBaseCost: 40000,
                         gstRate: 0.18,
@@ -446,25 +447,31 @@
                         },
                     
                         /* ── Startup Cost Formulas (Excel-based with GST) ── */
-                        get areaCost() { 
-                            return this.area * this.costPerSqFt 
+                        get interiorCost() { 
+                            return this.area * this.interiorCostPerSqFt 
                         },
-                        get franchiseCostWithGst() { 
+                        get inventoryCost() { 
+                            return this.area * this.inventoryCostPerSqFt 
+                        },
+                        get franchiseFeesWithGst() { 
                             return Math.round(this.franchiseBaseCost * (1 + this.gstRate))
                         },
                         get softwareCostWithGst() { 
                             return Math.round(this.softwareBaseCost * (1 + this.gstRate))
                         },
                         get totalStartup() { 
-                            return this.areaCost + this.franchiseCostWithGst + this.softwareCostWithGst 
+                            return this.interiorCost + this.inventoryCost + this.franchiseFeesWithGst + this.softwareCostWithGst 
                         },
                     
                         /* ── Percentage calculations for progress bars ── */
-                        get areaPercent() { 
-                            return Math.round((this.areaCost / this.totalStartup) * 100) 
+                        get interiorPercent() { 
+                            return Math.round((this.interiorCost / this.totalStartup) * 100) 
+                        },
+                        get inventoryPercent() { 
+                            return Math.round((this.inventoryCost / this.totalStartup) * 100) 
                         },
                         get franchisePercent() { 
-                            return Math.round((this.franchiseCostWithGst / this.totalStartup) * 100) 
+                            return Math.round((this.franchiseFeesWithGst / this.totalStartup) * 100) 
                         },
                         get softwarePercent() { 
                             return Math.round((this.softwareCostWithGst / this.totalStartup) * 100) 
@@ -541,31 +548,41 @@
                                 <div class="space-y-4">
                                     <div>
                                         <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Inventory Cost (Product Cost)</span>
-                                            <span class="font-bold text-white" x-text="fmt(areaCost)"></span>
+                                            <span class="text-[#9bbfb0] font-medium">Interior cost (Store Interior)</span>
+                                            <span class="font-bold text-white" x-text="fmt(interiorCost)"></span>
                                         </div>
                                         <div class="h-2 bg-white/10 rounded-full overflow-hidden">
                                             <div class="bg-[#109125] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${areaPercent}%`"></div>
+                                                :style="`width: ${interiorPercent}%`"></div>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Interior Cost (Store Interior)</span>
-                                            <span class="font-bold text-white" x-text="fmt(franchiseCostWithGst)"></span>
+                                            <span class="text-[#9bbfb0] font-medium">Inventory cost (Product Cost)</span>
+                                            <span class="font-bold text-white" x-text="fmt(inventoryCost)"></span>
                                         </div>
                                         <div class="h-2 bg-white/10 rounded-full overflow-hidden">
                                             <div class="bg-[#055346] h-full rounded-full transition-all duration-500"
+                                                :style="`width: ${inventoryPercent}%`"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1.5">
+                                            <span class="text-[#9bbfb0] font-medium">Franchise Fees (incl. GST)</span>
+                                            <span class="font-bold text-white" x-text="fmt(franchiseFeesWithGst)"></span>
+                                        </div>
+                                        <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                            <div class="bg-[#ec2024] h-full rounded-full transition-all duration-500"
                                                 :style="`width: ${franchisePercent}%`"></div>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Software Cost (incl. GST)</span>
+                                            <span class="text-[#9bbfb0] font-medium">Software cost per login (incl. GST)</span>
                                             <span class="font-bold text-white" x-text="fmt(softwareCostWithGst)"></span>
                                         </div>
                                         <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                            <div class="bg-[#ec2024] h-full rounded-full transition-all duration-500"
+                                            <div class="bg-[#f5a623] h-full rounded-full transition-all duration-500"
                                                 :style="`width: ${softwarePercent}%`"></div>
                                         </div>
                                     </div>
@@ -598,23 +615,27 @@
                         area: 2000,
                         
                         /* ── Configuration (same as Startup Costs tab) ── */
-                        costPerSqFt: 2000,
+                        interiorCostPerSqFt: 1000,
+                        inventoryCostPerSqFt: 1000,
                         franchiseBaseCost: 210000,
                         softwareBaseCost: 40000,
                         gstRate: 0.18,
                     
                         /* ── Startup Cost (same formula as Tab 1) ── */
-                        get areaCost() { 
-                            return this.area * this.costPerSqFt 
+                        get interiorCost() { 
+                            return this.area * this.interiorCostPerSqFt 
                         },
-                        get franchiseCostWithGst() { 
+                        get inventoryCost() { 
+                            return this.area * this.inventoryCostPerSqFt 
+                        },
+                        get franchiseFeesWithGst() { 
                             return Math.round(this.franchiseBaseCost * (1 + this.gstRate))
                         },
                         get softwareCostWithGst() { 
                             return Math.round(this.softwareBaseCost * (1 + this.gstRate))
                         },
                         get startupCost() { 
-                            return this.areaCost + this.franchiseCostWithGst + this.softwareCostWithGst 
+                            return this.interiorCost + this.inventoryCost + this.franchiseFeesWithGst + this.softwareCostWithGst 
                         },
                     
                         /* ── Total Setup (no separate stock investment) ── */
