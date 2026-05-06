@@ -336,7 +336,7 @@
                         <select name="store_area" required
                             class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all bg-white">
                             <option value="" disabled selected>Select area</option>
-                            <option value="300-500">300–500 sq ft (Mini)</option>
+                            
                             <option value="500-800">500–800 sq ft</option>
                             <option value="800-1200">800–1200 sq ft (Super)</option>
                             <option value="1200-2000">1200–2000 sq ft</option>
