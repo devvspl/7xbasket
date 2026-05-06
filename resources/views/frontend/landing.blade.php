@@ -1199,4 +1199,64 @@
             });
         })();
     </script>
+
+    <script>
+        // Handle landing page form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('applyPageForm');
+            if (!form) return;
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const btn = document.getElementById('applyPageSubmit');
+                const msg = document.getElementById('applyFormMsg');
+                
+                btn.disabled = true;
+                btn.innerHTML = '<span class="relative">Submitting…</span>';
+                
+                const data = new FormData(form);
+                
+                fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json',
+                        'X-Page-Url': window.location.href
+                    },
+                    body: data
+                })
+                .then(res => res.json())
+                .then(json => {
+                    msg.classList.remove('hidden');
+                    if (json.success) {
+                        msg.className = 'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-green-50 text-green-700 border border-green-200';
+                        msg.textContent = json.message;
+                        form.reset();
+                        
+                        // Redirect to thank-you page
+                        setTimeout(() => {
+                            if (json.redirect) {
+                                window.location.href = json.redirect;
+                            } else {
+                                window.location.href = '{{ route("thank-you") }}';
+                            }
+                        }, 1500);
+                    } else {
+                        msg.className = 'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-red-50 text-red-700 border border-red-200';
+                        msg.textContent = json.message || 'Something went wrong. Please try again.';
+                        btn.disabled = false;
+                        btn.innerHTML = '<span class="relative">YES — I want to open my store →</span>';
+                    }
+                })
+                .catch(() => {
+                    msg.classList.remove('hidden');
+                    msg.className = 'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-red-50 text-red-700 border border-red-200';
+                    msg.textContent = 'Network error. Please try again.';
+                    btn.disabled = false;
+                    btn.innerHTML = '<span class="relative">YES — I want to open my store →</span>';
+                });
+            });
+        });
+    </script>
 @endsection

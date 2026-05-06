@@ -570,31 +570,20 @@
                             msg.textContent = json.message;
                             form.reset();
 
+                            // Store action and user data in sessionStorage for thank-you page
+                            if (currentAction) {
+                                sessionStorage.setItem('pendingAction', currentAction);
+                                sessionStorage.setItem('userName', submittedName);
+                                sessionStorage.setItem('userPhone', submittedPhone);
+                            }
+
+                            // Redirect to thank-you page
                             setTimeout(() => {
-                                // Redirect to thank-you page if provided
                                 if (json.redirect) {
                                     window.location.href = json.redirect;
-                                    return;
+                                } else {
+                                    window.location.href = '{{ route("thank-you") }}';
                                 }
-
-                                closeLeadPopup();
-
-                                // Handle redirect based on action
-                                if (currentAction === 'whatsapp') {
-                                    var text = encodeURIComponent('Hi, I\'m ' + submittedName +
-                                        ' (' + submittedPhone +
-                                        '). I\'m interested in 7x Basket franchise.');
-                                    window.open('https://wa.me/919870275327?text=' + text,
-                                        '_blank');
-                                } else if (currentAction === 'call') {
-                                    window.location.href = 'tel:+919870275327';
-                                } else if (currentAction === 'brochure') {
-                                    // Trigger brochure download
-                                    window.location.href = '{{ route('brochure.download') }}';
-                                }
-
-                                // Reset action after redirect
-                                _leadAction = null;
                             }, 1500);
                         } else {
                             msg.className =

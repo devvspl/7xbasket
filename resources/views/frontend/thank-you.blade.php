@@ -27,7 +27,7 @@
                         ← Back to Home
                     </a>
                     <a href="{{ route('contact') }}" 
-                        class="inline-flex items-center justify-center bg-[#f5a623] hover:bg-[#e09610] text-white font-bold px-8 py-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl">
+                        class="inline-flex items-center justify-center bg-[#ec2024] hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl">
                         Contact Us
                     </a>
                 </div>
@@ -36,7 +36,7 @@
     </section>
 
     <script>
-        // Handle pending WhatsApp/Call actions from form submission
+        // Handle pending WhatsApp/Call/Brochure actions from form submission
         document.addEventListener('DOMContentLoaded', function() {
             const pendingAction = sessionStorage.getItem('pendingAction');
             const userName = sessionStorage.getItem('userName');
@@ -55,6 +55,8 @@
                         window.open('https://wa.me/919870275327?text=' + text, '_blank');
                     } else if (pendingAction === 'call') {
                         window.location.href = 'tel:+919870275327';
+                    } else if (pendingAction === 'brochure') {
+                        window.location.href = '{{ route('brochure.download') }}';
                     }
                 }, 500);
             }
