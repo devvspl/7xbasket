@@ -79,8 +79,12 @@ class BlogController extends Controller
             $data['slug'] = $this->uniqueSlug($newSlug, $blog->id);
         }
 
-        if ($request->hasFile('featured_image')) {
-            $data['featured_image'] = $this->handleImage($request);
+        // Handle featured image (both base64 and file upload)
+        if ($request->filled('featured_image') || $request->hasFile('featured_image')) {
+            $newImage = $this->handleImage($request);
+            if ($newImage) {
+                $data['featured_image'] = $newImage;
+            }
         }
 
         if ($data['is_published'] && !$blog->published_at) {
@@ -118,6 +122,7 @@ class BlogController extends Controller
             'category'         => 'nullable|string|max:100',
             'tags'             => 'nullable|string|max:255',
             'author'           => 'nullable|string|max:100',
+            'featured_image'   => 'nullable|string', // Changed to accept base64 string
             'featured_image_alt' => 'nullable|string|max:255',
             'is_published'     => 'nullable|in:0,1',
             'meta_title'       => 'nullable|string|max:255',
@@ -153,12 +158,39 @@ class BlogController extends Controller
 
     private function handleImage(Request $request): ?string
     {
+        // Handle base64 cropped image data
+        if ($request->filled('featured_image') && str_starts_with($request->featured_image, 'data:image')) {
+            $imageData = $request->featured_image;
+            
+            // Extract base64 data
+            preg_match('/^data:image\/(\w+);base64,/', $imageData, $matches);
+            $extension = $matches[1] ?? 'jpg';
+            $imageData = substr($imageData, strpos($imageData, ',') + 1);
+            $imageData = base64_decode($imageData);
+            
+            // Generate filename
+            $filename = time() . '_' . uniqid() . '.' . $extension;
+            $path = public_path('uploads/blogs/' . $filename);
+            
+            // Ensure directory exists
+            if (!file_exists(public_path('uploads/blogs'))) {
+                mkdir(public_path('uploads/blogs'), 0755, true);
+            }
+            
+            // Save the file
+            file_put_contents($path, $imageData);
+            
+            return 'uploads/blogs/' . $filename;
+        }
+        
+        // Handle traditional file upload (fallback)
         if ($request->hasFile('featured_image')) {
             $file     = $request->file('featured_image');
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('uploads/blogs'), $filename);
             return 'uploads/blogs/' . $filename;
         }
+        
         return null;
     }
 

@@ -597,8 +597,8 @@
                             </div>
                         </div>
                     @endif
-                    <input type="file" name="featured_image" id="featuredImageInput" accept="image/*"
-                        class="hidden">
+                    <input type="file" id="featuredImageInput" accept="image/*" class="hidden">
+                    <input type="hidden" name="featured_image" id="croppedImageData">
                     <button type="button" onclick="document.getElementById('featuredImageInput').click()"
                         class="w-full text-xs bg-gray-100 hover:bg-gray-200 text-gray-600 py-2 rounded-xl transition-colors font-medium">
                         {{ $blog->featured_image ? 'Change Image' : 'Upload Image' }}
@@ -609,6 +609,64 @@
                             value="{{ old('featured_image_alt', $blog->featured_image_alt) }}"
                             placeholder="Describe the image for SEO & accessibility"
                             class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                </div>
+
+                {{-- Image Crop Modal --}}
+                <div id="cropModal" class="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+                    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col" style="max-height:90vh">
+                        {{-- Header --}}
+                        <div class="flex items-center justify-between px-6 py-4 bg-[#055346] flex-shrink-0">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 bg-white/20 rounded-lg flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="font-bold text-white text-sm">Crop Featured Image</h3>
+                            </div>
+                            <button type="button" id="cropModalClose" class="text-white/70 hover:text-white w-7 h-7 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        {{-- Body --}}
+                        <div class="overflow-y-auto flex-1 p-6">
+                            <div class="max-w-full mx-auto">
+                                <img id="cropImage" src="" alt="Image to crop" class="max-w-full" style="display:block;">
+                            </div>
+                        </div>
+
+                        {{-- Footer --}}
+                        <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between gap-3 bg-gray-50 flex-shrink-0">
+                            <div class="flex gap-2">
+                                <button type="button" id="cropAspectFree" class="text-xs bg-white hover:bg-gray-100 text-gray-700 font-medium px-3 py-2 rounded-lg border border-gray-200 transition-colors">
+                                    Free
+                                </button>
+                                <button type="button" id="cropAspect16_9" class="text-xs bg-white hover:bg-gray-100 text-gray-700 font-medium px-3 py-2 rounded-lg border border-gray-200 transition-colors">
+                                    16:9
+                                </button>
+                                <button type="button" id="cropAspect4_3" class="text-xs bg-white hover:bg-gray-100 text-gray-700 font-medium px-3 py-2 rounded-lg border border-gray-200 transition-colors">
+                                    4:3
+                                </button>
+                                <button type="button" id="cropAspect1_1" class="text-xs bg-white hover:bg-gray-100 text-gray-700 font-medium px-3 py-2 rounded-lg border border-gray-200 transition-colors">
+                                    1:1
+                                </button>
+                            </div>
+                            <div class="flex gap-2">
+                                <button type="button" id="cropCancel" class="text-xs bg-white hover:bg-gray-100 text-gray-700 font-semibold px-5 py-2.5 rounded-xl border border-gray-200 transition-colors">
+                                    Cancel
+                                </button>
+                                <button type="button" id="cropApply" class="text-xs bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold px-6 py-2.5 rounded-xl transition-colors flex items-center gap-1.5">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    Apply Crop
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -661,6 +719,173 @@
             </div>
         </div>
     </form>
+
+    {{-- Cropper.js Library --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+
+    <style>
+        /* Cropper custom styles */
+        .cropper-container {
+            max-height: 60vh;
+        }
+        .cropper-view-box {
+            outline: 1px solid #109125;
+            outline-color: rgba(16, 145, 37, 0.75);
+        }
+        .cropper-face {
+            background-color: transparent !important;
+        }
+        .cropper-line,
+        .cropper-point {
+            background-color: #109125;
+        }
+        .cropper-point.point-se {
+            width: 8px;
+            height: 8px;
+            opacity: 1;
+        }
+    </style>
+
+    {{-- Image Crop Script --}}
+    <script>
+        let cropper = null;
+        const cropModal = document.getElementById('cropModal');
+        const cropImage = document.getElementById('cropImage');
+        const featuredImageInput = document.getElementById('featuredImageInput');
+        const imgPreview = document.getElementById('imgPreview');
+        const imgPlaceholder = document.getElementById('imgPlaceholder');
+        const croppedImageData = document.getElementById('croppedImageData');
+
+        // When user selects an image
+        featuredImageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Validate file type
+            if (!file.type.match('image.*')) {
+                alert('Please select an image file');
+                return;
+            }
+
+            // Read the file
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                // Set the image source
+                cropImage.src = event.target.result;
+                
+                // Show the crop modal
+                cropModal.classList.remove('hidden');
+                
+                // Initialize cropper
+                if (cropper) {
+                    cropper.destroy();
+                }
+                
+                cropper = new Cropper(cropImage, {
+                    aspectRatio: NaN, // Free aspect ratio
+                    viewMode: 1,
+                    dragMode: 'move',
+                    autoCropArea: 0.8,
+                    restore: false,
+                    guides: true,
+                    center: true,
+                    highlight: false,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+                    toggleDragModeOnDblclick: false,
+                    responsive: true,
+                    background: false,
+                    modal: true,
+                    minContainerWidth: 200,
+                    minContainerHeight: 200,
+                });
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Aspect ratio buttons
+        document.getElementById('cropAspectFree').addEventListener('click', function() {
+            if (cropper) cropper.setAspectRatio(NaN);
+        });
+        document.getElementById('cropAspect16_9').addEventListener('click', function() {
+            if (cropper) cropper.setAspectRatio(16 / 9);
+        });
+        document.getElementById('cropAspect4_3').addEventListener('click', function() {
+            if (cropper) cropper.setAspectRatio(4 / 3);
+        });
+        document.getElementById('cropAspect1_1').addEventListener('click', function() {
+            if (cropper) cropper.setAspectRatio(1);
+        });
+
+        // Apply crop
+        document.getElementById('cropApply').addEventListener('click', function() {
+            if (!cropper) return;
+
+            // Get cropped canvas
+            const canvas = cropper.getCroppedCanvas({
+                maxWidth: 1200,
+                maxHeight: 1200,
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high',
+            });
+
+            // Convert to blob and then to base64
+            canvas.toBlob(function(blob) {
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    const base64data = reader.result;
+                    
+                    // Store the cropped image data
+                    croppedImageData.value = base64data;
+                    
+                    // Update preview
+                    const existingPreview = document.getElementById('imgPreview');
+                    const placeholder = document.getElementById('imgPlaceholder');
+                    
+                    if (existingPreview) {
+                        // Update existing preview
+                        existingPreview.src = base64data;
+                        existingPreview.classList.remove('hidden');
+                    } else if (placeholder && placeholder.parentNode) {
+                        // Create new preview and replace placeholder
+                        const newPreview = document.createElement('img');
+                        newPreview.id = 'imgPreview';
+                        newPreview.src = base64data;
+                        newPreview.className = 'w-full h-36 object-cover rounded-xl mb-3';
+                        newPreview.alt = 'Featured image';
+                        
+                        placeholder.parentNode.insertBefore(newPreview, placeholder);
+                        placeholder.remove();
+                    }
+                    
+                    // Close modal
+                    cropModal.classList.add('hidden');
+                    
+                    // Destroy cropper
+                    if (cropper) {
+                        cropper.destroy();
+                        cropper = null;
+                    }
+                };
+                reader.readAsDataURL(blob);
+            }, 'image/jpeg', 0.9);
+        });
+
+        // Cancel crop
+        function closeCropModal() {
+            cropModal.classList.add('hidden');
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
+            // Reset file input
+            featuredImageInput.value = '';
+        }
+
+        document.getElementById('cropCancel').addEventListener('click', closeCropModal);
+        document.getElementById('cropModalClose').addEventListener('click', closeCropModal);
+    </script>
 
     @include('admin.blogs._tiptap_script')
 
