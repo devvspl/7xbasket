@@ -261,7 +261,7 @@
 
                         <p class="text-sm font-bold text-white">{{ $title }}</p>
 
-                        <p class="text-xs text-white/60 leading-relaxed mt-1.5">
+                        <p class="text-xs text-white leading-relaxed mt-1.5">
                             {{ $desc }}
                         </p>
                     </div>
@@ -296,7 +296,7 @@
                     <tbody>
                         <tr class="border-b border-gray-100">
                             <td class="px-6 py-4 text-gray-600 text-sm">Starting Investment</td>
-                            <td class="px-6 py-4 text-center bg-green-50/50 font-bold text-gray-800">Rs 10–12 Lakh</td>
+                            <td class="px-6 py-4 text-center bg-green-50/50 font-bold text-gray-800">Rs 13 Lakh</td>
                             <td class="px-6 py-4 text-center text-gray-600">Rs 20 Lakh+</td>
                         </tr>
 
@@ -490,19 +490,43 @@
             { src: '{{ asset('custom/8.webp') }}', alt: 'Store Branding' },
             { src: '{{ asset('custom/9.webp') }}', alt: 'Happy Customers' },
         ],
+        init() {
+            // Watch lightbox state
+            this.$watch('lightbox', value => {
+                const stickyBtn = document.getElementById('stickyApplyBtn');
+                if (stickyBtn) {
+                    if (value) {
+                        stickyBtn.classList.add('hidden');
+                    } else {
+                        stickyBtn.classList.remove('hidden');
+                    }
+                }
+            });
+            // Watch videoModal state
+            this.$watch('videoModal', value => {
+                const stickyBtn = document.getElementById('stickyApplyBtn');
+                if (stickyBtn) {
+                    if (value) {
+                        stickyBtn.classList.add('hidden');
+                    } else {
+                        stickyBtn.classList.remove('hidden');
+                    }
+                }
+            });
+        },
         openLightbox(i) {
             this.lightboxIndex = i;
-            this.lightbox = true
+            this.lightbox = true;
         },
         prevImage() { this.lightboxIndex = (this.lightboxIndex - 1 + this.images.length) % this.images.length },
         nextImage() { this.lightboxIndex = (this.lightboxIndex + 1) % this.images.length },
         openVideo(src) {
             this.videoSrc = src;
-            this.videoModal = true
+            this.videoModal = true;
         },
         closeVideo() {
             this.videoModal = false;
-            this.videoSrc = ''
+            this.videoSrc = '';
         }
     }"
         @keydown.escape.window="lightbox = false; closeVideo()" @keydown.arrow-left.window="if(lightbox) prevImage()"
@@ -510,8 +534,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8" data-aos="fade-up">
                 <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Inside 7x Basket</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">Our Stores & Stories</h2>
-                <p class="text-[#6b8f7e] max-w-xl mx-auto">A look inside our franchise stores across India.</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">Inside a 7x Basket store</h2>
+                <p class="text-[#6b8f7e]  mx-auto">A look inside 7x Basket franchise stores - from store design and product
+                    displays to grand openings and happy customers across cities.</p>
             </div>
             <div x-data="{
                 current: 0,
@@ -578,7 +603,7 @@
                 <p class="text-[#6b8f7e] text-sm">Watch real stories and expert insights about 7x Basket franchise.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-                @foreach ([['custom/7x_Basket_Store.png', 'How to Start a 7x Basket Franchise', 'Investment & ROI Explained', 'Expert Guide', ''], ['custom/7x_Basket_Store.png', 'Franchise Offer — Start Your Supermarket', '₹5L Investment, High Returns', 'Business Overview', ''], ['custom/7x_Basket_Store.png', 'Supermarket Grocery Store Business', 'Full Setup Guide for Beginners', 'Step-by-Step', '']] as [$img, $title, $subtitle, $tag, $ytId])
+                @foreach ([['custom/7x_Basket_Store.png', 'How to Start a 7x Basket Franchise', 'Investment & ROI Explained', 'Expert Guide', 'E8SjNuM04Xk'], ['custom/7x_Basket_Store.png', 'Franchise Offer — Start Your Supermarket', '₹5L Investment, High Returns', 'Business Overview', '_AWeuLbDD1w'], ['custom/7x_Basket_Store.png', 'Supermarket Grocery Store Business', 'Full Setup Guide for Beginners', 'Step-by-Step', 'znAW7U4EoDY']] as [$img, $title, $subtitle, $tag, $ytId])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
                         @click="openVideo('https://www.youtube.com/embed/{{ $ytId }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
@@ -611,9 +636,9 @@
                 <p class="text-[#6b8f7e] text-sm">Hear directly from our franchise owners across India.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                @foreach ([['custom/7x_Basket_Store.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."'], ['custom/7x_Basket_Store.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."'], ['custom/7x_Basket_Store.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."']] as [$img, $name, $city, $role, $quote])
+                @foreach ([['custom/7x_Basket_Store.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."', 'https://www.youtube.com/embed/apqR-F9q5x4'], ['custom/7x_Basket_Store.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."', 'https://www.youtube.com/embed/XwIbQUgLvMc'], ['custom/7x_Basket_Store.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."', 'https://www.youtube.com/embed/XYRC-Wva7-A']] as [$img, $name, $city, $role, $quote, $video])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
-                        @click="openVideo('https://www.youtube.com/embed/')" data-aos="fade-up"
+                        @click="openVideo('{{ $video }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
                         <img src="{{ asset($img) }}" alt="{{ $name }}"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">

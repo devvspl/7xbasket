@@ -114,7 +114,7 @@
                                     class="text-gray-700 text-xs font-bold uppercase tracking-wider block mb-3">Working
                                     Capital Plan</label>
                                 <div class="grid grid-cols-3 gap-2">
-                                    @foreach ([1 => ['Basic', '₹5L'], 2 => ['Standard', '₹7.5L'], 3 => ['Premium', '₹10L']] as $p => [$pname, $pamount])
+                                    @foreach ([1 => ['Basic', '₹5L'], 2 => ['Standard', '₹7.5L'], 3 => ['Premium', '₹13L']] as $p => [$pname, $pamount])
                                         <button @click="plan = {{ $p }}"
                                             :class="plan === {{ $p }} ? 'bg-[#109125] text-white' :
                                                 'bg-gray-100 text-gray-600 hover:bg-gray-200'"

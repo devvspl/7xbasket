@@ -4,9 +4,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8">
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
-                    Own a Highly Profitable "Ready-to-Run" Supermarket — India's Most Profitable Franchise.<br>
-                    <span class="text-[#109125]">Open in 45 Days.</span>
+                    India's Most Supported Supermarket Franchise — Starting at ₹13 Lakh, <span class="text-[#109125]">Zero Royalty for 2 Years</span>
                 </h2>
+                <p class="text-gray-600 text-base max-w-4xl mx-auto mt-4 leading-relaxed">
+                    Most people searching for a grocery store franchise in India hit the same wall: brands that look good on the website but give you almost no real support after you sign.
+                </p>
+                <p class="text-gray-700 text-base max-w-4xl mx-auto mt-3 leading-relaxed font-medium">
+                    7x Basket is built differently. You get a fully stocked supermarket franchise — 10,000+ products from Amul, HUL, Nestlé, and 500+ national brands — open in 45 days, with one named person managing your account from day one.
+                </p>
+                <p class="text-gray-600 text-base max-w-4xl mx-auto mt-3 leading-relaxed">
+                    Grocery franchise cost starting at ₹13 lakh. No royalty for the first 2 years. Your profits stay yours.
+                </p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div>
@@ -19,7 +27,7 @@
 
                     {{-- Key Benefits --}}
                     <div class="grid grid-cols-2 gap-3 mb-5">
-                        @foreach ([['💰', 'Zero royalty', 'No royalty charged for your first 2 years of operation.'], ['🚀', '45-day store launch', 'From signed agreement to grand opening in 45 days.'], ['🎓', 'Full staff training', 'Your team is trained and ready before the doors open.'], ['📦', '5,000+ products', 'Direct sourcing from top FMCG brands at wholesale prices.'], ['🔒', 'Exclusive territory', 'Your pincode zone is protected - no competing store in your area.'], ['🤝', 'Dedicated manager', 'A relationship manager assigned to your store from day one.']] as [$icon, $title, $desc])
+                        @foreach ([['💰', 'Zero royalty — 2 years', 'Keep every rupee of profit for your first two years of operation.'], ['🚀', 'Opens in 45 days', 'Signed agreement to grand opening in 45 days, fully managed.'], ['🎓', 'Full staff training', 'Your team trained and ready before the doors open.'], ['📦', '10,000+ products', 'Direct sourcing from top FMCG brands at wholesale prices.'], ['🔒', 'Exclusive territory', 'Your pincode zone is protected — no competing store nearby.'], ['💵', 'Starts at ₹13 lakh', 'Transparent investment breakdown — no surprise costs after signing.']] as [$icon, $title, $desc])
                             <div class="flex items-start gap-3 bg-gray-50 rounded-xl p-3 border border-gray-100">
                                 <span class="text-xl flex-shrink-0">{{ $icon }}</span>
                                 <div>
@@ -31,8 +39,8 @@
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-7">
-                    <h2 class="text-lg font-extrabold text-gray-900 mb-1">Apply for Franchise</h2>
-                    <p class="text-gray-400 text-sm mb-5">Our team will call you within 24 hours.</p>
+                    <h2 class="text-lg font-extrabold text-gray-900 mb-1">Apply for your grocery store franchise</h2>
+                    <p class="text-gray-400 text-sm mb-5">Our team calls you within 24 hours.</p>
                     <div id="applyFormMsg" class="hidden rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center"></div>
                     <form id="applyPageForm" action="{{ route('apply.store') }}" method="POST" class="space-y-3">
                         @csrf
@@ -106,7 +114,7 @@
                             class="relative w-full overflow-hidden text-white font-extrabold py-4 rounded-xl text-sm tracking-wide shadow-[0_4px_20px_rgba(16,145,37,0.35)] hover:shadow-[0_6px_30px_rgba(16,145,37,0.55)] hover:-translate-y-0.5 transition-all duration-200 group btn-gradient-animate">
                             <span
                                 class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent skew-x-12 pointer-events-none"></span>
-                            <span class="relative">YES! I Want to Open My Supermarket Franchise →</span>
+                            <span class="relative">YES — I want to open my store →</span>
                         </button>
                         <style>
                             .btn-gradient-animate {
@@ -129,8 +137,7 @@
                                 }
                             }
                         </style>
-                        <p class="text-center text-xs text-gray-400">No spam. We'll only call to discuss your franchise
-                            query.
+                        <p class="text-center text-xs text-gray-400">No spam. No pressure. We call only to discuss your franchise query.
                         </p>
                     </form>
                 </div>
@@ -140,7 +147,7 @@
     <section class="py-10 bg-[#0f2d1f]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap justify-center gap-4">
-                @foreach ([['200+', 'Stores Pan India'], ['12+', 'States Covered'], ['5,000+', 'Products Stocked'], ['500+', 'Brand Partners'], ['13L', 'Starting Investment']] as [$num, $label])
+                @foreach ([['200+', 'Stores across India'], ['12+', 'States covered'], ['5,000+', 'Products stocked'], ['500+', 'Brand partners'], ['₹13L', 'Starting investment']] as [$num, $label])
                     <div class="w-[45%] sm:w-[30%] lg:w-[18%] 
             border border-white/10 rounded-xl p-5 
             flex flex-col items-center justify-center text-center"
@@ -162,17 +169,15 @@
                 <div data-aos="fade-right">
                     <span class="text-[#109125] text-xs font-bold uppercase tracking-widest">The Opportunity</span>
                     <h2 class="text-3xl font-extrabold text-gray-900 mt-2 leading-tight">
-                        India's Grocery Market Is ONE Of The
-                        <span class="text-[#109125]">Largest Opportunities For Franchise Investors Right Now</span>
+                        Why a grocery business franchise is one of the
+                        <span class="text-[#109125]">strongest opportunities in India right now</span>
                     </h2>
-                    <p class="text-gray-500 text-sm mt-4 leading-relaxed">Organised grocery retail accounts for roughly 12%
-                        of India's total grocery market - which means 88% is still unbranded, unstructured kirana. That gap
-                        is exactly where a 7x Basket franchise sits. The demand is local, weekly, and recession-proof.
-                        Customers buy groceries regardless of economic conditions, which is what makes this one of the most
-                        stable franchise opportunities in India today.
+                    <p class="text-gray-500 text-sm mt-4 leading-relaxed">Organised grocery retail covers 12% of India's market. The remaining 88% is still unbranded kirana — local stores with no supply chain advantage, no technology, and no brand pull.</p>
+                    <p class="text-gray-500 text-sm mt-3 leading-relaxed">That gap is exactly where a grocery supermarket franchise operates. Demand is weekly. It does not slow down in recessions. Customers buy groceries regardless of what the economy is doing, which is what makes supermarket franchise opportunities in India more stable than most retail categories.</p>
+                    <p class="text-gray-500 text-sm mt-3 leading-relaxed">India's grocery market is projected to cross ₹85 lakh crore by 2030, growing at 9% per year. The franchisees who claim a territory now will have 5–6 years of compounding customer loyalty before that growth peaks. The ones who wait will pay more for the same territory, or find it already taken.
                     </p>
                     <div class="grid grid-cols-2 gap-4 mt-8">
-                        @foreach ([['~58 Lakh CR', 'Market size in 2025 (estimated, INR)'], ['9% CAGR', 'Projected growth rate 2025–2030'], ['~12%', 'Organised retail share of total market'], ['85+ Lakh CR', 'Projected market size by 2030 (INR)']] as [$n, $l])
+                        @foreach ([['~₹58 lakh cr', 'Estimated market size 2025'], ['9% CAGR', 'Projected growth 2025–2030'], ['~12%', 'Organised retail share today'], ['₹85 lakh cr', 'Projected size by 2030']] as [$n, $l])
                             <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
                                 <p class="text-2xl font-extrabold text-[#109125]">{{ $n }}</p>
                                 <p class="text-gray-400 text-xs mt-0.5">{{ $l }}</p>
@@ -187,16 +192,14 @@
                 </div>
                 <div class="bg-white rounded-2xl shadow-md border border-gray-100 p-6 flex flex-col" data-aos="fade-left">
                     <p class="text-sm font-bold text-gray-700 mb-1">India Grocery Market Size</p>
-                    <p class="text-xs text-gray-400 mb-4">In INR Lakh Crore &middot; 2020&ndash;2026 (2025&ndash;26
-                        projected)</p>
+                    <p class="text-xs text-gray-400 mb-4">In INR Lakh Crore · 2020–2026 (2025–26 projected)</p>
                     <div class="flex items-center gap-4 mb-3"><span
                             class="flex items-center gap-1.5 text-xs text-gray-600 font-medium"><span
                                 class="w-3 h-3 rounded-sm inline-block bg-[#109125]"></span> Actual</span><span
                             class="flex items-center gap-1.5 text-xs text-gray-600 font-medium"><span
                                 class="w-3 h-3 rounded-sm inline-block bg-[#86efac]"></span> Projected</span></div>
                     <div class="flex-1" style="min-height:300px"><canvas id="groceryChart"></canvas></div>
-                    <p class="text-[10px] text-gray-400 mt-3 text-center">Sources: Statista / Style Baazar 2024, ORMS Today
-                        / Euromonitor, Technavio. 2025&ndash;26 projected at 9% CAGR.</p>
+                    <p class="text-[10px] text-gray-400 mt-3 text-center">Sources: Statista / Euromonitor / Technavio. 2025–2030 projected at 9% CAGR.</p>
                 </div>
             </div>
         </div>
@@ -207,23 +210,22 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#4ade80] text-xs font-bold uppercase tracking-widest">Why 7x Basket</span>
-                <h2 class="text-3xl font-extrabold text-white mt-2">Everything You Need to Succeed</h2>
-                <p class="text-green-300/60 text-sm mt-2 max-w-lg mx-auto">We handle the hard parts so you can focus on
-                    growing
-                    your business.
+                <h2 class="text-3xl font-extrabold text-white mt-2">Everything in place before your grocery store franchise opens</h2>
+                <p class="text-green-300/60 text-sm mt-2 max-w-3xl mx-auto">Most people who try to open an independent grocery store or small grocery franchise spend the first year learning things they should have known before signing anything — supplier contacts, software, store layout, licences, staff training. By the time they sort it out, a better-stocked competitor has already taken their customers.</p>
+                <p class="text-green-300/60 text-sm mt-2 max-w-3xl mx-auto">With 7x Basket, that groundwork is done before your store opens. Whether you are opening a mini grocery store franchise in a residential area or a full supermarket in a high-footfall location, here is what is in place from day one.
                 </p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 @foreach ([
-            [1, '💰', 'Zero royalty model', 'Keep 100% of your profits for first 2 years. We earn through the supply chain. Your revenue is yours - no royalty deducted for first 2 years.'],
-            [2, '🏗️', '45-day store launch', 'Store ready in 45 days flat. From signed agreement to grand opening in 45 days, fully managed by our operations team.'],
-            [3, '📦', '10,000+ products', 'Direct sourcing at wholesale prices. Top FMCG brands, daily delivery, at prices that give you competitive margins on every sale.'],
-            [4, '🖥️', 'Cloud POS and app', 'One platform for your entire store. Billing, inventory, and sales analytics in one app. No prior tech knowledge needed to use it.'],
-            [5, '👥', 'Staff training', 'Your team is trained before day one. Complete operations training for you and every staff member, before the store opens its doors.'],
-            [6, '📣', 'Marketing support', 'National campaigns, local results. Branded marketing kits and national digital campaigns that bring customers in from week one.'],
-            [7, '🔒', 'Exclusive territory', 'Your zone, protected. Your pincode area is locked for your store. No other 7x Basket outlet operates within your radius.'],
-            [8, '🤝', 'Dedicated manager', 'One point of contact, always. A relationship manager is assigned to your store from day one - reachable whenever you need them.'],
-            [9, '📋', 'Legal compliance', 'All paperwork handled for you. FSSAI, GST, and Shops Act documentation managed by our compliance team. You focus on the store.'],
+            [1, '💰', 'Zero royalty — 2 years', 'You keep 100% of what your store earns for the first two years. 7x Basket earns through the supply chain, not your revenue. No royalty deducted, no hidden monthly fee. Your profit is yours to reinvest or take home.'],
+            [2, '🏗️', 'Store ready in 45 days', 'From signed agreement to grand opening in 45 days. Applies to every store format — mini supermarket franchise or full hyper format. The operations team manages the full setup: fit-out, shelving, branding, and POS installation. You do not manage contractors or chase timelines.'],
+            [3, '📦', '10,000+ products at wholesale', 'Direct sourcing from national FMCG brands at prices that give you margins a standalone kirana cannot match. Stock from Amul, Nestlé, HUL, Britannia, Dabur, and 500+ others, delivered on a regular cycle.'],
+            [4, '🖥️', 'Cloud POS and inventory app', 'One platform for billing, stock tracking, and sales data. Works on a tablet or a basic laptop. No IT background needed. Your staff learns it before the store opens, and support is one call away if anything goes wrong.'],
+            [5, '👥', 'Staff hired and trained', '7x Basket helps you hire and then trains every staff member before opening day. They know the POS, the layout, the customer flow, and the inventory system. You do not start with untrained staff figuring things out on your customers.'],
+            [6, '📣', 'Marketing from week one', 'Branded marketing kits for your local area and national digital campaigns that drive footfall. You do not build a customer base from zero — the brand name and the marketing bring people in from the first week.'],
+            [7, '🔒', 'Exclusive territory', 'Your pincode zone is locked. No other 7x Basket store opens within your protected radius. You build your customer base without competing against the same brand across the road.'],
+            [8, '🤝', 'Dedicated relationship manager', 'One named person assigned to your store from day one. Reachable when you have a stock issue, a staffing question, or a technical problem. Not a call centre. One person who knows your store.'],
+            [9, '📋', 'Legal and compliance handled', 'FSSAI, GST, and Shops Act documentation managed by 7x Basket\'s compliance team. You do not chase government offices or pay a consultant to figure out which licences you need. It gets done.'],
         ] as [$no, $icon, $title, $desc])
                     <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 hover:border-[#4ade80]/30 hover:-translate-y-0.5 transition-all duration-300"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
@@ -241,7 +243,7 @@
 
                         <p class="text-sm font-bold text-white">{{ $title }}</p>
 
-                        <p class="text-xs text-white/60 leading-relaxed mt-1.5">
+                        <p class="text-xs text-white leading-relaxed mt-1.5">
                             {{ $desc }}
                         </p>
                     </div>
@@ -253,9 +255,10 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-gray-400 text-xs font-bold uppercase tracking-widest">Competitor Comparison</span>
-                <h2 class="text-4xl font-extrabold text-gray-900 mt-3 mb-3">Why 7x Basket Wins</h2>
-                <p class="text-gray-500 text-sm max-w-2xl mx-auto">See how we compare honestly against other franchise
-                    options in the market.
+                <h2 class="text-4xl font-extrabold text-gray-900 mt-3 mb-3">How 7x Basket compares to other supermarket franchise options</h2>
+                <p class="text-gray-500 text-sm max-w-2xl mx-auto">If you have looked at other grocery franchise brands, you will have noticed a pattern: most do not publish their costs upfront, start charging royalty from month one, and leave you to manage operations mostly on your own after signing.
+                </p>
+                <p class="text-gray-500 text-sm max-w-2xl mx-auto mt-2">Here is an honest comparison. Every line is verifiable — ask any existing 7x Basket franchisee to confirm.
                 </p>
             </div>
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden" data-aos="fade-up">
@@ -275,15 +278,25 @@
                     </thead>
                     <tbody>
                         <tr class="border-b border-gray-100">
-                            <td class="px-6 py-4 text-gray-600 text-sm">Starting Investment</td>
-                            <td class="px-6 py-4 text-center bg-green-50/50 font-bold text-gray-800">Rs 10–12 Lakh</td>
-                            <td class="px-6 py-4 text-center text-gray-600">Rs 20 Lakh+</td>
+                            <td class="px-6 py-4 text-gray-600 text-sm">Grocery franchise cost / starting investment</td>
+                            <td class="px-6 py-4 text-center bg-green-50/50 font-bold text-gray-800">₹13–15 lakh, fully itemised</td>
+                            <td class="px-6 py-4 text-center text-gray-600">₹20 lakh+, often undisclosed</td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-100">
+                            <td class="px-6 py-4 text-gray-600 text-sm">Supermarket franchise cost transparency</td>
+                            <td class="px-6 py-4 text-center bg-green-50/50">
+                                <span class="text-[#109125] font-bold text-sm">✓ Full breakdown before signing</span>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="text-orange-500 font-semibold text-sm">~ Basic overview only</span>
+                            </td>
                         </tr>
 
                         <tr class="border-b border-gray-100">
-                            <td class="px-6 py-4 text-gray-600 text-sm">Store Opening Guarantee</td>
+                            <td class="px-6 py-4 text-gray-600 text-sm">Store opening timeline</td>
                             <td class="px-6 py-4 text-center bg-green-50/50">
-                                <span class="text-[#109125] font-bold text-sm">✓ 45 Days</span>
+                                <span class="text-[#109125] font-bold text-sm">✓ 45 days, guaranteed</span>
                             </td>
                             <td class="px-6 py-4 text-center">
                                 <span class="text-red-500 font-semibold text-sm">✗ Not stated</span>
@@ -291,19 +304,19 @@
                         </tr>
 
                         <tr class="border-b border-gray-100">
-                            <td class="px-6 py-4 text-gray-600 text-sm">Zero Royalty Period</td>
+                            <td class="px-6 py-4 text-gray-600 text-sm">Royalty-free period</td>
                             <td class="px-6 py-4 text-center bg-green-50/50">
-                                <span class="text-[#109125] font-bold text-sm">✓ Free for First 2 Years</span>
+                                <span class="text-[#109125] font-bold text-sm">✓ 2 full years</span>
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <span class="text-red-500 font-semibold text-sm">✗ Charged from Month 1</span>
+                                <span class="text-red-500 font-semibold text-sm">✗ Charged from month 1</span>
                             </td>
                         </tr>
 
                         <tr class="border-b border-gray-100">
-                            <td class="px-6 py-4 text-gray-600 text-sm">Free Accounting (3 months)</td>
+                            <td class="px-6 py-4 text-gray-600 text-sm">Free accounting support</td>
                             <td class="px-6 py-4 text-center bg-green-50/50">
-                                <span class="text-[#109125] font-bold text-sm">✓ Included</span>
+                                <span class="text-[#109125] font-bold text-sm">✓ 3 months included</span>
                             </td>
                             <td class="px-6 py-4 text-center">
                                 <span class="text-red-500 font-semibold text-sm">✗ Not included</span>
@@ -311,52 +324,32 @@
                         </tr>
 
                         <tr class="border-b border-gray-100">
-                            <td class="px-6 py-4 text-gray-600 text-sm">Exclusive Territory</td>
+                            <td class="px-6 py-4 text-gray-600 text-sm">Exclusive territory</td>
                             <td class="px-6 py-4 text-center bg-green-50/50">
-                                <span class="text-[#109125] font-bold text-sm">✓ Protected</span>
+                                <span class="text-[#109125] font-bold text-sm">✓ Pincode protected</span>
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <span class="text-orange-500 font-semibold text-sm">~ Limited</span>
+                                <span class="text-orange-500 font-semibold text-sm">~ Limited or shared</span>
                             </td>
                         </tr>
 
                         <tr class="border-b border-gray-100">
-                            <td class="px-6 py-4 text-gray-600 text-sm">Staff Hiring Support</td>
+                            <td class="px-6 py-4 text-gray-600 text-sm">Staff hiring and training</td>
                             <td class="px-6 py-4 text-center bg-green-50/50">
-                                <span class="text-[#109125] font-bold text-sm">✓ Full support</span>
+                                <span class="text-[#109125] font-bold text-sm">✓ Full — hire and train</span>
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <span class="text-[#109125] font-semibold text-sm">✓ Included</span>
-                            </td>
-                        </tr>
-
-                        <tr class="border-b border-gray-100">
-                            <td class="px-6 py-4 text-gray-600 text-sm">Dedicated Franchise Manager</td>
-                            <td class="px-6 py-4 text-center bg-green-50/50">
-                                <span class="text-[#109125] font-bold text-sm">✓ Personal</span>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <span class="text-orange-500 font-semibold text-sm">~ Shared team</span>
-                            </td>
-                        </tr>
-
-                        <tr class="border-b border-gray-100">
-                            <td class="px-6 py-4 text-gray-600 text-sm">ROI Calculator on Page</td>
-                            <td class="px-6 py-4 text-center bg-green-50/50">
-                                <span class="text-[#109125] font-bold text-sm">✓ Live tool</span>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <span class="text-red-500 font-semibold text-sm">✗ Not available</span>
+                                <span class="text-orange-500 font-semibold text-sm">~ Varies by brand</span>
                             </td>
                         </tr>
 
                         <tr>
-                            <td class="px-6 py-4 text-gray-600 text-sm">Investment Breakdown</td>
+                            <td class="px-6 py-4 text-gray-600 text-sm">Dedicated franchise manager</td>
                             <td class="px-6 py-4 text-center bg-green-50/50">
-                                <span class="text-[#109125] font-bold text-sm">✓ Detailed & transparent</span>
+                                <span class="text-[#109125] font-bold text-sm">✓ One named person, always</span>
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <span class="text-orange-500 font-semibold text-sm">~ Basic only</span>
+                                <span class="text-orange-500 font-semibold text-sm">~ Shared team</span>
                             </td>
                         </tr>
                     </tbody>
@@ -366,7 +359,7 @@
                 <a href="#apply-form"
                     onclick="document.querySelector('#applyPageForm').scrollIntoView({behavior:'smooth'}); return false;"
                     class="bg-[#ec2024] hover:bg-red-700 text-white font-extrabold px-8 py-3.5 rounded-xl text-sm transition-all duration-200 hover:-translate-y-0.5 inline-block shadow-lg">
-                    Apply Now & Claim Your Territory →
+                    Apply now and claim your territory →
                 </a>
             </div>
         </div>
@@ -375,14 +368,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
             <div class="text-center mb-6" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Our Product Range</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-2">10,000+ Products from India's Top
-                    Brands
-                </h2>
-                <p class="text-gray-500 max-w-xl mx-auto text-sm">Every category your customers need — all under one roof,
-                    sourced
-                    directly from manufacturers.
-                </p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-2">10,000+ products from India's most recognised brands</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto text-sm">Your store stocks what people actually buy — not niche imports, not unknown labels. The brands your customers grew up with: Amul, Britannia, Parle, ITC, HUL, Dabur, Marico, Godrej, Patanjali, Colgate, Haldirams, Nestlé. Sourced directly at wholesale, delivered regularly.</p>
             </div>
+            <p class="text-center text-gray-600 text-sm mb-6" data-aos="fade-up">Stock covers 10 categories:</p>
             <div class="flex flex-wrap justify-center gap-2 mb-6" data-aos="fade-up">
                 @foreach (['🥛 Dairy', '🥦 Fresh Produce', '🛒 Staples', '🧴 Personal Care', '🏠 Home Care', '🍿 Snacks', '🌾 Organic', '🥤 Beverages', '👶 Baby Care', '🐾 Pet Care'] as $cat)
                     <span
@@ -424,8 +413,8 @@
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="text-center mb-8" data-aos="fade-up">
-                <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">As Featured On</span>
-                <p class="text-gray-500 text-sm mt-2">Recognized by top media houses and industry publications</p>
+                <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">As seen in</span>
+                <p class="text-gray-500 text-sm mt-2">Recognised by India's leading business and franchise publications</p>
             </div>
             <div class="bg-gray-50 rounded-2xl py-8 px-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6">
@@ -470,19 +459,43 @@
             { src: '{{ asset('custom/8.webp') }}', alt: 'Store Branding' },
             { src: '{{ asset('custom/9.webp') }}', alt: 'Happy Customers' },
         ],
+        init() {
+            // Watch lightbox state
+            this.$watch('lightbox', value => {
+                const stickyBtn = document.getElementById('stickyApplyBtn');
+                if (stickyBtn) {
+                    if (value) {
+                        stickyBtn.classList.add('hidden');
+                    } else {
+                        stickyBtn.classList.remove('hidden');
+                    }
+                }
+            });
+            // Watch videoModal state
+            this.$watch('videoModal', value => {
+                const stickyBtn = document.getElementById('stickyApplyBtn');
+                if (stickyBtn) {
+                    if (value) {
+                        stickyBtn.classList.add('hidden');
+                    } else {
+                        stickyBtn.classList.remove('hidden');
+                    }
+                }
+            });
+        },
         openLightbox(i) {
             this.lightboxIndex = i;
-            this.lightbox = true
+            this.lightbox = true;
         },
         prevImage() { this.lightboxIndex = (this.lightboxIndex - 1 + this.images.length) % this.images.length },
         nextImage() { this.lightboxIndex = (this.lightboxIndex + 1) % this.images.length },
         openVideo(src) {
             this.videoSrc = src;
-            this.videoModal = true
+            this.videoModal = true;
         },
         closeVideo() {
             this.videoModal = false;
-            this.videoSrc = ''
+            this.videoSrc = '';
         }
     }"
         @keydown.escape.window="lightbox = false; closeVideo()" @keydown.arrow-left.window="if(lightbox) prevImage()"
@@ -490,8 +503,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8" data-aos="fade-up">
                 <span class="text-[#4ade80] text-sm font-bold uppercase tracking-widest">Inside 7x Basket</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">Our Stores & Stories</h2>
-                <p class="text-[#6b8f7e] max-w-xl mx-auto">A look inside our franchise stores across India.</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">Inside a 7x Basket franchise store</h2>
+                <p class="text-[#6b8f7e] mx-auto">Every photo below is from a real 7x Basket franchise store, already running across India.</p>
             </div>
             <div x-data="{
                 current: 0,
@@ -554,11 +567,11 @@
                 </div>
             </div>
             <div class="text-center mb-8" data-aos="fade-up">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-1">Have Doubts? These Videos Will Help!</h2>
-                <p class="text-[#6b8f7e] text-sm">Watch real stories and expert insights about 7x Basket franchise.</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-1">Watch before you decide</h2>
+                <p class="text-[#6b8f7e] text-sm">These three videos cover what most franchise enquiry calls cover in the first 20 minutes. Watch them now — you will have better questions when our team calls.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-                @foreach ([['custom/7x_Basket_Store.png', 'How to Start a 7x Basket Franchise', 'Investment & ROI Explained', 'Expert Guide', ''], ['custom/7x_Basket_Store.png', 'Franchise Offer — Start Your Supermarket', '₹5L Investment, High Returns', 'Business Overview', ''], ['custom/7x_Basket_Store.png', 'Supermarket Grocery Store Business', 'Full Setup Guide for Beginners', 'Step-by-Step', '']] as [$img, $title, $subtitle, $tag, $ytId])
+                @foreach ([['custom/7x_Basket_Store.png', 'How to start a 7x Basket grocery store franchise — investment, process, and what to expect', 'Complete franchise guide', 'Expert Guide', 'E8SjNuM04Xk'], ['custom/7x_Basket_Store.png', 'Supermarket franchise offer — opening your store: ₹13 lakh investment, what you get', 'Full breakdown of costs and support', 'Business Overview', '_AWeuLbDD1w'], ['custom/7x_Basket_Store.png', 'Full setup guide — from agreement to grand opening, step by step', 'Complete launch timeline explained', 'Step-by-Step', 'znAW7U4EoDY']] as [$img, $title, $subtitle, $tag, $ytId])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
                         @click="openVideo('https://www.youtube.com/embed/{{ $ytId }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
@@ -587,13 +600,13 @@
                 @endforeach
             </div>
             <div class="text-center mb-8" data-aos="fade-up">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-1">What Our Franchise Partner Says</h2>
-                <p class="text-[#6b8f7e] text-sm">Hear directly from our franchise owners across India.</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-1">What 200+ franchise partners say</h2>
+                <p class="text-[#6b8f7e] text-sm">Real franchisees, real outcomes.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                @foreach ([['custom/7x_Basket_Store.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."'], ['custom/7x_Basket_Store.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."'], ['custom/7x_Basket_Store.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."']] as [$img, $name, $city, $role, $quote])
+                @foreach ([['custom/7x_Basket_Store.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."', 'https://www.youtube.com/embed/apqR-F9q5x4'], ['custom/7x_Basket_Store.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."', 'https://www.youtube.com/embed/XwIbQUgLvMc'], ['custom/7x_Basket_Store.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."', 'https://www.youtube.com/embed/XYRC-Wva7-A']] as [$img, $name, $city, $role, $quote, $video])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
-                        @click="openVideo('https://www.youtube.com/embed/')" data-aos="fade-up"
+                        @click="openVideo('{{ $video }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
                         <img src="{{ asset($img) }}" alt="{{ $name }}"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
@@ -723,55 +736,55 @@
                                     'Rajesh Kumar',
                                     'Delhi',
                                     'Super Store',
-                                    'Joining 7x Basket was the best business decision I made. Turned profitable in 8 months. The support team is always available.',
+                                    'Turned profitable in 8 months. The support team picked up every call I made in the first year. Best business decision I have made.',
                                 ],
                                 [
                                     'Priya Sharma',
                                     'Mumbai',
                                     'Mini Store',
-                                    'The supply chain is excellent. Fresh products daily and margins are much better than running an independent store.',
+                                    'I ran a kirana store for six years before switching to a 7x Basket franchise. The difference in margins and daily footfall is not comparable. Fresh stock daily, better pricing, and the brand does the selling.',
                                 ],
                                 [
                                     'Amit Patel',
                                     'Ahmedabad',
                                     'Hyper Store',
-                                    'From training to launch, everything was smooth. The technology platform makes inventory management effortless.',
+                                    'From staff training to launch, everything happened on the timeline they promised. My store opened in 44 days.',
                                 ],
                                 [
                                     'Sunita Verma',
                                     'Jaipur',
                                     'Super Store',
-                                    'Zero royalty model is a game changer. I keep all my profits and the brand name brings customers in without extra marketing.',
+                                    'Zero royalty for two years meant I could reinvest my profits back into the store in the first year. The brand name brings people in without spending on local ads.',
                                 ],
                                 [
                                     'Kiran Reddy',
                                     'Hyderabad',
                                     'Mini Store',
-                                    'The dedicated relationship manager helped me through every step. My store broke even in just 6 months.',
+                                    'I converted my kirana shop to a 7x Basket franchise and the break-even came in 6 months. The relationship manager walked me through every step of the conversion.',
                                 ],
                                 [
                                     'Manoj Singh',
                                     'Lucknow',
                                     'Super Store',
-                                    'I was skeptical at first but the 45-day launch timeline is real. My store was up and running exactly on schedule.',
+                                    'I was not sure the 45-day launch was real. It was. My store opened exactly on schedule.',
                                 ],
                                 [
                                     'Deepa Nair',
                                     'Kochi',
                                     'Hyper Store',
-                                    'The POS system and inventory app are incredibly easy to use. Customer loyalty program keeps them coming back.',
+                                    'The POS system is easier to use than I expected. My staff learned it in two days. Customer retention has been strong since month one.',
                                 ],
                                 [
                                     'Vikram Joshi',
                                     'Pune',
                                     'Mini Store',
-                                    'Best investment I have made. The brand recognition alone drives footfall. 7x Basket is trusted before they walk in.',
+                                    'Brand recognition drives footfall before you run a single local campaign. Customers walk in already knowing the name.',
                                 ],
                                 [
                                     'Anita Gupta',
                                     'Chandigarh',
                                     'Super Store',
-                                    'National marketing campaigns save me so much time and money. I just focus on running the store and customers keep coming.',
+                                    'National marketing campaigns mean I spend my time running the store, not trying to get people through the door. The brand does that part.',
                                 ],
                             ];
                         @endphp
@@ -827,7 +840,7 @@
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">FAQ</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">
-                    Frequently Asked Questions
+                    Questions most people ask before applying
                 </h2>
                 <p class="text-gray-500 text-sm">
                     Everything you need to know before starting your franchise journey.
@@ -837,38 +850,36 @@
                 @php
                     $applyFaqs = [
                         [
-                            'What is a franchise business and how does it work in India?',
-                            'A franchise is a business model where you pay to use an established brand\'s name, products, and systems to run your own store. The franchisor provides training, supply chain, and operational support - you invest the capital and manage the outlet. In India, active franchisors number around 4,600 across sectors including grocery, food, education, and healthcare.',
+                            'Do I need retail experience to open a grocery supermarket franchise?',
+                            'No retail experience is needed. Before your store opens, 7x Basket trains you and every staff member on the POS system, inventory management, customer flow, and daily operations. The training covers what would take an independent store owner two years to learn on their own. Support continues after opening — there is no point where you are figuring it out without anyone to call.',
                         ],
                         [
-                            'Is owning a franchise better than starting an independent business?',
-                            'A franchise gives you a proven model, brand recognition, and built-in supplier network - reducing the risk of starting from zero. Independent stores offer more flexibility but require you to build everything yourself including brand trust, procurement, and customer base. For first-time entrepreneurs, a franchise typically reaches break-even faster than an independent setup.',
+                            'What is the grocery store franchise cost — total investment?',
+                            'The starting investment is ₹13 lakh, which covers the franchise fee, store setup, initial stock, POS hardware, and branding. This is the grocery franchise cost for a standard format store. Supermarket franchise cost for larger formats varies by size — the full itemised breakdown is shared before you sign. There are no costs that appear after the agreement.',
                         ],
                         [
-                            'Which are the best grocery franchise opportunities in India in 2026?',
-                            'Top grocery franchise options in India include D-Mart, Reliance Fresh, Spencer\'s Retail, More Retail, and 7x Basket. For mid-capital investors, 7x Basket is the most accessible entry point in 2026.',
+                            'Is there a royalty fee I need to pay?',
+                            'No royalty for the first two years of operation. After year two, the royalty structure is disclosed upfront at the time of the agreement — there are no surprises built into the contract. During the first two years, every rupee your store earns is yours.',
                         ],
                         [
-                            'Can I convert my existing kirana store into a franchise?',
-                            'Yes - several grocery franchise brands actively target existing kirana owners for conversion. The advantage is you already have a location, customer base, and basic operations in place. Brands like Reliance Fresh, More Retail, and 7x Basket have dedicated kirana upgrade programmes where your existing setup is assessed and rebranded into an organised franchise format.',
-                        ],
-
-                        [
-                            'Can I get a bank loan to fund a franchise in India?',
-                            'Yes. Most nationalised and private banks in India offer business loans for franchise investments under MSME and Mudra scheme categories. Banks typically fund 60–70% of the total project cost after reviewing the franchise agreement, location feasibility, and your financial profile. Having a signed franchise agreement and a projected cash flow statement significantly improves loan approval chances.',
+                            'How long does it actually take to open the store?',
+                            '45 days from signed agreement to grand opening. This covers store fit-out, branding, shelving, POS installation, initial stock delivery, staff training, and compliance setup. The operations team manages the full timeline. You are not coordinating contractors or chasing paperwork.',
                         ],
                         [
-                            'What is the difference between FOFO and FOCO franchise models?',
-                            'FOFO (Franchisee Owned, Franchisee Operated) means you invest the capital and run the store yourself - all profit and risk is yours. FOCO (Franchisee Owned, Company Operated) means you invest but the brand\'s team manages operations - returns are more predictable but lower. Most grocery franchises in India - including Reliance Fresh and 7x Basket - operate on the FOFO model.',
+                            'I already run a kirana store or grocery shop — can I convert it to a franchise?',
+                            'Yes. 7x Basket has a conversion pathway for existing kirana store and grocery shop owners. Your current location is assessed for footfall and area potential. If it qualifies, the store is rebranded, restocked, and upgraded to the 7x Basket format. You keep your existing customer base and gain the procurement, technology, and brand pull that comes with the franchise. Many of 7x Basket\'s current partners came in through this kirana shop franchise conversion route.',
                         ],
                         [
-                            'What should I check before signing a grocery franchise agreement?',
-                            'Check five things before signing - royalty structure and when it starts, territory exclusivity terms, full investment breakdown with no hidden costs, renewal and exit clauses, and actual support quality by speaking to existing franchise partners. Always have a franchise consultant or lawyer review the agreement before committing.',
+                            'Can I get a bank loan to fund the franchise?',
+                            'Yes. Most national and private banks in India offer MSME and Mudra scheme loans for franchise investments. Banks typically fund 60–70% of the project cost after reviewing the franchise agreement and your financial profile. A signed franchise agreement and a basic cash flow projection improve your approval chances significantly.',
                         ],
-
                         [
-                            'Is a grocery store a good business in India in 2026?',
-                            'Grocery is one of the most recession-proof retail businesses because demand is daily and non-discretionary. India\'s grocery retail is changing with growing urbanization, digital convergence, and changing consumer patterns - the need for organised formats has never been higher. Organised grocery stores replacing unbranded kirana shops is the single biggest structural trend driving franchise growth right now.',
+                            'What support do I get after the store opens?',
+                            'After opening, you have a named relationship manager reachable directly — not a call centre queue. Stock is delivered on a regular cycle. The POS and inventory system is supported remotely. Marketing campaigns run at the national level and filter to your store. The support does not stop at opening day.',
+                        ],
+                        [
+                            'Are supermarket franchise opportunities still available in my city?',
+                            'Territories are allocated by pincode zone. Once a zone is taken, it is closed — 7x Basket does not put two stores in the same protected area. Fill the form or call +91 98702 75327 to check availability in your specific area. Some cities have open slots. Some do not.',
                         ],
                     ];
                     $leftFaqs = array_slice($applyFaqs, 0, 4);

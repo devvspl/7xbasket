@@ -36,10 +36,8 @@
                         <img src="{{ asset('custom/7x_Basket_Store.jpg') }}" alt="7x Basket Store"
                             class="rounded-xl w-full h-72 object-cover">
                         <div class="bg-black/30 rounded-xl p-4 mt-4">
-                            <p class="text-white text-sm italic leading-relaxed">"We didn't build a supermarket chain. We
+                            <p class="text-white text-md text-center italic leading-relaxed">"We didn't build a supermarket chain. We
                                 built a wealth-creation engine for middle-class India."</p>
-                            <p class="text-[#4ade80] text-xs font-bold mt-2">Founder, 7x Basket</p>
-                            <p class="text-gray-400 text-xs">New Delhi · Est. 2019</p>
                         </div>
                     </div>
                 </div>
@@ -79,7 +77,7 @@
     <section class="py-10 bg-[#0f2d1f]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap justify-center gap-4">
-                @foreach ([['150+', 'Stores PAN India'], ['100+', 'Cities Covered'], ['25', 'States Pan India'], ['4.9/5', 'Customer Rating'], ['10L', 'Starting Investment']] as [$num, $label])
+                @foreach ([['150+', 'Stores PAN India'], ['100+', 'Cities Covered'], ['25', 'States Pan India'], ['4.9/5', 'Customer Rating'], ['13L', 'Starting Investment']] as [$num, $label])
                     <div class="w-[45%] sm:w-[30%] lg:w-[18%] 
             border border-white/10 rounded-xl p-5 
             flex flex-col items-center justify-center text-center"
@@ -383,54 +381,102 @@
 
     {{-- FAQ --}}
     <section class="py-12 pt-0 bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-xs font-bold uppercase tracking-widest">FAQ</span>
                 <h2 class="text-3xl font-extrabold text-gray-900 mt-2 mb-3">Frequently Asked Questions</h2>
                 <p class="text-gray-500 text-sm">Everything you need to know about the 7x Basket franchise model.</p>
             </div>
-            <div class="space-y-3" x-data="{ open: null }">
-                @foreach ([
-            ['What is 7x Basket and how does the franchise model work?', '7x Basket is a supermarket franchise brand headquartered in Delhi. Under the model, a franchisee pays a one-time fee and a variable setup cost based on store size, then runs a fully branded neighbourhood supermarket with 7x Basket\'s supply chain, software, and operational support. The brand charges zero royalty for the first 2 years of operation, after which a 1% royalty on total monthly sales applies from year 3 onwards. The franchise agreement runs for 5 years and is renewable.'],
-            ['How large is India\'s grocery market and why does it matter to franchisees?', 'India\'s grocery market is one of the largest in the world and remains predominantly unorganised. Over 90 percent of grocery retail in India still happens through unorganised channels - small shops, wet markets, and individual vendors. This means the shift toward branded, organised grocery retail is still in its early stages, which creates genuine demand for franchise-owned neighbourhood supermarkets in both urban and semi-urban areas.'],
-            ['How many states and cities does 7x Basket operate in?', '7x Basket currently operates 150+ franchise stores across 100+ cities in 25 states pan-India. The network is expanding monthly, with active territory mapping in tier-2 and tier-3 cities. Established in 2022, the brand has 3+ years of proven franchise operations. You can check city availability by contacting the team directly or applying online.'],
-            ['What support does 7x Basket provide to franchisees?', '7x Basket provides 9 dedicated support pillars to every franchisee. This includes site selection, store design and setup, 1-month on-site training during the launch phase, ongoing remote support post-launch, cloud-based billing software, inventory management guidance, marketing support for the store launch, branded signage and in-store materials, and access to the brand\'s national procurement network for product sourcing.'],
-        ] as [$q, $a])
-                    <div class="bg-gray-50 rounded-xl border border-[#d4e8dc] overflow-hidden"
-                        :class="open === {{ $loop->index }} ? 'shadow-md' : 'shadow-sm'" data-aos="fade-up"
-                        data-aos-delay="{{ $loop->index * 60 }}">
-                        <div class="flex">
-                            <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
-                                :class="open === {{ $loop->index }} ? 'bg-[#109125]' : 'bg-transparent'"></div>
-                            <div class="flex-1">
-                                <button @click="open === {{ $loop->index }} ? open = null : open = {{ $loop->index }}"
-                                    class="w-full flex items-center justify-between px-5 py-4 text-left">
-                                    <span
-                                        class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
-                                    <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
-                                        :class="open === {{ $loop->index }} ? 'bg-[#109125]' : 'bg-[#f0f7f3]'">
-                                        <svg :class="open === {{ $loop->index }} ? 'rotate-180 text-white' : 'text-[#109125]'"
-                                            class="w-4 h-4 transition-all duration-300" fill="none"
-                                            stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                                d="M19 9l-7 7-7-7" />
-                                        </svg>
+            <div class="flex flex-col md:flex-row md:items-start gap-4" x-data="{ open: null }">
+                @php
+                    $faqs = [
+                        ['What is 7x Basket and how does the franchise model work?', '7x Basket is a supermarket franchise brand headquartered in Delhi. Under the model, a franchisee pays a one-time fee and a variable setup cost based on store size, then runs a fully branded neighbourhood supermarket with 7x Basket\'s supply chain, software, and operational support. The brand charges zero royalty for the first 2 years of operation, after which a 1% royalty on total monthly sales applies from year 3 onwards. The franchise agreement runs for 5 years and is renewable.'],
+                        ['How large is India\'s grocery market and why does it matter to franchisees?', 'India\'s grocery market is one of the largest in the world and remains predominantly unorganised. Over 90 percent of grocery retail in India still happens through unorganised channels - small shops, wet markets, and individual vendors. This means the shift toward branded, organised grocery retail is still in its early stages, which creates genuine demand for franchise-owned neighbourhood supermarkets in both urban and semi-urban areas.'],
+                        ['How many states and cities does 7x Basket operate in?', '7x Basket currently operates 150+ franchise stores across 100+ cities in 25 states pan-India. The network is expanding monthly, with active territory mapping in tier-2 and tier-3 cities. Established in 2022, the brand has 3+ years of proven franchise operations. You can check city availability by contacting the team directly or applying online.'],
+                        ['What support does 7x Basket provide to franchisees?', '7x Basket provides 9 dedicated support pillars to every franchisee. This includes site selection, store design and setup, 1-month on-site training during the launch phase, ongoing remote support post-launch, cloud-based billing software, inventory management guidance, marketing support for the store launch, branded signage and in-store materials, and access to the brand\'s national procurement network for product sourcing.'],
+                    ];
+                    $left = array_slice($faqs, 0, 2);
+                    $right = array_slice($faqs, 2);
+                @endphp
+
+                {{-- Left column --}}
+                <div class="flex-1 flex flex-col gap-4">
+                    @foreach ($left as $idx => [$q, $a])
+                        <div class="bg-gray-50 rounded-xl border border-[#d4e8dc] overflow-hidden transition-all duration-300"
+                            :class="open === {{ $idx }} ? 'shadow-md' : 'shadow-sm'" data-aos="fade-up"
+                            data-aos-delay="{{ $idx * 60 }}">
+                            <div class="flex">
+                                <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
+                                    :class="open === {{ $idx }} ? 'bg-[#109125]' : 'bg-transparent'"></div>
+                                <div class="flex-1">
+                                    <button @click="open === {{ $idx }} ? open = null : open = {{ $idx }}"
+                                        class="w-full flex items-center justify-between px-5 py-4 text-left">
+                                        <span class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
+                                        <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
+                                            :class="open === {{ $idx }} ? 'bg-[#109125]' : 'bg-[#f0f7f3]'">
+                                            <svg :class="open === {{ $idx }} ? 'rotate-180 text-white' : 'text-[#109125]'"
+                                                class="w-4 h-4 transition-all duration-300" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                    d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div x-show="open === {{ $idx }}"
+                                        x-transition:enter="transition ease-out duration-200"
+                                        x-transition:enter-start="opacity-0 -translate-y-1"
+                                        x-transition:enter-end="opacity-100 translate-y-0"
+                                        x-transition:leave="transition ease-in duration-150"
+                                        x-transition:leave-start="opacity-100 translate-y-0"
+                                        x-transition:leave-end="opacity-0 -translate-y-1" class="px-5 pb-5">
+                                        <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">
+                                            {{ $a }}</p>
                                     </div>
-                                </button>
-                                <div x-show="open === {{ $loop->index }}"
-                                    x-transition:enter="transition ease-out duration-200"
-                                    x-transition:enter-start="opacity-0 -translate-y-1"
-                                    x-transition:enter-end="opacity-100 translate-y-0"
-                                    x-transition:leave="transition ease-in duration-150"
-                                    x-transition:leave-start="opacity-100 translate-y-0"
-                                    x-transition:leave-end="opacity-0 -translate-y-1" class="px-5 pb-5">
-                                    <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">
-                                        {{ $a }}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+
+                {{-- Right column --}}
+                <div class="flex-1 flex flex-col gap-4">
+                    @foreach ($right as $idx => [$q, $a])
+                        @php $i = $idx + 2; @endphp
+                        <div class="bg-gray-50 rounded-xl border border-[#d4e8dc] overflow-hidden transition-all duration-300"
+                            :class="open === {{ $i }} ? 'shadow-md' : 'shadow-sm'" data-aos="fade-up"
+                            data-aos-delay="{{ $i * 60 }}">
+                            <div class="flex">
+                                <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
+                                    :class="open === {{ $i }} ? 'bg-[#109125]' : 'bg-transparent'"></div>
+                                <div class="flex-1">
+                                    <button @click="open === {{ $i }} ? open = null : open = {{ $i }}"
+                                        class="w-full flex items-center justify-between px-5 py-4 text-left">
+                                        <span class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
+                                        <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
+                                            :class="open === {{ $i }} ? 'bg-[#109125]' : 'bg-[#f0f7f3]'">
+                                            <svg :class="open === {{ $i }} ? 'rotate-180 text-white' : 'text-[#109125]'"
+                                                class="w-4 h-4 transition-all duration-300" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                    d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div x-show="open === {{ $i }}"
+                                        x-transition:enter="transition ease-out duration-200"
+                                        x-transition:enter-start="opacity-0 -translate-y-1"
+                                        x-transition:enter-end="opacity-100 translate-y-0"
+                                        x-transition:leave="transition ease-in duration-150"
+                                        x-transition:leave-start="opacity-100 translate-y-0"
+                                        x-transition:leave-end="opacity-0 -translate-y-1" class="px-5 pb-5">
+                                        <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">
+                                            {{ $a }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>

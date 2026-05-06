@@ -100,6 +100,7 @@
 
     {{-- Apply Franchise vertical tab --}}
     <a href="#" onclick="openLeadPopup(); return false;"
+        id="stickyApplyBtn"
         class="fixed right-0 top-1/2 -translate-y-1/2 z-50
               bg-[#ec2024] text-white shadow-xl rounded-l-2xl
               flex items-center justify-center
@@ -134,6 +135,7 @@
             <form id="leadPopupForm" action="{{ route('apply.store') }}" method="POST" class="px-5 py-4 space-y-3">
                 @csrf
                 <input type="hidden" name="source" value="popup">
+                <input type="hidden" name="action_type" id="actionTypeInput" value="">
                 <div id="leadPopupMsg" class="hidden rounded-lg px-4 py-3 text-sm font-medium text-center"></div>
                 <div>
                     <label class="block text-xs font-bold text-gray-600 mb-1">Full Name <span
@@ -204,7 +206,7 @@
                     class="w-full bg-[#109125] hover:bg-[#0d7a1e] text-white font-extrabold py-2.5 rounded-lg transition-all duration-200 text-xs shadow-md hover:-translate-y-0.5">
                     Submit & Get a Free Callback →
                 </button>
-                <p class="text-center text-[10px] text-gray-400 pb-1">No spam. We'll only call to discuss your
+                <p class="text-center text-xs text-gray-400 pb-1">No spam. No pressure. We call only to discuss your
                     franchise query.</p>
             </form>
         </div>
@@ -233,12 +235,32 @@
 
         function closeLeadPopup() {
             document.getElementById('leadPopup').classList.add('hidden');
+            // Show sticky button when popup closes
+            var stickyBtn = document.getElementById('stickyApplyBtn');
+            if (stickyBtn) {
+                stickyBtn.classList.remove('hidden');
+                stickyBtn.style.display = '';
+            }
         }
 
         function openLeadPopup(action) {
             _leadAction = action || null;
             document.getElementById('leadPopup').classList.remove('hidden');
+            // Hide sticky button when popup opens
+            var stickyBtn = document.getElementById('stickyApplyBtn');
+            if (stickyBtn) {
+                stickyBtn.classList.add('hidden');
+            }
+            // Set action type in hidden input
+            var actionInput = document.getElementById('actionTypeInput');
+            if (actionInput) {
+                actionInput.value = action || '';
+            }
             document.getElementById('leadPopupForm').reset();
+            // Re-set action type after reset
+            if (actionInput) {
+                actionInput.value = action || '';
+            }
             var msg = document.getElementById('leadPopupMsg');
             msg.className = 'hidden rounded-lg px-4 py-3 text-sm font-medium text-center';
             msg.textContent = '';

@@ -17,8 +17,7 @@
                         Own a <span class="text-[#4ade80]">Supermarket Franchise</span>
                         in India - Start with 7x Basket
                     </h1>
-                    <p class="text-green-100 text-lg leading-relaxed mb-8 max-w-lg">
-                        150+ franchise partners. 100+ cities. 25 states. Zero royalty for 2 years. When you open a 7x Basket
+                    <p class="text-green-100 text-lg leading-relaxed mb-8 max-w-lg">When you open a 7x Basket
                         store, you get the brand, the supply chain, the technology, and a team that stays with you after day
                         one.
 
@@ -30,7 +29,7 @@
                         </a>
                     </div>
                     <div class="flex flex-wrap gap-8 mb-5">
-                        @foreach ([['150+', 'Franchise Partners'], ['₹10L', 'Min. Investment'], ['0', 'Royalty Fee - 2 Years']] as [$n, $l])
+                        @foreach ([['150+', 'Franchise Partners'], ['₹13L', 'Min. Investment'], ['0', 'Royalty Fee - 2 Years']] as [$n, $l])
                             <div>
                                 <p class="text-3xl font-extrabold text-white">{{ $n }}</p>
                                 <p class="text-green-200 text-sm">{{ $l }}</p>
@@ -44,7 +43,7 @@
                             class="w-full object-cover rounded-2xl">
                         <div
                             class="absolute -top-4 -right-4 bg-[#ec2024] text-white text-xs font-bold px-3 py-2 rounded-xl shadow-lg">
-                            Zero Royalty!
+                            4.9/5 Rating
                         </div>
                         <div
                             class="absolute -bottom-4 -left-4 bg-white text-[#055346] text-xs font-bold px-3 py-2 rounded-xl shadow-lg">
@@ -64,7 +63,7 @@
     <section class="py-10 bg-white -mt-1">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-                @foreach ([['🏛️', 'FSSAI', 'Certified'], ['📋', 'GST', 'Registered'], ['⭐', '4.8/5', 'Customer Rating'], ['📅', '6+', 'Years in Business'], ['🏆', '15+', 'Industry Awards']] as [$icon, $val, $label])
+                @foreach ([['🏛️', 'FSSAI', 'Certified'], ['📋', 'GST', 'Registered'], ['⭐', '4.9/5', 'Customer Rating'], ['📅', '5+', 'Years in Business'], ['🏆', '15+', 'Industry Awards']] as [$icon, $val, $label])
                     <div class="card-hover bg-gray-50 rounded-2xl p-5 text-center border border-gray-100" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
                         <div class="text-3xl mb-2">{{ $icon }}</div>
@@ -226,15 +225,18 @@
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Store Plans</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Store Model Comparison</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto">Three store formats built for every budget and market size. Pick the one that fits your investment capacity and local opportunity.</p>
+                <p class="text-gray-500 max-w-2xl mx-auto">Three store formats built for every budget and market size. Pick
+                    the one that fits your investment capacity and local opportunity.</p>
             </div>
 
-            <div class="overflow-x-auto rounded-2xl shadow-lg border border-gray-200" data-aos="fade-up" data-aos-delay="100">
+            <div class="overflow-x-auto rounded-2xl shadow-lg border border-gray-200" data-aos="fade-up"
+                data-aos-delay="100">
                 <table class="w-full min-w-[700px] border-collapse">
                     {{-- Header --}}
                     <thead>
                         <tr>
-                            <th class="bg-[#055346] text-white text-left px-5 py-4 text-sm font-extrabold uppercase tracking-wider w-[28%]">
+                            <th
+                                class="bg-[#055346] text-white text-left px-5 py-4 text-sm font-extrabold uppercase tracking-wider w-[28%]">
                                 Parameter
                             </th>
                             <th class="bg-[#109125] text-white px-5 py-4 text-center w-[24%]">
@@ -263,31 +265,69 @@
                     <tbody>
                         @php
                             $rows = [
-                                ['💰', 'Investment Range',          '₹12L – ₹22L',              '₹23L – ₹62L',                  '₹63L – ₹2Cr'],
-                                ['⭐', 'Core Services<br><span class="font-normal text-gray-400">(Product setup, sourcing,<br>training, POS, branding)</span>', 'Included', 'Included', 'Included'],
-                                ['🛍️', 'Product Range',             'Essential categories',      'Expanded categories',           'Full categories + bulk'],
-                                ['📋', 'Number of SKUs',            '800 – 1500',                '2000 – 5000',                   '5000 – 12000+'],
-                                ['🏗️', 'Store Layout Planning',     'Standard layout',           'Optimized layout',              'Zoning & advanced layout'],
-                                ['🖥️', 'Billing System',            'Single POS counter',        '1 – 2 billing counters',        'Multi-counter billing'],
-                                ['👥', 'Staff Requirement',         '1 – 3',                     '3 – 6',                         '6 – 12'],
-                                ['📦', 'Inventory Management',      'Basic stock handling',      'Category-wise management',      'Advanced stock planning'],
-                                ['🤝', 'Supplier Advantage',        'Standard sourcing',         'Better rates (volume)',         'Best rates (bulk)'],
-                                ['📈', 'Daily Sales Potential',     '₹30K – ₹60K',              '₹60K – ₹1.5L',                 '₹1.5L – ₹5L+'],
-                                ['💹', 'Gross Margin (Estimated)',  '25% – 30%',                 '30% – 35%',                     '35% – 40%'],
-                                ['⚙️', 'Operational Complexity',    'Low',                       'Medium',                        'High'],
-                                ['⚡', 'Electricity & Running Cost','Low',                       'Medium',                        'High'],
-                                ['😊', 'Customer Experience',       'Functional',                'Organized shopping',            'Premium experience'],
-                                ['📊', 'Scalability',               'Limited',                   'High',                          'Very High'],
-                                ['🎯', 'Best For',                  'Entry-level investors',     'Most recommended',              'High-scale investors'],
+                                ['💰', 'Investment Range', '₹13L – ₹22L', '₹23L – ₹62L', '₹63L – ₹2Cr'],
+                                [
+                                    '⭐',
+                                    'Core Services<br><span class="font-normal text-gray-400">(Product setup, sourcing,<br>training, POS, branding)</span>',
+                                    'Included',
+                                    'Included',
+                                    'Included',
+                                ],
+                                [
+                                    '🛍️',
+                                    'Product Range',
+                                    'Essential categories',
+                                    'Expanded categories',
+                                    'Full categories + bulk',
+                                ],
+                                ['📋', 'Number of SKUs', '800 – 1500', '2000 – 5000', '5000 – 12000+'],
+                                [
+                                    '🏗️',
+                                    'Store Layout Planning',
+                                    'Standard layout',
+                                    'Optimized layout',
+                                    'Zoning & advanced layout',
+                                ],
+                                [
+                                    '🖥️',
+                                    'Billing System',
+                                    'Single POS counter',
+                                    '1 – 2 billing counters',
+                                    'Multi-counter billing',
+                                ],
+                                ['👥', 'Staff Requirement', '1 – 3', '3 – 6', '6 – 12'],
+                                [
+                                    '📦',
+                                    'Inventory Management',
+                                    'Basic stock handling',
+                                    'Category-wise management',
+                                    'Advanced stock planning',
+                                ],
+                                [
+                                    '🤝',
+                                    'Supplier Advantage',
+                                    'Standard sourcing',
+                                    'Better rates (volume)',
+                                    'Best rates (bulk)',
+                                ],
+                                ['📈', 'Daily Sales Potential', '₹30K – ₹60K', '₹60K – ₹1.5L', '₹1.5L – ₹5L+'],
+                                ['💹', 'Gross Margin (Estimated)', '25% – 30%', '30% – 35%', '35% – 40%'],
+                                ['⚙️', 'Operational Complexity', 'Low', 'Medium', 'High'],
+                                ['⚡', 'Electricity & Running Cost', 'Low', 'Medium', 'High'],
+                                ['😊', 'Customer Experience', 'Functional', 'Organized shopping', 'Premium experience'],
+                                ['📊', 'Scalability', 'Limited', 'High', 'Very High'],
+                                ['🎯', 'Best For', 'Entry-level investors', 'Most recommended', 'High-scale investors'],
                             ];
                         @endphp
                         @foreach ($rows as $i => [$icon, $param, $mini, $super, $hyper])
-                            <tr class="{{ $i % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} border-t border-gray-100 hover:bg-blue-50/30 transition-colors duration-150">
+                            <tr
+                                class="{{ $i % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} border-t border-gray-100 hover:bg-blue-50/30 transition-colors duration-150">
                                 {{-- Parameter --}}
                                 <td class="px-5 py-3.5 border-r border-gray-100">
                                     <div class="flex items-center gap-2.5">
                                         <span class="text-base flex-shrink-0">{{ $icon }}</span>
-                                        <span class="text-sm font-semibold text-gray-800 leading-snug">{!! $param !!}</span>
+                                        <span
+                                            class="text-sm font-semibold text-gray-800 leading-snug">{!! $param !!}</span>
                                     </div>
                                 </td>
                                 {{-- Mini --}}
@@ -332,11 +372,13 @@
             </div>
 
             {{-- Disclaimer --}}
-            <div class="mt-4 bg-[#055346] rounded-xl px-5 py-3 flex items-center gap-3" data-aos="fade-up" data-aos-delay="150">
+            <div class="mt-4 bg-[#055346] rounded-xl px-5 py-3 flex items-center gap-3" data-aos="fade-up"
+                data-aos-delay="150">
                 <span class="text-xl flex-shrink-0">⭐</span>
                 <p class="text-white text-xs leading-relaxed">
                     <span class="font-bold">All store formats include complete support.</span>
-                    <span class="text-yellow-300 ml-2">Sales and margin figures are indicative and depend on location, product mix, and store operations.</span>
+                    <span class="text-yellow-300 ml-2">Sales and margin figures are indicative and depend on location,
+                        product mix, and store operations.</span>
                 </p>
             </div>
         </div>
@@ -358,7 +400,7 @@
                             :class="tab === 'cost' ? 'bg-[#0f1f1a] text-[#4ade80] shadow-sm' :
                                 'text-[#6b8f7e] hover:text-[#4ade80]'"
                             class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200">
-                            💰 Startup Costs
+                            💰 Investment Calculator
                         </button>
                         <button @click="tab = 'earn'"
                             :class="tab === 'earn' ? 'bg-[#0f1f1a] text-[#4ade80] shadow-sm' :
@@ -382,14 +424,20 @@
                     x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
 
                     <div x-data="{
-                        area: 1000,
+                        area: 2000,
                         format: 'super',
+                        
+                        /* ── Configuration (can be made dynamic from backend) ── */
+                        costPerSqFt: 2000,
+                        franchiseBaseCost: 210000,
+                        softwareBaseCost: 40000,
+                        gstRate: 0.18,
                     
                         /* ── Format presets: sets default area when format is picked ── */
                         formats: {
-                            mini: { icon: '🏪', label: 'Mini Store', size: '300–500 sqft', default: 400 },
-                            super: { icon: '🏬', label: 'Super Store', size: '800–1200 sqft', default: 1000 },
-                            hyper: { icon: '🏢', label: 'Hyper Store', size: '2000+ sqft', default: 2000 }
+                            mini: { icon: '🏪', label: 'Mini Store', size: '500–1000 sqft', default: 750 },
+                            super: { icon: '🏬', label: 'Super Store', size: '1000–3000 sqft', default: 2000 },
+                            hyper: { icon: '🏢', label: 'Hyper Store', size: '3000+ sqft', default: 5000 }
                         },
                     
                         selectFormat(key) {
@@ -397,13 +445,30 @@
                             this.area = this.formats[key].default;
                         },
                     
-                        /* ── Startup Cost Formulas (from Startup_Costs.xlsx) ── */
-                        get areaCost() { return this.area * 2000 },
-                        get baseWithGst() { return 247800 },
-                        /* ₹2,10,000 + 18% GST */
-                        get additionalGst() { return 47200 },
-                        /* ₹40,000   + 18% GST */
-                        get totalStartup() { return this.areaCost + this.baseWithGst + this.additionalGst },
+                        /* ── Startup Cost Formulas (Excel-based with GST) ── */
+                        get areaCost() { 
+                            return this.area * this.costPerSqFt 
+                        },
+                        get franchiseCostWithGst() { 
+                            return Math.round(this.franchiseBaseCost * (1 + this.gstRate))
+                        },
+                        get softwareCostWithGst() { 
+                            return Math.round(this.softwareBaseCost * (1 + this.gstRate))
+                        },
+                        get totalStartup() { 
+                            return this.areaCost + this.franchiseCostWithGst + this.softwareCostWithGst 
+                        },
+                    
+                        /* ── Percentage calculations for progress bars ── */
+                        get areaPercent() { 
+                            return Math.round((this.areaCost / this.totalStartup) * 100) 
+                        },
+                        get franchisePercent() { 
+                            return Math.round((this.franchiseCostWithGst / this.totalStartup) * 100) 
+                        },
+                        get softwarePercent() { 
+                            return Math.round((this.softwareCostWithGst / this.totalStartup) * 100) 
+                        },
                     
                         fmt(n) { return '₹' + Number(n).toLocaleString('en-IN') }
                     }"
@@ -445,16 +510,16 @@
                                             class="flex items-center gap-1 bg-[#1a2e27] border border-white/20 rounded-lg px-2 py-1">
                                             <input type="number" x-model.number="area"
                                                 @input="let v = Number($event.target.value); area = v > 10000 ? 10000 : (v || v === 0 ? v : area)"
-                                                @blur="area = Math.min(10000, Math.max(300, Number($event.target.value) || 300))"
+                                                @blur="area = Math.min(10000, Math.max(500, Number($event.target.value) || 500))"
                                                 class="w-20 bg-transparent text-[#f5a623] text-sm font-bold text-right outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none">
                                             <span class="text-[#6b8f7e] text-xs">sq ft</span>
                                         </div>
                                     </div>
-                                    <input type="range" x-model.number="area" min="300" max="10000"
+                                    <input type="range" x-model.number="area" min="500" max="10000"
                                         step="100"
                                         class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
                                     <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
-                                        <span>300</span><span>5,000</span><span>10,000</span>
+                                        <span>500</span><span>5,000</span><span>10,000</span>
                                     </div>
                                 </div>
 
@@ -472,48 +537,37 @@
                                 <p class="text-[#6b8f7e] text-xs mb-6">Based on <span
                                         x-text="Number(area).toLocaleString('en-IN')"></span> sq ft store area</p>
 
-                                {{-- Bar Chart --}}
-                                <div class="space-y-4 mb-6">
+                                {{-- Cost Breakdown --}}
+                                <div class="space-y-4">
                                     <div>
                                         <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Store Fitout & Setup</span>
+                                            <span class="text-[#9bbfb0] font-medium">Inventory Cost (Product Cost)</span>
                                             <span class="font-bold text-white" x-text="fmt(areaCost)"></span>
                                         </div>
                                         <div class="h-2 bg-white/10 rounded-full overflow-hidden">
                                             <div class="bg-[#109125] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${Math.round((areaCost / totalStartup) * 100)}%`"></div>
+                                                :style="`width: ${areaPercent}%`"></div>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Base Setup Cost (incl. GST)</span>
-                                            <span class="font-bold text-white">₹2,47,800</span>
+                                            <span class="text-[#9bbfb0] font-medium">Interior Cost (Store Interior)</span>
+                                            <span class="font-bold text-white" x-text="fmt(franchiseCostWithGst)"></span>
                                         </div>
                                         <div class="h-2 bg-white/10 rounded-full overflow-hidden">
                                             <div class="bg-[#055346] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${Math.round((247800 / totalStartup) * 100)}%`"></div>
+                                                :style="`width: ${franchisePercent}%`"></div>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Additional Costs (incl. GST)</span>
-                                            <span class="font-bold text-white">₹47,200</span>
+                                            <span class="text-[#9bbfb0] font-medium">Software Cost (incl. GST)</span>
+                                            <span class="font-bold text-white" x-text="fmt(softwareCostWithGst)"></span>
                                         </div>
                                         <div class="h-2 bg-white/10 rounded-full overflow-hidden">
                                             <div class="bg-[#ec2024] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${Math.round((47200 / totalStartup) * 100)}%`"></div>
+                                                :style="`width: ${softwarePercent}%`"></div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="mt-5 grid grid-cols-2 gap-3">
-                                    <div class="bg-white/[0.06] rounded-xl p-3 border border-white/10 text-center">
-                                        <p class="text-xs text-[#9bbfb0] mb-0.5">Cost per Sq Ft</p>
-                                        <p class="font-bold text-[#f5a623] text-sm">₹2,000</p>
-                                    </div>
-                                    <div class="bg-white/[0.06] rounded-xl p-3 border border-white/10 text-center">
-                                        <p class="text-xs text-[#9bbfb0] mb-0.5">Zero Royalty</p>
-                                        <p class="font-bold text-[#4ade80] text-sm">₹0 / month</p>
                                     </div>
                                 </div>
                             </div>
@@ -541,14 +595,30 @@
                     x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
 
                     <div x-data="{
-                        area: 1000,
-                        stockInvestment: 1000000,
+                        area: 2000,
+                        
+                        /* ── Configuration (same as Startup Costs tab) ── */
+                        costPerSqFt: 2000,
+                        franchiseBaseCost: 210000,
+                        softwareBaseCost: 40000,
+                        gstRate: 0.18,
                     
                         /* ── Startup Cost (same formula as Tab 1) ── */
-                        get startupCost() { return (this.area * 2000) + 247800 + 47200 },
+                        get areaCost() { 
+                            return this.area * this.costPerSqFt 
+                        },
+                        get franchiseCostWithGst() { 
+                            return Math.round(this.franchiseBaseCost * (1 + this.gstRate))
+                        },
+                        get softwareCostWithGst() { 
+                            return Math.round(this.softwareBaseCost * (1 + this.gstRate))
+                        },
+                        get startupCost() { 
+                            return this.areaCost + this.franchiseCostWithGst + this.softwareCostWithGst 
+                        },
                     
-                        /* ── Total Setup ── */
-                        get totalSetup() { return this.startupCost + this.stockInvestment },
+                        /* ── Total Setup (no separate stock investment) ── */
+                        get totalSetup() { return this.startupCost },
                     
                         /* ── Revenue & Profit (from ROI Calculator sheet) ── */
                         get monthlySales() { return Math.round(this.area * (4000000 / 3000)) },
@@ -597,32 +667,16 @@
                                             class="flex items-center gap-1 bg-[#1a2e27] border border-white/20 rounded-lg px-2 py-1">
                                             <input type="number" x-model.number="area"
                                                 @input="let v = Number($event.target.value); area = v > 10000 ? 10000 : (v || v === 0 ? v : area)"
-                                                @blur="area = Math.min(10000, Math.max(300, Number($event.target.value) || 300))"
+                                                @blur="area = Math.min(10000, Math.max(500, Number($event.target.value) || 500))"
                                                 class="w-20 bg-transparent text-[#f5a623] text-sm font-bold text-right outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none">
                                             <span class="text-[#6b8f7e] text-xs">sq ft</span>
                                         </div>
                                     </div>
-                                    <input type="range" x-model.number="area" min="300" max="10000"
+                                    <input type="range" x-model.number="area" min="500" max="10000"
                                         step="100"
                                         class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
                                     <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
-                                        <span>300</span><span>5,000</span><span>10,000</span>
-                                    </div>
-                                </div>
-
-                                {{-- Stock Investment --}}
-                                <div class="mb-5">
-                                    <div class="flex justify-between mb-2">
-                                        <label class="text-[#c8e8d8] text-xs font-bold uppercase tracking-wider">Stock
-                                            Investment (₹ Lakh)</label>
-                                        <span class="text-[#f5a623] text-sm font-bold"
-                                            x-text="'₹' + (stockInvestment/100000).toFixed(0) + 'L'"></span>
-                                    </div>
-                                    <input type="range" x-model.number="stockInvestment" min="500000" max="5000000"
-                                        step="100000"
-                                        class="w-full h-2 rounded-full appearance-none cursor-pointer accent-[#f5a623] bg-white/20">
-                                    <div class="flex justify-between text-xs text-[#6b8f7e] mt-1">
-                                        <span>₹5L</span><span>₹27.5L</span><span>₹50L</span>
+                                        <span>500</span><span>5,000</span><span>10,000</span>
                                     </div>
                                 </div>
 
@@ -714,8 +768,7 @@
                                 {{-- Total Setup Cost --}}
                                 <div
                                     class="mt-4 bg-white/[0.04] rounded-xl px-4 py-2.5 flex justify-between border border-white/[0.06]">
-                                    <span class="text-[#9bbfb0] text-xs font-medium">Total Setup Cost (Startup +
-                                        Stock)</span>
+                                    <span class="text-[#9bbfb0] text-xs font-medium">Total Investment Required</span>
                                     <span class="text-white text-xs font-bold" x-text="fmtFull(totalSetup)"></span>
                                 </div>
                             </div>
@@ -1124,19 +1177,43 @@
             { src: '{{ asset('custom/8.webp') }}', alt: 'Store Branding' },
             { src: '{{ asset('custom/9.webp') }}', alt: 'Happy Customers' },
         ],
+        init() {
+            // Watch lightbox state
+            this.$watch('lightbox', value => {
+                const stickyBtn = document.getElementById('stickyApplyBtn');
+                if (stickyBtn) {
+                    if (value) {
+                        stickyBtn.classList.add('hidden');
+                    } else {
+                        stickyBtn.classList.remove('hidden');
+                    }
+                }
+            });
+            // Watch videoModal state
+            this.$watch('videoModal', value => {
+                const stickyBtn = document.getElementById('stickyApplyBtn');
+                if (stickyBtn) {
+                    if (value) {
+                        stickyBtn.classList.add('hidden');
+                    } else {
+                        stickyBtn.classList.remove('hidden');
+                    }
+                }
+            });
+        },
         openLightbox(i) {
             this.lightboxIndex = i;
-            this.lightbox = true
+            this.lightbox = true;
         },
         prevImage() { this.lightboxIndex = (this.lightboxIndex - 1 + this.images.length) % this.images.length },
         nextImage() { this.lightboxIndex = (this.lightboxIndex + 1) % this.images.length },
         openVideo(src) {
             this.videoSrc = src;
-            this.videoModal = true
+            this.videoModal = true;
         },
         closeVideo() {
             this.videoModal = false;
-            this.videoSrc = ''
+            this.videoSrc = '';
         }
     }"
         @keydown.escape.window="lightbox = false; closeVideo()" @keydown.arrow-left.window="if(lightbox) prevImage()"
@@ -1213,7 +1290,7 @@
                 <p class="text-[#6b8f7e] text-sm">Watch real stories and expert insights about 7x Basket franchise.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-                @foreach ([['custom/7x_Basket_Store.png', 'How to Start a 7x Basket Franchise', 'Investment & ROI Explained', 'Expert Guide', ''], ['custom/7x_Basket_Store.png', 'Franchise Offer — Start Your Supermarket', '₹5L Investment, High Returns', 'Business Overview', ''], ['custom/7x_Basket_Store.png', 'Supermarket Grocery Store Business', 'Full Setup Guide for Beginners', 'Step-by-Step', '']] as [$img, $title, $subtitle, $tag, $ytId])
+                @foreach ([['custom/7x_Basket_Store.png', 'How to Start a 7x Basket Franchise', 'Investment & ROI Explained', 'Expert Guide', 'E8SjNuM04Xk'], ['custom/7x_Basket_Store.png', 'Franchise Offer — Start Your Supermarket', '₹5L Investment, High Returns', 'Business Overview', '_AWeuLbDD1w'], ['custom/7x_Basket_Store.png', 'Supermarket Grocery Store Business', 'Full Setup Guide for Beginners', 'Step-by-Step', 'znAW7U4EoDY']] as [$img, $title, $subtitle, $tag, $ytId])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
                         @click="openVideo('https://www.youtube.com/embed/{{ $ytId }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
@@ -1246,9 +1323,9 @@
                 <p class="text-[#6b8f7e] text-sm">Hear directly from our franchise owners across India.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                @foreach ([['custom/7x_Basket_Store.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."'], ['custom/7x_Basket_Store.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."'], ['custom/7x_Basket_Store.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."']] as [$img, $name, $city, $role, $quote])
+                @foreach ([['custom/7x_Basket_Store.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."', 'https://www.youtube.com/embed/apqR-F9q5x4'], ['custom/7x_Basket_Store.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."', 'https://www.youtube.com/embed/XwIbQUgLvMc'], ['custom/7x_Basket_Store.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."', 'https://www.youtube.com/embed/XYRC-Wva7-A']] as [$img, $name, $city, $role, $quote, $video])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
-                        @click="openVideo('https://www.youtube.com/embed/')" data-aos="fade-up"
+                        @click="openVideo('{{ $video }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
                         <img src="{{ asset($img) }}" alt="{{ $name }}"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
@@ -1355,93 +1432,131 @@
             <div class="flex flex-col md:flex-row md:items-start gap-4" x-data="{ open: null }">
                 @php
                     $faqs = [
-                        ['How much does a supermarket franchise cost in India?', 'It depends on the store format, city, and the brand. Costs vary based on the size of the space, fitout requirements, and the stock needed to open. The bigger the store and the bigger the city, the higher the number. Always ask for a written cost breakdown that separates the franchise fee, setup, and working capital before you decide.'],
-                        ['Is a grocery franchise profitable in India?', 'Yes, grocery franchises in India are profitable. That said, it depends on location, store size, and how well the business is run. Well-managed stores tend to do well because people buy groceries every day - the demand never stops. Add a good product mix and steady footfall, and the numbers work.'],
-                        ['Is a supermarket franchise better than opening an independent grocery store?', 'A franchise gives you a brand people already recognise, a supply chain that is already set up, and a trained support team from day one. An independent store gives you more control but puts everything - sourcing, branding, technology, and marketing - on you from scratch. For a first-time grocery business owner, a franchise reduces the three biggest risks: no brand pull, no supply chain, and no operational knowledge.'],
-                        ['How much space do I need to open a grocery store franchise?', 'Space requirements depend on the store format. Most grocery franchise brands offer three formats - small, medium, and large. A small or mini format typically runs from 500 sq ft and suits residential neighbourhoods. A medium format runs from 1500 sq ft and works for higher-footfall markets. Large or hyper formats need 4,000 sq ft and above. Check the minimum area requirement with the specific franchise brand before locking in a property.'],
-                        ['What is the royalty fee for a supermarket franchise in India?', 'Royalty fees vary by brand - some charge a percentage of monthly sales, others a flat monthly fee. In grocery retail where margins are already tight, the royalty structure directly affects monthly take-home profit. Always check when royalty starts, what it is calculated on, and whether there is a minimum charge regardless of how much you sell.'],
-                        ['How do I start a supermarket business in India with no retail experience?', 'A structured grocery franchise model fills the experience gap. Look for one that includes hands-on training during store setup and an assigned support contact after opening. The first few months are when most first-time store owners run into problems - live support during that period matters more than what is written in the brochure.'],
-                        ['How long does it take to open a grocery store franchise in India?', 'Most structured grocery franchise models get a store open within a few weeks to a couple of months from agreement signing. The main factors that affect the timeline are property readiness, documentation completion, and how quickly the fitout is done. A clean, ready space with complete paperwork gets you to opening day faster.'],
-                        ['What support does a retail supermarket franchise give to partners?', 'Good franchise support covers three phases - setup, opening, and post-launch. Setup includes store design, fitout, and training. Post-launch is where most brands pull back. Before signing, ask specifically what ongoing support looks like, who your point of contact is, and what the response time is for day-to-day problems.'],
-                        ['What is territory exclusivity in a supermarket franchise?', 'Territory exclusivity means the franchisor agrees not to open another store of the same brand within a defined area around your location. This protects your customer base from competition within the same franchise network. Not all grocery franchise brands offer it - some grant it based on location and market size, others assess it case by case. Always confirm the exact exclusivity terms in writing before signing the agreement.'],
-                        ['Can I open a grocery mart franchise in India on rented property?', 'Yes. Most grocery franchise brands in India allow rented, leased, or owned properties. Make sure your lease term is at least as long as the franchise agreement period. A mismatch between the two - a 5-year franchise tied to a 2-year rental - is a risk most first-time franchise partners overlook.'],
+                        [
+                            'How much does a supermarket franchise cost in India?',
+                            'It depends on the store format, city, and the brand. Costs vary based on the size of the space, fitout requirements, and the stock needed to open. The bigger the store and the bigger the city, the higher the number. Always ask for a written cost breakdown that separates the franchise fee, setup, and working capital before you decide.',
+                        ],
+                        [
+                            'Is a grocery franchise profitable in India?',
+                            'Yes, grocery franchises in India are profitable. That said, it depends on location, store size, and how well the business is run. Well-managed stores tend to do well because people buy groceries every day - the demand never stops. Add a good product mix and steady footfall, and the numbers work.',
+                        ],
+                        [
+                            'Is a supermarket franchise better than opening an independent grocery store?',
+                            'A franchise gives you a brand people already recognise, a supply chain that is already set up, and a trained support team from day one. An independent store gives you more control but puts everything - sourcing, branding, technology, and marketing - on you from scratch. For a first-time grocery business owner, a franchise reduces the three biggest risks: no brand pull, no supply chain, and no operational knowledge.',
+                        ],
+                        [
+                            'How much space do I need to open a grocery store franchise?',
+                            'Space requirements depend on the store format. Most grocery franchise brands offer three formats - small, medium, and large. A small or mini format typically runs from 500 sq ft and suits residential neighbourhoods. A medium format runs from 1500 sq ft and works for higher-footfall markets. Large or hyper formats need 4,000 sq ft and above. Check the minimum area requirement with the specific franchise brand before locking in a property.',
+                        ],
+                        [
+                            'What is the royalty fee for a supermarket franchise in India?',
+                            'Royalty fees vary by brand - some charge a percentage of monthly sales, others a flat monthly fee. In grocery retail where margins are already tight, the royalty structure directly affects monthly take-home profit. Always check when royalty starts, what it is calculated on, and whether there is a minimum charge regardless of how much you sell.',
+                        ],
+                        [
+                            'How do I start a supermarket business in India with no retail experience?',
+                            'A structured grocery franchise model fills the experience gap. Look for one that includes hands-on training during store setup and an assigned support contact after opening. The first few months are when most first-time store owners run into problems - live support during that period matters more than what is written in the brochure.',
+                        ],
+                        [
+                            'How long does it take to open a grocery store franchise in India?',
+                            'Most structured grocery franchise models get a store open within a few weeks to a couple of months from agreement signing. The main factors that affect the timeline are property readiness, documentation completion, and how quickly the fitout is done. A clean, ready space with complete paperwork gets you to opening day faster.',
+                        ],
+                        [
+                            'What support does a retail supermarket franchise give to partners?',
+                            'Good franchise support covers three phases - setup, opening, and post-launch. Setup includes store design, fitout, and training. Post-launch is where most brands pull back. Before signing, ask specifically what ongoing support looks like, who your point of contact is, and what the response time is for day-to-day problems.',
+                        ],
+                        [
+                            'What is territory exclusivity in a supermarket franchise?',
+                            'Territory exclusivity means the franchisor agrees not to open another store of the same brand within a defined area around your location. This protects your customer base from competition within the same franchise network. Not all grocery franchise brands offer it - some grant it based on location and market size, others assess it case by case. Always confirm the exact exclusivity terms in writing before signing the agreement.',
+                        ],
+                        [
+                            'Can I open a grocery mart franchise in India on rented property?',
+                            'Yes. Most grocery franchise brands in India allow rented, leased, or owned properties. Make sure your lease term is at least as long as the franchise agreement period. A mismatch between the two - a 5-year franchise tied to a 2-year rental - is a risk most first-time franchise partners overlook.',
+                        ],
                     ];
-                    $left  = array_slice($faqs, 0, 5);
+                    $left = array_slice($faqs, 0, 5);
                     $right = array_slice($faqs, 5);
                 @endphp
 
                 {{-- Left column --}}
                 <div class="flex-1 flex flex-col gap-4">
                     @foreach ($left as $idx => [$q, $a])
-                    <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
-                        :class="open === {{ $idx }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
-                        data-aos="fade-up" data-aos-delay="{{ $idx * 60 }}">
-                        <div class="flex">
-                            <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
-                                :class="open === {{ $idx }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
-                            <div class="flex-1">
-                                <button @click="open === {{ $idx }} ? open = null : open = {{ $idx }}"
-                                    class="w-full flex items-center justify-between px-5 py-4 text-left">
-                                    <span class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
-                                    <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
-                                        :class="open === {{ $idx }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
-                                        <svg :class="open === {{ $idx }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
-                                            class="w-4 h-4 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
-                                        </svg>
+                        <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
+                            :class="open === {{ $idx }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
+                            data-aos="fade-up" data-aos-delay="{{ $idx * 60 }}">
+                            <div class="flex">
+                                <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
+                                    :class="open === {{ $idx }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
+                                <div class="flex-1">
+                                    <button
+                                        @click="open === {{ $idx }} ? open = null : open = {{ $idx }}"
+                                        class="w-full flex items-center justify-between px-5 py-4 text-left">
+                                        <span
+                                            class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
+                                        <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
+                                            :class="open === {{ $idx }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
+                                            <svg :class="open === {{ $idx }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
+                                                class="w-4 h-4 transition-all duration-300" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                    d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div x-show="open === {{ $idx }}"
+                                        x-transition:enter="transition ease-out duration-200"
+                                        x-transition:enter-start="opacity-0 -translate-y-1"
+                                        x-transition:enter-end="opacity-100 translate-y-0"
+                                        x-transition:leave="transition ease-in duration-150"
+                                        x-transition:leave-start="opacity-100 translate-y-0"
+                                        x-transition:leave-end="opacity-0 -translate-y-1" class="px-5 pb-5">
+                                        <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">
+                                            {{ $a }}</p>
                                     </div>
-                                </button>
-                                <div x-show="open === {{ $idx }}"
-                                    x-transition:enter="transition ease-out duration-200"
-                                    x-transition:enter-start="opacity-0 -translate-y-1"
-                                    x-transition:enter-end="opacity-100 translate-y-0"
-                                    x-transition:leave="transition ease-in duration-150"
-                                    x-transition:leave-start="opacity-100 translate-y-0"
-                                    x-transition:leave-end="opacity-0 -translate-y-1"
-                                    class="px-5 pb-5">
-                                    <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">{{ $a }}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
 
                 {{-- Right column --}}
                 <div class="flex-1 flex flex-col gap-4">
                     @foreach ($right as $idx => [$q, $a])
-                    @php $i = $idx + 5; @endphp
-                    <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
-                        :class="open === {{ $i }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
-                        data-aos="fade-up" data-aos-delay="{{ $i * 60 }}">
-                        <div class="flex">
-                            <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
-                                :class="open === {{ $i }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
-                            <div class="flex-1">
-                                <button @click="open === {{ $i }} ? open = null : open = {{ $i }}"
-                                    class="w-full flex items-center justify-between px-5 py-4 text-left">
-                                    <span class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
-                                    <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
-                                        :class="open === {{ $i }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
-                                        <svg :class="open === {{ $i }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
-                                            class="w-4 h-4 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
-                                        </svg>
+                        @php $i = $idx + 5; @endphp
+                        <div class="bg-white rounded-xl border overflow-hidden transition-all duration-300"
+                            :class="open === {{ $i }} ? 'border-[#d4e8dc] shadow-md' : 'border-[#d4e8dc] shadow-sm'"
+                            data-aos="fade-up" data-aos-delay="{{ $i * 60 }}">
+                            <div class="flex">
+                                <div class="w-1 flex-shrink-0 rounded-l-xl transition-all duration-300"
+                                    :class="open === {{ $i }} ? 'bg-[#f5a623]' : 'bg-transparent'"></div>
+                                <div class="flex-1">
+                                    <button
+                                        @click="open === {{ $i }} ? open = null : open = {{ $i }}"
+                                        class="w-full flex items-center justify-between px-5 py-4 text-left">
+                                        <span
+                                            class="font-semibold text-gray-900 text-sm pr-4 leading-snug">{{ $q }}</span>
+                                        <div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300"
+                                            :class="open === {{ $i }} ? 'bg-[#1a5c38]' : 'bg-[#f0f7f3]'">
+                                            <svg :class="open === {{ $i }} ? 'rotate-180 text-white' : 'text-[#1a5c38]'"
+                                                class="w-4 h-4 transition-all duration-300" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                    d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div x-show="open === {{ $i }}"
+                                        x-transition:enter="transition ease-out duration-200"
+                                        x-transition:enter-start="opacity-0 -translate-y-1"
+                                        x-transition:enter-end="opacity-100 translate-y-0"
+                                        x-transition:leave="transition ease-in duration-150"
+                                        x-transition:leave-start="opacity-100 translate-y-0"
+                                        x-transition:leave-end="opacity-0 -translate-y-1" class="px-5 pb-5">
+                                        <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">
+                                            {{ $a }}</p>
                                     </div>
-                                </button>
-                                <div x-show="open === {{ $i }}"
-                                    x-transition:enter="transition ease-out duration-200"
-                                    x-transition:enter-start="opacity-0 -translate-y-1"
-                                    x-transition:enter-end="opacity-100 translate-y-0"
-                                    x-transition:leave="transition ease-in duration-150"
-                                    x-transition:leave-start="opacity-100 translate-y-0"
-                                    x-transition:leave-end="opacity-0 -translate-y-1"
-                                    class="px-5 pb-5">
-                                    <p class="text-sm text-gray-500 leading-relaxed border-t border-[#f0f7f3] pt-3">{{ $a }}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
 

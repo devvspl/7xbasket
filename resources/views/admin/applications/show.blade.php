@@ -71,6 +71,25 @@
                         {{ $application->source ?? 'website' }}
                     </p>
                 </div>
+                @if($application->action_type)
+                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100 sm:col-span-2">
+                    <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Action Type</p>
+                    <div class="flex items-center gap-2">
+                        @if($application->action_type === 'whatsapp')
+                            <span class="text-sm">💬</span>
+                            <p class="text-sm font-semibold text-green-600">WhatsApp</p>
+                        @elseif($application->action_type === 'call')
+                            <span class="text-sm">📞</span>
+                            <p class="text-sm font-semibold text-red-600">Call</p>
+                        @elseif($application->action_type === 'brochure')
+                            <span class="text-sm">📥</span>
+                            <p class="text-sm font-semibold text-blue-600">Brochure Download</p>
+                        @else
+                            <p class="text-sm font-semibold text-gray-900 capitalize">{{ $application->action_type }}</p>
+                        @endif
+                    </div>
+                </div>
+                @endif
                 <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100 sm:col-span-2">
                     <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Page URL</p>
                     <p class="text-xs text-gray-700 break-all">{{ $application->page_url ?? '—' }}</p>

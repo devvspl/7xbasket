@@ -43,16 +43,16 @@
             <div class="flex-1 overflow-hidden">
                 <div class="marquee-track flex gap-16 whitespace-nowrap w-max">
                     {{-- set 1 --}}
-                    <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">🎉</span> Limited slots available — Apply before <strong>30 April 2026</strong></span>
+                    <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">🎉</span> Limited slots available — Apply before <strong>{{ date('d F Y') }}</strong></span>
                     <span class="text-white/30">|</span>
-                    <span class="flex items-center gap-1.5"><span class="text-green-300">✅</span> <strong>Zero Royalty</strong> · Zero Hidden Charges</span>
+                    <span class="flex items-center gap-1.5"><span class="text-green-300">✅</span> <strong>Zero Hidden Charges</strong></span>
                     <span class="text-white/30">|</span>
                     <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">📞</span> Call us: <a href="tel:919870275327" class="underline underline-offset-2 hover:text-green-200 transition-colors">+91 9870275327</a></span>
                     <span class="text-white/30">|</span>
                     <span class="flex items-center gap-1.5"><span>🏪</span> 500+ Franchise Partners Across India</span>
                     <span class="text-white/30">|</span>
                     {{-- duplicate for seamless loop --}}
-                    <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">🎉</span> Limited slots available — Apply before <strong>30 April 2026</strong></span>
+                    <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">🎉</span> Limited slots available — Apply before <strong>{{ date('d F Y') }}</strong></span>
                     <span class="text-white/30">|</span>
                     <span class="flex items-center gap-1.5"><span class="text-green-300">✅</span> <strong>Zero Royalty</strong> · Zero Hidden Charges</span>
                     <span class="text-white/30">|</span>
@@ -93,9 +93,9 @@
                 <div class="hidden md:flex items-center gap-8">
                     <a href="{{ route('home') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('home') ? 'text-green-600' : '' }}">Home</a>
                     <a href="{{ route('about') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('about') ? 'text-green-600' : '' }}">About Us</a>
-                    <a href="{{ route('blogs') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('blogs*') ? 'text-green-600' : '' }}">Blogs</a>
-                    <a href="{{ route('calculator') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('calculator') ? 'text-green-600' : '' }}">Calculator</a>
                     <a href="{{ route('apply') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('apply') ? 'text-green-600' : '' }}">Apply Franchise</a>
+                    <a href="{{ route('calculator') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('calculator') ? 'text-green-600' : '' }}">Calculator</a>
+                    <a href="{{ route('blogs') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('blogs*') ? 'text-green-600' : '' }}">Blogs</a>
                     <a href="{{ route('contact') }}" class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('contact') ? 'text-green-600' : '' }}">Contact</a>
                     <a href="#" onclick="openLeadPopup('brochure'); return false;"
                        class="flex items-center gap-1.5 bg-[#055346] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#076b58] transition-all duration-200">
@@ -254,6 +254,7 @@
     {{-- RIGHT-CENTER: Apply Franchise vertical tab --}}
     <a href="#" onclick="openLeadPopup(); return false;"
        title="Apply for Franchise"
+       id="stickyApplyBtn"
        class="fixed right-0 top-1/2 -translate-y-1/2 z-50
               bg-[#ec2024] text-white shadow-xl rounded-l-2xl
               flex items-center justify-center
@@ -297,6 +298,7 @@
             <form id="leadPopupForm" action="{{ route('apply.store') }}" method="POST" class="px-5 py-4 space-y-3">
                 @csrf
                 <input type="hidden" name="source" value="popup">
+                <input type="hidden" name="action_type" id="actionTypeInput" value="">
 
                 {{-- Success / Error message --}}
                 <div id="leadPopupMsg" class="hidden rounded-lg px-4 py-3 text-sm font-medium text-center"></div>
@@ -393,13 +395,33 @@
         var _leadAction = null;
         function closeLeadPopup() {
             document.getElementById('leadPopup').classList.add('hidden');
+            // Show sticky button when popup closes
+            var stickyBtn = document.getElementById('stickyApplyBtn');
+            if (stickyBtn) {
+                stickyBtn.classList.remove('hidden');
+                stickyBtn.style.display = '';
+            }
             // Don't reset _leadAction here - keep it for redirect
         }
         function openLeadPopup(action) {
             _leadAction = action || null;
             document.getElementById('leadPopup').classList.remove('hidden');
+            // Hide sticky button when popup opens
+            var stickyBtn = document.getElementById('stickyApplyBtn');
+            if (stickyBtn) {
+                stickyBtn.classList.add('hidden');
+            }
+            // Set action type in hidden input
+            var actionInput = document.getElementById('actionTypeInput');
+            if (actionInput) {
+                actionInput.value = action || '';
+            }
             // Reset form & message on re-open
             document.getElementById('leadPopupForm').reset();
+            // Re-set action type after reset
+            if (actionInput) {
+                actionInput.value = action || '';
+            }
             var msg = document.getElementById('leadPopupMsg');
             msg.className = 'hidden rounded-lg px-4 py-3 text-sm font-medium text-center';
             msg.textContent = '';
