@@ -209,8 +209,7 @@
                         <img src="{{ asset('custom/logo-ligth.png') }}" alt="7x Basket"
                             class="h-10 w-auto object-contain">
                     </div>
-                    <p class="text-sm leading-relaxed text-green-200 max-w-sm">Your trusted grocery franchise partner.
-                        Build a profitable business with our proven model, full support, and strong brand.</p>
+                    <p class="text-sm leading-relaxed text-green-200 max-w-sm">7x Basket is India's growing supermarket franchise chain for aspiring business owners. We back every franchisee with a proven store model, full operational support, and a brand that shoppers already trust. From your first day to your first profit, we stay with you every step of the way.</p>
                 </div>
                 <div>
                     <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
@@ -236,9 +235,8 @@
                                 info@7xbasket.com</a></li>
                         <li><a href="tel:+919870275327" class="hover:text-white transition-colors">📞 +91
                                 9870275327</a></li>
-                        <li><a href="https://maps.app.goo.gl/xKx7arLWfbyjaZvB8" target="_blank" rel="noopener"
-                                class="hover:text-white transition-colors">📍 Third Floor, C-97, Nearby OSR Jewellers,
-                                Lajpat Nagar, Delhi 110024</a></li>
+                        <li><a href="https://maps.app.goo.gl/6RFzYXSyeP5oZ2za7" target="_blank" rel="noopener"
+                                class="hover:text-white transition-colors">📍 E-52, sector 3, third floor, GB Nagar, Noida up, pin code - 201301</a></li>
                         <li>🕐 Mon–Sat: 9AM – 6PM</li>
                     </ul>
                 </div>
@@ -573,6 +571,12 @@
                             form.reset();
 
                             setTimeout(() => {
+                                // Redirect to thank-you page if provided
+                                if (json.redirect) {
+                                    window.location.href = json.redirect;
+                                    return;
+                                }
+
                                 closeLeadPopup();
 
                                 // Handle redirect based on action

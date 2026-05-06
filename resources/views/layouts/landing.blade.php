@@ -305,6 +305,12 @@
                             msg.textContent = json.message;
                             form.reset();
                             setTimeout(() => {
+                                // Redirect to thank-you page if provided
+                                if (json.redirect) {
+                                    window.location.href = json.redirect;
+                                    return;
+                                }
+                                
                                 closeLeadPopup();
                                 if (currentAction === 'whatsapp') {
                                     var text = encodeURIComponent('Hi, I\'m ' + submittedName +

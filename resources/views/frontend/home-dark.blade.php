@@ -538,52 +538,66 @@
 
                             {{-- RIGHT: Results --}}
                             <div class="p-6 sm:p-8 bg-[#081510]">
-                                <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Total
-                                    Estimated Investment</p>
-                                <p class="text-5xl font-extrabold text-[#f5a623] mb-1" x-text="fmt(totalStartup)"></p>
-                                <p class="text-[#6b8f7e] text-xs mb-6">Based on <span
-                                        x-text="Number(area).toLocaleString('en-IN')"></span> sq ft store area</p>
+                                {{-- Show message if area is less than minimum --}}
+                                <div x-show="area < 500" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                    <div class="w-16 h-16 bg-[#ec2024]/20 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-[#ec2024]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                        </svg>
+                                    </div>
+                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Minimum Area Required</p>
+                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Please select a store area of at least 500 sq ft to see investment calculations.</p>
+                                </div>
 
-                                {{-- Cost Breakdown --}}
-                                <div class="space-y-4">
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Interior cost (Store Interior)</span>
-                                            <span class="font-bold text-white" x-text="fmt(interiorCost)"></span>
+                                {{-- Show results if area is valid --}}
+                                <div x-show="area >= 500" x-cloak>
+                                    <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Total
+                                        Estimated Investment</p>
+                                    <p class="text-5xl font-extrabold text-[#f5a623] mb-1" x-text="fmt(totalStartup)"></p>
+                                    <p class="text-[#6b8f7e] text-xs mb-6">Based on <span
+                                            x-text="Number(area).toLocaleString('en-IN')"></span> sq ft store area</p>
+
+                                    {{-- Cost Breakdown --}}
+                                    <div class="space-y-4">
+                                        <div>
+                                            <div class="flex justify-between text-sm mb-1.5">
+                                                <span class="text-[#9bbfb0] font-medium">Interior cost (Store Interior)</span>
+                                                <span class="font-bold text-white" x-text="fmt(interiorCost)"></span>
+                                            </div>
+                                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                                <div class="bg-[#109125] h-full rounded-full transition-all duration-500"
+                                                    :style="`width: ${interiorPercent}%`"></div>
+                                            </div>
                                         </div>
-                                        <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                            <div class="bg-[#109125] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${interiorPercent}%`"></div>
+                                        <div>
+                                            <div class="flex justify-between text-sm mb-1.5">
+                                                <span class="text-[#9bbfb0] font-medium">Inventory cost (Product Cost)</span>
+                                                <span class="font-bold text-white" x-text="fmt(inventoryCost)"></span>
+                                            </div>
+                                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                                <div class="bg-[#055346] h-full rounded-full transition-all duration-500"
+                                                    :style="`width: ${inventoryPercent}%`"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Inventory cost (Product Cost)</span>
-                                            <span class="font-bold text-white" x-text="fmt(inventoryCost)"></span>
+                                        <div>
+                                            <div class="flex justify-between text-sm mb-1.5">
+                                                <span class="text-[#9bbfb0] font-medium">Franchise Fees (incl. GST)</span>
+                                                <span class="font-bold text-white" x-text="fmt(franchiseFeesWithGst)"></span>
+                                            </div>
+                                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                                <div class="bg-[#ec2024] h-full rounded-full transition-all duration-500"
+                                                    :style="`width: ${franchisePercent}%`"></div>
+                                            </div>
                                         </div>
-                                        <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                            <div class="bg-[#055346] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${inventoryPercent}%`"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Franchise Fees (incl. GST)</span>
-                                            <span class="font-bold text-white" x-text="fmt(franchiseFeesWithGst)"></span>
-                                        </div>
-                                        <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                            <div class="bg-[#ec2024] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${franchisePercent}%`"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1.5">
-                                            <span class="text-[#9bbfb0] font-medium">Software cost per login (incl. GST)</span>
-                                            <span class="font-bold text-white" x-text="fmt(softwareCostWithGst)"></span>
-                                        </div>
-                                        <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                            <div class="bg-[#f5a623] h-full rounded-full transition-all duration-500"
-                                                :style="`width: ${softwarePercent}%`"></div>
+                                        <div>
+                                            <div class="flex justify-between text-sm mb-1.5">
+                                                <span class="text-[#9bbfb0] font-medium">Software cost per login (incl. GST)</span>
+                                                <span class="font-bold text-white" x-text="fmt(softwareCostWithGst)"></span>
+                                            </div>
+                                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                                <div class="bg-[#f5a623] h-full rounded-full transition-all duration-500"
+                                                    :style="`width: ${softwarePercent}%`"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -737,31 +751,44 @@
 
                             {{-- RIGHT: Results --}}
                             <div class="p-6 sm:p-8 bg-[#081510]">
-                                <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Net Monthly
-                                    Profit</p>
-                                <p class="text-5xl font-extrabold text-[#f5a623] leading-none mb-1"
-                                    x-text="fmtFull(netMonthlyProfit)"></p>
-                                <p class="text-[#6b8f7e] text-xs mb-5">Estimated based on <span
-                                        x-text="Number(area).toLocaleString('en-IN')"></span> sq ft store</p>
-
-                                {{-- KPI Cards --}}
-                                <div class="grid grid-cols-3 gap-3 mb-5">
-                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
-                                        <p class="text-[#f5a623] text-xl font-extrabold">25%</p>
-                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Margin</p>
+                                {{-- Show message if area is less than minimum --}}
+                                <div x-show="area < 500" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                    <div class="w-16 h-16 bg-[#ec2024]/20 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-[#ec2024]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                        </svg>
                                     </div>
-                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
-                                        <p class="text-[#f5a623] text-xl font-extrabold" x-text="paybackMonths + 'mo'">
-                                        </p>
-                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Breakeven</p>
-                                    </div>
-                                    <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
-                                        <p class="text-[#4ade80] text-xl font-extrabold" x-text="annualRoi + '%'"></p>
-                                        <p class="text-[#9bbfb0] text-xs mt-0.5">Annual ROI</p>
-                                    </div>
+                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Minimum Area Required</p>
+                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Please select a store area of at least 500 sq ft to see earnings projections.</p>
                                 </div>
 
-                                {{-- Annual Profit highlight --}}
+                                {{-- Show results if area is valid --}}
+                                <div x-show="area >= 500" x-cloak>
+                                    <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Net Monthly
+                                        Profit</p>
+                                    <p class="text-5xl font-extrabold text-[#f5a623] leading-none mb-1"
+                                        x-text="fmtFull(netMonthlyProfit)"></p>
+                                    <p class="text-[#6b8f7e] text-xs mb-5">Estimated based on <span
+                                            x-text="Number(area).toLocaleString('en-IN')"></span> sq ft store</p>
+
+                                    {{-- KPI Cards --}}
+                                    <div class="grid grid-cols-3 gap-3 mb-5">
+                                        <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                            <p class="text-[#f5a623] text-xl font-extrabold">25%</p>
+                                            <p class="text-[#9bbfb0] text-xs mt-0.5">Margin</p>
+                                        </div>
+                                        <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                            <p class="text-[#f5a623] text-xl font-extrabold" x-text="paybackMonths + 'mo'">
+                                            </p>
+                                            <p class="text-[#9bbfb0] text-xs mt-0.5">Breakeven</p>
+                                        </div>
+                                        <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
+                                            <p class="text-[#4ade80] text-xl font-extrabold" x-text="annualRoi + '%'"></p>
+                                            <p class="text-[#9bbfb0] text-xs mt-0.5">Annual ROI</p>
+                                        </div>
+                                    </div>
+
+                                    {{-- Annual Profit highlight --}}
                                 <div
                                     class="bg-[#109125]/10 border border-[#109125]/30 rounded-xl p-3 mb-5 flex items-center justify-between">
                                     <div>

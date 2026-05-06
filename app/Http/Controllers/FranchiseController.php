@@ -30,6 +30,15 @@ class FranchiseController extends Controller
         return view('frontend.landing', compact('seo'));
     }
 
+    public function thankYou()
+    {
+        $seo = SeoService::get('thank-you', [
+            'title' => 'Thank You - 7x Basket',
+            'description' => 'Thank you for your interest in 7x Basket franchise. Our team will contact you soon.',
+        ]);
+        return view('frontend.thank-you', compact('seo'));
+    }
+
     public function store(Request $request)
     {
         $ip = $request->ip();
@@ -153,8 +162,17 @@ class FranchiseController extends Controller
     private function respond(bool $isAjax, bool $success, string $message, int $status = 200)
     {
         if ($isAjax) {
-            return response()->json(['success' => $success, 'message' => $message], $status);
+            return response()->json([
+                'success' => $success, 
+                'message' => $message,
+                'redirect' => $success ? route('thank-you') : null
+            ], $status);
         }
+        
+        if ($success) {
+            return redirect()->route('thank-you');
+        }
+        
         $flash = $success ? 'success' : 'error';
         return redirect()->route('apply')->with($flash, $message);
     }

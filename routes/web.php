@@ -22,6 +22,7 @@ Route::middleware(['block.ip', 'track.visitor'])->group(function () {
     Route::get('/apply-franchise', [FranchiseController::class, 'apply'])->name('apply');
     Route::get('/landing', [FranchiseController::class, 'landing'])->name('landing');
     Route::post('/apply-franchise', [FranchiseController::class, 'store'])->name('apply.store')->middleware('throttle:20,60');
+    Route::get('/thank-you', [FranchiseController::class, 'thankYou'])->name('thank-you');
     Route::get('/download-brochure', [HomeController::class, 'brochure'])->name('brochure.download');
 });
 

@@ -39,7 +39,7 @@
 
                     {{-- Key Benefits --}}
                     <div class="grid grid-cols-2 gap-3 mb-5">
-                        @foreach ([['💰', 'Zero royalty', 'No royalty charged for your first 2 years of operation.'], ['🚀', '45-day store launch', 'From signed agreement to grand opening in 45 days.'], ['🎓', 'Full staff training', 'Your team is trained and ready before the doors open.'], ['📦', '5,000+ products', 'Direct sourcing from top FMCG brands at wholesale prices.'], ['🔒', 'Exclusive territory', 'Your pincode zone is protected - no competing store in your area.'], ['🤝', 'Dedicated manager', 'A relationship manager assigned to your store from day one.']] as [$icon, $title, $desc])
+                        @foreach ([['💰', 'Zero royalty', 'No royalty charged for your first 2 years of operation.'], ['🚀', '45-day store launch', 'From signed agreement to grand opening in 45 days.'], ['🎓', 'Full staff training', 'Your team is trained and ready before the doors open.'], ['📦', '15,000+ products', 'Direct sourcing from top FMCG brands at wholesale prices.'], ['🔒', 'Exclusive territory', 'Your pincode zone is protected - no competing store in your area.'], ['🤝', 'Dedicated manager', 'A relationship manager assigned to your store from day one.']] as [$icon, $title, $desc])
                             <div class="flex items-start gap-3 bg-gray-50 rounded-xl p-3 border border-gray-100">
                                 <span class="text-xl flex-shrink-0">{{ $icon }}</span>
                                 <div>
@@ -167,7 +167,7 @@
     <section class="py-10 bg-[#0f2d1f]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap justify-center gap-4">
-                @foreach ([['200+', 'Stores Pan India'], ['12+', 'States Covered'], ['5,000+', 'Products Stocked'], ['150+', 'Brand Partners'], ['13L', 'Starting Investment']] as [$num, $label])
+                @foreach ([['150+', 'Stores PAN India'], ['100+', 'Cities Covered'], ['25', 'States Pan India'], ['4.9/5', 'Customer Rating'], ['13L', 'Starting Investment']] as [$num, $label])
                     <div class="w-[45%] sm:w-[30%] lg:w-[18%] 
             border border-white/10 rounded-xl p-5 
             flex flex-col items-center justify-center text-center"
