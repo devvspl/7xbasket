@@ -826,7 +826,7 @@
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Success Stories</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">What Our Partners Say</h2>
-                <p class="text-gray-500  mx-auto">500+ franchise partners across India. Here's what they have to
+                <p class="text-gray-500  mx-auto">150+ franchise partners across India. Here's what they have to
                     say.
                 </p>
             </div>

@@ -49,7 +49,7 @@
                     <span class="text-white/30">|</span>
                     <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">📞</span> Call us: <a href="tel:919870275327" class="underline underline-offset-2 hover:text-green-200 transition-colors">+91 9870275327</a></span>
                     <span class="text-white/30">|</span>
-                    <span class="flex items-center gap-1.5"><span>🏪</span> 500+ Franchise Partners Across India</span>
+                    <span class="flex items-center gap-1.5"><span>🏪</span> 150+ Franchise Partners Across India</span>
                     <span class="text-white/30">|</span>
                     {{-- duplicate for seamless loop --}}
                     <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">🎉</span> Limited slots available — Apply before <strong>{{ date('d F Y') }}</strong></span>
@@ -58,7 +58,7 @@
                     <span class="text-white/30">|</span>
                     <span class="flex items-center gap-1.5"><span class="text-[#ec2024]">📞</span> Call us: <a href="tel:919870275327" class="underline underline-offset-2 hover:text-green-200 transition-colors">+91 9870275327</a></span>
                     <span class="text-white/30">|</span>
-                    <span class="flex items-center gap-1.5"><span>🏪</span> 500+ Franchise Partners Across India</span>
+                    <span class="flex items-center gap-1.5"><span>🏪</span> 150+ Franchise Partners Across India</span>
                     <span class="text-white/30">|</span>
                 </div>
             </div>

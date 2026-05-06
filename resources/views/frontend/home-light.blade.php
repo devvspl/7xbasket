@@ -22,7 +22,7 @@
                         Own a <span class="text-[#109125]">7x Basket</span><br>Grocery Store
                     </h1>
                     <p class="text-gray-500 text-lg leading-relaxed mb-8 max-w-lg">
-                        Join 500+ successful franchise partners. Low investment, high returns, zero royalty, and complete
+                        Join 150+ successful franchise partners. Low investment, high returns, zero royalty, and complete
                         business support from day one.
                     </p>
                     <div class="flex flex-wrap gap-4 mb-10">
@@ -32,7 +32,7 @@
                         </a>
                     </div>
                     <div class="flex flex-wrap gap-8">
-                        @foreach ([['500+', 'Partners'], ['₹5L', 'Min. Investment'], ['30%', 'Avg. ROI'], ['0', 'Royalty Fee']] as [$n, $l])
+                        @foreach ([['150+', 'Partners'], ['₹5L', 'Min. Investment'], ['30%', 'Avg. ROI'], ['0', 'Royalty Fee']] as [$n, $l])
                             <div>
                                 <p class="text-3xl font-extrabold text-gray-900">{{ $n }}</p>
                                 <p class="text-gray-500 text-sm">{{ $l }}</p>
@@ -207,7 +207,7 @@
                 </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-                @foreach ([['Mini Store', '₹5–8 Lakhs', '300–500 sq ft', 'Starter', false, ['500+ SKUs', 'POS System', 'Basic Staff Training', 'Local Marketing Support', 'FSSAI Compliance Help']], ['Super Store', '₹10–15 Lakhs', '800–1200 sq ft', 'Most Popular', true, ['2,000+ SKUs', 'Full POS + Inventory Tech', 'Advanced Staff Training', 'Dedicated Relationship Manager', 'Regional Marketing Campaigns']], ['Hyper Store', '₹20–30 Lakhs', '2000+ sq ft', 'Premium', false, ['5,000+ SKUs', 'Enterprise Tech Stack', 'Full Team Training', 'Priority 24/7 Support', 'National Marketing Campaigns']]] as [$name, $price, $size, $badge, $featured, $features])
+                @foreach ([['Mini Store', '₹5–8 Lakhs', '300–500 sq ft', 'Starter', false, ['150+ SKUs', 'POS System', 'Basic Staff Training', 'Local Marketing Support', 'FSSAI Compliance Help']], ['Super Store', '₹10–15 Lakhs', '800–1200 sq ft', 'Most Popular', true, ['2,000+ SKUs', 'Full POS + Inventory Tech', 'Advanced Staff Training', 'Dedicated Relationship Manager', 'Regional Marketing Campaigns']], ['Hyper Store', '₹20–30 Lakhs', '2000+ sq ft', 'Premium', false, ['5,000+ SKUs', 'Enterprise Tech Stack', 'Full Team Training', 'Priority 24/7 Support', 'National Marketing Campaigns']]] as [$name, $price, $size, $badge, $featured, $features])
                     <div class="relative rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl
                         {{ $featured ? 'bg-white border-gray-200 shadow-2xl scale-105' : 'bg-gray-50 border-gray-200 shadow-sm' }}"
                         data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
@@ -618,7 +618,7 @@
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Success Stories</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">What Our Partners Say</h2>
-                <p class="text-gray-500 max-w-xl mx-auto">500+ franchise partners across India. Here's what they have to
+                <p class="text-gray-500 max-w-xl mx-auto">150+ franchise partners across India. Here's what they have to
                     say.</p>
             </div>
 

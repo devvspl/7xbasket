@@ -160,7 +160,7 @@
     <section class="py-10 bg-[#0f2d1f]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap justify-center gap-4">
-                @foreach ([['200+', 'Stores Pan India'], ['12+', 'States Covered'], ['5,000+', 'Products Stocked'], ['500+', 'Brand Partners'], ['13L', 'Starting Investment']] as [$num, $label])
+                @foreach ([['200+', 'Stores Pan India'], ['12+', 'States Covered'], ['5,000+', 'Products Stocked'], ['150+', 'Brand Partners'], ['13L', 'Starting Investment']] as [$num, $label])
                     <div class="w-[45%] sm:w-[30%] lg:w-[18%] 
             border border-white/10 rounded-xl p-5 
             flex flex-col items-center justify-center text-center"
@@ -736,7 +736,7 @@
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Success Stories</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">What Our Partners Say</h2>
-                <p class="text-gray-500 max-w-xl mx-auto">500+ franchise partners across India. Here's what they have to
+                <p class="text-gray-500 max-w-xl mx-auto">150+ franchise partners across India. Here's what they have to
                     say.</p>
             </div>
 

@@ -10,7 +10,7 @@
                     Most people searching for a grocery store franchise in India hit the same wall: brands that look good on the website but give you almost no real support after you sign.
                 </p>
                 <p class="text-gray-700 text-base max-w-4xl mx-auto mt-3 leading-relaxed font-medium">
-                    7x Basket is built differently. You get a fully stocked supermarket franchise — 10,000+ products from Amul, HUL, Nestlé, and 500+ national brands — open in 45 days, with one named person managing your account from day one.
+                    7x Basket is built differently. You get a fully stocked supermarket franchise — 10,000+ products from Amul, HUL, Nestlé, and 150+ national brands — open in 45 days, with one named person managing your account from day one.
                 </p>
                 <p class="text-gray-600 text-base max-w-4xl mx-auto mt-3 leading-relaxed">
                     Grocery franchise cost starting at ₹13 lakh. No royalty for the first 2 years. Your profits stay yours.
@@ -147,7 +147,7 @@
     <section class="py-10 bg-[#0f2d1f]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap justify-center gap-4">
-                @foreach ([['200+', 'Stores across India'], ['12+', 'States covered'], ['5,000+', 'Products stocked'], ['500+', 'Brand partners'], ['₹13L', 'Starting investment']] as [$num, $label])
+                @foreach ([['200+', 'Stores across India'], ['12+', 'States covered'], ['5,000+', 'Products stocked'], ['150+', 'Brand partners'], ['₹13L', 'Starting investment']] as [$num, $label])
                     <div class="w-[45%] sm:w-[30%] lg:w-[18%] 
             border border-white/10 rounded-xl p-5 
             flex flex-col items-center justify-center text-center"
@@ -219,7 +219,7 @@
                 @foreach ([
             [1, '💰', 'Zero royalty — 2 years', 'You keep 100% of what your store earns for the first two years. 7x Basket earns through the supply chain, not your revenue. No royalty deducted, no hidden monthly fee. Your profit is yours to reinvest or take home.'],
             [2, '🏗️', 'Store ready in 45 days', 'From signed agreement to grand opening in 45 days. Applies to every store format — mini supermarket franchise or full hyper format. The operations team manages the full setup: fit-out, shelving, branding, and POS installation. You do not manage contractors or chase timelines.'],
-            [3, '📦', '10,000+ products at wholesale', 'Direct sourcing from national FMCG brands at prices that give you margins a standalone kirana cannot match. Stock from Amul, Nestlé, HUL, Britannia, Dabur, and 500+ others, delivered on a regular cycle.'],
+            [3, '📦', '10,000+ products at wholesale', 'Direct sourcing from national FMCG brands at prices that give you margins a standalone kirana cannot match. Stock from Amul, Nestlé, HUL, Britannia, Dabur, and 150+ others, delivered on a regular cycle.'],
             [4, '🖥️', 'Cloud POS and inventory app', 'One platform for billing, stock tracking, and sales data. Works on a tablet or a basic laptop. No IT background needed. Your staff learns it before the store opens, and support is one call away if anything goes wrong.'],
             [5, '👥', 'Staff hired and trained', '7x Basket helps you hire and then trains every staff member before opening day. They know the POS, the layout, the customer flow, and the inventory system. You do not start with untrained staff figuring things out on your customers.'],
             [6, '📣', 'Marketing from week one', 'Branded marketing kits for your local area and national digital campaigns that drive footfall. You do not build a customer base from zero — the brand name and the marketing bring people in from the first week.'],
@@ -704,7 +704,7 @@
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Success Stories</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">What Our Partners Say</h2>
-                <p class="text-gray-500 max-w-xl mx-auto">500+ franchise partners across India. Here's what they have to
+                <p class="text-gray-500 max-w-xl mx-auto">150+ franchise partners across India. Here's what they have to
                     say.</p>
             </div>
 
