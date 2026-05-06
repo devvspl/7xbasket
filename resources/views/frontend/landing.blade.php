@@ -23,7 +23,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div>
                     <div class="relative rounded-2xl overflow-hidden shadow-md mb-5 aspect-video bg-gray-100">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" class="w-full h-full" frameborder="0"
+                        <iframe src="https://www.youtube.com/embed/E1iC5EMfXkE" class="w-full h-full" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen loading="lazy">
                         </iframe>
