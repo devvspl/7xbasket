@@ -12,7 +12,7 @@
 .blog-content h4 { font-size: 1.25em; font-weight: 600; color: #374151; margin: 1.1em 0 0.4em; line-height: 1.35; }
 .blog-content h5 { font-size: 1.125em; font-weight: 600; color: #4b5563; margin: 1em 0 0.3em; line-height: 1.4; }
 .blog-content h6 { font-size: 1em; font-weight: 600; color: #6b7280; margin: 1em 0 0.3em; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.05em; }
-.blog-content p  { margin: 0 0 0.9em; color: #4b5563; }
+.blog-content p  { margin: 0 0 0.5em; color: #4b5563; }
 .blog-content a  { color: #109125; text-decoration: underline; text-underline-offset: 3px; }
 .blog-content a:hover { color: #0d7a1e; }
 .blog-content strong { font-weight: 700; color: #1f2937; }
