@@ -127,11 +127,11 @@
                             <label class="block text-xs font-bold text-gray-600 mb-1">Planned Opening Timeline</label>
                             <select name="opening_timeline"
                                 class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#109125] focus:ring-1 focus:ring-[#109125] transition-all bg-white">
+                                <option value="within_a_week">Within A Week</option>
                                 <option value="">Select timeline</option>
                                 <option value="1_month">Within 1 Month</option>
                                 <option value="3_months">1–3 Months</option>
                                 <option value="6_months">3–6 Months</option>
-                                <option value="within_a_week">Within A Week</option>
                                 <option value="exploring">Just Exploring</option>
                             </select>
                         </div>
