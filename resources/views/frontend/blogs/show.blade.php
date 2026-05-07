@@ -23,10 +23,10 @@
 .blog-content ul { list-style: none; padding: 0; margin: 0 0 1.2em; }
 .blog-content ul li { padding: 0.25em 0 0.25em 1.6em; position: relative; color: #4b5563; }
 .blog-content ul li p { margin: 0;}
-.blog-content ul li::before { content: ''; position: absolute; left: 0.3em; top: 0.65em; width: 7px; height: 7px; border-radius: 50%; background: #109125; }
+.blog-content ul li::before { content: ''; position: absolute; left: 0.3em; top: 0.95em; width: 7px; height: 7px; border-radius: 50%; background: #109125; }
 .blog-content ol { list-style: decimal; padding-left: 1.5em; margin: 0 0 1.2em; }
 .blog-content ol li { padding: 0.2em 0; color: #4b5563; }
-.blog-content li + li { margin-top: 0.25em; }
+.blog-content li + li { margin-top: 0; }
 
 /* Blockquote */
 .blog-content blockquote { border-left: 4px solid #109125; background: #f0fdf4; margin: 1.5em 0; padding: 1em 1.25em; border-radius: 0 12px 12px 0; }
