@@ -59,7 +59,7 @@ class FranchiseController extends Controller
                 'pincode' => 'nullable|digits:6',
                 'store_area' => 'nullable|string|max:50',
                 'property_type' => 'nullable|in:owned,rented,leased,looking',
-                'opening_timeline' => 'nullable|in:1_month,3_months,6_months,1_year,exploring',
+                'opening_timeline' => 'nullable|in:1_month,3_months,6_months,within_a_week,exploring',
                 'city' => 'nullable|string|min:2|max:100',
                 'investment_budget' => 'nullable|string|max:100',
                 'message' => 'nullable|string|max:1000',

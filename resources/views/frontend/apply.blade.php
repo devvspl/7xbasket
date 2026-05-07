@@ -1067,6 +1067,14 @@
                             msg.textContent = json.message;
                             form.reset();
                             btn.textContent = 'Submitted ✓';
+                            // Redirect to thank-you page
+                            setTimeout(() => {
+                                if (json.redirect) {
+                                    window.location.href = json.redirect;
+                                } else {
+                                    window.location.href = '{{ route("thank-you") }}';
+                                }
+                            }, 1500);
                         } else {
                             msg.className =
                                 'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-red-50 text-red-700 border border-red-200';

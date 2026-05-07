@@ -426,7 +426,7 @@
                     <div x-data="{
                         area: 2000,
                         format: 'super',
-                        hasInteracted: false,
+                        hasInteracted: true,
                         
                         /* ── Configuration (can be made dynamic from backend) ── */
                         interiorCostPerSqFt: 1000,
@@ -640,7 +640,7 @@
 
                     <div x-data="{
                         area: 2000,
-                        hasInteracted: false,
+                        hasInteracted: true,
                         
                         /* ── Configuration (same as Startup Costs tab) ── */
                         interiorCostPerSqFt: 1000,
