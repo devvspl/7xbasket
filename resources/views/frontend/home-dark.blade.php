@@ -227,7 +227,7 @@
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Choose The Store Format That Fits
                     Your Budget And Market</h2>
                 <p class="text-gray-500 max-w-2xl mx-auto">7x Basket has three store formats built for the grocery store in
-                    India — each sized to match your available space, investment capacity, and local market size. Whether
+                    India - each sized to match your available space, investment capacity, and local market size. Whether
                     you're opening your first location or adding a second, there's a format that fits. All three run on the
                     same brand, supply chain, and franchise support.</p>
             </div>
