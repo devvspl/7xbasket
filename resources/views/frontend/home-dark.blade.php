@@ -224,9 +224,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10" data-aos="fade-up">
                 <span class="text-[#109125] text-sm font-bold uppercase tracking-widest">Store Plans</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Store Model Comparison</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto">Three store formats built for every budget and market size. Pick
-                    the one that fits your investment capacity and local opportunity.</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Choose The Store Format That Fits
+                    Your Budget And Market</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">7x Basket has three store formats built for the grocery store in
+                    India — each sized to match your available space, investment capacity, and local market size. Whether
+                    you're opening your first location or adding a second, there's a format that fits. All three run on the
+                    same brand, supply chain, and franchise support.</p>
             </div>
 
             <div class="overflow-x-auto rounded-2xl shadow-lg border border-gray-200" data-aos="fade-up"
@@ -427,7 +430,7 @@
                         area: 2000,
                         format: 'super',
                         hasInteracted: true,
-                        
+                    
                         /* ── Configuration (can be made dynamic from backend) ── */
                         interiorCostPerSqFt: 1000,
                         inventoryCostPerSqFt: 1000,
@@ -449,34 +452,34 @@
                         },
                     
                         /* ── Startup Cost Formulas (Excel-based with GST) ── */
-                        get interiorCost() { 
-                            return this.area * this.interiorCostPerSqFt 
+                        get interiorCost() {
+                            return this.area * this.interiorCostPerSqFt
                         },
-                        get inventoryCost() { 
-                            return this.area * this.inventoryCostPerSqFt 
+                        get inventoryCost() {
+                            return this.area * this.inventoryCostPerSqFt
                         },
-                        get franchiseFeesWithGst() { 
+                        get franchiseFeesWithGst() {
                             return Math.round(this.franchiseBaseCost * (1 + this.gstRate))
                         },
-                        get softwareCostWithGst() { 
+                        get softwareCostWithGst() {
                             return Math.round(this.softwareBaseCost * (1 + this.gstRate))
                         },
-                        get totalStartup() { 
-                            return this.interiorCost + this.inventoryCost + this.franchiseFeesWithGst + this.softwareCostWithGst 
+                        get totalStartup() {
+                            return this.interiorCost + this.inventoryCost + this.franchiseFeesWithGst + this.softwareCostWithGst
                         },
                     
                         /* ── Percentage calculations for progress bars ── */
-                        get interiorPercent() { 
-                            return Math.round((this.interiorCost / this.totalStartup) * 100) 
+                        get interiorPercent() {
+                            return Math.round((this.interiorCost / this.totalStartup) * 100)
                         },
-                        get inventoryPercent() { 
-                            return Math.round((this.inventoryCost / this.totalStartup) * 100) 
+                        get inventoryPercent() {
+                            return Math.round((this.inventoryCost / this.totalStartup) * 100)
                         },
-                        get franchisePercent() { 
-                            return Math.round((this.franchiseFeesWithGst / this.totalStartup) * 100) 
+                        get franchisePercent() {
+                            return Math.round((this.franchiseFeesWithGst / this.totalStartup) * 100)
                         },
-                        get softwarePercent() { 
-                            return Math.round((this.softwareCostWithGst / this.totalStartup) * 100) 
+                        get softwarePercent() {
+                            return Math.round((this.softwareCostWithGst / this.totalStartup) * 100)
                         },
                     
                         fmt(n) { return '₹' + Number(n).toLocaleString('en-IN') }
@@ -541,25 +544,37 @@
                             {{-- RIGHT: Results --}}
                             <div class="p-6 sm:p-8 bg-[#081510]">
                                 {{-- Show initial message before interaction --}}
-                                <div x-show="!hasInteracted" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
-                                    <div class="w-16 h-16 bg-[#109125]/20 rounded-full flex items-center justify-center mb-4">
-                                        <svg class="w-8 h-8 text-[#4ade80]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                <div x-show="!hasInteracted" x-cloak
+                                    class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                    <div
+                                        class="w-16 h-16 bg-[#109125]/20 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-[#4ade80]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                         </svg>
                                     </div>
-                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Ready to Calculate</p>
-                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Select a store format or adjust the area slider to see your investment breakdown.</p>
+                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Ready to Calculate
+                                    </p>
+                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Select a store format or adjust
+                                        the area slider to see your investment breakdown.</p>
                                 </div>
 
                                 {{-- Show message if area is less than minimum --}}
-                                <div x-show="hasInteracted && area < 500" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
-                                    <div class="w-16 h-16 bg-[#ec2024]/20 rounded-full flex items-center justify-center mb-4">
-                                        <svg class="w-8 h-8 text-[#ec2024]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                <div x-show="hasInteracted && area < 500" x-cloak
+                                    class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                    <div
+                                        class="w-16 h-16 bg-[#ec2024]/20 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-[#ec2024]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                         </svg>
                                     </div>
-                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Minimum Area Required</p>
-                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Please select a store area of at least 500 sq ft to see investment calculations.</p>
+                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Minimum Area
+                                        Required</p>
+                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Please select a store area of at
+                                        least 500 sq ft to see investment calculations.</p>
                                 </div>
 
                                 {{-- Show results if area is valid --}}
@@ -574,7 +589,8 @@
                                     <div class="space-y-4">
                                         <div>
                                             <div class="flex justify-between text-sm mb-1.5">
-                                                <span class="text-[#9bbfb0] font-medium">Interior cost (Store Interior)</span>
+                                                <span class="text-[#9bbfb0] font-medium">Interior cost (Store
+                                                    Interior)</span>
                                                 <span class="font-bold text-white" x-text="fmt(interiorCost)"></span>
                                             </div>
                                             <div class="h-2 bg-white/10 rounded-full overflow-hidden">
@@ -584,7 +600,8 @@
                                         </div>
                                         <div>
                                             <div class="flex justify-between text-sm mb-1.5">
-                                                <span class="text-[#9bbfb0] font-medium">Inventory cost (Product Cost)</span>
+                                                <span class="text-[#9bbfb0] font-medium">Inventory cost (Product
+                                                    Cost)</span>
                                                 <span class="font-bold text-white" x-text="fmt(inventoryCost)"></span>
                                             </div>
                                             <div class="h-2 bg-white/10 rounded-full overflow-hidden">
@@ -595,7 +612,8 @@
                                         <div>
                                             <div class="flex justify-between text-sm mb-1.5">
                                                 <span class="text-[#9bbfb0] font-medium">Franchise Fees (incl. GST)</span>
-                                                <span class="font-bold text-white" x-text="fmt(franchiseFeesWithGst)"></span>
+                                                <span class="font-bold text-white"
+                                                    x-text="fmt(franchiseFeesWithGst)"></span>
                                             </div>
                                             <div class="h-2 bg-white/10 rounded-full overflow-hidden">
                                                 <div class="bg-[#ec2024] h-full rounded-full transition-all duration-500"
@@ -604,8 +622,10 @@
                                         </div>
                                         <div>
                                             <div class="flex justify-between text-sm mb-1.5">
-                                                <span class="text-[#9bbfb0] font-medium">Software cost per login (incl. GST)</span>
-                                                <span class="font-bold text-white" x-text="fmt(softwareCostWithGst)"></span>
+                                                <span class="text-[#9bbfb0] font-medium">Software cost per login (incl.
+                                                    GST)</span>
+                                                <span class="font-bold text-white"
+                                                    x-text="fmt(softwareCostWithGst)"></span>
                                             </div>
                                             <div class="h-2 bg-white/10 rounded-full overflow-hidden">
                                                 <div class="bg-[#f5a623] h-full rounded-full transition-all duration-500"
@@ -641,7 +661,7 @@
                     <div x-data="{
                         area: 2000,
                         hasInteracted: true,
-                        
+                    
                         /* ── Configuration (same as Startup Costs tab) ── */
                         interiorCostPerSqFt: 1000,
                         inventoryCostPerSqFt: 1000,
@@ -650,20 +670,20 @@
                         gstRate: 0.18,
                     
                         /* ── Startup Cost (same formula as Tab 1) ── */
-                        get interiorCost() { 
-                            return this.area * this.interiorCostPerSqFt 
+                        get interiorCost() {
+                            return this.area * this.interiorCostPerSqFt
                         },
-                        get inventoryCost() { 
-                            return this.area * this.inventoryCostPerSqFt 
+                        get inventoryCost() {
+                            return this.area * this.inventoryCostPerSqFt
                         },
-                        get franchiseFeesWithGst() { 
+                        get franchiseFeesWithGst() {
                             return Math.round(this.franchiseBaseCost * (1 + this.gstRate))
                         },
-                        get softwareCostWithGst() { 
+                        get softwareCostWithGst() {
                             return Math.round(this.softwareBaseCost * (1 + this.gstRate))
                         },
-                        get startupCost() { 
-                            return this.interiorCost + this.inventoryCost + this.franchiseFeesWithGst + this.softwareCostWithGst 
+                        get startupCost() {
+                            return this.interiorCost + this.inventoryCost + this.franchiseFeesWithGst + this.softwareCostWithGst
                         },
                     
                         /* ── Total Setup (no separate stock investment) ── */
@@ -766,30 +786,43 @@
                             {{-- RIGHT: Results --}}
                             <div class="p-6 sm:p-8 bg-[#081510]">
                                 {{-- Show initial message before interaction --}}
-                                <div x-show="!hasInteracted" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
-                                    <div class="w-16 h-16 bg-[#109125]/20 rounded-full flex items-center justify-center mb-4">
-                                        <svg class="w-8 h-8 text-[#4ade80]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                <div x-show="!hasInteracted" x-cloak
+                                    class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                    <div
+                                        class="w-16 h-16 bg-[#109125]/20 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-[#4ade80]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                                         </svg>
                                     </div>
-                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Ready to Calculate</p>
-                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Adjust the area slider to see your projected earnings and ROI.</p>
+                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Ready to Calculate
+                                    </p>
+                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Adjust the area slider to see
+                                        your projected earnings and ROI.</p>
                                 </div>
 
                                 {{-- Show message if area is less than minimum --}}
-                                <div x-show="hasInteracted && area < 500" x-cloak class="flex flex-col items-center justify-center h-full min-h-[400px]">
-                                    <div class="w-16 h-16 bg-[#ec2024]/20 rounded-full flex items-center justify-center mb-4">
-                                        <svg class="w-8 h-8 text-[#ec2024]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                <div x-show="hasInteracted && area < 500" x-cloak
+                                    class="flex flex-col items-center justify-center h-full min-h-[400px]">
+                                    <div
+                                        class="w-16 h-16 bg-[#ec2024]/20 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-[#ec2024]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                         </svg>
                                     </div>
-                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Minimum Area Required</p>
-                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Please select a store area of at least 500 sq ft to see earnings projections.</p>
+                                    <p class="text-[#9bbfb0] text-base font-semibold mb-2 text-center">Minimum Area
+                                        Required</p>
+                                    <p class="text-[#6b8f7e] text-sm text-center max-w-xs">Please select a store area of at
+                                        least 500 sq ft to see earnings projections.</p>
                                 </div>
 
                                 {{-- Show results if area is valid --}}
                                 <div x-show="hasInteracted && area >= 500" x-cloak>
-                                    <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Net Monthly
+                                    <p class="text-[#9bbfb0] text-xs font-semibold uppercase tracking-wider mb-1">Net
+                                        Monthly
                                         Profit</p>
                                     <p class="text-5xl font-extrabold text-[#f5a623] leading-none mb-1"
                                         x-text="fmtFull(netMonthlyProfit)"></p>
@@ -803,7 +836,8 @@
                                             <p class="text-[#9bbfb0] text-xs mt-0.5">Margin</p>
                                         </div>
                                         <div class="bg-white/[0.06] rounded-xl p-3 text-center border border-white/10">
-                                            <p class="text-[#f5a623] text-xl font-extrabold" x-text="paybackMonths + 'mo'">
+                                            <p class="text-[#f5a623] text-xl font-extrabold"
+                                                x-text="paybackMonths + 'mo'">
                                             </p>
                                             <p class="text-[#9bbfb0] text-xs mt-0.5">Breakeven</p>
                                         </div>
@@ -814,52 +848,53 @@
                                     </div>
 
                                     {{-- Annual Profit highlight --}}
-                                <div
-                                    class="bg-[#109125]/10 border border-[#109125]/30 rounded-xl p-3 mb-5 flex items-center justify-between">
-                                    <div>
-                                        <p class="text-[#4ade80] text-xs font-semibold uppercase tracking-wider">Year 1
-                                            Annual Profit</p>
-                                        <p class="text-[#6b8f7e] text-[10px]">Net Monthly Profit × 12</p>
-                                    </div>
-                                    <p class="text-[#4ade80] text-2xl font-extrabold" x-text="fmtFull(annualProfit)"></p>
-                                </div>
-
-                                {{-- 12-Month Bar Chart --}}
-                                <p class="text-[#4b7060] text-xs font-semibold uppercase tracking-wider mb-2">Monthly
-                                    Earnings Projection</p>
-                                <div class="flex items-end gap-1 h-24">
-                                    <template x-for="(bar, i) in chartBars" :key="i">
-                                        <div class="flex-1 rounded-t-sm transition-all duration-500 ease-out"
-                                            :style="`height: ${Math.round((bar / maxBar) * 100)}%; background: ${i >= 9 ? '#4ade80' : i >= 6 ? '#22c55e' : i >= 3 ? '#16a34a' : '#109125'}; min-height: 3px;`">
+                                    <div
+                                        class="bg-[#109125]/10 border border-[#109125]/30 rounded-xl p-3 mb-5 flex items-center justify-between">
+                                        <div>
+                                            <p class="text-[#4ade80] text-xs font-semibold uppercase tracking-wider">Year 1
+                                                Annual Profit</p>
+                                            <p class="text-[#6b8f7e] text-[10px]">Net Monthly Profit × 12</p>
                                         </div>
-                                    </template>
-                                </div>
-                                <div class="flex justify-between text-xs text-[#2e4d3d] mt-1.5">
-                                    <span>Month 1</span><span>Month 6</span><span>Month 12</span>
-                                </div>
+                                        <p class="text-[#4ade80] text-2xl font-extrabold" x-text="fmtFull(annualProfit)">
+                                        </p>
+                                    </div>
 
-                                {{-- Total Setup Cost --}}
-                                <div
-                                    class="mt-4 bg-white/[0.04] rounded-xl px-4 py-2.5 flex justify-between border border-white/[0.06]">
-                                    <span class="text-[#9bbfb0] text-xs font-medium">Total Investment Required</span>
-                                    <span class="text-white text-xs font-bold" x-text="fmtFull(totalSetup)"></span>
+                                    {{-- 12-Month Bar Chart --}}
+                                    <p class="text-[#4b7060] text-xs font-semibold uppercase tracking-wider mb-2">Monthly
+                                        Earnings Projection</p>
+                                    <div class="flex items-end gap-1 h-24">
+                                        <template x-for="(bar, i) in chartBars" :key="i">
+                                            <div class="flex-1 rounded-t-sm transition-all duration-500 ease-out"
+                                                :style="`height: ${Math.round((bar / maxBar) * 100)}%; background: ${i >= 9 ? '#4ade80' : i >= 6 ? '#22c55e' : i >= 3 ? '#16a34a' : '#109125'}; min-height: 3px;`">
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <div class="flex justify-between text-xs text-[#2e4d3d] mt-1.5">
+                                        <span>Month 1</span><span>Month 6</span><span>Month 12</span>
+                                    </div>
+
+                                    {{-- Total Setup Cost --}}
+                                    <div
+                                        class="mt-4 bg-white/[0.04] rounded-xl px-4 py-2.5 flex justify-between border border-white/[0.06]">
+                                        <span class="text-[#9bbfb0] text-xs font-medium">Total Investment Required</span>
+                                        <span class="text-white text-xs font-bold" x-text="fmtFull(totalSetup)"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                {{-- Disclaimer --}}
-                <div class="mt-5">
-                    <p class="text-[#4b7060] text-xs text-center leading-relaxed">
-                        <span class="text-[#6b8f7e] font-semibold">Disclaimer:</span>
-                        Projections are based on average data from 7x Basket franchise partners. Actual results vary by
-                        location, footfall, and store management.
-                    </p>
-                </div>
+                    {{-- Disclaimer --}}
+                    <div class="mt-5">
+                        <p class="text-[#4b7060] text-xs text-center leading-relaxed">
+                            <span class="text-[#6b8f7e] font-semibold">Disclaimer:</span>
+                            Projections are based on average data from 7x Basket franchise partners. Actual results vary by
+                            location, footfall, and store management.
+                        </p>
+                    </div>
 
+                </div>
             </div>
-        </div>
     </section>
     <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1477,8 +1512,9 @@
         <div x-show="videoModal" x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
             x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0" class="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4"
-            @click.self="closeVideo()" style="display:none">
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4" @click.self="closeVideo()"
+            style="display:none">
             <button @click="closeVideo()"
                 class="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
