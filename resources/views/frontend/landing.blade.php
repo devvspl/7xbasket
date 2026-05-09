@@ -1017,50 +1017,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var form = document.getElementById('applyPageForm');
-            if (!form) return;
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                var btn = document.getElementById('applyPageSubmit');
-                var msg = document.getElementById('applyFormMsg');
-                btn.disabled = true;
-                btn.textContent = 'Submitting�';
-                fetch(form.action, {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'Accept': 'application/json'
-                        },
-                        body: new FormData(form)
-                    })
-                    .then(r => r.json())
-                    .then(json => {
-                        msg.classList.remove('hidden');
-                        if (json.success) {
-                            msg.className =
-                                'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-green-50 text-green-700 border border-green-200';
-                            msg.textContent = json.message;
-                            form.reset();
-                            btn.textContent = 'Submitted ✓';
-                        } else {
-                            msg.className =
-                                'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-red-50 text-red-700 border border-red-200';
-                            msg.textContent = json.message || 'Something went wrong. Please try again.';
-                            btn.disabled = false;
-                            btn.textContent = 'YES! I Want to Open My Supermarket Franchise →';
-                        }
-                    })
-                    .catch(() => {
-                        msg.classList.remove('hidden');
-                        msg.className =
-                            'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-red-50 text-red-700 border border-red-200';
-                        msg.textContent = 'Network error. Please try again.';
-                        btn.disabled = false;
-                        btn.textContent = 'YES! I Want to Open My Supermarket Franchise →';
-                    });
-            });
-        });
-        document.addEventListener('DOMContentLoaded', function() {
             if (typeof AOS !== 'undefined') AOS.init({
                 once: true,
                 offset: 60
