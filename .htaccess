@@ -1,14 +1,11 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Serve static files from public/ folder transparently (css, js, images, etc.)
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
-    RewriteRule ^(.*)$ public/$1 [L]
+    # Serve existing files and directories directly
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
 
-    # Route all other requests through Laravel's front controller
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^ public/index.php [L]
+    # Route all requests through public/index.php, preserving the URI
+    RewriteRule ^(.*)$ public/index.php [QSA,L]
 </IfModule>
