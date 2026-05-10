@@ -922,7 +922,7 @@
                 <p class="text-gray-500 text-sm">Watch real stories and expert insights about 7x Basket franchise.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-                @foreach ([['custom/7x_Basket_Store.png', 'How to Start a 7x Basket Franchise', 'Investment & ROI Explained', 'Expert Guide', ''], ['custom/7x_Basket_Store.png', 'Franchise Offer — Start Your Supermarket', '₹5L Investment, High Returns', 'Business Overview', ''], ['custom/7x_Basket_Store.png', 'Supermarket Grocery Store Business', 'Full Setup Guide for Beginners', 'Step-by-Step', '']] as [$img, $title, $subtitle, $tag, $ytId])
+                @foreach ([['custom/review/7xbasket_Review_01.png', 'How to Start a 7x Basket Franchise', 'Investment & ROI Explained', 'Expert Guide', ''], ['custom/review/7xbasket_Review_02.png', 'Franchise Offer — Start Your Supermarket', '₹5L Investment, High Returns', 'Business Overview', ''], ['custom/review/7xbasket_Review_03.png', 'Supermarket Grocery Store Business', 'Full Setup Guide for Beginners', 'Step-by-Step', '']] as [$img, $title, $subtitle, $tag, $ytId])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-sm border border-gray-200"
                         @click="openVideo('https://www.youtube.com/embed/{{ $ytId }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
@@ -957,7 +957,7 @@
                 <p class="text-gray-500 text-sm">Hear directly from our franchise owners across India.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                @foreach ([['custom/7x_Basket_Store.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."'], ['custom/7x_Basket_Store.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."'], ['custom/7x_Basket_Store.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."']] as [$img, $name, $city, $role, $quote])
+                @foreach ([['custom/review/7xbasket_Review_04.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."'], ['custom/review/7xbasket_Review_05.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."'], ['custom/review/7xbasket_Review_06.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."']] as [$img, $name, $city, $role, $quote])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-sm border border-gray-200"
                         @click="openVideo('https://www.youtube.com/embed/')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">

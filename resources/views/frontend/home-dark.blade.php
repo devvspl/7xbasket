@@ -1272,6 +1272,7 @@
     <section class="py-16 bg-[#060f0c] relative overflow-hidden" x-data="{
         videoModal: false,
         videoSrc: '',
+        videoLoading: false,
         lightbox: false,
         lightboxIndex: 0,
         images: [
@@ -1316,12 +1317,14 @@
         prevImage() { this.lightboxIndex = (this.lightboxIndex - 1 + this.images.length) % this.images.length },
         nextImage() { this.lightboxIndex = (this.lightboxIndex + 1) % this.images.length },
         openVideo(src) {
+            this.videoLoading = true;
             this.videoSrc = src;
             this.videoModal = true;
         },
         closeVideo() {
             this.videoModal = false;
-            this.videoSrc = '';
+            this.videoLoading = false;
+            setTimeout(() => { this.videoSrc = ''; }, 300);
         }
     }"
         @keydown.escape.window="lightbox = false; closeVideo()" @keydown.arrow-left.window="if(lightbox) prevImage()"
@@ -1398,7 +1401,7 @@
                 <p class="text-[#6b8f7e] text-sm">Watch real stories and expert insights about 7x Basket franchise.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-                @foreach ([['custom/7x_Basket_Store.png', 'How to Start a 7x Basket Franchise', 'Investment & ROI Explained', 'Expert Guide', 'E8SjNuM04Xk'], ['custom/7x_Basket_Store.png', 'Franchise Offer — Start Your Supermarket', '₹5L Investment, High Returns', 'Business Overview', '_AWeuLbDD1w'], ['custom/7x_Basket_Store.png', 'Supermarket Grocery Store Business', 'Full Setup Guide for Beginners', 'Step-by-Step', 'znAW7U4EoDY']] as [$img, $title, $subtitle, $tag, $ytId])
+                @foreach ([['custom/review/7xbasket_Review_01.png', 'How to Start a 7x Basket Franchise', 'Investment & ROI Explained', 'Expert Guide', 'E8SjNuM04Xk'], ['custom/review/7xbasket_Review_02.png', 'Franchise Offer — Start Your Supermarket', '₹5L Investment, High Returns', 'Business Overview', '_AWeuLbDD1w'], ['custom/review/7xbasket_Review_03.png', 'Supermarket Grocery Store Business', 'Full Setup Guide for Beginners', 'Step-by-Step', 'znAW7U4EoDY']] as [$img, $title, $subtitle, $tag, $ytId])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
                         @click="openVideo('https://www.youtube.com/embed/{{ $ytId }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
@@ -1431,7 +1434,7 @@
                 <p class="text-[#6b8f7e] text-sm">Hear directly from our franchise owners across India.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                @foreach ([['custom/7x_Basket_Store.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."', 'https://www.youtube.com/embed/apqR-F9q5x4'], ['custom/7x_Basket_Store.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."', 'https://www.youtube.com/embed/XwIbQUgLvMc'], ['custom/7x_Basket_Store.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."', 'https://www.youtube.com/embed/XYRC-Wva7-A']] as [$img, $name, $city, $role, $quote, $video])
+                @foreach ([['custom/review/7xbasket_Review_04.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."', 'https://www.youtube.com/embed/apqR-F9q5x4'], ['custom/review/7xbasket_Review_05.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."', 'https://www.youtube.com/embed/XwIbQUgLvMc'], ['custom/review/7xbasket_Review_06.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."', 'https://www.youtube.com/embed/XYRC-Wva7-A']] as [$img, $name, $city, $role, $quote, $video])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
                         @click="openVideo('{{ $video }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
@@ -1521,9 +1524,23 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-            <div class="w-full max-w-4xl aspect-video rounded-xl overflow-hidden shadow-2xl">
-                <iframe x-show="videoModal" :src="videoSrc + '?autoplay=1'" class="w-full h-full" frameborder="0"
-                    allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <div class="w-full max-w-4xl aspect-video rounded-xl overflow-hidden shadow-2xl relative bg-black">
+                {{-- Loading spinner shown until iframe loads --}}
+                <div x-show="videoLoading" class="absolute inset-0 flex items-center justify-center bg-black z-10">
+                    <div class="flex flex-col items-center gap-3">
+                        <div class="w-12 h-12 border-4 border-white/20 border-t-[#f5a623] rounded-full animate-spin"></div>
+                        <p class="text-white/60 text-sm">Loading video...</p>
+                    </div>
+                </div>
+                <iframe
+                    x-show="videoModal"
+                    :src="videoSrc ? videoSrc + '?autoplay=1&rel=0' : ''"
+                    @load="videoLoading = false"
+                    class="w-full h-full"
+                    frameborder="0"
+                    allow="autoplay; fullscreen"
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
     </section>

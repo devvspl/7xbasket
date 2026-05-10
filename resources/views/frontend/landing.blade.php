@@ -611,7 +611,7 @@
                     first 20 minutes. Watch them now — you will have better questions when our team calls.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-                @foreach ([['custom/7x_Basket_Store.png', 'How to start a 7x Basket grocery store franchise — investment, process, and what to expect', 'Complete franchise guide', 'Expert Guide', 'E8SjNuM04Xk'], ['custom/7x_Basket_Store.png', 'Supermarket franchise offer — opening your store: ₹13 lakh investment, what you get', 'Full breakdown of costs and support', 'Business Overview', '_AWeuLbDD1w'], ['custom/7x_Basket_Store.png', 'Full setup guide — from agreement to grand opening, step by step', 'Complete launch timeline explained', 'Step-by-Step', 'znAW7U4EoDY']] as [$img, $title, $subtitle, $tag, $ytId])
+                @foreach ([['custom/review/7xbasket_Review_01.png', 'How to start a 7x Basket grocery store franchise — investment, process, and what to expect', 'Complete franchise guide', 'Expert Guide', 'E8SjNuM04Xk'], ['custom/review/7xbasket_Review_02.png', 'Supermarket franchise offer — opening your store: ₹13 lakh investment, what you get', 'Full breakdown of costs and support', 'Business Overview', '_AWeuLbDD1w'], ['custom/review/7xbasket_Review_03.png', 'Full setup guide — from agreement to grand opening, step by step', 'Complete launch timeline explained', 'Step-by-Step', 'znAW7U4EoDY']] as [$img, $title, $subtitle, $tag, $ytId])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
                         @click="openVideo('https://www.youtube.com/embed/{{ $ytId }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
@@ -644,7 +644,7 @@
                 <p class="text-[#6b8f7e] text-sm">Real franchisees, real outcomes.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                @foreach ([['custom/7x_Basket_Store.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."', 'https://www.youtube.com/embed/apqR-F9q5x4'], ['custom/7x_Basket_Store.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."', 'https://www.youtube.com/embed/XwIbQUgLvMc'], ['custom/7x_Basket_Store.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."', 'https://www.youtube.com/embed/XYRC-Wva7-A']] as [$img, $name, $city, $role, $quote, $video])
+                @foreach ([['custom/review/7xbasket_Review_04.png', 'Rajesh Kumar', 'Delhi', 'Super Store Owner', '"Turned profitable in 8 months. Best decision of my life."', 'https://www.youtube.com/embed/apqR-F9q5x4'], ['custom/review/7xbasket_Review_05.png', 'Priya Sharma', 'Mumbai', 'Mini Store Owner', '"Fresh products daily. Margins far better than independent stores."', 'https://www.youtube.com/embed/XwIbQUgLvMc'], ['custom/review/7xbasket_Review_06.png', 'Amit Patel', 'Ahmedabad', 'Hyper Store Owner', '"From training to launch — everything was smooth and on time."', 'https://www.youtube.com/embed/XYRC-Wva7-A']] as [$img, $name, $city, $role, $quote, $video])
                     <div class="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video shadow-lg border border-white/10"
                         @click="openVideo('{{ $video }}')" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 80 }}">
@@ -1164,54 +1164,58 @@
 
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
                 const btn = document.getElementById('applyPageSubmit');
                 const msg = document.getElementById('applyFormMsg');
-                
+
                 btn.disabled = true;
                 btn.innerHTML = '<span class="relative">Submitting…</span>';
-                
+
                 const data = new FormData(form);
-                
+
                 fetch(form.action, {
-                    method: 'POST',
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'Accept': 'application/json',
-                        'X-Page-Url': window.location.href
-                    },
-                    body: data
-                })
-                .then(res => res.json())
-                .then(json => {
-                    msg.classList.remove('hidden');
-                    if (json.success) {
-                        msg.className = 'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-green-50 text-green-700 border border-green-200';
-                        msg.textContent = json.message;
-                        form.reset();
-                        
-                        // Redirect to thank-you page
-                        setTimeout(() => {
-                            if (json.redirect) {
-                                window.location.href = json.redirect;
-                            } else {
-                                window.location.href = '{{ route("thank-you") }}';
-                            }
-                        }, 1500);
-                    } else {
-                        msg.className = 'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-red-50 text-red-700 border border-red-200';
-                        msg.textContent = json.message || 'Something went wrong. Please try again.';
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'application/json',
+                            'X-Page-Url': window.location.href
+                        },
+                        body: data
+                    })
+                    .then(res => res.json())
+                    .then(json => {
+                        msg.classList.remove('hidden');
+                        if (json.success) {
+                            msg.className =
+                                'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-green-50 text-green-700 border border-green-200';
+                            msg.textContent = json.message;
+                            form.reset();
+
+                            // Redirect to thank-you page
+                            setTimeout(() => {
+                                if (json.redirect) {
+                                    window.location.href = json.redirect;
+                                } else {
+                                    window.location.href = '{{ route('thank-you') }}';
+                                }
+                            }, 1500);
+                        } else {
+                            msg.className =
+                                'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-red-50 text-red-700 border border-red-200';
+                            msg.textContent = json.message || 'Something went wrong. Please try again.';
+                            btn.disabled = false;
+                            btn.innerHTML =
+                                '<span class="relative">YES — I want to open my store →</span>';
+                        }
+                    })
+                    .catch(() => {
+                        msg.classList.remove('hidden');
+                        msg.className =
+                            'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-red-50 text-red-700 border border-red-200';
+                        msg.textContent = 'Network error. Please try again.';
                         btn.disabled = false;
                         btn.innerHTML = '<span class="relative">YES — I want to open my store →</span>';
-                    }
-                })
-                .catch(() => {
-                    msg.classList.remove('hidden');
-                    msg.className = 'rounded-xl px-4 py-3 text-sm font-medium mb-4 text-center bg-red-50 text-red-700 border border-red-200';
-                    msg.textContent = 'Network error. Please try again.';
-                    btn.disabled = false;
-                    btn.innerHTML = '<span class="relative">YES — I want to open my store →</span>';
-                });
+                    });
             });
         });
     </script>
