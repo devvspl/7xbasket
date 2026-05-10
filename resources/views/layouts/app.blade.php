@@ -119,8 +119,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <a href="{{ route('home') }}"
                             class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('home') ? 'text-green-600' : '' }}">Home</a>
                         <a href="{{ route('about-us') }}"
-                            class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('about-us') ? 'text-green-600' : '' }}">About Us
-                            Us</a>
+                            class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('about-us') ? 'text-green-600' : '' }}">About Us</a>
                         <a href="{{ route('apply') }}"
                             class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('apply') ? 'text-green-600' : '' }}">Apply
                             Franchise</a>
