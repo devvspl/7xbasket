@@ -6,6 +6,12 @@ use App\Http\Controllers\FranchiseController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
+// Redirect /public/* URLs to clean URLs (strip /public prefix)
+Route::get('/public', fn() => redirect('/', 301));
+Route::get('/public/{any}', function (string $any) {
+    return redirect('/' . $any, 301);
+})->where('any', '.*');
+
 /*
  * |--------------------------------------------------------------------------
  * | Frontend Routes
