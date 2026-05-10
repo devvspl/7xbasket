@@ -79,12 +79,13 @@ class BlogController extends Controller
             $data['slug'] = $this->uniqueSlug($newSlug, $blog->id);
         }
 
-        // Handle featured image (both base64 and file upload)
-        if ($request->filled('featured_image') || $request->hasFile('featured_image')) {
-            $newImage = $this->handleImage($request);
-            if ($newImage) {
-                $data['featured_image'] = $newImage;
-            }
+        // Handle featured image — only update if a new image was actually uploaded
+        $newImage = $this->handleImage($request);
+        if ($newImage) {
+            $data['featured_image'] = $newImage;
+        } else {
+            // No new image provided — keep the existing one, don't overwrite
+            unset($data['featured_image']);
         }
 
         if ($data['is_published'] && !$blog->published_at) {
