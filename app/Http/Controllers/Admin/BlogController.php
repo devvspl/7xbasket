@@ -83,11 +83,8 @@ class BlogController extends Controller
         $newImage = $this->handleImage($request);
         if ($newImage) {
             $data['featured_image'] = $newImage;
-        } elseif ($request->input('remove_featured_image') === '1') {
-            // Explicitly remove the image
-            $data['featured_image'] = null;
         } else {
-            // No new image, no removal — keep existing
+            // No new image provided — keep the existing one, don't overwrite
             unset($data['featured_image']);
         }
 
@@ -128,7 +125,6 @@ class BlogController extends Controller
             'author'           => 'nullable|string|max:100',
             'featured_image'   => 'nullable|string', // Changed to accept base64 string
             'featured_image_alt' => 'nullable|string|max:255',
-            'remove_featured_image' => 'nullable|in:0,1',
             'is_published'     => 'nullable|in:0,1',
             'meta_title'       => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
