@@ -118,8 +118,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="hidden md:flex items-center gap-8">
                         <a href="{{ route('home') }}"
                             class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('home') ? 'text-green-600' : '' }}">Home</a>
-                        <a href="{{ route('about') }}"
-                            class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('about') ? 'text-green-600' : '' }}">About
+                        <a href="{{ route('about-us') }}"
+                            class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('about-us') ? 'text-green-600' : '' }}">About Us
                             Us</a>
                         <a href="{{ route('apply') }}"
                             class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors {{ request()->routeIs('apply') ? 'text-green-600' : '' }}">Apply
@@ -159,7 +159,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div x-show="open" x-cloak class="md:hidden border-t border-gray-100 bg-white px-4 py-4 space-y-3">
                 <a href="{{ route('home') }}"
                     class="block text-sm font-medium text-gray-700 hover:text-green-600">Home</a>
-                <a href="{{ route('about') }}"
+                <a href="{{ route('about-us') }}"
                     class="block text-sm font-medium text-gray-700 hover:text-green-600">About Us</a>
                 <a href="{{ route('blogs') }}"
                     class="block text-sm font-medium text-gray-700 hover:text-green-600">Blogs</a>
@@ -219,7 +219,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('home') }}"
                                 class="text-green-200 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="{{ route('about') }}"
+                        <li><a href="{{ route('about-us') }}"
                                 class="text-green-200 hover:text-white transition-colors">About Us</a></li>
                         <li><a href="{{ route('blogs') }}"
                                 class="text-green-200 hover:text-white transition-colors">Blogs</a></li>

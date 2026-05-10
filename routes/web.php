@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['block.ip', 'track.visitor'])->group(function () {
     Route::get('/', [HomeController::class, 'dark'])->name('home');
     Route::get('/light', [HomeController::class, 'light'])->name('dark');
-    Route::get('/about', [HomeController::class, 'about'])->name('about');
+    Route::get('/about-us', [HomeController::class, 'about'])->name('about-us');
     Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
     Route::get('/investment-calculator', [HomeController::class, 'calculator'])->name('calculator');
     Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
