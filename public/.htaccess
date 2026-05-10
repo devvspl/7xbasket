@@ -13,10 +13,6 @@
     RewriteCond %{HTTP:x-xsrf-token} .
     RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
 
-    # Redirect /public/... URLs to clean URLs (strip /public prefix)
-    RewriteCond %{REQUEST_URI} ^/public/(.*)$
-    RewriteRule ^ /%1 [L,R=301]
-
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
