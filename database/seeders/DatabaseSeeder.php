@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\SeoMeta;
 use App\Models\User;
+use Database\Seeders\RedirectSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,6 +25,9 @@ class DatabaseSeeder extends Seeder
 
         // Blogs from JSON
         $this->call(BlogSeeder::class);
+
+        // Redirects
+        $this->call(RedirectSeeder::class);
 
         // SEO defaults
         $seoData = [

@@ -11,6 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Run redirect checks on every web request (before route matching)
+        $middleware->web(prepend: [
+            \App\Http\Middleware\HandleRedirects::class,
+        ]);
+
         $middleware->alias([
             'block.ip'      => \App\Http\Middleware\BlockIpMiddleware::class,
             'track.visitor' => \App\Http\Middleware\TrackVisitor::class,

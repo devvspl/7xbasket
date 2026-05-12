@@ -161,5 +161,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/blocked-ips', [Admin\VisitorController::class, 'blockIp'])->name('blocked-ips.store');
         Route::patch('/blocked-ips/{blockedIp}/unblock', [Admin\VisitorController::class, 'unblockIp'])->name('blocked-ips.unblock');
         Route::delete('/blocked-ips/{blockedIp}', [Admin\VisitorController::class, 'destroyBlockedIp'])->name('blocked-ips.destroy');
+        // Redirects
+        Route::resource('redirects', Admin\RedirectController::class);
+        Route::patch('/redirects/{redirect}/toggle', [Admin\RedirectController::class, 'toggle'])->name('redirects.toggle');
     });
 });
