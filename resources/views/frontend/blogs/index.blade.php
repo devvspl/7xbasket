@@ -65,7 +65,7 @@
                class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:-translate-y-1 block">
                 @if($blog->featured_image)
                 <img src="{{ asset($blog->featured_image) }}" alt="{{ $blog->featured_image_alt ?: $blog->title }}"
-                     class="w-full h-48 object-cover transition-transform duration-500" loading="lazy">
+                     class="w-full transition-transform duration-500" loading="lazy">
                 @else
                 <div class="w-full h-48 bg-gradient-to-br from-[#055346] to-[#109125] flex items-center justify-center">
                     <span class="text-5xl">🛒</span>
