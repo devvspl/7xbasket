@@ -183,7 +183,7 @@ html { scroll-behavior: smooth; }
                            class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 block group">
                             @if($post->featured_image)
                             <img src="{{ asset($post->featured_image) }}" alt="{{ $post->title }}"
-                                 class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                                 class="w-full transition-transform duration-300" loading="lazy">
                             @else
                             <div class="w-full h-40 bg-gradient-to-br from-[#055346] to-[#109125] flex items-center justify-center">
                                 <span class="text-3xl">🛒</span>
