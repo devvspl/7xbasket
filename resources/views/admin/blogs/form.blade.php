@@ -418,9 +418,9 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-gray-600 mb-1.5">Meta Title <span
-                                        class="text-gray-400 float-right" id="metaTitleCount">0/60</span></label>
+                                        class="text-gray-400 float-right" id="metaTitleCount">0 chars</span></label>
                                 <input type="text" name="meta_title" id="metaTitle"
-                                    value="{{ old('meta_title', $blog->meta_title) }}" maxlength="60"
+                                    value="{{ old('meta_title', $blog->meta_title) }}"
                                     class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                                     placeholder="Leave blank to use blog title">
                             </div>
@@ -435,8 +435,8 @@
 
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1.5">Meta Description <span
-                                    class="text-gray-400 float-right" id="metaDescCount">0/160</span></label>
-                            <textarea name="meta_description" id="metaDesc" rows="2" maxlength="160"
+                                    class="text-gray-400 float-right" id="metaDescCount">0 chars</span></label>
+                            <textarea name="meta_description" id="metaDesc" rows="2"
                                 class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
                                 placeholder="Leave blank to use excerpt">{{ old('meta_description', $blog->meta_description) }}</textarea>
                         </div>

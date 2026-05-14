@@ -126,8 +126,8 @@ class BlogController extends Controller
             'featured_image'   => 'nullable|string', // Changed to accept base64 string
             'featured_image_alt' => 'nullable|string|max:255',
             'is_published'     => 'nullable|in:0,1',
-            'meta_title'       => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string|max:500',
+            'meta_title'       => 'nullable|string',
+            'meta_description' => 'nullable|string',
             'meta_keywords'    => 'nullable|string|max:500',
             'og_image'         => 'nullable|string|max:500',
             'meta_index'       => 'nullable|boolean',

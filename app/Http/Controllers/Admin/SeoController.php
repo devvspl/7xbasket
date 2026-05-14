@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class SeoController extends Controller
 {
-    private array $pages = ['home', 'about', 'blogs', 'apply', 'contact', 'calculator'];
+    private array $pages = ['home', 'about', 'blogs', 'apply', 'contact', 'calculator', 'landing'];
 
     public function index()
     {
@@ -29,11 +29,11 @@ class SeoController extends Controller
         abort_unless(in_array($page, $this->pages), 404);
 
         $data = $request->validate([
-            'title'          => 'nullable|string|max:255',
-            'description'    => 'nullable|string|max:500',
+            'title'          => 'nullable|string',
+            'description'    => 'nullable|string',
             'keywords'       => 'nullable|string|max:500',
-            'og_title'       => 'nullable|string|max:255',
-            'og_description' => 'nullable|string|max:500',
+            'og_title'       => 'nullable|string',
+            'og_description' => 'nullable|string',
             'og_image'       => 'nullable|string|max:500',
             'schema_markup'  => 'nullable|string',
         ]);

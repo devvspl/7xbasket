@@ -8,11 +8,12 @@
     $appUrl = config('app.url');
     $pageUrls = [
         'home'       => '/',
-        'about'      => '/about',
+        'about'      => '/about-us',
         'blogs'      => '/blogs',
         'apply'      => '/apply-franchise',
         'contact'    => '/contact',
         'calculator' => '/investment-calculator',
+        'landing'    => '/landing',
     ];
     $pageUrl = $pageUrls[$page] ?? '/' . $page;
 @endphp
@@ -35,25 +36,25 @@
             <div class="stat-card">
                 <div class="flex items-center justify-between mb-2">
                     <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Meta Title</label>
-                    <span class="text-xs text-gray-400" id="metaTitleCount">0/60</span>
+                    <span class="text-xs text-gray-400" id="metaTitleCount">0 chars</span>
                 </div>
                 <input type="text" name="title" id="metaTitle"
-                       value="{{ old('title', $meta->title) }}" maxlength="60"
+                       value="{{ old('title', $meta->title) }}"
                        class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                       placeholder="Page title shown in search results (50–60 chars)">
-                <p class="text-xs text-gray-400 mt-1.5">Recommended: 50–60 characters. Leave blank to use the default site title.</p>
+                       placeholder="Page title shown in search results">
+                <p class="text-xs text-gray-400 mt-1.5">Recommended: 50–60 characters for best display in Google. No hard limit.</p>
             </div>
 
             {{-- Meta Description --}}
             <div class="stat-card">
                 <div class="flex items-center justify-between mb-2">
                     <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Meta Description</label>
-                    <span class="text-xs text-gray-400" id="metaDescCount">0/160</span>
+                    <span class="text-xs text-gray-400" id="metaDescCount">0 chars</span>
                 </div>
-                <textarea name="description" id="metaDesc" rows="3" maxlength="160"
+                <textarea name="description" id="metaDesc" rows="3"
                     class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
-                    placeholder="Brief description shown under the title in search results (150–160 chars)">{{ old('description', $meta->description) }}</textarea>
-                <p class="text-xs text-gray-400 mt-1.5">Recommended: 150–160 characters.</p>
+                    placeholder="Brief description shown under the title in search results">{{ old('description', $meta->description) }}</textarea>
+                <p class="text-xs text-gray-400 mt-1.5">Recommended: 150–160 characters for best display in Google. No hard limit.</p>
             </div>
 
             {{-- Keywords --}}
@@ -206,11 +207,18 @@ const ogImagePreview = document.getElementById('ogImagePreview');
 const titleLengthBadge = document.getElementById('titleLengthBadge');
 const descLengthBadge  = document.getElementById('descLengthBadge');
 
-function getBadgeClass(len, warn, max) {
-    if (len === 0) return 'bg-gray-100 text-gray-500';
-    if (len <= warn) return 'bg-green-100 text-green-700';
-    if (len <= max)  return 'bg-yellow-100 text-yellow-700';
-    return 'bg-red-100 text-red-600';
+function getBadgeClass(len, ideal, warn) {
+    if (len === 0)    return 'bg-gray-100 text-gray-500';
+    if (len <= ideal) return 'bg-green-100 text-green-700';
+    if (len <= warn)  return 'bg-yellow-100 text-yellow-700';
+    return 'bg-orange-100 text-orange-600';
+}
+
+function getCounterClass(len, ideal, warn) {
+    if (len === 0)    return 'text-gray-400 text-xs';
+    if (len <= ideal) return 'text-green-600 text-xs font-medium';
+    if (len <= warn)  return 'text-yellow-600 text-xs font-medium';
+    return 'text-orange-500 text-xs font-medium';
 }
 
 function updateChecklist() {
@@ -223,6 +231,7 @@ function updateChecklist() {
     };
     Object.entries(checks).forEach(([id, pass]) => {
         const el  = document.getElementById(id);
+        if (!el) return;
         const dot = el.querySelector('div');
         dot.className = pass
             ? 'w-4 h-4 rounded-full bg-green-500 flex-shrink-0 flex items-center justify-center'
@@ -236,11 +245,11 @@ function update() {
     const tLen = metaTitle.value.length;
     const dLen = metaDesc.value.length;
 
-    // Counters
-    metaTitleCount.textContent = tLen + '/60';
-    metaTitleCount.className   = tLen > 55 ? 'text-red-500 text-xs' : 'text-gray-400 text-xs';
-    metaDescCount.textContent  = dLen + '/160';
-    metaDescCount.className    = dLen > 150 ? 'text-red-500 text-xs' : 'text-gray-400 text-xs';
+    // Counters — informational only, no hard cap
+    metaTitleCount.textContent = tLen + ' chars';
+    metaTitleCount.className   = getCounterClass(tLen, 60, 80);
+    metaDescCount.textContent  = dLen + ' chars';
+    metaDescCount.className    = getCounterClass(dLen, 160, 200);
 
     // SERP
     serpTitle.textContent = metaTitle.value || '7x Basket — {{ ucfirst($page) }}';
@@ -248,9 +257,9 @@ function update() {
 
     // Badges
     titleLengthBadge.textContent = tLen;
-    titleLengthBadge.className   = 'font-semibold px-2 py-0.5 rounded-full text-xs ' + getBadgeClass(tLen, 55, 60);
+    titleLengthBadge.className   = 'font-semibold px-2 py-0.5 rounded-full text-xs ' + getBadgeClass(tLen, 60, 80);
     descLengthBadge.textContent  = dLen;
-    descLengthBadge.className    = 'font-semibold px-2 py-0.5 rounded-full text-xs ' + getBadgeClass(dLen, 150, 160);
+    descLengthBadge.className    = 'font-semibold px-2 py-0.5 rounded-full text-xs ' + getBadgeClass(dLen, 160, 200);
 
     // OG preview
     ogTitlePreview.textContent = metaTitle.value || '{{ ucfirst($page) }} — 7x Basket';

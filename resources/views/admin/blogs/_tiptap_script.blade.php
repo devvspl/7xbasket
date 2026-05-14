@@ -382,10 +382,10 @@ function updateSerp() {
     document.getElementById('serpTitle').textContent = metaTitle.value || titleInput.value || 'Blog Title';
     document.getElementById('serpDesc').textContent  = metaDesc.value || titleInput.value || 'Meta description...';
 }
-metaTitle.addEventListener('input', function() { metaTitleCount.textContent = this.value.length+'/60'; metaTitleCount.className = this.value.length>55?'text-red-500 float-right':'text-gray-400 float-right'; updateSerp(); });
-metaDesc.addEventListener('input', function() { metaDescCount.textContent = this.value.length+'/160'; metaDescCount.className = this.value.length>150?'text-red-500 float-right':'text-gray-400 float-right'; updateSerp(); });
-metaTitleCount.textContent = metaTitle.value.length+'/60';
-metaDescCount.textContent  = metaDesc.value.length+'/160';
+metaTitle.addEventListener('input', function() { metaTitleCount.textContent = this.value.length+' chars'; metaTitleCount.className = this.value.length>80?'text-orange-500 float-right':this.value.length>60?'text-yellow-600 float-right':this.value.length>0?'text-green-600 float-right':'text-gray-400 float-right'; updateSerp(); });
+metaDesc.addEventListener('input', function() { metaDescCount.textContent = this.value.length+' chars'; metaDescCount.className = this.value.length>200?'text-orange-500 float-right':this.value.length>160?'text-yellow-600 float-right':this.value.length>0?'text-green-600 float-right':'text-gray-400 float-right'; updateSerp(); });
+metaTitleCount.textContent = metaTitle.value.length+' chars';
+metaDescCount.textContent  = metaDesc.value.length+' chars';
 
 document.getElementById('publishToggle').addEventListener('change', function() {
     document.getElementById('publishLabel').textContent = this.checked ? 'Published' : 'Draft';
