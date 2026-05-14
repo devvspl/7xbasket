@@ -41,6 +41,93 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-5XDDB2LH');</script>
 <!-- End Google Tag Manager -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "7x Basket",
+  "alternateName": "7xBasket",
+  "url": "https://7xbasket.com",
+  "logo": "https://7xbasket.com/custom/logo.png",
+  "description": "7x Basket is India's growing supermarket franchise chain for aspiring business owners, offering a proven store model, full operational support, and brand recognition.",
+  "foundingDate": "2022",
+  "email": "info@7xbasket.com",
+  "telephone": "+91-9870275327",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "E-52, 3rd Floor, Sector 3",
+    "addressLocality": "Noida",
+    "addressRegion": "Uttar Pradesh",
+    "postalCode": "201301",
+    "addressCountry": "IN"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91-9870275327",
+    "contactType": "customer service",
+    "email": "info@7xbasket.com",
+    "availableLanguage": ["English", "Hindi"]
+  },
+  "sameAs": [
+    "https://www.facebook.com/7xbasketofficial",
+    "https://www.instagram.com/7xbasket",
+    "https://www.youtube.com/@7xBasket"
+  ],
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  }
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "7x Basket",
+  "url": "https://7xbasket.com",
+  "description": "Start your own grocery franchise with 7x Basket. Low investment, high returns, full support system.",
+  "inLanguage": "en-IN",
+  "publisher": {
+    "@type": "Organization",
+    "name": "7x Basket",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://7xbasket.com/custom/logo.png"
+    }
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://7xbasket.com/blogs?search={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "mainEntity": {
+    "@type": "WebPage",
+    "@id": "https://7xbasket.com/",
+    "name": "7x Basket – Premium Grocery Franchise Opportunity",
+    "description": "Start your own grocery franchise with 7x Basket. Low investment, high returns, full support system.",
+    "url": "https://7xbasket.com/",
+    "image": "https://7xbasket.com/images/og-default.jpg",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://7xbasket.com/"
+        }
+      ]
+    }
+  }
+}
+</script>
+
+
 </head>
 
 <body class="font-sans bg-white text-gray-800 antialiased">
