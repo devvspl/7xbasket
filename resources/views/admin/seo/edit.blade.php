@@ -110,6 +110,22 @@
                 </div>
             </div>
 
+            {{-- FAQ Schema --}}
+            <div class="stat-card">
+                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">FAQ Schema (JSON-LD)</label>
+                <p class="text-xs text-gray-400 mb-3">FAQPage structured data for rich results. Rendered before the closing <code class="bg-gray-100 px-1 rounded">&lt;/footer&gt;</code> tag.</p>
+                <textarea name="faq_schema" id="faqSchema" rows="8"
+                    class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-green-500 resize-y"
+                    placeholder="Paste FAQPage JSON-LD schema here...">{{ old('faq_schema', $meta->faq_schema) }}</textarea>
+                <div class="flex items-center justify-between mt-2">
+                    <span class="text-xs text-gray-400" id="faqSchemaStatus"></span>
+                    <button type="button" id="validateFaqSchema"
+                            class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-600 px-3 py-1.5 rounded-lg transition-colors font-medium">
+                        Validate JSON
+                    </button>
+                </div>
+            </div>
+
         </div>
 
         {{-- ── RIGHT: Preview & Actions ── --}}
@@ -282,6 +298,21 @@ ogImageUrl.addEventListener('input', function() {
 document.getElementById('validateSchema').addEventListener('click', function() {
     const val = document.getElementById('schemaMarkup').value.trim();
     const status = document.getElementById('schemaStatus');
+    if (!val) { status.textContent = ''; return; }
+    try {
+        JSON.parse(val);
+        status.textContent = '✓ Valid JSON';
+        status.className = 'text-xs text-green-600 font-medium';
+    } catch(e) {
+        status.textContent = '✗ ' + e.message;
+        status.className = 'text-xs text-red-500 font-medium';
+    }
+});
+
+// FAQ Schema validator
+document.getElementById('validateFaqSchema').addEventListener('click', function() {
+    const val = document.getElementById('faqSchema').value.trim();
+    const status = document.getElementById('faqSchemaStatus');
     if (!val) { status.textContent = ''; return; }
     try {
         JSON.parse(val);

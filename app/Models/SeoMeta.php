@@ -8,7 +8,7 @@ class SeoMeta extends Model
 {
     protected $fillable = [
         'page_key', 'title', 'description', 'keywords',
-        'og_title', 'og_description', 'og_image', 'schema_markup',
+        'og_title', 'og_description', 'og_image', 'schema_markup', 'faq_schema',
     ];
 
     public static function forPage(string $key): ?self

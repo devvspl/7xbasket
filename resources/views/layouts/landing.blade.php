@@ -68,6 +68,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {{-- Minimal landing footer --}}
     <footer class="bg-[#055346] text-green-200 py-6 text-center text-xs">
         <p>© {{ date('Y') }} 7x Basket. All rights reserved.</p>
+        {{-- FAQ Schema (from SEO Manager) --}}
+        @if(!empty($seo['faq_schema']))
+        <script type="application/ld+json">{!! $seo['faq_schema'] !!}</script>
+        @endif
     </footer>
 
     {{-- Floating WhatsApp --}}

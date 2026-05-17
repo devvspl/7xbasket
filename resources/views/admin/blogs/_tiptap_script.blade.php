@@ -434,6 +434,32 @@ document.getElementById('addSchemaBtn').addEventListener('click', function() {
     document.getElementById('schemaList').appendChild(entry);
 });
 
+// ── FAQ ──────────────────────────────────────────────────────────────────────
+function updateFaqCount() {
+    var count = document.querySelectorAll('.faq-entry').length;
+    var el = document.getElementById('faqCount');
+    if (el) el.textContent = count + ' items';
+}
+
+document.getElementById('addFaqBtn').addEventListener('click', function() {
+    var empty = document.getElementById('faqEmpty');
+    if (empty) empty.remove();
+    var num = document.querySelectorAll('.faq-entry').length + 1;
+    var entry = document.createElement('div');
+    entry.className = 'faq-entry border border-gray-200 rounded-xl p-3 space-y-2 bg-gray-50';
+    entry.innerHTML =
+        `<div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold text-gray-400 uppercase">Q${num}</span>
+            <button type="button" onclick="this.closest('.faq-entry').remove(); updateFaqCount();" class="text-red-400 hover:text-red-600 flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <input type="text" name="faq_question[]" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Question...">
+        <textarea name="faq_answer[]" rows="2" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-green-500 resize-y" placeholder="Answer..."></textarea>`;
+    document.getElementById('faqList').appendChild(entry);
+    updateFaqCount();
+});
+
 // ── Editor styles ────────────────────────────────────────────────────────────
 const style = document.createElement('style');
 style.textContent = `

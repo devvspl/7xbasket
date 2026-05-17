@@ -281,6 +281,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <a href="{{ route('sitemap') }}" class="hover:text-white transition-colors">Sitemap</a>
             </div>
         </div>
+        {{-- FAQ Schema (from SEO Manager) --}}
+        @if(!empty($seo['faq_schema']))
+        <script type="application/ld+json">{!! $seo['faq_schema'] !!}</script>
+        @endif
     </footer>
 
     {{-- ══════════════════════════════════════════

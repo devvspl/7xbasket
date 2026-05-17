@@ -528,7 +528,7 @@
             </div>
 
             {{-- RIGHT: Sidebar --}}
-            <div class="w-full xl:w-80 flex-shrink-0">
+            <div class="w-full xl:w-80 flex-shrink-0 space-y-4">
 
                 {{-- Publish --}}
                 <div class="stat-card">
@@ -713,6 +713,51 @@
                                 value="{{ old('author', $blog->author ?? auth()->user()->name) }}"
                                 class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
                         </div>
+                    </div>
+                </div>
+
+                {{-- FAQ (Question & Answer) --}}
+                <div class="stat-card space-y-4" x-data="{ faqOpen: {{ ($blog->exists && $blog->faqs->count()) ? 'true' : 'false' }} }">
+                    <button type="button" @click="faqOpen = !faqOpen" class="flex items-center justify-between w-full">
+                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">FAQ (Question & Answer)</p>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] text-gray-400" id="faqCount">{{ $blog->exists ? $blog->faqs->count() : 0 }} items</span>
+                            <svg :class="faqOpen ? 'rotate-180' : ''" class="w-4 h-4 text-gray-400 transition-transform"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div x-show="faqOpen" x-cloak class="space-y-3">
+                        <div class="space-y-3" id="faqList">
+                            @if($blog->exists && $blog->faqs->count())
+                                @foreach($blog->faqs as $faq)
+                                <div class="faq-entry border border-gray-200 rounded-xl p-3 space-y-2 bg-gray-50">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[10px] font-bold text-gray-400 uppercase">Q{{ $loop->iteration }}</span>
+                                        <button type="button" onclick="this.closest('.faq-entry').remove(); updateFaqCount();"
+                                            class="text-red-400 hover:text-red-600 transition-colors flex-shrink-0">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <input type="text" name="faq_question[]" value="{{ $faq->question }}"
+                                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-green-500"
+                                        placeholder="Question...">
+                                    <textarea name="faq_answer[]" rows="2"
+                                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-green-500 resize-y"
+                                        placeholder="Answer...">{{ $faq->answer }}</textarea>
+                                </div>
+                                @endforeach
+                            @else
+                                <p class="text-xs text-gray-400 text-center py-2" id="faqEmpty">No FAQs yet. Click "Add FAQ" to add one.</p>
+                            @endif
+                        </div>
+                        <button type="button" id="addFaqBtn"
+                            class="w-full text-xs border border-dashed border-blue-300 text-blue-600 hover:bg-blue-50 py-2 rounded-xl transition-colors font-medium">
+                            + Add FAQ
+                        </button>
                     </div>
                 </div>
 

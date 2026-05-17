@@ -14,7 +14,8 @@ class SeoController extends Controller
     {
         $metas = SeoMeta::all()->keyBy('page_key');
         $pages = $this->pages;
-        return view('admin.seo.index', compact('metas', 'pages'));
+        $global = SeoMeta::firstOrNew(['page_key' => '_global']);
+        return view('admin.seo.index', compact('metas', 'pages', 'global'));
     }
 
     public function edit(string $page)
@@ -36,10 +37,25 @@ class SeoController extends Controller
             'og_description' => 'nullable|string',
             'og_image'       => 'nullable|string|max:500',
             'schema_markup'  => 'nullable|string',
+            'faq_schema'     => 'nullable|string',
         ]);
 
         SeoMeta::updateOrCreate(['page_key' => $page], $data);
 
         return redirect()->route('admin.seo.edit', $page)->with('success', 'SEO updated for ' . ucfirst($page) . ' page.');
+    }
+
+    public function updateGlobal(Request $request)
+    {
+        $data = $request->validate([
+            'organization_schema' => 'nullable|string',
+        ]);
+
+        SeoMeta::updateOrCreate(
+            ['page_key' => '_global'],
+            ['schema_markup' => $data['organization_schema']]
+        );
+
+        return redirect()->route('admin.seo.index')->with('success', 'Global Organization Schema updated.');
     }
 }

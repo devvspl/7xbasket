@@ -36,7 +36,7 @@ class BlogController extends Controller
 
     public function show(string $slug)
     {
-        $blog = Blog::published()->where('slug', $slug)->with('schemas')->firstOrFail();
+        $blog = Blog::published()->where('slug', $slug)->with(['schemas', 'faqs'])->firstOrFail();
 
         $seo = [
             'title'          => ($blog->meta_title ?: $blog->title) . ' - 7x Basket Blog',

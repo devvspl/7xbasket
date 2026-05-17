@@ -29,15 +29,10 @@
 <script type="application/ld+json">{!! $seo['schema_markup'] !!}</script>
 @endif
 
-{{-- Default Organization Schema --}}
+{{-- Global Organization Schema (from SEO Manager) --}}
 @php
-$orgSchema = json_encode([
-    '@context'     => 'https://schema.org',
-    '@type'        => 'Organization',
-    'name'         => '7x Basket',
-    'url'          => config('app.url'),
-    'logo'         => asset('custom/logo.png'),
-    'contactPoint' => ['@type' => 'ContactPoint', 'telephone' => '+91-9870275327', 'contactType' => 'customer service'],
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    $globalSeo = \App\Models\SeoMeta::where('page_key', '_global')->first();
 @endphp
-<script type="application/ld+json">{!! $orgSchema !!}</script>
+@if($globalSeo && $globalSeo->schema_markup)
+<script type="application/ld+json">{!! $globalSeo->schema_markup !!}</script>
+@endif

@@ -18,6 +18,7 @@ class SeoService
             'og_description'  => $meta?->og_description ?? $meta?->description ?? $defaults['description'] ?? '',
             'og_image'        => $meta?->og_image ?? asset('images/og-default.jpg'),
             'schema_markup'   => $meta?->schema_markup ?? null,
+            'faq_schema'      => $meta?->faq_schema ?? null,
         ];
     }
 }

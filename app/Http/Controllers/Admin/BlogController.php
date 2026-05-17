@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\BlogFaq;
 use App\Models\BlogSchema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -57,6 +58,7 @@ class BlogController extends Controller
 
         $blog = Blog::create($data);
         $this->syncSchemas($blog, $request);
+        $this->syncFaqs($blog, $request);
 
         return redirect()->route('admin.blogs.edit', $blog)->with('success', 'Blog created successfully.');
     }
@@ -94,6 +96,7 @@ class BlogController extends Controller
 
         $blog->update($data);
         $this->syncSchemas($blog, $request);
+        $this->syncFaqs($blog, $request);
 
         return redirect()->route('admin.blogs.edit', $blog)->with('success', 'Blog updated successfully.');
     }
@@ -153,6 +156,25 @@ class BlogController extends Controller
                 'schema_type'   => $type ?: 'BlogPosting',
                 'schema_markup' => $markup,
                 'sort_order'    => $i,
+            ]);
+        }
+    }
+
+    private function syncFaqs(Blog $blog, Request $request): void
+    {
+        $blog->faqs()->delete();
+
+        $questions = $request->input('faq_question', []);
+        $answers   = $request->input('faq_answer', []);
+
+        foreach ($questions as $i => $question) {
+            $question = trim($question);
+            $answer   = trim($answers[$i] ?? '');
+            if ($question === '' || $answer === '') continue;
+            $blog->faqs()->create([
+                'question'   => $question,
+                'answer'     => $answer,
+                'sort_order' => $i,
             ]);
         }
     }

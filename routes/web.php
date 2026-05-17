@@ -155,6 +155,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/seo', [Admin\SeoController::class, 'index'])->name('seo.index');
         Route::get('/seo/{page}/edit', [Admin\SeoController::class, 'edit'])->name('seo.edit');
         Route::put('/seo/{page}', [Admin\SeoController::class, 'update'])->name('seo.update');
+        Route::put('/seo-global', [Admin\SeoController::class, 'updateGlobal'])->name('seo.global.update');
         // Visitors & IP Blocking
         Route::get('/visitors', [Admin\VisitorController::class, 'index'])->name('visitors.index');
         Route::get('/blocked-ips', [Admin\VisitorController::class, 'blockedIps'])->name('blocked-ips.index');

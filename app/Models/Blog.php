@@ -43,4 +43,9 @@ class Blog extends Model
     {
         return $this->hasMany(BlogSchema::class)->orderBy('sort_order');
     }
+
+    public function faqs()
+    {
+        return $this->hasMany(BlogFaq::class)->orderBy('sort_order');
+    }
 }
