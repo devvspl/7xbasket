@@ -249,6 +249,48 @@
                     <input type="file" id="tiptap-image-upload" accept="image/*" class="hidden">
                 </div>
 
+                {{-- ── Image Alt Text Modal ── --}}
+                <div id="img-alt-modal" class="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 backdrop-blur-sm hidden p-4">
+                    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+                        {{-- Header --}}
+                        <div class="flex items-center justify-between px-6 py-4 bg-[#055346]">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-7 h-7 bg-white/20 rounded-lg flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                </div>
+                                <h3 class="font-bold text-white text-sm" id="img-alt-modal-title">Image Alt Text</h3>
+                            </div>
+                            <button type="button" id="img-alt-modal-close" class="text-white/70 hover:text-white w-7 h-7 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                            </button>
+                        </div>
+                        {{-- Body --}}
+                        <div class="px-6 py-5 space-y-4">
+                            <div id="img-alt-preview-wrap" class="hidden">
+                                <img id="img-alt-preview" src="" alt="" class="w-full h-32 object-cover rounded-xl border border-gray-200">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Alt Text <span class="text-gray-400 font-normal normal-case text-[11px]">(for SEO & accessibility)</span></label>
+                                <input type="text" id="img-alt-input" placeholder="Describe the image..."
+                                    class="w-full border-2 border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#109125] transition-colors">
+                                <p class="text-[11px] text-gray-400 mt-1.5">Describe what's in the image. Helps search engines and screen readers.</p>
+                            </div>
+                        </div>
+                        {{-- Footer --}}
+                        <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-end gap-2 bg-gray-50">
+                            <button type="button" id="img-alt-cancel"
+                                class="text-xs bg-white hover:bg-gray-100 text-gray-700 font-semibold px-5 py-2.5 rounded-xl border border-gray-200 transition-colors">
+                                Cancel
+                            </button>
+                            <button type="button" id="img-alt-save"
+                                class="text-xs bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold px-6 py-2.5 rounded-xl transition-colors flex items-center gap-1.5">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- ── Link Insert Modal ── --}}
                 <div id="link-modal" class="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 backdrop-blur-sm hidden p-4">
                     <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden flex flex-col" style="max-height:90vh">

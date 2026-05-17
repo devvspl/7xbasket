@@ -235,6 +235,39 @@ document.getElementById('tiptap-image-btn').addEventListener('click', () => {
     document.getElementById('tiptap-image-upload').click();
 });
 
+// ── Image Alt Modal helpers ───────────────────────────────────────────────────
+const imgAltModal = document.getElementById('img-alt-modal');
+const imgAltInput = document.getElementById('img-alt-input');
+const imgAltPreview = document.getElementById('img-alt-preview');
+const imgAltPreviewWrap = document.getElementById('img-alt-preview-wrap');
+let _imgAltCallback = null;
+
+function openImgAltModal(opts) {
+    opts = opts || {};
+    imgAltInput.value = opts.alt || '';
+    if (opts.src) {
+        imgAltPreview.src = opts.src;
+        imgAltPreviewWrap.classList.remove('hidden');
+    } else {
+        imgAltPreviewWrap.classList.add('hidden');
+    }
+    document.getElementById('img-alt-modal-title').textContent = opts.title || 'Image Alt Text';
+    imgAltModal.classList.remove('hidden');
+    setTimeout(() => imgAltInput.focus(), 100);
+    return new Promise((resolve) => { _imgAltCallback = resolve; });
+}
+
+function closeImgAltModal(value) {
+    imgAltModal.classList.add('hidden');
+    if (_imgAltCallback) { _imgAltCallback(value); _imgAltCallback = null; }
+}
+
+document.getElementById('img-alt-save').addEventListener('click', () => closeImgAltModal(imgAltInput.value));
+document.getElementById('img-alt-cancel').addEventListener('click', () => closeImgAltModal(null));
+document.getElementById('img-alt-modal-close').addEventListener('click', () => closeImgAltModal(null));
+imgAltModal.addEventListener('click', e => { if (e.target === imgAltModal) closeImgAltModal(null); });
+imgAltInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); closeImgAltModal(imgAltInput.value); } });
+
 document.getElementById('tiptap-image-upload').addEventListener('change', async function () {
     const file = this.files[0];
     if (!file) return;
@@ -243,16 +276,24 @@ document.getElementById('tiptap-image-upload').addEventListener('change', async 
     try {
         const res  = await fetch(uploadUrl, { method: 'POST', headers: { 'X-CSRF-TOKEN': csrfToken }, body: formData });
         const json = await res.json();
-        if (json.location) editor.chain().focus().setImage({ src: json.location, alt: file.name }).run();
+        if (json.location) {
+            const defaultAlt = file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+            const alt = await openImgAltModal({ alt: defaultAlt, src: json.location, title: 'Set Image Alt Text' });
+            editor.chain().focus().setImage({ src: json.location, alt: alt || '' }).run();
+        }
     } catch (e) { alert('Image upload failed.'); }
     this.value = '';
 });
 
-// ── Image remove: click image in editor → show remove button ─────────────────
+// ── Image context menu: click image in editor → show options ─────────────────
 const imgMenu = document.createElement('div');
 imgMenu.id = 'img-context-menu';
 imgMenu.className = 'hidden fixed z-[1000] bg-white border border-gray-200 rounded-xl shadow-xl p-1';
 imgMenu.innerHTML = `
+    <button type="button" id="img-alt-btn" class="flex items-center gap-2 px-3 py-2 text-xs text-blue-600 hover:bg-blue-50 rounded-lg w-full font-semibold transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
+        Edit Alt Text
+    </button>
     <button type="button" id="img-remove-btn" class="flex items-center gap-2 px-3 py-2 text-xs text-red-600 hover:bg-red-50 rounded-lg w-full font-semibold transition-colors">
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
         Remove Image
@@ -275,6 +316,17 @@ document.getElementById('tiptap-editor').addEventListener('click', e => {
 });
 document.addEventListener('click', e => {
     if (!imgMenu.contains(e.target) && e.target.tagName !== 'IMG') imgMenu.classList.add('hidden');
+});
+document.getElementById('img-alt-btn').addEventListener('click', async () => {
+    const img = imgMenu._target;
+    if (!img) return;
+    imgMenu.classList.add('hidden');
+    const currentAlt = img.getAttribute('alt') || '';
+    const newAlt = await openImgAltModal({ alt: currentAlt, src: img.src, title: 'Edit Image Alt Text' });
+    if (newAlt !== null) {
+        img.setAttribute('alt', newAlt);
+        editor.chain().focus().updateAttributes('image', { alt: newAlt }).run();
+    }
 });
 document.getElementById('img-remove-btn').addEventListener('click', () => {
     editor.chain().focus().deleteSelection().run();
