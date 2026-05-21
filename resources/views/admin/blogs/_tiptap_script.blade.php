@@ -540,5 +540,126 @@ style.textContent = `
     #tiptap-editor .ProseMirror .selectedCell { background: #dbeafe !important; }
 `;
 document.head.appendChild(style);
+
+// ── Preview and Backdate Functions ──────────────────────────────────────────
+window.generatePreview = async function(blogId) {
+    const btn = document.getElementById('generatePreviewBtn');
+    const btnText = document.getElementById('generateBtnText');
+    const originalText = btnText.textContent;
+    
+    btnText.textContent = 'Generating...';
+    btn.disabled = true;
+    
+    try {
+        const response = await fetch(`/admin/blogs/${blogId}/preview`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Update the UI directly without reload
+            document.getElementById('previewUrl').value = data.preview_url;
+            document.getElementById('openPreviewBtn').href = data.preview_url;
+            document.getElementById('previewLinkSection').classList.remove('hidden');
+            document.getElementById('previewStatus').textContent = 'Active';
+            btnText.textContent = 'Regenerate Preview Link';
+            
+            // Show success message
+            const successMsg = document.createElement('div');
+            successMsg.className = 'fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+            successMsg.textContent = 'Preview link generated successfully!';
+            document.body.appendChild(successMsg);
+            setTimeout(() => successMsg.remove(), 3000);
+        } else {
+            alert('Failed to generate preview link');
+            btnText.textContent = originalText;
+        }
+    } catch (error) {
+        console.error('Error generating preview:', error);
+        alert('Failed to generate preview link');
+        btnText.textContent = originalText;
+    } finally {
+        btn.disabled = false;
+    }
+};
+
+window.clearPreview = async function(blogId) {
+    if (!confirm('Are you sure you want to clear the preview link?')) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/admin/blogs/${blogId}/preview`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Update the UI directly without reload
+            document.getElementById('previewLinkSection').classList.add('hidden');
+            document.getElementById('previewStatus').textContent = 'No link generated';
+            document.getElementById('generateBtnText').textContent = 'Generate Preview Link';
+            
+            // Show success message
+            const successMsg = document.createElement('div');
+            successMsg.className = 'fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+            successMsg.textContent = 'Preview link cleared successfully!';
+            document.body.appendChild(successMsg);
+            setTimeout(() => successMsg.remove(), 3000);
+        } else {
+            alert('Failed to clear preview link');
+        }
+    } catch (error) {
+        console.error('Error clearing preview:', error);
+        alert('Failed to clear preview link');
+    }
+};
+
+window.copyPreviewUrl = function() {
+    const urlInput = document.getElementById('previewUrl');
+    if (urlInput) {
+        urlInput.select();
+        document.execCommand('copy');
+        
+        // Show temporary feedback
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('bg-green-700');
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('bg-green-700');
+        }, 2000);
+    }
+};
+
+// Backdate toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const backdateToggle = document.getElementById('backdateToggle');
+    const backdateSection = document.getElementById('backdateSection');
+    
+    if (backdateToggle && backdateSection) {
+        backdateToggle.addEventListener('change', function() {
+            if (this.checked) {
+                backdateSection.classList.remove('hidden');
+            } else {
+                backdateSection.classList.add('hidden');
+            }
+        });
+    }
+});
 </script>
 @endverbatim

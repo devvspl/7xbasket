@@ -54,7 +54,17 @@ class BlogController extends Controller
         $data = $this->validated($request);
         $data['featured_image'] = $this->handleImage($request);
         $data['slug'] = $this->uniqueSlug($request->slug ?: $request->title);
-        $data['published_at'] = $data['is_published'] ? now() : null;
+        
+        // Handle published_at for new blogs
+        if ($data['is_published']) {
+            if ($data['allow_backdate'] && $request->filled('published_at')) {
+                $data['published_at'] = $request->published_at;
+            } else {
+                $data['published_at'] = now();
+            }
+        } else {
+            $data['published_at'] = null;
+        }
 
         $blog = Blog::create($data);
         $this->syncSchemas($blog, $request);
@@ -91,7 +101,15 @@ class BlogController extends Controller
         }
 
         if ($data['is_published'] && !$blog->published_at) {
-            $data['published_at'] = now();
+            // If publishing for the first time, set published_at
+            if ($data['allow_backdate'] && $request->filled('published_at')) {
+                $data['published_at'] = $request->published_at;
+            } else {
+                $data['published_at'] = now();
+            }
+        } elseif ($data['is_published'] && $blog->published_at && $data['allow_backdate'] && $request->filled('published_at')) {
+            // If already published but allowing backdate, update published_at
+            $data['published_at'] = $request->published_at;
         }
 
         $blog->update($data);
@@ -116,6 +134,33 @@ class BlogController extends Controller
         return back()->with('success', 'Blog deleted.');
     }
 
+    /**
+     * Generate preview token for a blog
+     */
+    public function generatePreview(Blog $blog)
+    {
+        $token = $blog->generatePreviewToken();
+        
+        return response()->json([
+            'success' => true,
+            'preview_url' => $blog->preview_url,
+            'token' => $token
+        ]);
+    }
+
+    /**
+     * Clear preview token
+     */
+    public function clearPreview(Blog $blog)
+    {
+        $blog->clearPreviewToken();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Preview token cleared successfully.'
+        ]);
+    }
+
     private function validated(Request $request): array
     {
         $data = $request->validate([
@@ -129,6 +174,8 @@ class BlogController extends Controller
             'featured_image'   => 'nullable|string', // Changed to accept base64 string
             'featured_image_alt' => 'nullable|string|max:255',
             'is_published'     => 'nullable|in:0,1',
+            'published_at'     => 'nullable|date',
+            'allow_backdate'   => 'nullable|boolean',
             'meta_title'       => 'nullable|string',
             'meta_description' => 'nullable|string',
             'meta_keywords'    => 'nullable|string|max:500',
@@ -139,6 +186,7 @@ class BlogController extends Controller
         $data['is_published'] = (bool) ($data['is_published'] ?? false);
         $data['meta_index']   = (bool) ($data['meta_index'] ?? false);
         $data['meta_follow']  = (bool) ($data['meta_follow'] ?? false);
+        $data['allow_backdate'] = (bool) ($data['allow_backdate'] ?? false);
         return $data;
     }
 

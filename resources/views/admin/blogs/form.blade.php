@@ -237,7 +237,7 @@
                     {{-- TipTap Editor --}}
                     <div id="tiptap-editor"
                         class="min-h-[480px] border border-gray-200 rounded-b-xl px-5 py-4 focus:outline-none prose prose-sm max-w-none text-gray-800 bg-white overflow-y-auto"
-                        style="font-family: Inter, sans-serif; font-size: 15px; line-height: 1.7;">
+                        style="font-family: Inter, sans-serif; font-size: 15px; line-height: 1.7;height: 350px;">
                     </div>
 
                     {{-- HTML Source View --}}
@@ -606,6 +606,75 @@
                                 Visit Blog
                             </a>
                         @endif
+                    </div>
+
+                    {{-- Preview Section --}}
+                    @if ($blog->exists)
+                        <div class="border-t border-gray-100 pt-4 mt-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm font-medium text-gray-700">Preview</span>
+                                <span class="text-xs text-gray-400" id="previewStatus">
+                                    @if ($blog->preview_token)
+                                        Active
+                                    @else
+                                        No link generated
+                                    @endif
+                                </span>
+                            </div>
+                            
+                            <div id="previewLinkSection" class="{{ $blog->preview_token ? '' : 'hidden' }}">
+                                <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-medium text-green-800">Preview Link</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <input type="text" value="{{ $blog->preview_url ?? '' }}" readonly
+                                            class="flex-1 text-xs bg-white border border-green-200 rounded px-2 py-1.5 font-mono text-green-700"
+                                            id="previewUrl">
+                                        <button type="button" onclick="copyPreviewUrl()"
+                                            class="text-xs bg-green-600 text-white px-3 py-1.5 rounded hover:bg-green-700 transition-colors font-medium">
+                                            Copy
+                                        </button>
+                                    </div>
+                                    <div class="flex gap-2 mt-2">
+                                        <a href="{{ $blog->preview_url ?? '#' }}" target="_blank" id="openPreviewBtn"
+                                            class="flex-1 text-xs bg-green-600 text-white text-center py-1.5 rounded hover:bg-green-700 transition-colors font-medium">
+                                            Open Preview
+                                        </a>
+                                        <button type="button" onclick="clearPreview({{ $blog->id }})"
+                                            class="flex-1 text-xs bg-red-100 text-red-600 py-1.5 rounded hover:bg-red-200 transition-colors font-medium">
+                                            Clear
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="button" onclick="generatePreview({{ $blog->id }})" id="generatePreviewBtn"
+                                class="w-full text-xs bg-blue-100 text-blue-600 py-2.5 rounded-xl hover:bg-blue-200 transition-colors font-medium">
+                                <span id="generateBtnText">{{ $blog->preview_token ? 'Regenerate Preview Link' : 'Generate Preview Link' }}</span>
+                            </button>
+                        </div>
+                    @endif
+
+                    {{-- Backdate Section --}}
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-medium text-gray-700">Publish Date</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="hidden" name="allow_backdate" value="0">
+                                <input type="checkbox" name="allow_backdate" value="1" id="backdateToggle"
+                                    {{ old('allow_backdate', $blog->allow_backdate) ? 'checked' : '' }} class="sr-only peer">
+                                <div class="w-8 h-4 bg-gray-200 peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-4 peer-checked:bg-blue-500 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
+                                <span class="ml-2 text-xs text-gray-600 peer-checked:text-blue-600 font-medium">Custom</span>
+                            </label>
+                        </div>
+                        
+                        <div id="backdateSection" class="{{ old('allow_backdate', $blog->allow_backdate) ? '' : 'hidden' }}">
+                            <input type="datetime-local" name="published_at" id="publishedAtInput"
+                                value="{{ old('published_at', $blog->published_at ? $blog->published_at->format('Y-m-d\TH:i') : '') }}"
+                                class="w-full text-xs border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <p class="text-xs text-gray-400 mt-1.5">Set a custom publish date and time</p>
+                        </div>
                     </div>
                     <div class="flex gap-2 mt-4">
                         <button type="submit"

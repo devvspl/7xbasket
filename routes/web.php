@@ -25,6 +25,7 @@ Route::middleware(['block.ip', 'track.visitor'])->group(function () {
     Route::get('/investment-calculator', [HomeController::class, 'calculator'])->name('calculator');
     Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
     Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
+    Route::get('/blogs/{slug}/preview', [BlogController::class, 'preview'])->name('blogs.preview');
     Route::get('/apply-franchise', [FranchiseController::class, 'apply'])->name('apply');
     Route::get('/landing', [FranchiseController::class, 'landing'])->name('landing');
     Route::post('/apply-franchise', [FranchiseController::class, 'store'])->name('apply.store')->middleware('throttle:20,60');
@@ -145,6 +146,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Blogs
         Route::resource('blogs', Admin\BlogController::class);
         Route::post('/blogs/upload-image', [Admin\BlogController::class, 'uploadImage'])->name('blogs.upload-image');
+        Route::post('/blogs/{blog}/preview', [Admin\BlogController::class, 'generatePreview'])->name('blogs.preview');
+        Route::delete('/blogs/{blog}/preview', [Admin\BlogController::class, 'clearPreview'])->name('blogs.preview.clear');
         // Applications
         Route::get('/applications', [Admin\ApplicationController::class, 'index'])->name('applications.index');
         Route::get('/applications/export', [Admin\ApplicationController::class, 'export'])->name('applications.export');
