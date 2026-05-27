@@ -611,9 +611,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
 
         window.addEventListener('load', function() {
+            @php
+                $popupActive = \App\Models\SiteSetting::get('lead_popup_active', '1');
+                $popupDelay = \App\Models\SiteSetting::get('lead_popup_delay', '30');
+            @endphp
+            @if($popupActive == '1')
             setTimeout(function() {
                 document.getElementById('leadPopup').classList.remove('hidden');
-            }, 30000);
+            }, {{ (int)$popupDelay * 1000 }});
+            @endif
         });
     </script>
 

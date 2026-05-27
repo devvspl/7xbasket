@@ -168,5 +168,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Redirects
         Route::resource('redirects', Admin\RedirectController::class);
         Route::patch('/redirects/{redirect}/toggle', [Admin\RedirectController::class, 'toggle'])->name('redirects.toggle');
+        // Settings
+        Route::get('/settings', [Admin\SettingController::class, 'index'])->name('settings.index');
+        Route::put('/settings', [Admin\SettingController::class, 'update'])->name('settings.update');
     });
 });
