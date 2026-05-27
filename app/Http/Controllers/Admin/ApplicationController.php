@@ -22,8 +22,10 @@ class ApplicationController extends Controller
         if ($request->filled('page_url')) {
             $filterPath = $request->page_url;
             $query->where(function ($q) use ($filterPath) {
+                // Match full URL containing the path
                 $q->where('page_url', $filterPath)
-                  ->orWhere('page_url', 'like', $filterPath . '?%');
+                  ->orWhere('page_url', 'like', '%' . $filterPath)
+                  ->orWhere('page_url', 'like', '%' . $filterPath . '?%');
             });
         }
         if ($request->filled('spam')) {
