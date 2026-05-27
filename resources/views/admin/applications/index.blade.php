@@ -20,7 +20,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
                 </svg>
                 <h3 class="text-sm font-bold text-gray-700">Filters</h3>
-                @if(request()->hasAny(['search', 'status', 'source', 'spam', 'date_from', 'date_to']))
+                @if(request()->hasAny(['search', 'status', 'source', 'page_url', 'spam', 'date_from', 'date_to']))
                     <span class="text-xs bg-green-100 text-green-700 font-semibold px-2 py-0.5 rounded-full">Active</span>
                 @endif
             </div>
@@ -42,7 +42,12 @@
                         Source: <strong>{{ ucfirst(request('source')) }}</strong>
                     </span>
                 @endif
-                @if(request('spam') !== null)
+                @if(request('page_url'))
+                    <span class="text-xs bg-teal-50 text-teal-700 font-medium px-2.5 py-1 rounded-lg border border-teal-200">
+                        Page: <strong>{{ Str::limit(request('page_url'), 30) }}</strong>
+                    </span>
+                @endif
+                @if(request('spam') !== null && request('spam') !== '')
                     <span class="text-xs bg-red-50 text-red-700 font-medium px-2.5 py-1 rounded-lg border border-red-200">
                         {{ request('spam') === '1' ? '🚫 Spam Only' : '✅ Not Spam' }}
                     </span>
@@ -78,6 +83,12 @@
                 <option value="">All Sources</option>
                 <option value="popup" {{ request('source') == 'popup' ? 'selected' : '' }}>Popup</option>
                 <option value="website" {{ request('source') == 'website' ? 'selected' : '' }}>Website Form</option>
+            </select>
+            <select name="page_url" class="border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white max-w-64">
+                <option value="">All Pages</option>
+                @foreach($pageUrls as $url)
+                <option value="{{ $url }}" {{ request('page_url') == $url ? 'selected' : '' }}>{{ str_replace(url('/'), '', $url) ?: '/' }}</option>
+                @endforeach
             </select>
             <select name="spam" class="border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white">
                 <option value="">All</option>
@@ -116,15 +127,15 @@
                 <th class="text-left px-4 py-3.5 font-semibold text-gray-600 hidden lg:table-cell">Pincode</th>
                 <th class="text-left px-4 py-3.5 font-semibold text-gray-600 hidden lg:table-cell">Store Area</th>
                 <th class="text-left px-4 py-3.5 font-semibold text-gray-600 hidden xl:table-cell">Timeline</th>
-                <th class="text-left px-4 py-3.5 font-semibold text-gray-600">Source</th>
+                <th class="text-left px-4 py-3.5 font-semibold text-gray-600 hidden xl:table-cell">Page</th>
                 <th class="text-left px-4 py-3.5 font-semibold text-gray-600">Status</th>
                 <th class="text-left px-4 py-3.5 font-semibold text-gray-600 hidden lg:table-cell">Date</th>
-                <th class="text-right px-4 py-3.5 font-semibold text-gray-600">Actions</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-50">
             @forelse($applications as $index => $app)
-            <tr class="hover:bg-gray-50 transition-colors {{ $app->is_spam ? 'bg-red-50' : '' }}">
+            <tr class="hover:bg-gray-50 transition-colors cursor-pointer {{ $app->is_spam ? 'bg-red-50' : '' }}"
+                onclick="window.location='{{ route('admin.applications.show', $app) }}'">
                 <td class="px-4 py-3.5 text-gray-500 font-medium">
                     {{ $applications->firstItem() + $index }}
                 </td>
@@ -141,10 +152,14 @@
                 <td class="px-4 py-3.5 hidden lg:table-cell text-gray-500">{{ $app->pincode ?? '—' }}</td>
                 <td class="px-4 py-3.5 hidden lg:table-cell text-gray-500">{{ $app->store_area ?? '—' }}</td>
                 <td class="px-4 py-3.5 hidden xl:table-cell text-gray-500 text-xs">{{ $app->opening_timeline ? str_replace('_',' ',$app->opening_timeline) : '—' }}</td>
-                <td class="px-4 py-3.5">
-                    <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold {{ $app->source === 'popup' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700' }}">
-                        {{ ucfirst($app->source ?? 'website') }}
-                    </span>
+                <td class="px-4 py-3.5 hidden xl:table-cell text-xs text-gray-500">
+                    @if($app->page_url)
+                        <span class="px-2 py-0.5 rounded-full bg-teal-50 text-teal-700 font-medium" title="{{ $app->page_url }}">
+                            {{ Str::limit(str_replace(url('/'), '', $app->page_url) ?: '/', 20) }}
+                        </span>
+                    @else
+                        —
+                    @endif
                 </td>
                 <td class="px-4 py-3.5">
                     @php $colors = ['pending'=>'yellow','reviewed'=>'blue','approved'=>'green','rejected'=>'red']; $c = $colors[$app->status] ?? 'gray'; @endphp
@@ -153,12 +168,9 @@
                     </span>
                 </td>
                 <td class="px-4 py-3.5 hidden lg:table-cell text-gray-400 text-xs">{{ $app->created_at->format('M d, Y') }}</td>
-                <td class="px-4 py-3.5 text-right">
-                    <a href="{{ route('admin.applications.show', $app) }}" class="text-xs text-blue-600 hover:underline">View</a>
-                </td>
             </tr>
             @empty
-            <tr><td colspan="10" class="px-5 py-10 text-center text-gray-400">No applications yet.</td></tr>
+            <tr><td colspan="9" class="px-5 py-10 text-center text-gray-400">No applications yet.</td></tr>
             @endforelse
         </tbody>
     </table>
