@@ -87,7 +87,7 @@
             <select name="page_url" class="border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white max-w-64">
                 <option value="">All Pages</option>
                 @foreach($pageUrls as $url)
-                <option value="{{ $url }}" {{ request('page_url') == $url ? 'selected' : '' }}>{{ str_replace(url('/'), '', $url) ?: '/' }}</option>
+                <option value="{{ $url }}" {{ request('page_url') == $url ? 'selected' : '' }}>{{ $url }}</option>
                 @endforeach
             </select>
             <select name="spam" class="border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white">
@@ -154,8 +154,9 @@
                 <td class="px-4 py-3.5 hidden xl:table-cell text-gray-500 text-xs">{{ $app->opening_timeline ? str_replace('_',' ',$app->opening_timeline) : '—' }}</td>
                 <td class="px-4 py-3.5 hidden xl:table-cell text-xs text-gray-500">
                     @if($app->page_url)
+                        @php $cleanPath = parse_url($app->page_url, PHP_URL_PATH) ?: '/'; @endphp
                         <span class="px-2 py-0.5 rounded-full bg-teal-50 text-teal-700 font-medium" title="{{ $app->page_url }}">
-                            {{ Str::limit(str_replace(url('/'), '', $app->page_url) ?: '/', 20) }}
+                            {{ Str::limit($cleanPath, 20) }}
                         </span>
                     @else
                         —

@@ -20,7 +20,11 @@ class ApplicationController extends Controller
             $query->where('source', $request->source);
         }
         if ($request->filled('page_url')) {
-            $query->where('page_url', $request->page_url);
+            $filterPath = $request->page_url;
+            $query->where(function ($q) use ($filterPath) {
+                $q->where('page_url', $filterPath)
+                  ->orWhere('page_url', 'like', $filterPath . '?%');
+            });
         }
         if ($request->filled('spam')) {
             $query->where('is_spam', (bool) $request->spam);
@@ -45,11 +49,17 @@ class ApplicationController extends Controller
 
         $applications = $query->paginate(20)->withQueryString();
         
-        // Get distinct page URLs for filter dropdown
+        // Get distinct page URLs for filter dropdown (strip query strings)
         $pageUrls = FranchiseApplication::whereNotNull('page_url')
             ->where('page_url', '!=', '')
             ->distinct()
-            ->pluck('page_url');
+            ->pluck('page_url')
+            ->map(function ($url) {
+                return parse_url($url, PHP_URL_PATH) ?: '/';
+            })
+            ->unique()
+            ->sort()
+            ->values();
 
         return view('admin.applications.index', compact('applications', 'pageUrls'));
     }
