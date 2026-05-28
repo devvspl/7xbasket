@@ -535,7 +535,7 @@
                                     </div>
                                 </div>
 
-                                <a href="#" onclick="openLeadPopup(); return false;"
+                                <a href="{{ route('apply') }}"
                                     class="block w-full bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold text-center py-3 rounded-xl transition-all duration-200 text-sm">
                                     Plan My Budget →
                                 </a>
@@ -777,7 +777,7 @@
                                     </div>
                                 </div>
 
-                                <a href="#" onclick="openLeadPopup(); return false;"
+                                <a href="{{ route('apply') }}"
                                     class="block w-full bg-[#109125] hover:bg-[#0d7a1e] text-white font-bold text-center py-3 rounded-xl transition-all duration-200 text-sm">
                                     Calculate My Earnings →
                                 </a>
